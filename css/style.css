@@ -2,13 +2,13 @@
 
 .section{
     text-align:center;
-    font-family: arial,helvetica;
+    font-family: "Roboto", sans-serif;
 }
 .fp-watermark {
     display: none !important;
 }
 /* - - - - - - SECTION SPECIFIC - - - - - - */
 
-#section-1{
+#section-0{
     background-image: linear-gradient(90deg,#2D72D2,#D33D17);
 }
