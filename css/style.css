@@ -7,6 +7,11 @@
 .fp-watermark {
     display: none !important;
 }
+
+.visContainer {
+    height: 75vh; /* So that SVG height can be set dynamically */
+}
+
 /* - - - - - - SECTION SPECIFIC - - - - - - */
 
 #section-0{
