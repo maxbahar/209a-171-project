@@ -1,7 +1,8 @@
 // Read in data from multiple files via promises
 let promises = [
-    d3.json('data/block_groups_proportions.geojson'),
-    d3.json('data/block_groups_counts.geojson'),
+    d3.json('data/block_groups.geojson'),
+    d3.json('data/tracts.geojson'),
+    d3.json('data/counties.geojson'),
 ];
 Promise.all(promises)
     .then(data => createVis(data))
@@ -13,11 +14,12 @@ function createVis(data) {
     // console.log(data);
 
     // Extract data
-    let blockGroupProportionData = data[0];
-    let blockGroupCountsData = data[1];
+    let blockGroupData = data[0];
+    let tractData = data[1];
+    let countyData = data[2];
 
     // TO DO: Visualizations go here
-    let myMapVis = new MapVis("mapParentElement", blockGroupProportionData);
+    let myMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData);
     
 }
 
