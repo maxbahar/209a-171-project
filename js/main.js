@@ -20,10 +20,11 @@ function createVis(data) {
     let tractData = data[1];
     let countyData = data[2];
 
+
     // TO DO: Visualizations go here
     let myMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData);
 
-    let kdeTestPlot = new KdePlot("kdeTest")
+    let kdeTestPlot = new KdePlot("kdeTest", blockGroupData)
 }
 
 let fullPage = new fullpage('#fullpage', {
