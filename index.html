@@ -278,12 +278,12 @@
         <h1>rising insight</h1>
         <!-- GET TEAM'S OPINION ON THIS -->
         <!-- Call initVis() for now, not sure if it's right -->
-        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.initVis()">
+        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.absentMapVis()">
             <option value="county">County</option>
             <option value="tract">Tract</option>
             <option value="blockGroup">Block Group</option>
         </select>
-        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.initVis()">
+        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.absentMapVis()">
             <option value="age">Age</option>
             <option value="gender">Gender</option>
             <option value="party">Party</option>
@@ -299,11 +299,13 @@
             <h1>What do Massachusetts Demographics Look Like?</h1>
             <h3>By Population</h3>
             <div>POP MAP HERE</div>
+            <div class="visContainer" id="popMapParent"></div>
         </div>
         <div class="slide">
             <h1>What do Massachusetts Demographics Look Like?</h1>
             <h3>By INCOME</h3>
             <div>Income Map Here</div>
+            <div class="visContainer" id="incomeMapParent"></div>
         </div>
         <div class="slide">
             <h1>What do Massachusetts Demographics Look Like?</h1>

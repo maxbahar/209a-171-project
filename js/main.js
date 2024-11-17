@@ -22,7 +22,10 @@ function createVis(data) {
 
 
     // TO DO: Visualizations go here
-    let myMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData);
+    let absentMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData, "2020_absent_pct");
+    let popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
+    let incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
+    
 
     let kdeTestPlot = new KdePlot("kdeTest", blockGroupData)
 }

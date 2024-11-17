@@ -1,6 +1,6 @@
 class MapVis {
 
-    constructor(parentElement, blockGroupData, tractData, countyData) {
+    constructor(parentElement, blockGroupData, tractData, countyData, variable) {
         
         this.parentElement = parentElement;
         this.geoData = {
@@ -8,6 +8,7 @@ class MapVis {
             "tract": tractData,
             "county" : countyData
         };
+        this.variable = variable;
 
         console.log(this.geoData);
 
@@ -86,8 +87,8 @@ class MapVis {
 
     wrangleData() {
         let vis = this;
-/////////////////////// HARDCODED
-        vis.variable = '2020_absent_pct' 
+        
+        // vis.variable = '2020_absent_pct' 
 
         vis.displayData = {
             "name": "displayData",
