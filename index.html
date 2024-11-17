@@ -317,7 +317,12 @@
     <div class="section">
         <div class="visContainer" id="kdeTest"></div>
     </div>
-    <div class="section"><h1>main message</h1></div>
+    <!---------------------------- Page 6 / Feature Importance ---------------------------->
+    <div class="section"><h1>main message</h1>
+        <div class="visContainer", id="importanceParentElement">
+            <!-- SHAP feature importance visualization here -->
+        </div>
+    </div>
     <div class="section"><h1>solution</h1></div>
 </div>
 
@@ -331,6 +336,7 @@
         crossorigin="anonymous"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <!-- Include custom libraries -->
+<script src="js/importancevis.js"></script>
 <script src="js/mapvis.js"></script>
 <script src="js/interactionHelper.js"></script>
 <script src="js/kdeplot.js"></script>
