@@ -14,6 +14,15 @@
 
 /* - - - - - - SECTION SPECIFIC - - - - - - */
 
-#section-0{
+#section-0 {
     background-image: linear-gradient(90deg,#2D72D2,#D33D17);
+}
+
+/* - - - - - - MAP SPECIFIC - - - - - - */
+
+#mapTooltip {
+    border: thin solid lightgray; 
+    border-radius: 5px; 
+    background: white; 
+    padding: 20px
 }

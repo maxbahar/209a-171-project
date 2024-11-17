@@ -26,6 +26,12 @@
     <!-- Page 2 -->
     <div class="section">
         <h1>rising insight</h1>
+        <!-- Call initVis() for now, not sure if it's right -->
+        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.initVis()">
+            <option value="county">County</option>
+            <option value="tract">Tract</option>
+            <option value="blockGroup">Block Group</option>
+        </select>
         <div class="visContainer" id="mapParentElement">
             <!-- Map visualization here -->
         </div>

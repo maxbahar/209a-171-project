@@ -3,11 +3,15 @@ class MapVis {
     constructor(parentElement, blockGroupData, tractData, countyData) {
         
         this.parentElement = parentElement;
-        this.blockGroupData = blockGroupData;
-        this.tractData = tractData;
-        this.countyData = countyData;
+        this.geoData = {
+            "blockGroup" : blockGroupData,
+            "tract": tractData,
+            "county" : countyData
+        };
 
-        this.initVis()
+        console.log(this.geoData);
+
+        this.initVis();
         
     }
 
@@ -45,19 +49,24 @@ class MapVis {
 
         //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
+/////////////////////// HARDCODED
+        vis.geoLevel = "county";
+        vis.geoLevel = document.getElementById("geoLevel").value;
+        console.log(vis.geoLevel);  
+
         // Project the GeoJSON
         vis.projection = d3.geoMercator()
-                          .fitSize([vis.width, vis.height], vis.blockGroupData);
+                          .fitSize([vis.width, vis.height], vis.geoData[vis.geoLevel]);
 
         // Define geo generator
         vis.path = d3.geoPath()
                     .projection(vis.projection);
 
         // Draw the geographic features
-        vis.blockGroups = vis.svg.selectAll(".blockGroup")
-                                .data(vis.blockGroupData.features) // Make sure to use .features
+        vis.geoFeatures = vis.svg.selectAll(".geoFeature")
+                                .data(vis.geoData[vis.geoLevel].features) // Make sure to use .features
                                 .enter().append("path")
-                                .attr('class', 'blockGroup')
+                                .attr('class', 'geoFeature')
                                 .attr("d", vis.path)
                                 .attr("fill", "#ccc")
                                 .attr("stroke", "#333")
@@ -66,32 +75,35 @@ class MapVis {
         // Initialize the color scale
         vis.colorScale = d3.scaleSequential(d3.interpolatePurples);
 
+        // Initialize tooltip
+        vis.tooltip = d3.select("body").append('div')
+                        .attr('class', "tooltip")
+                        .attr('id', 'mapTooltip');
+
         vis.wrangleData();
 
     }
 
     wrangleData() {
         let vis = this;
+/////////////////////// HARDCODED
+        vis.variable = '2020_absent_pct' 
 
-        vis.variable = 'total_reg' // Hardcoded currently
-
-        // Nothing for now, as the data is cleaned already, simply copy the initial data to displayData
         vis.displayData = {
-            "name": "blockGroupDisplayData",
+            "name": "displayData",
             "type": "FeatureCollection",
             "features": []
         }
-        vis.displayData.features = vis.blockGroupData.features.map(function(d) {
+        vis.displayData.features = vis.geoData[vis.geoLevel].features.map(function(d) {
             return {
                 "GEOID20": d.properties["GEOID20"],
-                "2020_turnout": d.properties["g20201103_pct_voted_all"], // Hardcoded right now
-                "2020_absent": 1 - d.properties["g20201103_pct_voted_all"], // Hardcoded right now
+                "name" : d.properties["BASENAME"],
                 [vis.variable]: d.properties[vis.variable]
             }
         });
 
         // Optionally log data
-        // console.log(vis.displayData);
+        console.log(vis.displayData);
 
         vis.updateVis();
     }
@@ -104,11 +116,44 @@ class MapVis {
         vis.colorScale.domain([d3.min(vis.variableArray),d3.max(vis.variableArray)]);
 
         // Change the feature colors
-        vis.blockGroups = vis.svg.selectAll('.blockGroup')
+        vis.geoFeatures = vis.svg.selectAll('.geoFeature')
                                     .data(vis.displayData.features)
                                     .enter().append("path")
-                                    .merge(vis.blockGroups)
+                                    .merge(vis.geoFeatures)
                                     .attr("fill", d => vis.colorScale(d[vis.variable]));
+
+        // Mouseover behavior
+        vis.geoFeatures.on('mouseover', function(event, d){
+
+            d3.select(this)
+                .attr('fill', 'white');
+
+            vis.tooltip.style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+///////////////////// TOOLTIP HARDCODED RIGHT NOW 
+                    .html(`
+                        <h4>${d["name"]} County</h4>
+                        <div style="font-size: 14pt"><span style="font-weight:600">${vis.variable}: </span>${d[vis.variable].toLocaleString()}</div>
+                        `); 
+
+        }).on('mouseout', function(event, d){
+
+            d3.select(this)
+                .attr("fill", d => vis.colorScale(d[vis.variable]));
+
+            vis.tooltip.style("opacity", 0)
+                        .style("left", 0)
+                        .style("top", 0)    
+                        .html(``);
+        })
+            
+        // Click behavior
+        vis.geoFeatures.on("click", function(event, d){
+    
+            // Do something here?
+    
+        });
 
     }
 }
