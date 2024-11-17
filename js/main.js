@@ -22,7 +22,8 @@ function createVis(data) {
 
     // TO DO: Visualizations go here
     let myMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData);
-    
+
+    let kdeTestPlot = new KdePlot("kdeTest")
 }
 
 let fullPage = new fullpage('#fullpage', {
