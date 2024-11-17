@@ -1,3 +1,5 @@
+let memberVote = undefined
+let selectedFeatures = new Set()
 // Read in data from multiple files via promises
 let promises = [
     d3.json('data/block_groups.geojson'),
@@ -30,13 +32,3 @@ let fullPage = new fullpage('#fullpage', {
     autoScrolling: true,
 });
 
-function voted(groupMemberID) {
-    memberVote = groupMemberID
-    document.querySelectorAll('.vote-box').forEach(function(div) {
-        div.classList.remove('clicked-vote-box');
-    });
-    const clickedDiv = document.getElementById(groupMemberID);
-    if (clickedDiv) {
-        clickedDiv.classList.add('clicked-vote-box');
-    }
-}
