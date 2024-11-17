@@ -26,11 +26,18 @@
     <!-- Page 2 -->
     <div class="section">
         <h1>rising insight</h1>
+        <!-- GET TEAM'S OPINION ON THIS -->
         <!-- Call initVis() for now, not sure if it's right -->
         <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.initVis()">
             <option value="county">County</option>
             <option value="tract">Tract</option>
             <option value="blockGroup">Block Group</option>
+        </select>
+        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.initVis()">
+            <option value="age">Age</option>
+            <option value="gender">Gender</option>
+            <option value="party">Party</option>
+            <option value="ethnicity">Ethnicity</option>
         </select>
         <div class="visContainer" id="mapParentElement">
             <!-- Map visualization here -->
