@@ -29,3 +29,14 @@ let fullPage = new fullpage('#fullpage', {
     licenseKey: "gplv3-license",
     autoScrolling: true,
 });
+
+function voted(groupMemberID) {
+    memberVote = groupMemberID
+    document.querySelectorAll('.vote-box').forEach(function(div) {
+        div.classList.remove('clicked-vote-box');
+    });
+    const clickedDiv = document.getElementById(groupMemberID);
+    if (clickedDiv) {
+        clickedDiv.classList.add('clicked-vote-box');
+    }
+}

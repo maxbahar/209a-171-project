@@ -10,20 +10,162 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Include custom styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.css"
+          integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>    <!-- Include Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Include custom styling -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ballot-style.css">
 </head>
 <body>
 
 <div id="fullpage">
     <!-- Page 0 / Title-->
-    <div class="section" id="section-0"><h1>Title Slide</h1></div>
-    <!-- Page 1 / Hook -->
-    <div class="section" id="section-1">
-        <div>
-            hook slide + visualization
+    <div class="section ballot-container blue-red-gradient " id="section-0">
+        <div class="ballot-border-container">
+            <div class="ballot-border">
+                <div class="ballot-box">
+                    <div class="ballot-heading">
+                        <div>
+                            <div id="project-title">Voter Turnout in Massachusetts</div>
+                            <div id="project-subtitle">An Analysis of the 2020 Presidential Election</div>
+                        </div>
+                    </div>
+                    <div class="ballot-body">
+                        <div class="row">
+                            <!-- left column -->
+                            <div class="col-4 left-ballot-col">
+                                <div class="row">
+                                    <div class="col-md-8 ballot-category-text-title">
+                                        TEAM MEMBERS
+                                    </div>
+                                    <div class="col-md-4 ballot-category-text-subtitle">
+                                        Vote for ONE
+                                    </div>
+                                </div>
+                                <div class="row ballot-vote-row ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Max Bahar
+                                        </div>
+                                        <div class="row vote-subtitle-text">
+                                            Harvard University
+                                        </div>
+                                        <div class="row  vote-sub-subtitle-text">
+                                            MS - Data Science 2026
+                                        </div>
+                                    </div>
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box" id="vote-max" onclick="voted('vote-max')"></div>
+                                    </div>
+                                </div>
+                                <div class="row ballot-vote-row ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Ted McCulloch
+                                        </div>
+                                        <div class="row vote-subtitle-text">
+                                            Harvard University
+                                        </div>
+                                        <div class="row vote-sub-subtitle-text">
+                                            MS - Data Science 2026
+                                        </div>
+                                    </div>
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box" id="vote-ted" onclick="voted('vote-ted')"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- middle column -->
+                            <div class="col-4 mid-ballot-col">
+                                <div class="row">
+                                    <div class="col-md-8 ballot-category-text-title">
+                                        TEAM MEMBERS
+                                    </div>
+                                    <div class="col-md-4 ballot-category-text-subtitle">
+                                        CONTINUED
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="row ballot-vote-row ">
+                                        <div class="col-10">
+                                            <div class="row vote-title-text">
+                                                Stefan Chu
+                                            </div>
+                                            <div class="row vote-subtitle-text">
+                                                Harvard University
+                                            </div>
+                                            <div class="row vote-sub-subtitle-text">
+                                                MS - Data Science 202X
+                                            </div>
+                                        </div>
+                                        <div class="col-2 vote-box-container">
+                                            <div class="vote-box" id="vote-stef"  onclick="voted('vote-stef')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row ballot-vote-row ">
+                                        <div class="col-10">
+                                            <div class="row vote-title-text">
+                                                Anitej Thamma
+                                            </div>
+                                            <div class="row vote-subtitle-text">
+                                                Harvard University
+                                            </div>
+                                            <div class="row vote-sub-subtitle-text">
+                                                MS - Data Science 202X
+                                            </div>
+                                        </div>
+                                        <div class="col-2 vote-box-container">
+                                            <div class="vote-box" id="vote-ani" onclick="voted('vote-ani')"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- right column -->
+                            <div class="col-4 right-ballot-col ">
+                                <div class="right-ballot-col-question-box">
+                                    <div class="right-ballot-col-question">
+                                        <div><b>QUESTION</b></div>
+                                        <div>HOW DO DEMOGRAPHICS IMPACT VOTER TURNOUT IN DIFFERENT AREAS OF
+                                            MASSACHUSETTS?
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Page 2 -->
+    <!-------------------- Page 1 / Hook ------------------>
+    <div class="section ballot-container blue-red-gradient " id="section-1">
+        <div class="ballot-border-container">
+            <div class="ballot-border-end">
+                <div class="ballot-box-end">
+                    <div class="row ballot-col-container-end">
+                        <div class="col-4 left-ballot-col">
+                            (Interactive)
+                        </div>
+                        <div class="col-4 mid-ballot-col">
+                            select what you think the top three contributing factors to voter turnout are?
+                        </div>
+                        <div class="col-4 right-ballot-col">
+                            income, age, gender, ....
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------------- Page 2 / Hook (CONT) ------------------>
+    <div class="section">
+        <h1>feature visualization chart here with the three selections made from last slide highlighted?</h1>
+    </div>
     <div class="section">
         <h1>rising insight</h1>
         <!-- GET TEAM'S OPINION ON THIS -->
@@ -44,8 +186,26 @@
         </div>
     </div>
     <!-- Page 3 -->
-    <div class="section"><h1>main message</h1></div>
+    <div class="section" id="demographic-slide">
+        <div class="slide">
+            <h1>What do Massachusetts Demographics Look Like?</h1>
+            <h3>By Population</h3>
+            <div>POP MAP HERE</div>
+        </div>
+        <div class="slide">
+            <h1>What do Massachusetts Demographics Look Like?</h1>
+            <h3>By INCOME</h3>
+            <div>Income Map Here</div>
+        </div>
+        <div class="slide">
+            <h1>What do Massachusetts Demographics Look Like?</h1>
+            <h3>By _____</h3>
+            <div>Income _____ Here</div>
+        </div>
+    </div>
     <!-- Page 4 -->
+    <div class="section"><h1>main message</h1></div>
+    <!-- Page 5 -->
     <div class="section"><h1>solution</h1></div>
 </div>
 

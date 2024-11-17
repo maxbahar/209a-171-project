@@ -8,13 +8,32 @@
     display: none !important;
 }
 
+/* Change the color of the horizontal arrows */
+.fp-controlArrow.fp-prev {
+    border-color: transparent black transparent transparent;
+}
+
+.fp-controlArrow.fp-next {
+    border-color: transparent transparent transparent black;
+}
+
+
 .visContainer {
     height: 75vh; /* So that SVG height can be set dynamically */
 }
 
 /* - - - - - - SECTION SPECIFIC - - - - - - */
 
-#section-0 {
+
+#demographic-slide {
+    margin-left: 10vh;
+    margin-right: 10vh;
+    color: indianred;
+}
+
+
+
+.blue-red-gradient {
     background-image: linear-gradient(90deg,#2D72D2,#D33D17);
 }
 
@@ -26,3 +45,4 @@
     background: white; 
     padding: 20px
 }
+
