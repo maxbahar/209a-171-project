@@ -59,7 +59,7 @@ class KdePlot {
             .attr("class", "dot")
             .attr("fill","blue")
             .attr("cx", d => {
-                return vis.xScale(d.properties["gender_m"] / (d.properties["gender_f"] + d.properties["gender_m"] + d.properties["gender_f"]))
+                return vis.xScale(d.properties["gender_m"] / (d.properties["gender_unknown"] + d.properties["gender_m"] + d.properties["gender_f"]))
             })
             .attr("cy", d => vis.yScale(d.properties["2020_turnout_pct"]))
             .attr("r", 5);
@@ -70,7 +70,7 @@ class KdePlot {
             .attr("class", "dot")
             .attr("fill","red")
             .attr("cx", d => {
-                return vis.xScale(d.properties["gender_f"] / (d.properties["gender_f"] + d.properties["gender_m"] + d.properties["gender_f"]))
+                return vis.xScale(d.properties["gender_f"] / (d.properties["gender_unknown"] + d.properties["gender_m"] + d.properties["gender_f"]))
             })
             .attr("cy", d => vis.yScale(d.properties["2020_turnout_pct"]))
             .attr("r", 5);
