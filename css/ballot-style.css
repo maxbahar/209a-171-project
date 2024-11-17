@@ -23,9 +23,14 @@
     height: 100vh;
     width: 83vw;
     background: #faf8f2;
-    border-left: 3vh dashed #000;
-    border-right: 3vh dashed #000;
-    border-top: 6vh dashed #000;
+    /**
+        border-left: 3vh dashed #000;
+        border-right: 3vh dashed #000;
+        border-top: 6vh dashed #000;
+    */
+    border-left: 1vh solid #000;
+    border-right: 1vh solid #000;
+    border-top: 1vh solid #000;
     box-sizing: border-box;
 }
 
@@ -35,6 +40,8 @@
     padding-left: 3vh;
     padding-right: 3vh;
     padding-top: 2.5vh;
+    height: 99vh;
+
 }
 
 /* large color heading at top of ballot*/
@@ -62,7 +69,7 @@
 /* .box that wraps the contents below ballot heading */
 /* .ballot-box > .ballot-body */
 .ballot-body {
-    height: 56.5vh;
+    height: 61vh; /*56.5vh*/
     text-align: left;
 }
 
@@ -108,7 +115,7 @@
     text-align: left;
     padding-left: 3vh;
     padding-bottom: 3vh;
-    height: 25vh
+    height: 28vh
 }
 
 .vote-box-container {
@@ -162,9 +169,14 @@
     width: 83vw;
     height: 100vh;
     background: #faf8f2;
-    border-left: 3vh dashed #000;
+    /*
+     border-left: 3vh dashed #000;
     border-right: 3vh dashed #000;
     border-bottom: 3vh dashed #000;
+    */
+    border-left: 1vh solid #000;
+    border-right: 1vh solid #000;
+    border-bottom: 1vh solid #000;
     box-sizing: border-box;
 }
 
