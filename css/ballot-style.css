@@ -22,7 +22,7 @@
 .ballot-border {
     height: 100vh;
     width: 83vw;
-    background: #faf8f2;
+    background: #fff;
     /**
         border-left: 3vh dashed #000;
         border-right: 3vh dashed #000;
@@ -168,7 +168,7 @@
 .ballot-border-end {
     width: 83vw;
     height: 100vh;
-    background: #faf8f2;
+    background: #fff;
     /*
      border-left: 3vh dashed #000;
     border-right: 3vh dashed #000;
