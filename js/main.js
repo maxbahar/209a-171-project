@@ -1,5 +1,5 @@
 let memberVote = undefined
-let selectedFeatures = new Set()
+let selectedFeatureCategories = new Set()
 // Read in data from multiple files via promises
 let promises = [
     d3.json('data/block_groups.geojson'),

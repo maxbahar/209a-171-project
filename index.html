@@ -104,7 +104,7 @@
                                             </div>
                                         </div>
                                         <div class="col-2 vote-box-container">
-                                            <div class="vote-box" id="vote-stef"  onclick="voted('vote-stef')"></div>
+                                            <div class="vote-box" id="vote-stef" onclick="voted('vote-stef')"></div>
                                         </div>
                                     </div>
                                     <div class="row ballot-vote-row ">
@@ -149,13 +149,119 @@
                 <div class="ballot-box-end">
                     <div class="row ballot-col-container-end">
                         <div class="col-4 left-ballot-col">
-                            (Interactive)
+                            <div class="padding-from-top"></div>
+                            <div class="interactive-warning">
+                                INTERACTIVE
+                            </div>
+                            <div class="padding-from-top"></div>
+                            <div class="left-ballot-col-question">
+                                <div><b>QUESTION</b></div>
+                                <div>WHICH DEMOGRAPHIC CATEGORIES DO YOU THINK CONTRIBUTE THE MOST
+                                    TOWARDS VOTER TURNOUT (POSITIVELY OR NEGATIVELY)
+                                </div>
+                            </div>
                         </div>
                         <div class="col-4 mid-ballot-col">
-                            select what you think the top three contributing factors to voter turnout are?
+                            <div class="padding-from-top"></div>
+                            <div class="row">
+                                <div class="col-md-6 ballot-category-text-title">
+                                    CATEGORIES
+                                </div>
+                                <div class="col-md-6 ballot-category-text-subtitle">
+                                    Select up to THREE
+                                </div>
+                            </div>
+                            <div class="row ballot-vote-row-pg2 ">
+                                <div class="col-10">
+                                    <div class="row vote-title-text">
+                                        Party Affiliation
+                                    </div>
+                                    <div class="row vote-sub-subtitle-text">
+                                        Democrat, Republican, Independent, etc.
+                                    </div>
+
+                                </div>
+                                <div class="col-2 vote-box-container">
+                                    <div class="vote-box2" id="vote-party" onclick="votecat('vote-party')"></div>
+                                </div>
+                            </div>
+                            <div class="row ballot-vote-row-pg2 ">
+                                <div class="col-10">
+                                    <div class="row vote-title-text">
+                                        Gender
+                                    </div>
+                                    <div class="row vote-sub-subtitle-text">
+                                        Male, Female, Unknown
+                                    </div>
+                                </div>
+                                <div class="col-2 vote-box-container">
+                                    <div class="vote-box2" id="vote-gender" onclick="votecat('vote-gender')"></div>
+                                </div>
+                            </div>
+                            <div class="row ballot-vote-row-pg2 ">
+                                <div class="col-10">
+                                    <div class="row vote-title-text">
+                                        Age
+                                    </div>
+                                    <div class="row vote-sub-subtitle-text">
+                                        Younger, Older, etc.
+                                    </div>
+                                </div>
+                                <div class="col-2 vote-box-container">
+                                    <div class="vote-box2" id="vote-age" onclick="votecat('vote-age')"></div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-4 right-ballot-col">
-                            income, age, gender, ....
+                            <div class="padding-from-top"></div>
+                            <div class="row">
+                                <div class="col-md-6 ballot-category-text-title">
+                                    CATEGORIES
+                                </div>
+
+                                <div class="col-md-6 ballot-category-text-subtitle">
+                                    CONTINUED
+                                </div>
+                            </div>
+                            <div class="row ballot-vote-row-pg2 ">
+                                <div class="col-10">
+                                    <div class="row vote-title-text">
+                                        Average Income
+                                    </div>
+                                    <div class="row vote-sub-subtitle-text">
+                                        High, Middle, Low
+                                    </div>
+                                </div>
+                                <div class="col-2 vote-box-container">
+                                    <div class="vote-box2" id="vote-income" onclick="votecat('vote-income')"></div>
+                                </div>
+                            </div>
+                            <div class="row ballot-vote-row-pg2 ">
+                                <div class="col-10">
+                                    <div class="row vote-title-text">
+                                        Spoken Language
+                                    </div>
+                                    <div class="row vote-sub-subtitle-text">
+                                        English, Spanish, Italian, etc.
+                                    </div>
+                                </div>
+                                <div class="col-2 vote-box-container">
+                                    <div class="vote-box2" id="vote-lang" onclick="votecat('vote-lang')"></div>
+                                </div>
+                            </div>
+                            <div class="row ballot-vote-row-pg2 ">
+                                <div class="col-10">
+                                    <div class="row vote-title-text">
+                                        Ethnicity
+                                    </div>
+                                    <div class="row vote-sub-subtitle-text">
+                                        White, Black, Asian, etc.
+                                    </div>
+                                </div>
+                                <div class="col-2 vote-box-container">
+                                    <div class="vote-box2" id="vote-eth" onclick="votecat('vote-eth')"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,6 +271,7 @@
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
     <div class="section">
         <h1>feature visualization chart here with the three selections made from last slide highlighted?</h1>
+        <h2 id="user-cat-sel-info">user made no selections on previous slide</h2>
     </div>
     <!---------------------------- Page 3 / MAP ---------------------------->
     <div class="section">

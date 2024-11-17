@@ -91,6 +91,8 @@
     font-size: 35px
 }
 
+
+
 .right-ballot-col-question-box {
     height: 56.5vh;
     text-align: center;
@@ -176,7 +178,39 @@
     text-align: left
 }
 
+/* page 2 selection content*/
+.interactive-warning {
+    text-align: center;
+    font-size: xxx-large;
+    margin: 3vh;
+    padding: 3vh;
+    border: 3px solid orange;
+    border-radius: 15px;
+}
 
+.left-ballot-col-question {
+    text-align: center;
+    font-size: 35px
+}
+.padding-from-top{
+    padding-top: 2vh;
+}
 
+.ballot-vote-row-pg2 {
+    border-top: 1px solid black;
+    padding-top: 3vh;
+    text-align: left;
+    padding-left: 3vh;
+    padding-bottom: 3vh;
+    height: 20vh;
+}
 
-
+.vote-box2 {
+    border: 3px solid black;
+    border-radius: 20px;
+    height: 30px;
+    width: 50px;
+}
+.vote-box2:hover {
+    background: black;
+}
