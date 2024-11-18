@@ -1,5 +1,6 @@
 let memberVote = undefined
 let selectedFeatureCategories = new Set()
+let absentMapVis, popMapVis, incomeMapVis, kdeTestPlot, importanceVis;
 // Read in data from multiple files via promises
 let promises = [
     d3.json('data/block_groups.geojson'),
@@ -23,13 +24,13 @@ function createVis(data) {
     let shapData = data[3];
 
     // TO DO: Visualizations go here
-    let absentMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData, "2020_absent_pct");
-    let popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
-    let incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
+    absentMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData, "2020_absent_pct");
+    popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
+    incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
 
-    let kdeTestPlot = new KdePlot("kdeTest", blockGroupData)
+    kdeTestPlot = new KdePlot("kdeTest", blockGroupData)
 
-    let importanceVis = new ImportanceVis("importanceParentElement", shapData)
+    importanceVis = new ImportanceVis("importanceParentElement", shapData)
 }
 
 let fullPage = new fullpage('#fullpage', {

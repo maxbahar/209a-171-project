@@ -273,27 +273,23 @@
         <h1>feature visualization chart here with the three selections made from last slide highlighted?</h1>
         <h2 id="user-cat-sel-info">user made no selections on previous slide</h2>
     </div>
-    <!---------------------------- Page 3 / MAP ---------------------------->
+    <!---------------------------- Page 3 / RISING INSIGHT (MAIN MAP) ---------------------------->
     <div class="section">
         <h1>rising insight</h1>
-        <!-- GET TEAM'S OPINION ON THIS -->
-        <!-- Call initVis() for now, not sure if it's right -->
-        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.absentMapVis()">
+        <select name="geoLevel-option" id="geoLevel" onchange="absentMapVis.wrangleData()">
             <option value="county">County</option>
             <option value="tract">Tract</option>
             <option value="blockGroup">Block Group</option>
         </select>
-        <select name="geoLevel-option" id="geoLevel" onchange="myMapVis.absentMapVis()">
+        <select name="geoLevel-option" id="geoLevel" onchange="absentMapVis.wrangleData()">
             <option value="age">Age</option>
             <option value="gender">Gender</option>
             <option value="party">Party</option>
             <option value="ethnicity">Ethnicity</option>
         </select>
-        <div class="visContainer" id="mapParentElement">
-            <!-- Map visualization here -->
-        </div>
+        <div class="visContainer" id="mapParentElement"></div>
     </div>
-    <!---------------------------- Page 4 / DEMOGRAPHICS ---------------------------->
+    <!---------------------------- Page 4 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
     <div class="section" id="demographic-slide">
         <div class="slide">
             <h1>What do Massachusetts Demographics Look Like?</h1>
@@ -313,15 +309,19 @@
             <div>Income _____ Here</div>
         </div>
     </div>
-    <!---------------------------- Page 5 / KDE Test ---------------------------->
+    <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
     <div class="section">
         <div class="visContainer" id="kdeTest"></div>
     </div>
-    <!---------------------------- Page 6 / Feature Importance ---------------------------->
+    <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
+    <div class="section">
+        <h1>Rising Insight (Diverging Bar Plot)</h1>
+        <div class="visContainer" id=""></div>
+    </div>
+    <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
     <div class="section"><h1>main message</h1>
-        <div class="visContainer", id="importanceParentElement">
-            <!-- SHAP feature importance visualization here -->
-        </div>
+        <h3>This is actually how demographics affect voter turnout!</h3>
+        <div class="visContainer", id="importanceParentElement"></div>
     </div>
     <div class="section"><h1>solution</h1></div>
 </div>

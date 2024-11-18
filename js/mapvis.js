@@ -33,48 +33,39 @@ class MapVis {
 
         //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
-        // Add a zoomable `g` element
-        vis.g = vis.svg.append("g")
-            .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+        // // Add a zoomable `g` element
+        // vis.g = vis.svg.append("g")
+        //     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        // Define the zoom behavior
-        vis.zoom = d3.zoom()
-            .scaleExtent([1, 8]) // Define zoom scale limits
-            .translateExtent([[0, 0], [vis.width, vis.height]]) // Limit panning
-            .on("zoom", function (event) {
-                vis.g.attr("transform", event.transform); // Apply zoom transformations
-            });
+        // // Define the zoom behavior
+        // vis.zoom = d3.zoom()
+        //     .scaleExtent([1, 8]) // Define zoom scale limits
+        //     .translateExtent([[0, 0], [vis.width, vis.height]]) // Limit panning
+        //     .on("zoom", function (event) {
+        //         vis.g.attr("transform", event.transform); // Apply zoom transformations
+        //     });
 
-        // Apply the zoom behavior to the SVG
-        vis.svg.call(vis.zoom);
+        // // Apply the zoom behavior to the SVG
+        // vis.svg.call(vis.zoom);
 
         //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
-/////////////////////// HARDCODED
-        vis.geoLevel = "county";
-        vis.geoLevel = document.getElementById("geoLevel").value;
-        console.log(vis.geoLevel);  
-
-        // Project the GeoJSON
-        vis.projection = d3.geoMercator()
-                          .fitSize([vis.width, vis.height], vis.geoData[vis.geoLevel]);
-
-        // Define geo generator
-        vis.path = d3.geoPath()
-                    .projection(vis.projection);
-
-        // Draw the geographic features
-        vis.geoFeatures = vis.svg.selectAll(".geoFeature")
-                                .data(vis.geoData[vis.geoLevel].features) // Make sure to use .features
-                                .enter().append("path")
-                                .attr('class', 'geoFeature')
-                                .attr("d", vis.path)
-                                .attr("fill", "#ccc")
-                                .attr("stroke", "#333")
-                                .attr("stroke-width", 0.1);
-                                
+///////////////////// COLORSCALE HARDCODED RIGHT NOW 
         // Initialize the color scale
-        vis.colorScale = d3.scaleSequential(d3.interpolatePurples);
+        switch(vis.variable) {
+            case '2020_absent_pct':
+                vis.colorScale = d3.scaleSequential(d3.interpolatePurples);
+                break;
+            case "total_reg":
+                vis.colorScale = d3.scaleSequential(d3.interpolateReds);
+                break;
+            case "mean_hh_income":
+                vis.colorScale = d3.scaleSequential(d3.interpolateBlues);
+                break;
+            default:
+                vis.colorScale = d3.scaleSequential(d3.interpolateGreys);
+        }
+        // vis.colorScale = d3.scaleSequential(vis.variable == "2020_absent_pct" ? d3.interpolatePurples);
 
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
@@ -88,7 +79,7 @@ class MapVis {
     wrangleData() {
         let vis = this;
         
-        // vis.variable = '2020_absent_pct' 
+        vis.geoLevel = document.getElementById("geoLevel").value;
 
         vis.displayData = {
             "name": "displayData",
@@ -115,6 +106,37 @@ class MapVis {
         // Update the color scale
         vis.variableArray = vis.displayData.features.map(d => d[vis.variable]);
         vis.colorScale.domain([d3.min(vis.variableArray),d3.max(vis.variableArray)]);
+
+
+
+        //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
+
+        
+
+        // Project the GeoJSON
+        vis.projection = d3.geoMercator()
+                          .fitSize([vis.width, vis.height], vis.geoData[vis.geoLevel]);
+
+        // Define geo generator
+        vis.path = d3.geoPath()
+                    .projection(vis.projection);
+
+
+        vis.svg.selectAll(".geoFeature").remove();
+
+        // Draw the geographic features
+        vis.geoFeatures = vis.svg.selectAll(".geoFeature")
+                                .data(vis.geoData[vis.geoLevel].features)
+                                .enter().append("path")
+                                .attr('class', 'geoFeature')
+                                .attr("d", vis.path)
+                                .attr("fill", "#ccc")
+                                .attr("stroke", "#333")
+                                .attr("stroke-width", 0.1);
+
+        //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
+
+        
 
         // Change the feature colors
         vis.geoFeatures = vis.svg.selectAll('.geoFeature')
