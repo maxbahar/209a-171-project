@@ -23,14 +23,40 @@ function createVis(data) {
     let countyData = data[2];
     let shapData = data[3];
 
-    // TO DO: Visualizations go here
     absentMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData, "2020_absent_pct");
     popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
     incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
+    kdeTestPlot = new KdePlot("kdeTest", blockGroupData);
+    importanceVis = new ImportanceVis("importanceParentElement", shapData);
 
-    kdeTestPlot = new KdePlot("kdeTest", blockGroupData)
 
-    importanceVis = new ImportanceVis("importanceParentElement", shapData)
+    //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
+
+    // Dummy data for rendering purposes
+    const sentimentData = Array.from({ length: 3000 }, (_, i) => ({
+        date: new Date(
+            2023,
+            Math.floor(Math.random() * 12),
+            Math.ceil(Math.random() * 28)
+        ),
+        network: `Demographic Group ${Math.ceil(Math.random() * 5)}`,
+        score: Math.random(),
+        party: Math.random() > 0.5 ? "Democrat" : "Republican",
+    }));
+
+    for (let i = 0; i < 1500; i++) {
+        sentimentData.push({
+            date: new Date(2023, Math.floor(Math.random() * 12), Math.ceil(Math.random() * 28)),
+            network: "Demographic Group 1",
+            score: Math.random(),
+            party: Math.random() > 0.5 ? "Democrat" : "Republican",
+        });
+    }
+
+    sentimentVis = new SentimentChart("sentimentParent", sentimentData);
+
+    //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
+
 }
 
 let fullPage = new fullpage('#fullpage', {

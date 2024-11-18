@@ -46,3 +46,138 @@
     padding: 20px
 }
 
+/* - - - - - - SENTIMENT CHART SPECIFIC - - - - - - */
+
+/* body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+} */
+
+.slider-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#date-slider {
+    width: 60%;
+    margin: 10px 0;
+}
+
+#date-range {
+    font-weight: bold;
+}
+
+.chart {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #333;
+    padding: 0 10%;
+}
+
+.chart-header .label-left {
+    text-align: left;
+    color: steelblue;
+}
+
+.chart-header .label-right {
+    text-align: right;
+    color: crimson;
+}
+
+#comparison-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 10px 0;
+}
+
+.bar-label {
+    width: 20%;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.bar-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 20px;
+    position: relative;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.democrat-bar {
+    background-color: steelblue;
+    height: 100%;
+    transform-origin: right;
+    z-index: 5;
+}
+
+.republican-bar {
+    background-color: crimson;
+    height: 100%;
+    transform-origin: left;
+    z-index: 5;
+}
+
+.bar-value {
+    position: absolute;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+}
+
+.democrat-value {
+    right: 55%;
+    transform: translateX(100%);
+}
+
+.republican-value {
+    left: 55%;
+    transform: translateX(-100%);
+}
