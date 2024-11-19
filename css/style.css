@@ -22,6 +22,11 @@
     height: 75vh; /* So that SVG height can be set dynamically */
 }
 
+.barPlotContainer {
+    width: 30vw;
+    height: 75vh;
+}
+
 /* - - - - - - SECTION SPECIFIC - - - - - - */
 
 
@@ -46,32 +51,28 @@
     padding: 20px
 }
 
-/* - - - - - - SENTIMENT CHART SPECIFIC - - - - - - */
+/* - - - - - - BAR PLOT SPECIFIC - - - - - - */
 
-/* body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f9f9f9;
-    color: #333;
+/* .party-bar {
+
 }
+.gender-bar {
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
 }
+.age-bar {
 
-h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 10px;
 }
+.income-bar {
 
-p {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
+}
+.language-bar {
+
+}
+.ethnicity-bar {
+
 } */
+
+/* - - - - - - SENTIMENT CHART SPECIFIC - - - - - - */
 
 .slider-container {
     text-align: center;

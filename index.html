@@ -272,37 +272,41 @@
     </div>
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
     <div class="section">
-        <h1>feature visualization chart here with the three selections made from last slide highlighted?</h1>
-        <h2 id="user-cat-sel-info">user made no selections on previous slide</h2>
+        <h1>Guess!</h1>
+        <h2 id="user-cat-sel-info">No data selected</h2>
+        <h2 id="block-group-chosen"></h2>
+        <div class="d-flex justify-content-center">
+            <div class="barPlotContainer" id="ageBarParent"></div>
+            <div class="barPlotContainer" id="partyBarParent"></div>
+            <div class="barPlotContainer" id="genderBarParent"></div>
+        </div>
     </div>
-    <!---------------------------- Page 3 / RISING INSIGHT (MAIN MAP) ---------------------------->
-    <div class="section">
-        <h1>rising insight</h1>
-        <select name="geoLevel-option" id="geoLevel" onchange="absentMapVis.wrangleData()">
+    <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
+    <div class="section" id="demographic-slide">
+        <select name="geoLevel-option" id="geoLevel" onchange="absentMapVis.updateVis()">
             <option value="county">County</option>
             <option value="tract">Tract</option>
             <option value="blockGroup">Block Group</option>
         </select>
-        <select name="geoLevel-option" id="geoLevel" onchange="absentMapVis.wrangleData()">
+        <select name="demographicVar-option" id="demographicVar" onchange="absentMapVis.updateVis()">
             <option value="age">Age</option>
             <option value="gender">Gender</option>
             <option value="party">Party</option>
             <option value="ethnicity">Ethnicity</option>
         </select>
-        <div class="visContainer" id="mapParentElement"></div>
-    </div>
-    <!---------------------------- Page 4 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
-    <div class="section" id="demographic-slide">
         <div class="slide">
             <h1>What do Massachusetts Demographics Look Like?</h1>
-            <h3>By Population</h3>
-            <div>POP MAP HERE</div>
+            <h3>By Voter Absence</h3>
+            <div class="visContainer" id="absentMapElement"></div>
+        </div>
+        <div class="slide">
+            <h1>What do Massachusetts Demographics Look Like?</h1>
+            <h3>By Voter Registration</h3>
             <div class="visContainer" id="popMapParent"></div>
         </div>
         <div class="slide">
             <h1>What do Massachusetts Demographics Look Like?</h1>
-            <h3>By INCOME</h3>
-            <div>Income Map Here</div>
+            <h3>By Household Income</h3>
             <div class="visContainer" id="incomeMapParent"></div>
         </div>
         <div class="slide">
@@ -339,9 +343,10 @@
 <script src="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.js"></script>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <!-- Include custom libraries -->
+<script src="js/interactionHelper.js"></script>
+<script src="js/barvis.js"></script>
 <script src="js/importancevis.js"></script>
 <script src="js/mapvis.js"></script>
-<script src="js/interactionHelper.js"></script>
 <script src="js/kdeplot.js"></script>
 <script src="js/sentimentvis.js"></script>
 <script src="js/main.js"></script>

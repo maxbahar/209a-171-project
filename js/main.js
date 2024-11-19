@@ -1,5 +1,5 @@
-let memberVote = undefined
-let selectedFeatureCategories = new Set()
+let memberVote = undefined;
+let selectedFeatureCategories = new Set();
 let absentMapVis, popMapVis, incomeMapVis, kdeTestPlot, importanceVis;
 // Read in data from multiple files via promises
 let promises = [
@@ -23,12 +23,23 @@ function createVis(data) {
     let countyData = data[2];
     let shapData = data[3];
 
-    absentMapVis = new MapVis("mapParentElement", blockGroupData, tractData, countyData, "2020_absent_pct");
+    // Initialize visualizations
+
+    // Maps
+    absentMapVis = new MapVis("absentMapElement", blockGroupData, tractData, countyData, "2020_absent_pct");
     popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
     incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
+
+    // Density plot
     kdeTestPlot = new KdePlot("kdeTest", blockGroupData);
+    
+    // Feature importance plot
     importanceVis = new ImportanceVis("importanceParentElement", shapData);
 
+    // Bar plots
+    ageBarVis = new BarVis("ageBarParent",blockGroupData, tractData, countyData,"vote-age")
+    partyBarVis = new BarVis("partyBarParent",blockGroupData, tractData, countyData,"vote-party")
+    genderBarVis = new BarVis("genderBarParent",blockGroupData, tractData, countyData,"vote-gender")
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
@@ -53,7 +64,7 @@ function createVis(data) {
         });
     }
 
-    sentimentVis = new SentimentChart("sentimentParent", sentimentData);
+    // sentimentVis = new SentimentChart("sentimentParent", sentimentData);
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 

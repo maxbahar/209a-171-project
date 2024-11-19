@@ -45,4 +45,5 @@ function votecat(categoryID) {
     }
 
     document.getElementById("user-cat-sel-info").innerText = nStr;
+    
 }

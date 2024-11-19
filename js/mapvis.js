@@ -10,8 +10,6 @@ class MapVis {
         };
         this.variable = variable;
 
-        console.log(this.geoData);
-
         this.initVis();
         
     }
@@ -30,25 +28,6 @@ class MapVis {
                     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
-        //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
-
-        // // Add a zoomable `g` element
-        // vis.g = vis.svg.append("g")
-        //     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
-        // // Define the zoom behavior
-        // vis.zoom = d3.zoom()
-        //     .scaleExtent([1, 8]) // Define zoom scale limits
-        //     .translateExtent([[0, 0], [vis.width, vis.height]]) // Limit panning
-        //     .on("zoom", function (event) {
-        //         vis.g.attr("transform", event.transform); // Apply zoom transformations
-        //     });
-
-        // // Apply the zoom behavior to the SVG
-        // vis.svg.call(vis.zoom);
-
-        //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
 ///////////////////// COLORSCALE HARDCODED RIGHT NOW 
         // Initialize the color scale
@@ -78,24 +57,6 @@ class MapVis {
 
     wrangleData() {
         let vis = this;
-        
-        vis.geoLevel = document.getElementById("geoLevel").value;
-
-        vis.displayData = {
-            "name": "displayData",
-            "type": "FeatureCollection",
-            "features": []
-        }
-        vis.displayData.features = vis.geoData[vis.geoLevel].features.map(function(d) {
-            return {
-                "GEOID20": d.properties["GEOID20"],
-                "name" : d.properties["BASENAME"],
-                [vis.variable]: d.properties[vis.variable]
-            }
-        });
-
-        // Optionally log data
-        console.log(vis.displayData);
 
         vis.updateVis();
     }
@@ -103,15 +64,16 @@ class MapVis {
     updateVis() {
         let vis = this;
 
+        // Get geography level
+        vis.geoLevel = document.getElementById("geoLevel").value;
+
         // Update the color scale
-        vis.variableArray = vis.displayData.features.map(d => d[vis.variable]);
+        vis.variableArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.variable]);
         vis.colorScale.domain([d3.min(vis.variableArray),d3.max(vis.variableArray)]);
 
 
 
         //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
-
-        
 
         // Project the GeoJSON
         vis.projection = d3.geoMercator()
@@ -120,7 +82,6 @@ class MapVis {
         // Define geo generator
         vis.path = d3.geoPath()
                     .projection(vis.projection);
-
 
         vis.svg.selectAll(".geoFeature").remove();
 
@@ -140,10 +101,10 @@ class MapVis {
 
         // Change the feature colors
         vis.geoFeatures = vis.svg.selectAll('.geoFeature')
-                                    .data(vis.displayData.features)
+                                    .data(vis.geoData[vis.geoLevel].features)
                                     .enter().append("path")
                                     .merge(vis.geoFeatures)
-                                    .attr("fill", d => vis.colorScale(d[vis.variable]));
+                                    .attr("fill", d => vis.colorScale(d.properties[vis.variable]));
 
         // Mouseover behavior
         vis.geoFeatures.on('mouseover', function(event, d){
@@ -156,14 +117,14 @@ class MapVis {
                     .style("top", event.pageY + "px")
 ///////////////////// TOOLTIP HARDCODED RIGHT NOW 
                     .html(`
-                        <h4>${d["name"]} County</h4>
-                        <div style="font-size: 14pt"><span style="font-weight:600">${vis.variable}: </span>${d[vis.variable].toLocaleString()}</div>
+                        <h4>${d.properties["BASENAME"]}</h4>
+                        <div style="font-size: 14pt"><span style="font-weight:600">${vis.variable}: </span>${d.properties[vis.variable].toLocaleString()}</div>
                         `); 
 
         }).on('mouseout', function(event, d){
 
             d3.select(this)
-                .attr("fill", d => vis.colorScale(d[vis.variable]));
+                .attr("fill", d => vis.colorScale(d.properties[vis.variable]));
 
             vis.tooltip.style("opacity", 0)
                         .style("left", 0)
