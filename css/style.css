@@ -21,11 +21,6 @@
     height: 75vh; /* So that SVG height can be set dynamically */
 }
 
-.barPlotContainer {
-    width: 30vw;
-    height: 75vh;
-}
-
 /* - - - - - - SECTION SPECIFIC - - - - - - */
 
 
@@ -52,24 +47,20 @@
 
 /* - - - - - - BAR PLOT SPECIFIC - - - - - - */
 
-/* .party-bar {
-
+.barPlotContainer {
+    width: 30vw;
+    height: 75vh;
 }
-.gender-bar {
 
+#barPlot1 > svg > g > rect {
+    fill: crimson;
 }
-.age-bar {
-
+#barPlot2 > svg > g > rect {
+    fill: steelblue;
 }
-.income-bar {
-
+#barPlot3 > svg > g > rect {
+    fill: orange;
 }
-.language-bar {
-
-}
-.ethnicity-bar {
-
-} */
 
 /* - - - - - - SENTIMENT CHART SPECIFIC - - - - - - */
 

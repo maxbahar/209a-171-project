@@ -17,17 +17,18 @@ class BarVis {
     initVis() {
 
         let vis = this;
-
-        vis.margin = {top: 20, right: 20, bottom: 100, left: 30};
+        
+        vis.margin = {top: 20, right: 20, bottom: 100, left: 50};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
-        // Initialize SVG drawing area
+        // Initialize SVG drawing area 
         vis.svg = d3.select("#" + vis.parentElement).append("svg")
                     .attr("width", vis.width + vis.margin.left + vis.margin.right)
                     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+        
 
         // Initialize scale
         vis.y = d3.scaleLinear()
@@ -60,36 +61,53 @@ class BarVis {
     wrangleData() {
         let vis = this;
 
+        console.log(vis.category);
+
         // Define the category
-        switch(vis.category) {
-            case "vote-party":
-                vis.variables = ['party_npp', 'party_dem', 'party_rep','party_lib', 'party_grn', 'party_con', 'party_ain', 'party_scl','party_oth']
-                break;
-            case "vote-gender":
-                vis.variables = ['gender_m', 'gender_f', 'gender_unknown'] 
-                break;
-            case "vote-age":
-                vis.variables = ['age_18_19', 'age_20_24', 'age_25_29','age_30_34','age_35_44', 'age_45_54', 'age_55_64', 'age_65_74','age_75_84', 'age_85over']
-                break;
-            case "vote-income":
-                vis.variables = "mean_hh_income"
-                break;
-            case "vote-lang":
-                vis.variables = ['lang_english', 'lang_spanish', 'lang_portuguese', 'lang_chinese', 'lang_italian', 'lang_vietnamese', 'lang_other', 'lang_unknown']
-                break;
-            case "vote-eth":
-                vis.variables = ['eth1_eur', 'eth1_hisp', 'eth1_aa', 'eth1_esa', 'eth1_oth', 'eth1_unk']
-                break;
+
+        if (vis.category == "vote-income") {
+            vis.variables =  ["mean_hh_income"]
+
+            let bgArray = vis.geoData["blockGroup"].features
+                                .filter(d => d.properties["GEOID20"].slice(0,11) == chosenFeature.properties["GEOID20"])
+                                .map((d) => [d.properties["mean_hh_income"], d.properties["total_reg"]]);
+
+            // Create histogram
+            let binSize = 10000;
+            let incomeMin = Math.floor(d3.min(bgArray.map(d => d[0])) / binSize) * binSize;
+            let incomeMax = Math.ceil(d3.max(bgArray.map(d => d[0])) / binSize) * binSize;
+            let numBins = Math.ceil((incomeMax - incomeMin) / binSize);
+            vis.displayData = Array.from({length: numBins}, (_, i) => [ [incomeMin + i * binSize, incomeMin + (i + 1) * binSize], 0 ]);
+
+            bgArray.forEach(d => {
+                let binIndex = Math.floor((d[0] - incomeMin) / binSize);
+                vis.displayData[binIndex][1] += d[1];
+            });
+
+        } else {
+
+            switch(vis.category) {
+                case "vote-party":
+                    vis.variables = ['party_npp', 'party_dem', 'party_rep','party_lib', 'party_grn', 'party_con', 'party_ain', 'party_scl','party_oth']
+                    break;
+                case "vote-gender":
+                    vis.variables = ['gender_m', 'gender_f', 'gender_unknown'] 
+                    break;
+                case "vote-age":
+                    vis.variables = ['age_18_19', 'age_20_24', 'age_25_29','age_30_34','age_35_44', 'age_45_54', 'age_55_64', 'age_65_74','age_75_84', 'age_85over']
+                    break;
+                case "vote-lang":
+                    vis.variables = ['lang_english', 'lang_spanish', 'lang_portuguese', 'lang_chinese', 'lang_italian', 'lang_vietnamese', 'lang_other', 'lang_unknown']
+                    break;
+                case "vote-eth":
+                    vis.variables = ['eth1_eur', 'eth1_hisp', 'eth1_aa', 'eth1_esa', 'eth1_oth', 'eth1_unk']
+                    break;
+            }
+
+            // Get data for relevant variables
+            vis.displayData = vis.variables.map((d) => [d,chosenFeature.properties[d]]);
+
         }
-
-        // Randomly generate block group to examine
-        vis.chosenBlockGroupIdx = Math.floor(Math.random() * vis.geoData["blockGroup"].features.length);
-        vis.chosenBlockGroup = vis.geoData["blockGroup"].features[vis.chosenBlockGroupIdx];
-
-        // Get data for relevant variables
-        vis.displayData = vis.variables.map((d) => {
-            return [d,vis.chosenBlockGroup.properties[d]];
-        });
 
         console.log(vis.displayData);
 
@@ -99,7 +117,6 @@ class BarVis {
     updateVis() {
         let vis = this;
 
-        document.getElementById("block-group-chosen").innerText = vis.chosenBlockGroup.properties["GEOID20"];
 
         // Update domains
         vis.x.domain(vis.displayData.map(d => d[0]));

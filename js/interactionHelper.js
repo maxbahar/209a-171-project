@@ -1,3 +1,5 @@
+let votecatIdx = 1;
+
 /**
  * handle the vote cast for group member
  * @param groupMemberID
@@ -18,15 +20,31 @@ function voted(groupMemberID) {
  * @param categoryID
  */
 function votecat(categoryID) {
-    if (selectedFeatureCategories.has(categoryID)) {
-        selectedFeatureCategories.delete(categoryID);
-    } else if (selectedFeatureCategories.size <= 2) {
-        selectedFeatureCategories.add(categoryID);
+    if (categoryID in selectedFeatureCategories) {
+        delete selectedFeatureCategories[categoryID];
+
+        // Remove barplot
+        votecatIdx--;
+        document.getElementById(`barPlot${votecatIdx}`).classList.remove("barPlotContainer");
+        let parentDiv = document.getElementById(`barPlot${votecatIdx}`)
+        let svgElement = parentDiv.querySelector("svg");
+
+        // Remove the SVG if it exists
+        if (svgElement) {
+            parentDiv.removeChild(svgElement);
+        }
+        
+
+    } else if (Object.keys(selectedFeatureCategories).length <= 2) {
+
+        document.getElementById(`barPlot${votecatIdx}`).classList.add("barPlotContainer");
+        selectedFeatureCategories[categoryID] = new BarVis(`barPlot${votecatIdx}`, blockGroupData, tractData, countyData, categoryID);
+        votecatIdx++;
     }
     document.querySelectorAll('.vote-box2').forEach(function (div) {
         div.classList.remove('clicked-vote-box');
     });
-    selectedFeatureCategories.forEach((categoryID) => {
+    Object.keys(selectedFeatureCategories).forEach((categoryID) => {
         const clickedDiv = document.getElementById(categoryID);
         if (clickedDiv) {
             clickedDiv.classList.add('clicked-vote-box');
@@ -39,7 +57,7 @@ function votecat(categoryID) {
         nStr = "user made no selections on previous slide"
     } else {
         nStr = "user selected the following categories: "
-        selectedFeatureCategories.forEach((categoryID) => {
+        Object.keys(selectedFeatureCategories).forEach((categoryID) => {
             nStr += categoryID + ', '
         })
     }

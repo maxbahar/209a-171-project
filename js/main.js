@@ -1,6 +1,11 @@
-let memberVote = undefined;
-let selectedFeatureCategories = new Set();
+// Initalize variables
+let memberVote, chosenFeature;
+let selectedFeatureCategories = {};
+// let selectedFeatureCategories = new Set();
+let blockGroupData, tractData, countyData, shapData;
 let absentMapVis, popMapVis, incomeMapVis, kdeTestPlot, importanceVis;
+
+
 // Read in data from multiple files via promises
 let promises = [
     d3.json('data/block_groups.geojson'),
@@ -18,28 +23,29 @@ function createVis(data) {
     // console.log(data);
 
     // Extract data
-    let blockGroupData = data[0];
-    let tractData = data[1];
-    let countyData = data[2];
-    let shapData = data[3];
+    blockGroupData = data[0];
+    tractData = data[1];
+    countyData = data[2];
+    shapData = data[3];
+
+    // Randomly choose a Block Group (can be changed to accomodate different levels of geography)
+    let chosenFeatureIdx = Math.floor(Math.random() * tractData.features.length);
+    chosenFeature = tractData.features[chosenFeatureIdx];
+    document.getElementById("chosen-feature").innerText = chosenFeature.properties["BASENAME"];
 
     // Initialize visualizations
 
     // Maps
-    absentMapVis = new MapVis("absentMapElement", blockGroupData, tractData, countyData, "2020_absent_pct");
-    popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
-    incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
+    // absentMapVis = new MapVis("absentMapElement", blockGroupData, tractData, countyData, "2020_absent_pct");
+    // popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
+    // incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
 
     // Density plot
-    kdeTestPlot = new KdePlot("kdeTest", blockGroupData);
+    // kdeTestPlot = new KdePlot("kdeTest", blockGroupData);
     
     // Feature importance plot
-    importanceVis = new ImportanceVis("importanceParentElement", shapData);
+    // importanceVis = new ImportanceVis("importanceParentElement", shapData);
 
-    // Bar plots
-    ageBarVis = new BarVis("ageBarParent",blockGroupData, tractData, countyData,"vote-age")
-    partyBarVis = new BarVis("partyBarParent",blockGroupData, tractData, countyData,"vote-party")
-    genderBarVis = new BarVis("genderBarParent",blockGroupData, tractData, countyData,"vote-gender")
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
