@@ -28,9 +28,9 @@
         border-right: 3vh dashed #000;
         border-top: 6vh dashed #000;
     */
-    border-left: 1vh solid #000;
-    border-right: 1vh solid #000;
-    border-top: 1vh solid #000;
+    border-left: .5vh solid #000;
+    border-right: .5vh solid #000;
+    border-top: .5vh solid #000;
     box-sizing: border-box;
 }
 
@@ -76,21 +76,21 @@
 /* left column */
 /* .ballot-body > .left-ballot-col  */
 .left-ballot-col {
-    border-right: .5vh solid #000;
+    border-right: .25vh solid #000;
     font-size: 1.4rem;
 }
 
 /* middle column */
 /* .ballot-body >  .mid-ballot-col */
 .mid-ballot-col {
-    border-left: .25vh solid #000;
-    border-right: .25vh solid #000;
+    border-left: .125vh solid #000;
+    border-right: .125vh solid #000;
 }
 
 /* right column */
 /* .ballot-body > .right-ballot-col */
 .right-ballot-col {
-    border-left: .5vh solid #000;
+    border-left: .25vh solid #000;
 }
 
 .right-ballot-col-question {
@@ -174,9 +174,9 @@
     border-right: 3vh dashed #000;
     border-bottom: 3vh dashed #000;
     */
-    border-left: 1vh solid #000;
-    border-right: 1vh solid #000;
-    border-bottom: 1vh solid #000;
+    border-left: .5vh solid #000;
+    border-right: .5vh solid #000;
+    border-bottom: .5vh solid #000;
     box-sizing: border-box;
 }
 
