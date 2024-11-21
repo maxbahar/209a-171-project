@@ -136,6 +136,7 @@
 
 .vote-box:hover {
     background: black;
+    cursor: pointer;
 }
 
 
@@ -225,4 +226,5 @@
 }
 .vote-box2:hover {
     background: black;
+    cursor: pointer;
 }

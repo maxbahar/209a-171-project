@@ -1,7 +1,6 @@
 // Initalize variables
 let memberVote, chosenFeature;
 let selectedFeatureCategories = {};
-// let selectedFeatureCategories = new Set();
 let blockGroupData, tractData, countyData, shapData;
 let absentMapVis, popMapVis, incomeMapVis, kdeTestPlot, importanceVis;
 
@@ -83,3 +82,6 @@ let fullPage = new fullpage('#fullpage', {
     autoScrolling: true,
 });
 
+let selPrevCard1 = new SelVarPrev("var-sel1", 0)
+let selPrevCard2 = new SelVarPrev("var-sel2", 1)
+let selPrevCard3 = new SelVarPrev("var-sel3", 2)

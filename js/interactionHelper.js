@@ -62,6 +62,13 @@ function votecat(categoryID) {
         })
     }
 
+
     document.getElementById("user-cat-sel-info").innerText = nStr;
+
+    document.getElementById("val-sel-count").innerText = "you have selected "+Object.keys(selectedFeatureCategories).length+" categories"
+
+    selPrevCard1.wrangleData()
+    selPrevCard2.wrangleData()
+    selPrevCard3.wrangleData()
     
 }
