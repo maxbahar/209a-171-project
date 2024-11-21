@@ -2,8 +2,63 @@
     background: #2F343C;
     color: white;
     font-family: 'Oswald', sans-serif;
+
 }
 
 .rec-bg h1{
     font-size: 3em;
+}
+
+#rec1-bg{
+    background-image: url("/images/vote1.jpg");
+}
+
+#rec2-bg{
+    background-image: url("/images/vote2.jpg");
+}
+
+#rec3-bg{
+    background-image: url("/images/vote3.jpg");
+}
+
+
+.img-text-container {
+    padding: 10px;
+    background: rgba(255, 255, 255, .8);
+    text-align: left;
+    margin-left: 25vh;
+    margin-right: 25vh;
+}
+
+.img-text-container-dark {
+    padding: 10px;
+    background: rgba(0, 0, 0, .8);
+    text-align: left;
+    margin-left: 25vh;
+    margin-right: 25vh;
+    color: white;
+}
+
+
+
+.img-text-container h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    padding-bottom: 10px;
+
+}
+
+.img-text-container ul {
+    font-size: 1.2rem;
+}
+
+.img-text-container-dark h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    padding-bottom: 10px;
+
+}
+
+.img-text-container-dark ul {
+    font-size: 1.2rem;
 }

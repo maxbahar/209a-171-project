@@ -16,6 +16,11 @@
     border-color: transparent transparent transparent black;
 }
 
+.section-img-bg{
+    background-size: cover;
+    font-family: 'Oswald', sans-serif;
+}
+
 
 .visContainer {
     height: 75vh; /* So that SVG height can be set dynamically */
