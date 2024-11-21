@@ -1,23 +1,23 @@
-.rec-bg{
+.rec-bg {
     background: #2F343C;
     color: white;
     font-family: 'Oswald', sans-serif;
 
 }
 
-.rec-bg h1{
+.rec-bg h1 {
     font-size: 3em;
 }
 
-#rec1-bg{
+#rec1-bg {
     background-image: url("/images/vote1.jpg");
 }
 
-#rec2-bg{
+#rec2-bg {
     background-image: url("/images/vote2.jpg");
 }
 
-#rec3-bg{
+#rec3-bg {
     background-image: url("/images/vote3.jpg");
 }
 
@@ -38,7 +38,6 @@
     margin-right: 25vh;
     color: white;
 }
-
 
 
 .img-text-container h1 {

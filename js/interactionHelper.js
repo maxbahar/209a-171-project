@@ -65,7 +65,13 @@ function votecat(categoryID) {
 
     document.getElementById("user-cat-sel-info").innerText = nStr;
 
-    document.getElementById("val-sel-count").innerText = "you have selected "+Object.keys(selectedFeatureCategories).length+" categories"
+    if(Object.keys(selectedFeatureCategories).length !== 1){
+        document.getElementById("val-sel-count").innerText = "you have selected "+Object.keys(selectedFeatureCategories).length+" categories"
+    }
+    else{
+        document.getElementById("val-sel-count").innerText = "you have selected one category"
+
+    }
 
     selPrevCard1.wrangleData()
     selPrevCard2.wrangleData()
