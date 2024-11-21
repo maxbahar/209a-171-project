@@ -16,7 +16,7 @@
 }
 
 .header p {
-    font-size: 1.2em;
+    font-size: 1.4em;
     color: #777;
 }
 
@@ -43,13 +43,13 @@
 
 /* Hover effect on cards */
 .card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
 }
 
 /* Card title styling */
 .card h3 {
     margin: 0 0 10px;
-    font-size: 1.5em;
+    font-size: 1.6em;
     color: #333;
 }
 
@@ -59,10 +59,11 @@
     height: auto;
     border-radius: 8px;
     margin-bottom: 15px;
+    padding:25px
 }
 
 /* Card description styling */
 .card p {
-    font-size: 1em;
+    font-size: 1.4em;
     color: #666;
 }

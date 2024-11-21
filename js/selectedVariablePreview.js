@@ -14,6 +14,7 @@ class SelVarPrev{
         let vis = this;
         vis.titleID =vis.parentElementID+"-title"
         vis.cardID = vis.parentElementID+"-card"
+        vis.imageID = vis.parentElementID+"-img"
 
         vis.titleMap = {
             "none": "Nothing Selected",
@@ -32,6 +33,15 @@ class SelVarPrev{
             "vote-income":"Our model considers mean incomes",
             "vote-lang":"Our model includes 8 language categories",
             "vote-eth":"Our model considers 6 ethnicity categories",
+        }
+        vis.imageMap = {
+            "none": "/images/250.png",
+            "vote-party":"/images/align.png",
+            "vote-gender":"/images/gender.png",
+            "vote-age":"/images/cake.png",
+            "vote-income":"/images/money.png",
+            "vote-lang":"/images/lang.png",
+            "vote-eth":"/images/globe.png",
         }
         vis.wrangleData()
     }
@@ -52,6 +62,8 @@ class SelVarPrev{
 
         document.getElementById(vis.titleID).innerText = vis.titleMap[vis.selID]
         document.getElementById(vis.cardID).innerText = vis.textMap[vis.selID]
+        document.getElementById(vis.imageID).src = vis.imageMap[vis.selID]
+
     }
 }
 
