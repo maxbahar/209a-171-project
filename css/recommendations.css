@@ -1,0 +1,9 @@
+.rec-bg{
+    background: #2F343C;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+}
+
+.rec-bg h1{
+    font-size: 3em;
+}
