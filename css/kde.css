@@ -1,0 +1,9 @@
+#kde-container {
+    background: #FAF9F6;
+    font-family: 'Oswald', sans-serif;
+}
+
+.kde-plot-card {
+    height: 75vh;
+    background: white;
+}

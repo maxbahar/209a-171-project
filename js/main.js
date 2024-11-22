@@ -2,7 +2,7 @@
 let memberVote, chosenFeature;
 let selectedFeatureCategories = {};
 let blockGroupData, tractData, countyData, shapData;
-let absentMapVis, popMapVis, incomeMapVis, kdeTestPlot, importanceVis;
+let absentMapVis, popMapVis, incomeMapVis, kdePlot, importanceVis;
 
 
 // Read in data from multiple files via promises
@@ -40,7 +40,7 @@ function createVis(data) {
     // incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
 
     // Density plot
-    // kdeTestPlot = new KdePlot("kdeTest", blockGroupData);
+    kdePlot = new KdePlot("kde-parent", blockGroupData);
     
     // Feature importance plot
     // importanceVis = new ImportanceVis("importanceParentElement", shapData);
