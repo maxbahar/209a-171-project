@@ -300,11 +300,11 @@
     </div>
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
     <div class="section">
-        <h1>Guess!</h1>
-        <h2 id="user-cat-sel-info">No data selected</h2>
-        <h2 id="chosen-feature"></h2>
+        <div class="header">
+            <h1>Predict Voter Turnout for <span id="chosen-feature"></span></h1>
+            <!-- <h2 id="user-cat-sel-info">No data selected</h2> -->
+        </div>
         <div class="d-flex justify-content-center" id="allBarPlotsParent">
-
             <div id="barPlot1"></div>
             <div id="barPlot2"></div>
             <div id="barPlot3"></div>
@@ -313,18 +313,25 @@
     </div>
     <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
     <div class="section" id="demographic-slide">
-        <select name="geoLevel-option" id="geoLevel" onchange="absentMapVis.updateVis()">
-            <option value="county">County</option>
-            <option value="tract">Tract</option>
-            <option value="blockGroup">Block Group</option>
-        </select>
-        <select name="demographicVar-option" id="demographicVar" onchange="absentMapVis.updateVis()">
-            <option value="age">Age</option>
-            <option value="gender">Gender</option>
-            <option value="party">Party</option>
-            <option value="ethnicity">Ethnicity</option>
-        </select>
         <div class="slide">
+            <h1>What do Massachusetts Demographics Look Like?</h1>
+            <h3 id="main-var-chosen">Variable</h3>
+            <div class="visContainer" id="mainMapElement"></div>
+            <button type="button" class="btn btn-primary" onclick="prevMap()">Previous</button>
+            <select name="geoLevel-option" id="geoLevel" onchange="mainMap.updateVis(mapMainVars[mapIndex])">
+                <option value="county">County</option>
+                <option value="tract">Tract</option>
+                <option value="blockGroup">Block Group</option>
+            </select>
+            <select name="demographicVar-option" id="demographicVar" onchange="mainMap.updateVis(mapMainVars[mapIndex])">
+                <option value="age">Age</option>
+                <option value="gender">Gender</option>
+                <option value="party">Party</option>
+                <option value="ethnicity">Ethnicity</option>
+            </select>
+            <button type="button" class="btn btn-primary" onclick="nextMap()">Next</button>
+        </div>
+        <!-- <div class="slide">
             <h1>What do Massachusetts Demographics Look Like?</h1>
             <h3>By Voter Absence</h3>
             <div class="visContainer" id="absentMapElement"></div>
@@ -338,12 +345,7 @@
             <h1>What do Massachusetts Demographics Look Like?</h1>
             <h3>By Household Income</h3>
             <div class="visContainer" id="incomeMapParent"></div>
-        </div>
-        <div class="slide">
-            <h1>What do Massachusetts Demographics Look Like?</h1>
-            <h3>By _____</h3>
-            <div>Income _____ Here</div>
-        </div>
+        </div> -->
     </div>
     <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
     <div class="section">

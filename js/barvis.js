@@ -69,7 +69,7 @@ class BarVis {
             vis.variables =  ["mean_hh_income"]
 
             let bgArray = vis.geoData["blockGroup"].features
-                                .filter(d => d.properties["GEOID20"].slice(0,11) == chosenFeature.properties["GEOID20"])
+                                .filter(d => d.properties["GEOID20"].slice(0,5) == chosenFeature.properties["GEOID20"])
                                 .map((d) => [d.properties["mean_hh_income"], d.properties["total_reg"]]);
 
             // Create histogram
@@ -131,9 +131,7 @@ class BarVis {
                 .attr("x",d => vis.x(d[0]))
                 .attr("y",d => vis.y(d[1]))
                 .attr("height",d => vis.height - vis.y(d[1]))
-                .attr("width", vis.x.bandwidth())
-//////////////// HARDCODED FILL TO GRAY
-                .attr("fill","lightgray");
+                .attr("width", vis.x.bandwidth());
 
         // Update axis
         vis.xAxisGroup.call(vis.xAxis).selectAll("text").attr("transform","rotate(-45)").style("text-anchor","end");

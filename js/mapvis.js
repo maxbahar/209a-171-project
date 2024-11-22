@@ -1,6 +1,6 @@
 class MapVis {
 
-    constructor(parentElement, blockGroupData, tractData, countyData, variable) {
+    constructor(parentElement, blockGroupData, tractData, countyData, mainVar) {
         
         this.parentElement = parentElement;
         this.geoData = {
@@ -8,7 +8,7 @@ class MapVis {
             "tract": tractData,
             "county" : countyData
         };
-        this.variable = variable;
+        this.mainVar = mainVar;
 
         this.initVis();
         
@@ -29,9 +29,36 @@ class MapVis {
                     .append("g")
                     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+        // Initialize tooltip
+        vis.tooltip = d3.select("body").append('div')
+                        .attr('class', "tooltip")
+                        .attr('id', 'mapTooltip');
+
+        vis.wrangleData(vis.mainVar);
+
+    }
+
+    wrangleData(mainVar) {
+        let vis = this;
+
+        vis.updateVis(mainVar);
+    }
+
+    updateVis(mainVar) {
+        let vis = this;
+
+        // Update description
+        document.getElementById("main-var-chosen").innerText = mainVar;
+
+        // Get geography level
+        vis.geoLevel = document.getElementById("geoLevel").value;
+
+        // Get demographic variable
+        vis.demoVar = document.getElementById("demographicVar").value;
+
 ///////////////////// COLORSCALE HARDCODED RIGHT NOW 
         // Initialize the color scale
-        switch(vis.variable) {
+        switch(mainVar) {
             case '2020_absent_pct':
                 vis.colorScale = d3.scaleSequential(d3.interpolatePurples);
                 break;
@@ -44,32 +71,10 @@ class MapVis {
             default:
                 vis.colorScale = d3.scaleSequential(d3.interpolateGreys);
         }
-        // vis.colorScale = d3.scaleSequential(vis.variable == "2020_absent_pct" ? d3.interpolatePurples);
-
-        // Initialize tooltip
-        vis.tooltip = d3.select("body").append('div')
-                        .attr('class', "tooltip")
-                        .attr('id', 'mapTooltip');
-
-        vis.wrangleData();
-
-    }
-
-    wrangleData() {
-        let vis = this;
-
-        vis.updateVis();
-    }
-
-    updateVis() {
-        let vis = this;
-
-        // Get geography level
-        vis.geoLevel = document.getElementById("geoLevel").value;
 
         // Update the color scale
-        vis.variableArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.variable]);
-        vis.colorScale.domain([d3.min(vis.variableArray),d3.max(vis.variableArray)]);
+        vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[mainVar]);
+        vis.colorScale.domain([d3.min(vis.mainVarArray),d3.max(vis.mainVarArray)]);
 
 
 
@@ -104,7 +109,7 @@ class MapVis {
                                     .data(vis.geoData[vis.geoLevel].features)
                                     .enter().append("path")
                                     .merge(vis.geoFeatures)
-                                    .attr("fill", d => vis.colorScale(d.properties[vis.variable]));
+                                    .attr("fill", d => vis.colorScale(d.properties[mainVar]));
 
         // Mouseover behavior
         vis.geoFeatures.on('mouseover', function(event, d){
@@ -118,13 +123,13 @@ class MapVis {
 ///////////////////// TOOLTIP HARDCODED RIGHT NOW 
                     .html(`
                         <h4>${d.properties["BASENAME"]}</h4>
-                        <div style="font-size: 14pt"><span style="font-weight:600">${vis.variable}: </span>${d.properties[vis.variable].toLocaleString()}</div>
+                        <div style="font-size: 14pt"><span style="font-weight:600">${mainVar}: </span>${d.properties[mainVar].toLocaleString()}</div>
                         `); 
 
         }).on('mouseout', function(event, d){
 
             d3.select(this)
-                .attr("fill", d => vis.colorScale(d.properties[vis.variable]));
+                .attr("fill", d => vis.colorScale(d.properties[mainVar]));
 
             vis.tooltip.style("opacity", 0)
                         .style("left", 0)

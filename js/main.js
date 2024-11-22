@@ -2,8 +2,13 @@
 let memberVote, chosenFeature;
 let selectedFeatureCategories = {};
 let blockGroupData, tractData, countyData, shapData;
-let absentMapVis, popMapVis, incomeMapVis, kdePlot, importanceVis;
+let kdePlot, importanceVis;
 
+// Initialize map variables
+let maps = {};
+let mainMap;
+let mapMainVars = ["2020_absent_pct", "total_reg", "mean_hh_income"]
+let mapIndex = 0;
 
 // Read in data from multiple files via promises
 let promises = [
@@ -28,16 +33,19 @@ function createVis(data) {
     shapData = data[3];
 
     // Randomly choose a Block Group (can be changed to accomodate different levels of geography)
-    let chosenFeatureIdx = Math.floor(Math.random() * tractData.features.length);
-    chosenFeature = tractData.features[chosenFeatureIdx];
-    document.getElementById("chosen-feature").innerText = chosenFeature.properties["BASENAME"];
+    let chosenFeatureIdx = Math.floor(Math.random() * countyData.features.length);
+    chosenFeature = countyData.features[chosenFeatureIdx];
+    document.getElementById("chosen-feature").innerText = chosenFeature.properties["BASENAME"] + " County";
 
     // Initialize visualizations
 
     // Maps
-    // absentMapVis = new MapVis("absentMapElement", blockGroupData, tractData, countyData, "2020_absent_pct");
-    // popMapVis = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
-    // incomeMapVis = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
+    mainMap = new MapVis("mainMapElement", blockGroupData, tractData, countyData, "2020_absent_pct");
+    // maps["absentMap"] = new MapVis("absentMapElement", blockGroupData, tractData, countyData, "2020_absent_pct");
+    // maps["popMap"] = new MapVis("popMapParent", blockGroupData, tractData, countyData, "total_reg");
+    // maps["incomeMap"] = new MapVis("incomeMapParent", blockGroupData, tractData, countyData, "mean_hh_income");
+
+    console.log(maps);
 
     // Density plot
     kdePlot = new KdePlot("kde-parent", blockGroupData);
@@ -73,6 +81,26 @@ function createVis(data) {
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
+}
+
+function prevMap() {
+    if (mapIndex === 0) {
+        mapIndex = mapMainVars.length - 1;
+    } else {
+        mapIndex--;
+    }
+    console.log(mapIndex);
+    mainMap.updateVis(mapMainVars[mapIndex]);
+}
+
+function nextMap() {
+    if (mapIndex === mapMainVars.length - 1) {
+        mapIndex = 0;
+    } else {
+        mapIndex++;
+    }
+    console.log(mapIndex);
+    mainMap.updateVis(mapMainVars[mapIndex]);
 }
 
 let fullPage = new fullpage('#fullpage', {
