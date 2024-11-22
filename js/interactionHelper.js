@@ -63,7 +63,7 @@ function votecat(categoryID) {
     }
 
 
-    document.getElementById("user-cat-sel-info").innerText = nStr;
+    // document.getElementById("user-cat-sel-info").innerText = nStr;
 
     if(Object.keys(selectedFeatureCategories).length !== 1){
         document.getElementById("val-sel-count").innerText = "you have selected "+Object.keys(selectedFeatureCategories).length+" categories"
