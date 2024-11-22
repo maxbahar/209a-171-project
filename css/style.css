@@ -45,6 +45,9 @@
 .wood-grain{
     background-image: url("/images/wood-grain.jpg");
 }
+.wood-grain-blur{
+    background-image: url("/images/wood-grain-blur.png");
+}
 
 /* - - - - - - MAP SPECIFIC - - - - - - */
 
