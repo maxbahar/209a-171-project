@@ -21,6 +21,10 @@
     background-image: url("/images/vote3.jpg");
 }
 
+#rec4-bg {
+    background-image: url("/images/vote4.jpg");
+}
+
 
 .img-text-container {
     padding: 10px;
@@ -60,4 +64,17 @@
 
 .img-text-container-dark ul {
     font-size: 1.5rem;
+}
+
+.conclusion-body{
+    height: 65vh;
+    padding-left: 4vh;
+
+}
+.conclusion-body ul{
+    text-align: left;
+}
+.conclusion-body ul li {
+    padding-top:5vh;
+
 }
