@@ -8,13 +8,14 @@
     align-items: center;
     font-family: 'Oswald', sans-serif;
     font-size: 1.5rem;
+
 }
 
 /* small border around ballot and background*/
 /* .ballot-container > .ballot-border-container */
 .ballot-border-container {
-    border-left: 1px solid gray;
-    border-right: 1px solid gray;
+    border-left: 3px solid rgba(166, 166, 166, .7);
+    border-right: 1px solid rgba(166, 166, 166, .7);
 }
 
 /* big blocky borders of ballot */
@@ -47,12 +48,13 @@
 /* large color heading at top of ballot*/
 /* .ballot-box > .ballot-heading */
 .ballot-heading {
-    background: #faf79b;
+    background: #f7f6da;
     height: 35vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid #faf79b
 }
 
 /* .ballot-heading > #project-title  */
@@ -93,19 +95,13 @@
     border-left: .25vh solid #000;
 }
 
-.right-ballot-col-question {
-    padding-top: 10vh;
-    font-size: 35px
+.right-ballot-instructions li{
+    padding-top: 3vh;
+    font-size: 2rem;
 }
 
-
-
-.right-ballot-col-question-box {
-    height: 56.5vh;
-    text-align: center;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-    font-family: 'Oswald', sans-serif;
+.preattentive {
+    color:red;
 }
 
 /* container for content in left and middle rows*/
@@ -159,10 +155,12 @@
 
 .vote-subtitle-text {
     font-size: 25px;
+    color: gray;
 }
 
 .vote-sub-subtitle-text {
     font-size: 22.5px;
+    color: #b5b3b3;
 }
 
 /* page 2 ballot ending stuff */
@@ -202,8 +200,8 @@
 }
 
 .left-ballot-col-question {
-    text-align: center;
-    font-size: 35px
+    text-align: left;
+    font-size: 3rem;
 }
 .padding-from-top{
     padding-top: 2vh;
