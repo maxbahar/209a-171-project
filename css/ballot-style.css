@@ -127,7 +127,7 @@
     width: 50px;
 }
 .clicked-vote-box{
-    background: black;
+    background: #545454;
 }
 
 .vote-box:hover {

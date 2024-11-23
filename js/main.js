@@ -45,7 +45,7 @@ function createVis(data) {
     console.log(maps);
 
     // Density plot
-    kdePlot = new KdePlot("kde-parent", blockGroupData);
+    kdePlot = new KdePlot("kde-plot-parent", blockGroupData);
     
     // Feature importance plot
     // importanceVis = new ImportanceVis("importanceParentElement", shapData);

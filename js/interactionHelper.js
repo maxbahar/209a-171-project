@@ -78,3 +78,8 @@ function votecat(categoryID) {
     selPrevCard3.wrangleData()
     
 }
+
+function onKdeSelChange(){
+    let selectedVal = document.getElementById("kde-select").value;
+    kdePlot.selectionChange(selectedVal);
+}

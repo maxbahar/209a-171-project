@@ -3,7 +3,47 @@
     font-family: 'Oswald', sans-serif;
 }
 
-.kde-plot-card {
-    height: 75vh;
-    background: white;
+#kde-plot-parent{
+    height: 80vh;
 }
+
+.kde-left{
+    height: 90vh;
+}
+
+.kde-card{
+    background: white;
+    margin:5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-top: 2.5vh;
+    padding: 1vh;
+}
+
+.kde-right{
+    height: 40vh;
+    width: 27.5vw;
+    padding-right: 2vw;
+    padding-left: 2vw;
+}
+.kde-right ul{
+    font-size: large;
+    text-align: left;
+}
+.kde-right ul li{
+    padding-bottom: 1vh
+}
+.kde-right h4 {
+    padding-bottom: 2vh;
+
+}
+
+.kde-right-top{
+    margin-bottom: 5vh;
+}
+
+.custom-container {
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+}
+

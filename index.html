@@ -348,8 +348,35 @@
         </div> -->
     </div>
     <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
-    <div class="section">
-        <div class="visContainer" id="kdeTest"></div>
+    <div class="section custom-container" id="kde-container">
+        <div class="row">
+            <div class="col-8 kde-left">
+                <div class="kde-card" >
+                    <select name="geoLevel-option" id="kde-select" onchange="onKdeSelChange()">
+                        <option value="gender">Gender</option>
+                        <option value="party">Party</option>
+                        <option value="ethnicity">Ethnicity</option>
+                        <option value="age">Age</option>
+                        <option value="language">Language</option>
+                    </select>
+                    <div id="kde-plot-parent"></div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="kde-right kde-right-top kde-card">
+                    <h4>Legend</h4>
+                </div>
+                <div class="kde-right kde-card">
+                    <h4>About</h4>
+                    <ul>
+                        <li>kernel density plots allow you to visualize the density of data observations </li>
+                        <li>each of our observations is a block group</li>
+                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion belonged to the stated category</li>
+                        <li><b>y-axis</b> - voter turnout for a given block group</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
     <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
     <div class="section">
@@ -425,21 +452,6 @@
                 </uL>
             </div>
             <div class="col-6"></div>
-        </div>
-    </div>
-    <div class="section" id="kde-container">
-        <div>
-            <h1>Data Density Exploration</h1>
-            <h3>Something about data distribution?</h3>
-        </div>
-        <div class="row">
-            <div class="col-7 kde-plot-card ">
-
-            </div>
-            <div class="col-5">
-                <div class="row">a</div>
-                <div class="row">b</div>
-            </div>
         </div>
     </div>
 </div>
