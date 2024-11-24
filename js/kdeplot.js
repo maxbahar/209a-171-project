@@ -4,9 +4,11 @@ class KdePlot {
         this.parentElement = parentElement;
         this.data = data;
         this.margin = {top: 40, right: 40, bottom: 40, left: 40};
-
+        this.selectedCategory = "gender"
         this.initVis();
         window.addEventListener('resize', () => this.resize());
+
+
     }
 
     resize() {
@@ -26,7 +28,7 @@ class KdePlot {
     initVis() {
         let vis = this;
 
-        let defaultTag = "gender"
+        let defaultTag = vis.selectedCategory
 
         // trace init
         vis.traceOptions = {
@@ -107,23 +109,38 @@ class KdePlot {
             .domain(vis.yDomain)
             .rangeRound([vis.height - vis.margin.bottom, vis.margin.top]);
 
+        let tooltip = d3.select('body').append('div')
+            .attr('class', 'tooltip')
+            .style('position', 'absolute')
+            .style('visibility', 'hidden') // Start with hidden visibility
+            .style('background-color', 'red')
+            .style('width','30px')
+            .style('color', 'black')
+            .style('padding', '5px')
+            .style('border-radius', '5px')
+            .style('pointer-events', 'none')
+            .style('z-index', 1000);
 
-        // mouse tracking lines init
         let horizontalLine = vis.svg.append('line')
             .attr('stroke', '#000')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4')
             .style('opacity', 0);
+
         let verticalLine = vis.svg.append('line')
             .attr('stroke', '#000')
             .attr('stroke-width', 1)
             .attr('stroke-dasharray', '4')
-            .style('opacity', 0); // Initially hidden
+            .style('opacity', 0);
+
+// Mouse move event
         vis.svg.on('mousemove', function (event) {
             let mousePosition = d3.pointer(event); // [x, y]
 
-            //var mouseY = vis.yScale.invert(mousePosition[1]);
-            //console.log(vis.xScale.invert(mousePosition[0]));
+            tooltip.style('visibility', 'visible') // Show the tooltip
+                .style('top', (mousePosition[1] + 10) + 'px')
+                .style('left', (mousePosition[0] + 10) + 'px')
+                .text('x: ' + Math.round(vis.xScale.invert(mousePosition[0])) + ', y: ' + Math.round(vis.yScale.invert(mousePosition[1])));
 
             horizontalLine
                 .attr('x1', 0)
@@ -131,6 +148,7 @@ class KdePlot {
                 .attr('x2', vis.width)
                 .attr('y2', mousePosition[1])
                 .style('opacity', 1);
+
             verticalLine
                 .attr('x1', mousePosition[0])
                 .attr('y1', 0)
@@ -138,7 +156,10 @@ class KdePlot {
                 .attr('y2', vis.height)
                 .style('opacity', 1);
         });
+
+// Mouse out event
         vis.svg.on('mouseout', function () {
+            tooltip.style('visibility', 'hidden'); // Hide the tooltip
             horizontalLine.style('opacity', 0);
             verticalLine.style('opacity', 0);
         });
@@ -209,23 +230,32 @@ class KdePlot {
 
 
 
-        vis.updateVis()
+        vis.wrangleData()
     }
 
 
     updateVis() {
         let vis = this;
+        // update axes
+        vis.svg.select(".x-axis")
+            .transition()
+            .duration(750)
+            .call(d3.axisBottom(vis.xScale));
+
+        vis.svg.select(".y-axis")
+            .transition()
+            .duration(750)
+            .call(d3.axisLeft(vis.yScale));
+
+        // update legend
         for (let i = 0; i < 4; i++) {
             document.getElementById("k-t-r" + i + "-color").style.background = "white"
             document.getElementById("k-t-r" + i + "-label").innerText = ""
         }
-
-        // legend
         vis.activeTraces.forEach((d, i) => {
             document.getElementById("k-t-r" + i + "-color").style.background = d.color
             document.getElementById("k-t-r" + i + "-label").innerText = d.label
         })
-
 
         // contours
         let contours = []
@@ -266,26 +296,30 @@ class KdePlot {
 
     }
 
-    selectionChange(key) {
+    wrangleData(){
         let vis = this;
 
-        vis.activeTraces = vis.traceOptions[key]
+        // set up data
+        vis.activeTraces = vis.traceOptions[vis.selectedCategory]
+        // reset x and y domains
+        vis.xScale.domain(vis.traceConfigs[vis.selectedCategory].xDomain);
+        vis.yScale.domain(vis.traceConfigs[vis.selectedCategory].yDomain);
 
-        vis.xScale.domain(vis.traceConfigs[key].xDomain);
-        vis.yScale.domain(vis.traceConfigs[key].yDomain);
-
-        vis.svg.select(".x-axis")
-            .transition()
-            .duration(750)
-            .call(d3.axisBottom(vis.xScale));
-
-        vis.svg.select(".y-axis")
-            .transition()
-            .duration(750)
-            .call(d3.axisLeft(vis.yScale));
+        // TODO Experimental
 
 
         vis.updateVis()
+
+    }
+
+    selectionChange(key) {
+        let vis = this;
+
+        vis.selectedCategory = key
+
+
+
+        vis.wrangleData()
 
     }
 
