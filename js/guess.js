@@ -1,4 +1,5 @@
 class Slider {
+    // Handles the slider needed for the user to guess voter turnout
 
     constructor(sliderId) {
         this.sliderId = sliderId;
@@ -8,10 +9,10 @@ class Slider {
     initVis() {
         let vis = this;
 
-        // grab slider location in your DOM
+        // Get slider location
         vis.slider = document.getElementById(vis.sliderId);
 
-        // define slider functionality - notice that you need to provide the slider's location
+        // Define slider functionality
         noUiSlider.create(vis.slider, {
             start: userGuess,
             connect: true,
@@ -23,16 +24,12 @@ class Slider {
                 'max': 1
             },
             tooltips: {to: (v) => v}
-
         });
 
-        // attach an event listener to the slider
+        // Update user's guess when slider is changed
         slider.noUiSlider.on('slide', function (values) {
-
-            console.log(values);
             userGuess = values[0];
             document.getElementById("user-guess").innerText = userGuess.toLocaleString();
-
         });
     }
 }

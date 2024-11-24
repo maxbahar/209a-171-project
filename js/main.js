@@ -22,9 +22,6 @@ Promise.all(promises)
 
 function createVis(data) {
 
-    // Log data for confirmation
-    // console.log(data);
-
     // Extract data
     geoData = {
         "blockGroup": data[0],
@@ -33,9 +30,11 @@ function createVis(data) {
     }
     shapData = data[3];
 
-    // Randomly choose a Block Group (can be changed to accomodate different levels of geography)
+    // Choose a feature for users to guess
     let chosenFeatureIdx = Math.floor(Math.random() * geoData["county"].features.length);
     chosenFeature = geoData["county"].features[chosenFeatureIdx];
+    
+    // Update text in the page to match chosen feature    
     let chosenFeatureSpans = document.getElementsByClassName("chosen-feature");
     for (let i = 0; i < chosenFeatureSpans.length; i++) {
         chosenFeatureSpans[i].innerText = chosenFeature.properties["BASENAME"] + " County";
@@ -43,7 +42,7 @@ function createVis(data) {
     document.getElementById("model-guess").innerText = chosenFeature.properties["2020_turnout_pct_pred"].toLocaleString();
     document.getElementById("actual-value").innerText = chosenFeature.properties["2020_turnout_pct"].toLocaleString();
 
-    // Initialize visualizations
+    ////////// VISUALIZATIONS //////////
 
     // County map
     countyMap = new CountyVis("countyMapParent",geoData["county"]);
@@ -108,8 +107,7 @@ function createVis(data) {
 
 }
 
-
-
+// Slide navigation
 let fullPage = new fullpage('#fullpage', {
     navigation: true,
     navigationPosition: "right",
@@ -117,6 +115,7 @@ let fullPage = new fullpage('#fullpage', {
     autoScrolling: true,
 });
 
+// Dynamic variables selection
 let selPrevCard1 = new SelVarPrev("var-sel1", 0)
 let selPrevCard2 = new SelVarPrev("var-sel2", 1)
 let selPrevCard3 = new SelVarPrev("var-sel3", 2)

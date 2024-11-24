@@ -13,6 +13,7 @@ class CountyVis {
 
         let vis = this;
 
+        // Define width, height, and margins
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
@@ -29,8 +30,8 @@ class CountyVis {
     }
 
     wrangleData() {
+        // No data wrangling is needed for this static viz
         let vis = this;
-
         vis.updateVis();
     }
 
