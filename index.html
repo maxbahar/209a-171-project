@@ -319,12 +319,25 @@
     <div class="section">
         <div class="header">
             <h1>Predict Voter Turnout for <span id="chosen-feature"></span></h1>
-            <!-- <h2 id="user-cat-sel-info">No data selected</h2> -->
         </div>
+
+        <div class="card-container">
+            <div class="bar-card" style="width:35vw; margin-bottom: 20px;" id="countyMapParent"></div>
+        </div>
+        
         <div class="card-container" id="allBarPlotsParent">
-            <div id="barPlot1"></div>
-            <div id="barPlot2"></div>
-            <div id="barPlot3"></div>
+            <div class="bar-card" id="barPlot1">
+            </div>
+            <div class="bar-card" id="barPlot2">
+            </div>
+            <div class="bar-card" id="barPlot3">
+            </div>
+        </div>
+
+        <div id="slider"></div>
+        <div>
+            <h3>What is the voter turnout in the county?</h3>
+            <h4>The average voter turnout in Massachusetts is <span id="stateAvg"></span></h4>
         </div>
     </div>
     <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
@@ -561,10 +574,12 @@
 <script src="js/tooltipvis.js"></script>
 <script src="js/barvis.js"></script>
 <script src="js/importancevis.js"></script>
+<script src="js/countyvis.js"></script>
 <script src="js/mapvis.js"></script>
 <script src="js/kdeplot.js"></script>
 <script src="js/sentimentvis.js"></script>
 <script src="js/main.js"></script>
+<script src="js/guess.js"></script>
 
 </body>
 </html>

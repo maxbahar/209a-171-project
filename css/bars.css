@@ -1,15 +1,27 @@
 /* Individual card styling */
+
+#slider {
+    width: 50vw;
+    margin: 5vh auto 1vh auto;
+    /* Flexbox properties for centering */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;    /* Centers vertically (if applicable) */
+}
+
 .bar-card {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     text-align: center;
     transition: transform 0.3s;
     width: 20vw;
-    max-width: 45vh;
-    height: 40vh;
+    height: 30vh;
     border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.bar-card-parent {
+    height:100%;
 }
 
 /* Hover effect on cards */

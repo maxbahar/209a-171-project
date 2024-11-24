@@ -1,5 +1,24 @@
 let votecatIdx = 1;
 
+let titleMap = {
+    "none": "Nothing Selected",
+    "vote-party":"Party Affiliation",
+    "vote-gender":"Gender",
+    "vote-age":"Age",
+    "vote-income":"Mean Income",
+    "vote-lang":"Language Spoken",
+    "vote-eth":"Ethnicity",
+}
+let textMap = {
+    "none": "",
+    "vote-party":"Our model includes 10 party categories",
+    "vote-gender":"Our model includes: male, female, and unknown",
+    "vote-age":"Our model includes 10 age groups",
+    "vote-income":"Our model considers mean incomes",
+    "vote-lang":"Our model includes 8 language categories",
+    "vote-eth":"Our model considers 6 ethnicity categories",
+}
+
 /**
  * handle the vote cast for group member
  * @param groupMemberID
@@ -25,7 +44,7 @@ function votecat(categoryID) {
 
         // Remove barplot
         votecatIdx--;
-        document.getElementById(`barPlot${votecatIdx}`).classList.remove("barPlotContainer");
+        // document.getElementById(`barPlot${votecatIdx}`).classList.remove("barPlotContainer");
         let parentDiv = document.getElementById(`barPlot${votecatIdx}`)
         let svgElement = parentDiv.querySelector("svg");
 
@@ -34,10 +53,12 @@ function votecat(categoryID) {
             parentDiv.removeChild(svgElement);
         }
         
+        // Reset title
+        parentDiv.querySelector("h3").innerText = "Nothing Selected";
 
     } else if (Object.keys(selectedFeatureCategories).length <= 2) {
 
-        document.getElementById(`barPlot${votecatIdx}`).classList.add("barPlotContainer");
+        // document.getElementById(`barPlot${votecatIdx}`).classList.add("barPlotContainer");
         selectedFeatureCategories[categoryID] = new BarVis(`barPlot${votecatIdx}`, geoData, categoryID);
         votecatIdx++;
     }

@@ -3,6 +3,7 @@ let memberVote, chosenFeature;
 let selectedFeatureCategories = {};
 let geoData, shapData;
 let kdePlot, importanceVis;
+let userGuess = 0.5;
 
 // Initialize map variables
 let maps = {};
@@ -39,8 +40,20 @@ function createVis(data) {
 
     // Initialize visualizations
 
+    // County map
+    countyMap = new CountyVis("countyMapParent",geoData["county"]);
+
     // Map of demographic variables
     mainMap = new MapVis("mainMapElement", geoData, "2020_absent_pct", ["2020_absent_pct", "total_reg", "mean_hh_income"], "mainMapTooltip");
+    // Slider below map
+    let stateVotes = 0, stateReg = 0;
+    geoData["county"].features.forEach(d => {
+        stateVotes += d.properties["2020_turnout"];
+        stateReg += d.properties["2020_reg"];
+    });
+    userGuess = stateVotes / stateReg;
+    document.getElementById("stateAvg").innerText = userGuess.toLocaleString();
+    guessTurnout = new Slider("slider")
 
     // Density plot
     kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
