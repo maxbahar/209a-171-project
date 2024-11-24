@@ -134,13 +134,14 @@
                             <div class="col-4 right-ballot-col ">
                                 <div class="row">
                                     <div class="col-md-12 ballot-category-text-title">
-                                        <u >INSTRUCTIONS</u>
+                                        <u>INSTRUCTIONS</u>
                                     </div>
                                 </div>
                                 <div class="right-ballot-instructions">
                                     <ul>
-                                        <li ><span class="preattentive">you will be prompted to vote</span> </li>
-                                        <li><span class="preattentive">to vote fill in the <u>oval</u> next to your choice</span></li>
+                                        <li><span class="preattentive">you will be prompted to vote</span></li>
+                                        <li><span class="preattentive">to vote fill in the <u>oval</u> next to your choice</span>
+                                        </li>
                                         <li>this page is just practice</li>
                                     </ul>
                                 </div>
@@ -261,7 +262,7 @@
                                         Ethnicity
                                     </div>
                                     <div class="row vote-sub-subtitle-text">
-                                        White, Black, Asian, etc.
+                                        European, African American, East/South Asian, Hispanic
                                     </div>
                                 </div>
                                 <div class="col-2 vote-box-container">
@@ -323,7 +324,8 @@
                 <option value="tract">Tract</option>
                 <option value="blockGroup">Block Group</option>
             </select>
-            <select name="demographicVar-option" id="demographicVar" onchange="mainMap.updateVis(mapMainVars[mapIndex])">
+            <select name="demographicVar-option" id="demographicVar"
+                    onchange="mainMap.updateVis(mapMainVars[mapIndex])">
                 <option value="age">Age</option>
                 <option value="gender">Gender</option>
                 <option value="party">Party</option>
@@ -351,27 +353,86 @@
     <div class="section custom-container" id="kde-container">
         <div class="row">
             <div class="col-8 kde-left">
-                <div class="kde-card" >
-                    <select name="geoLevel-option" id="kde-select" onchange="onKdeSelChange()">
-                        <option value="gender">Gender</option>
-                        <option value="party">Party</option>
-                        <option value="ethnicity">Ethnicity</option>
-                        <option value="age">Age</option>
-                        <option value="language">Language</option>
-                    </select>
+                <div class="kde-card">
+                    <table id="kde-title">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <h4>Kernel Density Estimate by Category:&nbsp;</h4>
+                            </td>
+                            <td><select id="kde-select" onchange="onKdeSelChange()">
+                                <option value="gender">Gender</option>
+                                <option value="party">Party</option>
+                                <option value="ethnicity">Ethnicity</option>
+                                <option value="age">Age</option>
+                                <option value="language">Language</option>
+                            </select></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
                     <div id="kde-plot-parent"></div>
                 </div>
             </div>
             <div class="col-4">
                 <div class="kde-right kde-right-top kde-card">
                     <h4>Legend</h4>
+                    <div class="kde-right-top-table">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r0-color"></div>
+                                </th>
+                                <td id="k-t-r0-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r1-color"></div>
+                                </th>
+                                <td id="k-t-r1-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r2-color"></div>
+                                </th>
+                                <td id="k-t-r2-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r3-color"></div>
+                                </th>
+                                <td id="k-t-r3-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
                 <div class="kde-right kde-card">
                     <h4>About</h4>
                     <ul>
-                        <li>kernel density plots allow you to visualize the density of data observations </li>
+                        <li>kernel density plots allow you to visualize the density of data observations</li>
                         <li>each of our observations is a block group</li>
-                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion belonged to the stated category</li>
+                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
+                            belonged to the stated category
+                        </li>
                         <li><b>y-axis</b> - voter turnout for a given block group</li>
                     </ul>
                 </div>
@@ -444,7 +505,7 @@
     </div>
     <div class="section section-img-bg" id="rec4-bg">
         <div class="row ">
-            <div class="col-6 conclusion-body" >
+            <div class="col-6 conclusion-body">
                 <h1>Thank you for your attention</h1>
                 <uL>
                     <li>some stuff</li>
