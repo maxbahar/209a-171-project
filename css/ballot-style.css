@@ -48,13 +48,13 @@
 /* large color heading at top of ballot*/
 /* .ballot-box > .ballot-heading */
 .ballot-heading {
-    background: #f7f6da;
+    background: #e4f2f5;
     height: 35vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #faf79b
+    border: 1px solid #acccd4
 }
 
 /* .ballot-heading > #project-title  */
