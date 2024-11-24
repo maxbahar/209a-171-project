@@ -12,9 +12,9 @@ let mapIndex = 0;
 
 // Read in data from multiple files via promises
 let promises = [
-    d3.json('data/block_groups_pred.geojson'), //  d3.json('data/block_groups_pred.geojson'),
-    d3.json('data/tracts_pred.geojson'), // d3.json('data/tracts_pred.geojson'),
-    d3.json('data/counties_pred.geojson'), // d3.json('data/counties_pred.geojson'),
+    d3.json('data/block_groups_pred.geojson'), 
+    d3.json('data/tracts_pred.geojson'), 
+    d3.json('data/counties_pred.geojson'), 
     d3.csv('data/shap_values.csv'),
 ];
 Promise.all(promises)
