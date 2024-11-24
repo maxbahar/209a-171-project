@@ -42,11 +42,17 @@
 
 /* - - - - - - MAP SPECIFIC - - - - - - */
 
+.tooltipVisContainer {
+    width: 500px;
+    height: 500px;
+}
+
 #mapTooltip {
     border: thin solid lightgray; 
     border-radius: 5px; 
-    background: white; 
-    padding: 20px
+    background: rgba(255, 255, 255, 0.75); 
+    padding: 20px;
+    opacity: 1;
 }
 
 #demographic-slide {

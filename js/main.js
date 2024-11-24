@@ -12,9 +12,9 @@ let mapIndex = 0;
 
 // Read in data from multiple files via promises
 let promises = [
-    d3.json('data/block_groups.geojson'), //  d3.json('data/block_groups_pred.geojson'),
-    d3.json('data/tracts.geojson'), // d3.json('data/tracts_pred.geojson'),
-    d3.json('data/counties.geojson'), // d3.json('data/counties_pred.geojson'),
+    d3.json('data/block_groups_pred.geojson'), //  d3.json('data/block_groups_pred.geojson'),
+    d3.json('data/tracts_pred.geojson'), // d3.json('data/tracts_pred.geojson'),
+    d3.json('data/counties_pred.geojson'), // d3.json('data/counties_pred.geojson'),
     d3.csv('data/shap_values.csv'),
 ];
 Promise.all(promises)
@@ -40,9 +40,7 @@ function createVis(data) {
     // Initialize visualizations
 
     // Map of demographic variables
-    mainMap = new MapVis("mainMapElement", blockGroupData, tractData, countyData, "2020_absent_pct");
-
-    console.log(maps);
+    mainMap = new MapVis("mainMapElement", blockGroupData, tractData, countyData, "2020_absent_pct", "mainMapTooltip");
 
     // Density plot
     kdePlot = new KdePlot("kde-plot-parent", blockGroupData);
@@ -51,7 +49,7 @@ function createVis(data) {
     // importanceVis = new ImportanceVis("importanceParentElement", shapData);
 
     // Map of model results
-    modelMap = new MapVis()
+    modelMap = new MapVis("modelMapElement", blockGroupData, tractData, countyData, "2020_absent_pct_pred", "modelMapTooltip")
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 

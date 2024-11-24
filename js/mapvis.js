@@ -1,6 +1,6 @@
 class MapVis {
 
-    constructor(parentElement, blockGroupData, tractData, countyData, mainVar) {
+    constructor(parentElement, blockGroupData, tractData, countyData, mainVar, tooltipID) {
         
         this.parentElement = parentElement;
         this.geoData = {
@@ -9,6 +9,7 @@ class MapVis {
             "county" : countyData
         };
         this.mainVar = mainVar;
+        this.tooltipID = tooltipID;
 
         this.initVis();
         
@@ -33,6 +34,21 @@ class MapVis {
         vis.tooltip = d3.select("body").append('div')
                         .attr('class', "tooltip")
                         .attr('id', 'mapTooltip');
+        vis.tooltipShowing = false;
+
+        vis.tooltipHandler = vis.svg.append("rect")
+                                        .attr("opacity", 0)
+                                        .attr("width", vis.width)
+                                        .attr("height", vis.height)
+                                        .on("click", function(event) {
+                                            if (vis.tooltipShowing) {
+                                                vis.tooltipShowing = false;
+                                                vis.tooltip.style("opacity", 1)
+                                                .style("display","none")
+                                                .style("left", 0)
+                                                .style("top", 0);
+                                            }
+                                        });
 
         vis.wrangleData(vis.mainVar);
 
@@ -104,6 +120,8 @@ class MapVis {
 
         
 
+        
+
         // Change the feature colors
         vis.geoFeatures = vis.svg.selectAll('.geoFeature')
                                     .data(vis.geoData[vis.geoLevel].features)
@@ -112,37 +130,40 @@ class MapVis {
                                     .attr("fill", d => vis.colorScale(d.properties[mainVar]));
 
         // Mouseover behavior
-        vis.geoFeatures.on('mouseover', function(event, d){
+        vis.geoFeatures.on("mouseover", function(event, d){
 
             d3.select(this)
-                .attr('fill', 'white');
-
-            vis.tooltip.style("opacity", 1)
-                    .style("left", event.pageX + 20 + "px")
-                    .style("top", event.pageY + "px")
-///////////////////// TOOLTIP HARDCODED RIGHT NOW 
-                    .html(`
-                        <h4>${d.properties["BASENAME"]}</h4>
-                        <div style="font-size: 14pt"><span style="font-weight:600">${mainVar}: </span>${d.properties[mainVar].toLocaleString()}</div>
-                        `); 
+                .attr('fill', 'white')
+                .attr("stroke-width", 0.5);
 
         }).on('mouseout', function(event, d){
 
             d3.select(this)
-                .attr("fill", d => vis.colorScale(d.properties[mainVar]));
-
-            vis.tooltip.style("opacity", 0)
-                        .style("left", 0)
-                        .style("top", 0)    
-                        .html(``);
+                .attr("fill", d => vis.colorScale(d.properties[mainVar]))
+                .attr("stroke-width", 0.1);
         })
             
         // Click behavior
         vis.geoFeatures.on("click", function(event, d){
+
+            console.log(d);
     
-            // Do something here?
+            vis.tooltipShowing = true;
+
+            vis.tooltip.style("display","grid")
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+///////////////////// TOOLTIP HARDCODED RIGHT NOW 
+                    .html(`
+                        <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
+                        <div style="font-size: 14pt"><span style="font-weight:600">${mainVar}: </span>${d.properties[mainVar].toLocaleString()}</div>
+                        <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
+                        `); 
+
+            vis.tooltipVis = new TooltipVis(vis.tooltipID, d, document.getElementById("demographicVar").value);
     
         });
 
     }
+
 }

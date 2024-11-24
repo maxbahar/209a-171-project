@@ -326,10 +326,11 @@
             </select>
             <select name="demographicVar-option" id="demographicVar"
                     onchange="mainMap.updateVis(mapMainVars[mapIndex])">
-                <option value="age">Age</option>
-                <option value="gender">Gender</option>
-                <option value="party">Party</option>
-                <option value="ethnicity">Ethnicity</option>
+                <option value="vote-age">Age</option>
+                <option value="vote-gender">Gender</option>
+                <option value="vote-party">Party</option>
+                <option value="vote-eth">Ethnicity</option>
+                <option value="vote-lang">Language</option>
             </select>
             <button type="button" class="btn btn-primary" onclick="nextMap()">Next</button>
         </div>
@@ -445,9 +446,14 @@
         <div class="visContainer" id="sentimentParent"></div>
     </div>
     <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
-    <div class="section"><h1>main message</h1>
+    <div class="section"><h1>Feature Importance Plot</h1>
         <h3>This is actually how demographics affect voter turnout!</h3>
         <div class="visContainer" id="importanceParentElement"></div>
+    </div>
+    <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
+    <div class="section"><h1>Predicted Voter Turnout</h1>
+        <h3>Our model predictions vs. real values</h3>
+        <div class="visContainer" id="modelMapElement"></div>
     </div>
     <!---------------------------- RECOMMENDATIONS / CONCLUSION ---------------------------->
     <div class="section rec-bg">
@@ -530,6 +536,7 @@
 <!-- Include custom libraries -->
 <script src="js/selectedVariablePreview.js"></script>
 <script src="js/interactionHelper.js"></script>
+<script src="js/tooltipvis.js"></script>
 <script src="js/barvis.js"></script>
 <script src="js/importancevis.js"></script>
 <script src="js/mapvis.js"></script>
