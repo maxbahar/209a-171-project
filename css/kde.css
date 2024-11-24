@@ -21,7 +21,6 @@
 }
 
 .kde-right{
-    height: 40vh;
     width: 27.5vw;
     padding-right: 2vw;
     padding-left: 2vw;
@@ -29,6 +28,7 @@
 .kde-right ul{
     font-size: large;
     text-align: left;
+
 }
 .kde-right ul li{
     padding-bottom: 1vh
@@ -49,14 +49,11 @@
     padding-right: 2.5vw;
 }
 
-.kde-right-top{
-
-}
-
 .kde-right-top-table{
     display: flex;
     justify-content: center;  /* Centers horizontally */
     align-items: center;
+    padding-bottom: 2.5vh;
 }
 
 .kde-right table {
