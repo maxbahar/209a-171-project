@@ -93,7 +93,3 @@
     margin-right: auto;
     border-collapse: collapse
 }
-
-.tooltip {
-    z-index: 1000; /* Ensure the tooltip is on top */
-}

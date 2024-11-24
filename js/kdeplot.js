@@ -73,16 +73,15 @@ class KdePlot {
         }
 
         vis.traceConfigs = {
-            "gender": {xDomain: [.4, .6], yDomain:[.5, 1]},
-            "party": {xDomain: [-.05,.75], yDomain:[0.4,1]},
-            "ethnicity": {xDomain: [-.1,.95], yDomain:[0.5,1]},
-            "age": {xDomain: [0,.6], yDomain:[0.4,1]},
-            "language": {xDomain: [-0.05,.65], yDomain:[0.5,1]},
+            "gender": {xDomain: [.4, .6], yDomain: [.5, 1]},
+            "party": {xDomain: [-.05, .75], yDomain: [0.4, 1]},
+            "ethnicity": {xDomain: [-.1, .95], yDomain: [0.5, 1]},
+            "age": {xDomain: [0, .6], yDomain: [0.4, 1]},
+            "language": {xDomain: [-0.05, .65], yDomain: [0.5, 1]},
         }
         vis.activeTraces = vis.traceOptions[defaultTag]
         vis.xDomain = vis.traceConfigs[defaultTag].xDomain;
         vis.yDomain = vis.traceConfigs[defaultTag].yDomain;
-
 
 
         // svg basics init
@@ -109,17 +108,10 @@ class KdePlot {
             .domain(vis.yDomain)
             .rangeRound([vis.height - vis.margin.bottom, vis.margin.top]);
 
-        let tooltip = d3.select('body').append('div')
-            .attr('class', 'tooltip')
+        let tooltip = d3.select(".kde-tooltip")
             .style('position', 'absolute')
-            .style('visibility', 'hidden') // Start with hidden visibility
-            .style('background-color', 'red')
-            .style('width','30px')
             .style('color', 'black')
-            .style('padding', '5px')
-            .style('border-radius', '5px')
-            .style('pointer-events', 'none')
-            .style('z-index', 1000);
+            .style('visibility', 'hidden');
 
         let horizontalLine = vis.svg.append('line')
             .attr('stroke', '#000')
@@ -133,14 +125,14 @@ class KdePlot {
             .attr('stroke-dasharray', '4')
             .style('opacity', 0);
 
-// Mouse move event
         vis.svg.on('mousemove', function (event) {
-            let mousePosition = d3.pointer(event); // [x, y]
+            let mousePosition = d3.pointer(event);
 
-            tooltip.style('visibility', 'visible') // Show the tooltip
-                .style('top', (mousePosition[1] + 10) + 'px')
-                .style('left', (mousePosition[0] + 10) + 'px')
-                .text('x: ' + Math.round(vis.xScale.invert(mousePosition[0])) + ', y: ' + Math.round(vis.yScale.invert(mousePosition[1])));
+
+            // tooltip.style('visibility', 'visible')
+            //     .style('top', (mousePosition[1] + 200) + 'px')
+            //     .style('left', (mousePosition[0]) + 'px')
+            //     .text('x: ' + vis.xScale.invert(mousePosition[0]));
 
             horizontalLine
                 .attr('x1', 0)
@@ -157,9 +149,8 @@ class KdePlot {
                 .style('opacity', 1);
         });
 
-// Mouse out event
         vis.svg.on('mouseout', function () {
-            tooltip.style('visibility', 'hidden'); // Hide the tooltip
+            tooltip.style('visibility', 'hidden');
             horizontalLine.style('opacity', 0);
             verticalLine.style('opacity', 0);
         });
@@ -209,7 +200,7 @@ class KdePlot {
 
 
         vis.svg.append("g")
-            .attr("class",'x-axis')
+            .attr("class", 'x-axis')
             .attr("transform", `translate(0,${vis.height - vis.margin.bottom})`)
             .call(d3.axisBottom(vis.xScale).tickSizeOuter(0))
             .call(g => g.select(".tick:last-of-type text").clone()
@@ -219,7 +210,7 @@ class KdePlot {
                 .text("ratio of group"));
 
         vis.svg.append("g")
-            .attr("class",'y-axis')
+            .attr("class", 'y-axis')
             .attr("transform", `translate(${vis.margin.left},0)`)
             .call(d3.axisLeft(vis.yScale).tickSizeOuter(0))
             .call(g => g.select(".tick:last-of-type text").clone()
@@ -227,7 +218,6 @@ class KdePlot {
                 .attr("text-anchor", "start")
                 .attr("font-weight", "bold")
                 .text("voter turnout"));
-
 
 
         vis.wrangleData()
@@ -296,7 +286,7 @@ class KdePlot {
 
     }
 
-    wrangleData(){
+    wrangleData() {
         let vis = this;
 
         // set up data
@@ -316,8 +306,6 @@ class KdePlot {
         let vis = this;
 
         vis.selectedCategory = key
-
-
 
         vis.wrangleData()
 
