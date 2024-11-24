@@ -1,14 +1,12 @@
 // Initalize variables
 let memberVote, chosenFeature;
 let selectedFeatureCategories = {};
-let blockGroupData, tractData, countyData, shapData;
+let geoData, shapData;
 let kdePlot, importanceVis;
 
 // Initialize map variables
 let maps = {};
 let mainMap;
-let mapMainVars = ["2020_absent_pct", "total_reg", "mean_hh_income"]
-let mapIndex = 0;
 
 // Read in data from multiple files via promises
 let promises = [
@@ -27,29 +25,31 @@ function createVis(data) {
     // console.log(data);
 
     // Extract data
-    blockGroupData = data[0];
-    tractData = data[1];
-    countyData = data[2];
+    geoData = {
+        "blockGroup": data[0],
+        "tract": data[1],
+        "county": data[2]
+    }
     shapData = data[3];
 
     // Randomly choose a Block Group (can be changed to accomodate different levels of geography)
-    let chosenFeatureIdx = Math.floor(Math.random() * countyData.features.length);
-    chosenFeature = countyData.features[chosenFeatureIdx];
+    let chosenFeatureIdx = Math.floor(Math.random() * geoData["county"].features.length);
+    chosenFeature = geoData["county"].features[chosenFeatureIdx];
     document.getElementById("chosen-feature").innerText = chosenFeature.properties["BASENAME"] + " County";
 
     // Initialize visualizations
 
     // Map of demographic variables
-    mainMap = new MapVis("mainMapElement", blockGroupData, tractData, countyData, "2020_absent_pct", "mainMapTooltip");
+    mainMap = new MapVis("mainMapElement", geoData, "2020_absent_pct", ["2020_absent_pct", "total_reg", "mean_hh_income"], "mainMapTooltip");
 
     // Density plot
-    kdePlot = new KdePlot("kde-plot-parent", blockGroupData);
+    kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
     
     // Feature importance plot
     // importanceVis = new ImportanceVis("importanceParentElement", shapData);
 
     // Map of model results
-    modelMap = new MapVis("modelMapElement", blockGroupData, tractData, countyData, "2020_absent_pct_pred", "modelMapTooltip")
+    modelMap = new MapVis("modelMapElement", geoData, "2020_absent_pct_pred", "modelMapTooltip")
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
@@ -80,25 +80,7 @@ function createVis(data) {
 
 }
 
-function prevMap() {
-    if (mapIndex === 0) {
-        mapIndex = mapMainVars.length - 1;
-    } else {
-        mapIndex--;
-    }
-    console.log(mapIndex);
-    mainMap.updateVis(mapMainVars[mapIndex]);
-}
 
-function nextMap() {
-    if (mapIndex === mapMainVars.length - 1) {
-        mapIndex = 0;
-    } else {
-        mapIndex++;
-    }
-    console.log(mapIndex);
-    mainMap.updateVis(mapMainVars[mapIndex]);
-}
 
 let fullPage = new fullpage('#fullpage', {
     navigation: true,

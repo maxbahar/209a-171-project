@@ -38,7 +38,7 @@ function votecat(categoryID) {
     } else if (Object.keys(selectedFeatureCategories).length <= 2) {
 
         document.getElementById(`barPlot${votecatIdx}`).classList.add("barPlotContainer");
-        selectedFeatureCategories[categoryID] = new BarVis(`barPlot${votecatIdx}`, blockGroupData, tractData, countyData, categoryID);
+        selectedFeatureCategories[categoryID] = new BarVis(`barPlot${votecatIdx}`, geoData, categoryID);
         votecatIdx++;
     }
     document.querySelectorAll('.vote-box2').forEach(function (div) {

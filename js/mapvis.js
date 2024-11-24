@@ -1,14 +1,11 @@
 class MapVis {
 
-    constructor(parentElement, blockGroupData, tractData, countyData, mainVar, tooltipID) {
+    constructor(parentElement, geoData, mainVar, demoVars, tooltipID) {
         
         this.parentElement = parentElement;
-        this.geoData = {
-            "blockGroup" : blockGroupData,
-            "tract": tractData,
-            "county" : countyData
-        };
+        this.geoData = geoData;
         this.mainVar = mainVar;
+        this.demoVars = demoVars;
         this.tooltipID = tooltipID;
 
         this.initVis();
@@ -35,7 +32,6 @@ class MapVis {
                         .attr('class', "tooltip")
                         .attr('id', 'mapTooltip');
         vis.tooltipShowing = false;
-
         vis.tooltipHandler = vis.svg.append("rect")
                                         .attr("opacity", 0)
                                         .attr("width", vis.width)
@@ -47,24 +43,34 @@ class MapVis {
                                                 .style("display","none")
                                                 .style("left", 0)
                                                 .style("top", 0);
+                                                vis.tooltipHandler.lower();
+                                            }
+                                        }).on("mouseout", function(event) {  // Temporary to prevent lingering tooltip across pages
+                                            if (vis.tooltipShowing) {
+                                                vis.tooltipShowing = false;
+                                                vis.tooltip.style("opacity", 1)
+                                                .style("display","none")
+                                                .style("left", 0)
+                                                .style("top", 0);
+                                                vis.tooltipHandler.lower();
                                             }
                                         });
 
-        vis.wrangleData(vis.mainVar);
+        // Initialize variable cycling
+        vis.varIndex = 0;
+
+        vis.wrangleData();
 
     }
 
-    wrangleData(mainVar) {
+    wrangleData() {
         let vis = this;
 
-        vis.updateVis(mainVar);
+        vis.updateVis();
     }
 
-    updateVis(mainVar) {
+    updateVis() {
         let vis = this;
-
-        // Update description
-        document.getElementById("main-var-chosen").innerText = mainVar;
 
         // Get geography level
         vis.geoLevel = document.getElementById("geoLevel").value;
@@ -74,7 +80,7 @@ class MapVis {
 
 ///////////////////// COLORSCALE HARDCODED RIGHT NOW 
         // Initialize the color scale
-        switch(mainVar) {
+        switch(vis.mainVar) {
             case '2020_absent_pct':
                 vis.colorScale = d3.scaleSequential(d3.interpolatePurples);
                 break;
@@ -89,7 +95,7 @@ class MapVis {
         }
 
         // Update the color scale
-        vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[mainVar]);
+        vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
         vis.colorScale.domain([d3.min(vis.mainVarArray),d3.max(vis.mainVarArray)]);
 
 
@@ -127,7 +133,7 @@ class MapVis {
                                     .data(vis.geoData[vis.geoLevel].features)
                                     .enter().append("path")
                                     .merge(vis.geoFeatures)
-                                    .attr("fill", d => vis.colorScale(d.properties[mainVar]));
+                                    .attr("fill", d => vis.colorScale(d.properties[vis.mainVar]));
 
         // Mouseover behavior
         vis.geoFeatures.on("mouseover", function(event, d){
@@ -139,16 +145,12 @@ class MapVis {
         }).on('mouseout', function(event, d){
 
             d3.select(this)
-                .attr("fill", d => vis.colorScale(d.properties[mainVar]))
+                .attr("fill", d => vis.colorScale(d.properties[vis.mainVar]))
                 .attr("stroke-width", 0.1);
         })
             
         // Click behavior
         vis.geoFeatures.on("click", function(event, d){
-
-            console.log(d);
-    
-            vis.tooltipShowing = true;
 
             vis.tooltip.style("display","grid")
                     .style("left", event.pageX + 20 + "px")
@@ -156,14 +158,39 @@ class MapVis {
 ///////////////////// TOOLTIP HARDCODED RIGHT NOW 
                     .html(`
                         <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
-                        <div style="font-size: 14pt"><span style="font-weight:600">${mainVar}: </span>${d.properties[mainVar].toLocaleString()}</div>
+                        <div style="font-size: 14pt"><span style="font-weight:600">${vis.mainVar}: </span>${d.properties[vis.mainVar].toLocaleString()}</div>
                         <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
                         `); 
 
             vis.tooltipVis = new TooltipVis(vis.tooltipID, d, document.getElementById("demographicVar").value);
+            vis.tooltipShowing = true;
+            vis.tooltipHandler.raise();
     
         });
 
+    }
+
+    prevMap() {
+        let vis = this;
+
+        if (vis.varIndex === 0) {
+            vis.varIndex = vis.demoVars.length - 1;
+        } else {
+            vis.varIndex--;
+        }
+        vis.mainVar = vis.demoVars[vis.varIndex];
+        vis.updateVis();
+    }
+    
+    nextMap() {
+        let vis = this;
+        if (vis.varIndex === vis.demoVars.length - 1) {
+            vis.varIndex = 0;
+        } else {
+            vis.varIndex++;
+        }
+        vis.mainVar = vis.demoVars[vis.varIndex];
+        vis.updateVis();
     }
 
 }

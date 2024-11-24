@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="css/var-preview-style.css">
     <link rel="stylesheet" href="css/recommendations.css">
     <link rel="stylesheet" href="css/kde.css">
+    <link rel="stylesheet" href="css/bars.css">
+    <link rel="stylesheet" href="css/map.css">
     <!-- Other styling dependencies -->
     <link href="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.css" rel="stylesheet"/>
 </head>
@@ -305,51 +307,46 @@
             <h1>Predict Voter Turnout for <span id="chosen-feature"></span></h1>
             <!-- <h2 id="user-cat-sel-info">No data selected</h2> -->
         </div>
-        <div class="d-flex justify-content-center" id="allBarPlotsParent">
+        <div class="card-container" id="allBarPlotsParent">
             <div id="barPlot1"></div>
             <div id="barPlot2"></div>
             <div id="barPlot3"></div>
-
         </div>
     </div>
     <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
-    <div class="section" id="demographic-slide">
-        <div class="slide">
-            <h1>What do Massachusetts Demographics Look Like?</h1>
-            <h3 id="main-var-chosen">Variable</h3>
-            <div class="visContainer" id="mainMapElement"></div>
-            <button type="button" class="btn btn-primary" onclick="prevMap()">Previous</button>
-            <select name="geoLevel-option" id="geoLevel" onchange="mainMap.updateVis(mapMainVars[mapIndex])">
-                <option value="county">County</option>
-                <option value="tract">Tract</option>
-                <option value="blockGroup">Block Group</option>
-            </select>
-            <select name="demographicVar-option" id="demographicVar"
-                    onchange="mainMap.updateVis(mapMainVars[mapIndex])">
-                <option value="vote-age">Age</option>
-                <option value="vote-gender">Gender</option>
-                <option value="vote-party">Party</option>
-                <option value="vote-eth">Ethnicity</option>
-                <option value="vote-lang">Language</option>
-            </select>
-            <button type="button" class="btn btn-primary" onclick="nextMap()">Next</button>
+    <!-- <div class="section" id="demographic-slide"> -->
+    <div class="section custom-container">
+        <div class="row">
+            <div class="col-4">
+                <div class="map-card">
+                    <h4>What do Massachusetts Demographics Look Like?</h4>
+                    <p>Voter turnout in Massachussets is not the same across the state.</p>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="map-card">
+                    <h4>Map of Massachussets</h4>
+                    <button type="button" class="btn btn-primary" onclick="mainMap.prevMap()">Previous</button>
+                    <select name="geoLevel-option" id="geoLevel" onchange="mainMap.updateVis()">
+                        <option value="county">County</option>
+                        <option value="tract">Tract</option>
+                        <option value="blockGroup">Block Group</option>
+                    </select>
+                    <select name="demographicVar-option" id="demographicVar"
+                            onchange="mainMap.updateVis()">
+                        <option value="vote-age">Age</option>
+                        <option value="vote-gender">Gender</option>
+                        <option value="vote-party">Party</option>
+                        <option value="vote-eth">Ethnicity</option>
+                        <option value="vote-lang">Language</option>
+                    </select>
+                    <button type="button" class="btn btn-primary" onclick="mainMap.nextMap()">Next</button>
+                    <div class="visContainer" id="mainMapElement"></div>
+                </div>
+            </div>
         </div>
-        <!-- <div class="slide">
-            <h1>What do Massachusetts Demographics Look Like?</h1>
-            <h3>By Voter Absence</h3>
-            <div class="visContainer" id="absentMapElement"></div>
-        </div>
-        <div class="slide">
-            <h1>What do Massachusetts Demographics Look Like?</h1>
-            <h3>By Voter Registration</h3>
-            <div class="visContainer" id="popMapParent"></div>
-        </div>
-        <div class="slide">
-            <h1>What do Massachusetts Demographics Look Like?</h1>
-            <h3>By Household Income</h3>
-            <div class="visContainer" id="incomeMapParent"></div>
-        </div> -->
     </div>
+        
     <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
     <div class="section custom-container" id="kde-container">
         <div class="kde-tooltip"></div>
@@ -455,6 +452,21 @@
     <div class="section"><h1>Predicted Voter Turnout</h1>
         <h3>Our model predictions vs. real values</h3>
         <div class="visContainer" id="modelMapElement"></div>
+        <button type="button" class="btn btn-primary" onclick="prevMap()">Previous</button>
+        <select name="geoLevel-option2" id="geoLevel2" onchange="modelMap.updateVis(mapDemoVars[mapDemoIndex])">
+            <option value="county">County</option>
+            <option value="tract">Tract</option>
+            <option value="blockGroup">Block Group</option>
+        </select>
+        <select name="demographicVar-option2" id="demographicVar2"
+                onchange="modelMap.updateVis(mapDemoVars[mapDemoIndex])">
+            <option value="vote-age">Age</option>
+            <option value="vote-gender">Gender</option>
+            <option value="vote-party">Party</option>
+            <option value="vote-eth">Ethnicity</option>
+            <option value="vote-lang">Language</option>
+        </select>
+        <button type="button" class="btn btn-primary" onclick="nextModelMap()">Next</button>
     </div>
     <!---------------------------- RECOMMENDATIONS / CONCLUSION ---------------------------->
     <div class="section rec-bg">

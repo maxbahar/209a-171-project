@@ -72,7 +72,7 @@
 
 .barPlotContainer {
     width: 30vw;
-    height: 75vh;
+    height: 50vh;
 }
 
 #barPlot1 > svg > g > rect {

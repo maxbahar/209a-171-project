@@ -1,13 +1,9 @@
 class BarVis {
 
-    constructor(parentElement, blockGroupData, tractData, countyData, category) {
+    constructor(parentElement, geoData, category) {
         
         this.parentElement = parentElement;
-        this.geoData = {
-            "blockGroup" : blockGroupData,
-            "tract": tractData,
-            "county" : countyData
-        };
+        this.geoData = geoData;
         this.category = category;
 
         this.initVis();
@@ -66,11 +62,12 @@ class BarVis {
         // Define the category
 
         if (vis.category == "vote-income") {
-            vis.variables =  ["mean_hh_income"]
+            vis.variables = ["mean_hh_income"];
 
             let bgArray = vis.geoData["blockGroup"].features
                                 .filter(d => d.properties["GEOID20"].slice(0,5) == chosenFeature.properties["GEOID20"])
                                 .map((d) => [d.properties["mean_hh_income"], d.properties["total_reg"]]);
+            console.log(bgArray);
 
             // Create histogram
             let binSize = 10000;
@@ -109,7 +106,7 @@ class BarVis {
 
         }
 
-        // console.log(vis.displayData);
+        console.log(vis.displayData);
 
         vis.updateVis();
     }
