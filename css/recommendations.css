@@ -1,8 +1,15 @@
 .rec-bg {
-    background: #2F343C;
     color: white;
     font-family: 'Oswald', sans-serif;
 
+}
+
+#bg-rec-tran{
+    background-image: linear-gradient(180deg, #FAF9F6, #2F343C);
+}
+
+#bg-rec-tran2{
+    background-image: linear-gradient(180deg, #2F343C,#ececeb);
 }
 
 .rec-bg h1 {
