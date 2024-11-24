@@ -27,6 +27,24 @@
     height: 75vh; /* So that SVG height can be set dynamically */
 }
 
+/* - - - - - - TITLE SPECIFIC - - - - - - */
+
+
+#title1-bg {
+    background-image: url("/images/vote-t1.jpg");
+}
+#title1-bg h1{
+    font-size: 10vh;
+    color: #dc3c34;
+}
+#title2-bg {
+    background-image: url("/images/vote-t2.jpg");
+}
+#title-sub{
+    color: #666666;
+}
+
+
 /* - - - - - - SECTION SPECIFIC - - - - - - */
 
 .blue-red-gradient {
