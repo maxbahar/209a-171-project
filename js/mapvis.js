@@ -1,11 +1,14 @@
 class MapVis {
 
-    constructor(parentElement, geoData, mainVar, demoVars, tooltipID) {
+    constructor(parentElement, geoData, cycleVars, colorScales, geoLevelID, demoID, tooltipID) {
         
         this.parentElement = parentElement;
         this.geoData = geoData;
-        this.mainVar = mainVar;
-        this.demoVars = demoVars;
+        this.cycleVars = cycleVars;
+        this.colorScales = colorScales;
+        this.mainVar = cycleVars[0];
+        this.geoLevelID = geoLevelID;
+        this.demoID = demoID;
         this.tooltipID = tooltipID;
 
         this.initVis();
@@ -73,26 +76,12 @@ class MapVis {
         let vis = this;
 
         // Get geography level
-        vis.geoLevel = document.getElementById("geoLevel").value;
+        vis.geoLevel = document.getElementById(vis.geoLevelID).value;
 
         // Get demographic variable
-        vis.demoVar = document.getElementById("demographicVar").value;
+        vis.demoVar = document.getElementById(vis.demoID).value;
 
-///////////////////// COLORSCALE HARDCODED RIGHT NOW 
-        // Initialize the color scale
-        switch(vis.mainVar) {
-            case '2020_absent_pct':
-                vis.colorScale = d3.scaleSequential(d3.interpolatePurples);
-                break;
-            case "total_reg":
-                vis.colorScale = d3.scaleSequential(d3.interpolateReds);
-                break;
-            case "mean_hh_income":
-                vis.colorScale = d3.scaleSequential(d3.interpolateBlues);
-                break;
-            default:
-                vis.colorScale = d3.scaleSequential(d3.interpolateGreys);
-        }
+        vis.colorScale = d3.scaleSequential(vis.colorScales[vis.varIndex]);
 
         // Update the color scale
         vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
@@ -162,7 +151,7 @@ class MapVis {
                         <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
                         `); 
 
-            vis.tooltipVis = new TooltipVis(vis.tooltipID, d, document.getElementById("demographicVar").value);
+            vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
             vis.tooltipShowing = true;
             vis.tooltipHandler.raise();
     
@@ -174,22 +163,22 @@ class MapVis {
         let vis = this;
 
         if (vis.varIndex === 0) {
-            vis.varIndex = vis.demoVars.length - 1;
+            vis.varIndex = vis.cycleVars.length - 1;
         } else {
             vis.varIndex--;
         }
-        vis.mainVar = vis.demoVars[vis.varIndex];
+        vis.mainVar = vis.cycleVars[vis.varIndex];
         vis.updateVis();
     }
     
     nextMap() {
         let vis = this;
-        if (vis.varIndex === vis.demoVars.length - 1) {
+        if (vis.varIndex === vis.cycleVars.length - 1) {
             vis.varIndex = 0;
         } else {
             vis.varIndex++;
         }
-        vis.mainVar = vis.demoVars[vis.varIndex];
+        vis.mainVar = vis.cycleVars[vis.varIndex];
         vis.updateVis();
     }
 

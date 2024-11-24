@@ -29,6 +29,10 @@ class Slider {
         // attach an event listener to the slider
         slider.noUiSlider.on('slide', function (values) {
 
+            console.log(values);
+            userGuess = values[0];
+            document.getElementById("user-guess").innerText = userGuess.toLocaleString();
+
         });
     }
 }

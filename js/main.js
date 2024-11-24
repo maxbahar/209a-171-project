@@ -36,7 +36,12 @@ function createVis(data) {
     // Randomly choose a Block Group (can be changed to accomodate different levels of geography)
     let chosenFeatureIdx = Math.floor(Math.random() * geoData["county"].features.length);
     chosenFeature = geoData["county"].features[chosenFeatureIdx];
-    document.getElementById("chosen-feature").innerText = chosenFeature.properties["BASENAME"] + " County";
+    let chosenFeatureSpans = document.getElementsByClassName("chosen-feature");
+    for (let i = 0; i < chosenFeatureSpans.length; i++) {
+        chosenFeatureSpans[i].innerText = chosenFeature.properties["BASENAME"] + " County";
+    }
+    document.getElementById("model-guess").innerText = chosenFeature.properties["2020_turnout_pct_pred"].toLocaleString();
+    document.getElementById("actual-value").innerText = chosenFeature.properties["2020_turnout_pct"].toLocaleString();
 
     // Initialize visualizations
 
@@ -44,16 +49,23 @@ function createVis(data) {
     countyMap = new CountyVis("countyMapParent",geoData["county"]);
 
     // Map of demographic variables
-    mainMap = new MapVis("mainMapElement", geoData, "2020_absent_pct", ["2020_absent_pct", "total_reg", "mean_hh_income"], "mainMapTooltip");
+    mainMap = new MapVis("mainMapElement", geoData, 
+                            ["2020_absent_pct", "total_reg", "mean_hh_income"], 
+                            [d3.interpolatePurples,d3.interpolateReds, d3.interpolateBlues],
+                            "geoLevel", "demographicVar","mainMapTooltip");
+    
     // Slider below map
     let stateVotes = 0, stateReg = 0;
     geoData["county"].features.forEach(d => {
         stateVotes += d.properties["2020_turnout"];
         stateReg += d.properties["2020_reg"];
     });
+    guessTurnout = new Slider("slider")
+
+    // Initialize user guess
     userGuess = stateVotes / stateReg;
     document.getElementById("stateAvg").innerText = userGuess.toLocaleString();
-    guessTurnout = new Slider("slider")
+    document.getElementById("user-guess").innerText = userGuess.toLocaleString();
 
     // Density plot
     kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
@@ -62,7 +74,10 @@ function createVis(data) {
     // importanceVis = new ImportanceVis("importanceParentElement", shapData);
 
     // Map of model results
-    modelMap = new MapVis("modelMapElement", geoData, "2020_absent_pct_pred", "modelMapTooltip")
+    modelMap = new MapVis("modelMapElement", geoData, 
+                            ["2020_absent_pct_pred", "2020_absent_pct"], 
+                            [d3.interpolatePurples, d3.interpolatePurples], 
+                            "geoLevel2", "demographicVar2","modelMapTooltip");
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 

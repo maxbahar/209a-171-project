@@ -318,7 +318,7 @@
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
     <div class="section">
         <div class="header">
-            <h1>Predict Voter Turnout for <span id="chosen-feature"></span></h1>
+            <h1>What Do You Think Voter Turnout is for <span class="chosen-feature"></span>?</h1>
         </div>
 
         <div class="card-container">
@@ -336,7 +336,7 @@
 
         <div id="slider"></div>
         <div>
-            <h3>What is the voter turnout in the county?</h3>
+            <h3>Use the slider above to make your guess.</h3>
             <h4>The average voter turnout in Massachusetts is <span id="stateAvg"></span></h4>
         </div>
     </div>
@@ -476,24 +476,37 @@
         <div class="visContainer" id="importanceParentElement"></div>
     </div>
     <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
-    <div class="section"><h1>Predicted Voter Turnout</h1>
-        <h3>Our model predictions vs. real values</h3>
-        <div class="visContainer" id="modelMapElement"></div>
-        <button type="button" class="btn btn-primary" onclick="prevMap()">Previous</button>
-        <select name="geoLevel-option2" id="geoLevel2" onchange="modelMap.updateVis(mapDemoVars[mapDemoIndex])">
-            <option value="county">County</option>
-            <option value="tract">Tract</option>
-            <option value="blockGroup">Block Group</option>
-        </select>
-        <select name="demographicVar-option2" id="demographicVar2"
-                onchange="modelMap.updateVis(mapDemoVars[mapDemoIndex])">
-            <option value="vote-age">Age</option>
-            <option value="vote-gender">Gender</option>
-            <option value="vote-party">Party</option>
-            <option value="vote-eth">Ethnicity</option>
-            <option value="vote-lang">Language</option>
-        </select>
-        <button type="button" class="btn btn-primary" onclick="nextModelMap()">Next</button>
+    <div class="section custom-container"><h1>Predicted Voter Turnout</h1>
+        <div class="row">
+            <div class="col-8">
+                <div class="map-card">
+                    <h3>Our model predictions vs. real values</h3>
+                    <button type="button" class="btn btn-primary" onclick="modelMap.prevMap()">Previous</button>
+                    <select name="geoLevel-option2" id="geoLevel2" onchange="modelMap.updateVis()">
+                        <option value="county">County</option>
+                        <option value="tract">Tract</option>
+                        <option value="blockGroup">Block Group</option>
+                    </select>
+                    <select name="demographicVar-option2" id="demographicVar2" onchange="modelMap.updateVis()">
+                        <option value="vote-age">Age</option>
+                        <option value="vote-gender">Gender</option>
+                        <option value="vote-party">Party</option>
+                        <option value="vote-eth">Ethnicity</option>
+                        <option value="vote-lang">Language</option>
+                    </select>
+                    <button type="button" class="btn btn-primary" onclick="modelMap.nextMap()">Next</button>
+                    <div class="visContainer" id="modelMapElement"></div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="map-card">
+                    <h3>How did you do?</h3>
+                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span id="user-guess"></span>.</p>
+                    <p>Our model predicted that the county had a voter turnout of <span id="model-guess"></span>.</p>
+                    <p>In reality, the county had a voter turnout of <span id="actual-value"></span>.</p>
+                </div>
+            </div>
+        </div>
     </div>
     <!---------------------------- RECOMMENDATIONS / CONCLUSION ---------------------------->
     <div class="section rec-bg" id="bg-rec-tran">

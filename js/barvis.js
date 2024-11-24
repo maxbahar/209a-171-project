@@ -67,7 +67,6 @@ class BarVis {
             let bgArray = vis.geoData["blockGroup"].features
                                 .filter(d => d.properties["GEOID20"].slice(0,5) == chosenFeature.properties["GEOID20"])
                                 .map((d) => [d.properties["mean_hh_income"], d.properties["total_reg"]]);
-            console.log(bgArray);
 
             // Create histogram
             let binSize = 10000;
@@ -106,7 +105,7 @@ class BarVis {
 
         }
 
-        console.log(vis.displayData);
+        // console.log(vis.displayData);
 
         vis.updateVis();
     }

@@ -54,7 +54,7 @@ function votecat(categoryID) {
         }
         
         // Reset title
-        parentDiv.querySelector("h3").innerText = "Nothing Selected";
+        // parentDiv.querySelector("h3").innerText = "Nothing Selected";
 
     } else if (Object.keys(selectedFeatureCategories).length <= 2) {
 
@@ -86,13 +86,12 @@ function votecat(categoryID) {
 
     // document.getElementById("user-cat-sel-info").innerText = nStr;
 
-    if(Object.keys(selectedFeatureCategories).length !== 1){
-        document.getElementById("val-sel-count").innerText = "you have selected "+Object.keys(selectedFeatureCategories).length+" categories"
-    }
-    else{
-        document.getElementById("val-sel-count").innerText = "you have selected one category"
-
-    }
+    // if(Object.keys(selectedFeatureCategories).length !== 1){
+    //     document.getElementById("val-sel-count").innerText = "you have selected "+Object.keys(selectedFeatureCategories).length+" categories"
+    // }
+    // else{
+    //     document.getElementById("val-sel-count").innerText = "you have selected one category"
+    // }
 
     selPrevCard1.wrangleData()
     selPrevCard2.wrangleData()

@@ -86,10 +86,10 @@
 
 /* - - - - - - BAR PLOT SPECIFIC - - - - - - */
 
-#chosen-feature {
+.chosen-feature {
     font-style: italic;
     text-decoration: underline dashed;
-    text-underline-offset: 10px;
+    text-underline-offset: 0.3rem;
 }
 
 .barPlotContainer {
