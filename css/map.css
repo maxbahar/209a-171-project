@@ -8,3 +8,45 @@
     border: 1px solid rgba(0, 0, 0, .125);
     margin-right: 25px;
 }
+
+.tooltipVisContainer {
+    width: 500px;
+    height: 500px;
+}
+
+.map-dropdown-label {
+    margin: 0 15px 0 0;
+    text-align: right;
+}
+
+#mapTooltip {
+    border: thin solid lightgray; 
+    border-radius: 5px; 
+    background: rgba(255, 255, 255, 0.75); 
+    padding: 20px;
+    opacity: 1;
+}
+
+
+.map-container{
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: space-between; /* Space out arrows and map */
+    position: relative;
+}
+
+#mainMapElement {
+    flex: 1; /* Take up the remaining space */
+}
+
+.left-arrow {
+    margin-right: 10px; /* Adjust spacing */
+}
+
+.right-arrow {
+    margin-left: 10px; /* Adjust spacing */
+}
+
+.arrow-button:hover {
+
+}

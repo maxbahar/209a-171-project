@@ -11,15 +11,6 @@
     height: 90vh;
 }
 
-.kde-card{
-    background: white;
-    margin:5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    margin-top: 2.5vh;
-    padding: 1vh;
-}
-
 .kde-right{
     width: 27.5vw;
     padding-right: 2vw;
@@ -28,14 +19,12 @@
 .kde-right ul{
     font-size: large;
     text-align: left;
-
 }
 .kde-right ul li{
     padding-bottom: 1vh
 }
 .kde-right h4 {
     padding-bottom: 2vh;
-
 }
 
 .kde-right-top{
@@ -58,7 +47,6 @@
 
 .kde-right table {
     border-collapse: collapse;
-
 }
 
 .kde-right table tr{
@@ -68,7 +56,6 @@
 
 .kde-right table tr th{
     width: 5.5vw;
-
 }
 
 .kde-right table tbody tr {
@@ -80,16 +67,4 @@
 .kde-right table tbody tr th div {
     height: 5px;
     margin-right: 25px
-}
-
-#kde-select{
-    font-size: large;
-    width: 10vw;
-    text-align: center ;
-}
-
-#kde-title{
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse
 }

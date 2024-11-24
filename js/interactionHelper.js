@@ -85,13 +85,16 @@ function votecat(categoryID) {
 
 
     // document.getElementById("user-cat-sel-info").innerText = nStr;
+    console.log(selectedFeatureCategories);
 
-    // if(Object.keys(selectedFeatureCategories).length !== 1){
-    //     document.getElementById("val-sel-count").innerText = "you have selected "+Object.keys(selectedFeatureCategories).length+" categories"
-    // }
-    // else{
-    //     document.getElementById("val-sel-count").innerText = "you have selected one category"
-    // }
+    if(Object.keys(selectedFeatureCategories).length > 1){
+        document.getElementById("val-sel-count").innerText = "You have selected "+Object.keys(selectedFeatureCategories).length+" categories";
+    }
+    else if (Object.keys(selectedFeatureCategories).length === 1) {
+        document.getElementById("val-sel-count").innerText = "You have selected one category";
+    } else {
+        document.getElementById("val-sel-count").innerText = "You have made no selections, please return to previous slide to vote.";
+    }
 
     selPrevCard1.wrangleData()
     selPrevCard2.wrangleData()

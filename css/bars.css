@@ -1,4 +1,4 @@
-/* Individual card styling */
+/* - - - - - - Slider - - - - - - */
 
 #slider {
     width: 50vw;
@@ -8,6 +8,8 @@
     justify-content: center; /* Centers horizontally */
     align-items: center;    /* Centers vertically (if applicable) */
 }
+
+/* - - - - - - Cards and containers - - - - - - */
 
 .bar-card {
     background-color: white;
@@ -24,7 +26,31 @@
     height:100%;
 }
 
-/* Hover effect on cards */
 .bar-card:hover {
     transform: translateY(-5px);
+}
+
+.barPlotContainer {
+    width: 30vw;
+    height: 50vh;
+}
+
+/* - - - - - - Chosen feature - - - - - - */
+
+.chosen-feature {
+    font-style: italic;
+    text-decoration: underline dashed;
+    text-underline-offset: 0.3rem;
+}
+
+/* - - - - - - Barplots - - - - - - */
+
+#barPlot1 > svg > g > rect {
+    fill: crimson;
+}
+#barPlot2 > svg > g > rect {
+    fill: steelblue;
+}
+#barPlot3 > svg > g > rect {
+    fill: orange;
 }

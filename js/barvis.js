@@ -57,7 +57,6 @@ class BarVis {
     wrangleData() {
         let vis = this;
 
-        // console.log(vis.category);
 
         // Define the category
 
@@ -74,6 +73,8 @@ class BarVis {
             let incomeMax = Math.ceil(d3.max(bgArray.map(d => d[0])) / binSize) * binSize;
             let numBins = Math.ceil((incomeMax - incomeMin) / binSize);
             vis.displayData = Array.from({length: numBins}, (_, i) => [ [incomeMin + i * binSize, incomeMin + (i + 1) * binSize], 0 ]);
+
+            console.log(vis.displayData);
 
             bgArray.forEach(d => {
                 let binIndex = Math.floor((d[0] - incomeMin) / binSize);

@@ -52,19 +52,19 @@ function createVis(data) {
                             ["2020_absent_pct", "total_reg", "mean_hh_income"], 
                             [d3.interpolatePurples,d3.interpolateReds, d3.interpolateBlues],
                             "geoLevel", "demographicVar","mainMapTooltip");
-    
-    // Slider below map
+
+    // Initialize user guess
     let stateVotes = 0, stateReg = 0;
     geoData["county"].features.forEach(d => {
         stateVotes += d.properties["2020_turnout"];
         stateReg += d.properties["2020_reg"];
     });
-    guessTurnout = new Slider("slider")
-
-    // Initialize user guess
     userGuess = stateVotes / stateReg;
     document.getElementById("stateAvg").innerText = userGuess.toLocaleString();
     document.getElementById("user-guess").innerText = userGuess.toLocaleString();
+
+    // Slider below map
+    guessTurnout = new Slider("slider");
 
     // Density plot
     kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);

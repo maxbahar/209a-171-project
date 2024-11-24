@@ -8,7 +8,7 @@ class Slider {
 
     initVis() {
         let vis = this;
-
+        console.log(userGuess);
         // Get slider location
         vis.slider = document.getElementById(vis.sliderId);
 

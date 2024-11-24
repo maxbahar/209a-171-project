@@ -33,7 +33,7 @@
 <div id="fullpage">
     <!---------------------------- Prelude ---------------------------->
     <div class="section section-img-bg" id="title1-bg">
-        <div class="row">
+        <div class="row g-0">
             <div class="col-1"></div>
             <div class="col-4">
                 <h1>Voter Turnout in Massachusetts</h1>
@@ -57,10 +57,10 @@
                         </div>
                     </div>
                     <div class="ballot-body">
-                        <div class="row">
+                        <div class="row g-0">
                             <!-- left column -->
                             <div class="col-4 left-ballot-col">
-                                <div class="row">
+                                <div class="row g-0">
                                     <div class="col-md-8 ballot-category-text-title">
                                         TEAM MEMBERS
                                     </div>
@@ -103,7 +103,7 @@
                             </div>
                             <!-- middle column -->
                             <div class="col-4 mid-ballot-col">
-                                <div class="row">
+                                <div class="row g-0">
                                     <div class="col-md-8 ballot-category-text-title">
                                         TEAM MEMBERS
                                     </div>
@@ -111,7 +111,7 @@
                                         CONTINUED
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row g-0">
                                     <div class="row ballot-vote-row ">
                                         <div class="col-10">
                                             <div class="row vote-title-text">
@@ -148,7 +148,7 @@
                             </div>
                             <!-- right column -->
                             <div class="col-4 right-ballot-col ">
-                                <div class="row">
+                                <div class="row g-0">
                                     <div class="col-md-12 ballot-category-text-title">
                                         <u>INSTRUCTIONS</u>
                                     </div>
@@ -186,7 +186,7 @@
                         </div>
                         <div class="col-4 mid-ballot-col">
                             <div class="padding-from-top"></div>
-                            <div class="row">
+                            <div class="row g-0">
                                 <div class="col-md-6 ballot-category-text-title">
                                     CATEGORIES
                                 </div>
@@ -237,7 +237,7 @@
                         </div>
                         <div class="col-4 right-ballot-col">
                             <div class="padding-from-top"></div>
-                            <div class="row">
+                            <div class="row g-0">
                                 <div class="col-md-6 ballot-category-text-title">
                                     CATEGORIES
                                 </div>
@@ -295,7 +295,7 @@
     <div class="section" id="var-preview-section">
         <div class="header">
             <h1>Reviewing Your Selections</h1>
-            <p id="val-sel-count">You have made no selection; return to previous slide to vote.</p>
+            <p id="val-sel-count">You have made no selections, please return to previous slide to vote.</p>
         </div>
         <div class="card-container">
             <div class="card" id="var-sel1">
@@ -318,7 +318,8 @@
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
     <div class="section">
         <div class="header">
-            <h1>What Do You Think Voter Turnout is for <span class="chosen-feature"></span>?</h1>
+            <h1>What Do You Think Voter Turnout is for <span class="chosen-feature"></span> ?</h1>
+            <p>How do you think the demographics of this county affects voter turnout?</p>
         </div>
 
         <div class="card-container">
@@ -335,40 +336,84 @@
         </div>
 
         <div id="slider"></div>
-        <div>
-            <h3>Use the slider above to make your guess.</h3>
-            <h4>The average voter turnout in Massachusetts is <span id="stateAvg"></span></h4>
+        <div class="header">
+            <h3>Use the slider to make your guess.</h3>
+            <p>The average voter turnout in Massachusetts is <span id="stateAvg"></span></p>
         </div>
     </div>
     <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
-    <!-- <div class="section" id="demographic-slide"> -->
     <div class="section custom-container">
-        <div class="row">
+        <div class="row g-0">
             <div class="col-4">
-                <div class="map-card">
+                <div class="content-card">
                     <h4>What do Massachusetts Demographics Look Like?</h4>
                     <p>Voter turnout in Massachussets is not the same across the state.</p>
+                    <ul>
+                        <li></li>
+                    </ul>
                 </div>
+
+                <div class="kde-right content-card">
+                    <h4>About</h4>
+                    <ul>
+                        <li>kernel density plots allow you to visualize the density of data observations</li>
+                        <li>each of our observations is a block group</li>
+                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
+                            belonged to the stated category
+                        </li>
+                        <li><b>y-axis</b> - voter turnout for a given block group</li>
+                    </ul>
+                </div>
+
             </div>
             <div class="col-8">
-                <div class="map-card">
-                    <h4>Map of Massachussets</h4>
-                    <button type="button" class="btn btn-primary" onclick="mainMap.prevMap()">Previous</button>
-                    <select name="geoLevel-option" id="geoLevel" onchange="mainMap.updateVis()">
-                        <option value="county">County</option>
-                        <option value="tract">Tract</option>
-                        <option value="blockGroup">Block Group</option>
-                    </select>
-                    <select name="demographicVar-option" id="demographicVar"
-                            onchange="mainMap.updateVis()">
-                        <option value="vote-age">Age</option>
-                        <option value="vote-gender">Gender</option>
-                        <option value="vote-party">Party</option>
-                        <option value="vote-eth">Ethnicity</option>
-                        <option value="vote-lang">Language</option>
-                    </select>
-                    <button type="button" class="btn btn-primary" onclick="mainMap.nextMap()">Next</button>
-                    <div class="visContainer" id="mainMapElement"></div>
+                <div class="content-card">
+                    <table class="viz-title">
+                        <h4>Voter Turnout in Massachussets</h4>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="map-dropdown-label">by Geography:</p>
+                                </td>
+                                <td>
+                                    <select class="select-dropdown" id="geoLevel" onchange="mainMap.updateVis()">
+                                        <option value="county">County</option>
+                                        <option value="tract">Tract</option>
+                                        <option value="blockGroup">Block Group</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="map-dropdown-label">by Category:</p>
+                                </td>
+                                <td>
+                                    <select class="select-dropdown" id="demographicVar" onchange="mainMap.updateVis()">
+                                        <option value="vote-age">Age</option>
+                                        <option value="vote-gender">Gender</option>
+                                        <option value="vote-party">Party</option>
+                                        <option value="vote-eth">Ethnicity</option>
+                                        <option value="vote-lang">Language</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <button type="button" class="btn btn-primary" onclick="mainMap.prevMap()">Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="mainMap.nextMap()">Next</button> -->
+                    <div class="map-container">
+                        <div class="arrow-button left-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="30,10 30,38 10,24" fill="#000" onclick="mainMap.prevMap()"></polygon>
+                            </svg>
+                        </div>
+                        <div class="visContainer" id="mainMapElement"></div>
+                        <div class="arrow-button right-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="18,10 18,38 38,24" fill="#000" onclick="mainMap.nextMap()"></polygon>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -377,16 +422,16 @@
     <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
     <div class="section custom-container" id="kde-container">
         <div class="kde-tooltip"></div>
-        <div class="row">
+        <div class="row g-0">
             <div class="col-8 kde-left">
-                <div class="kde-card">
-                    <table id="kde-title">
+                <div class="content-card">
+                    <table class="viz-title" id="kde-title">
                         <tbody>
                         <tr>
                             <td>
                                 <h4>Kernel Density Estimate by Category:&nbsp;</h4>
                             </td>
-                            <td><select id="kde-select" onchange="onKdeSelChange()">
+                            <td><select class="select-dropdown" id="kde-select" onchange="onKdeSelChange()">
                                 <option value="gender">Gender</option>
                                 <option value="party">Party</option>
                                 <option value="ethnicity">Ethnicity</option>
@@ -401,7 +446,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="kde-right kde-right-top kde-card">
+                <div class="kde-right kde-right-top content-card">
                     <h4>Legend</h4>
                     <div class="kde-right-top-table">
                         <table>
@@ -451,7 +496,7 @@
                     </div>
 
                 </div>
-                <div class="kde-right kde-card">
+                <div class="kde-right content-card">
                     <h4>About</h4>
                     <ul>
                         <li>kernel density plots allow you to visualize the density of data observations</li>
@@ -467,17 +512,22 @@
     </div>
     <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
     <div class="section">
-        <h1>Rising Insight (Diverging Bar Plot)</h1>
+        <div class="header">
+            <h1>Rising Insight (Diverging Bar Plot)</h1>
+        </div>
         <div class="visContainer" id="sentimentParent"></div>
     </div>
     <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
-    <div class="section"><h1>Feature Importance Plot</h1>
-        <h3>This is actually how demographics affect voter turnout!</h3>
+    <div class="section">
+        <div class="header">
+            <h1>Model Feature Importance</h1>
+            <p>Our results suggest that some demographic features are more important in predicting voter turnout.<p>
+        </div>
         <div class="visContainer" id="importance-beeswarm-plot"></div>
     </div>
     <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
     <div class="section custom-container"><h1>Predicted Voter Turnout</h1>
-        <div class="row">
+        <div class="row g-0">
             <div class="col-8">
                 <div class="map-card">
                     <h3>Our model predictions vs. real values</h3>
@@ -563,7 +613,7 @@
         </div>
     </div>
     <div class="section section-img-bg" id="rec4-bg">
-        <div class="row">
+        <div class="row g-0">
             <div class="col-1"></div>
             <div class="col-4"><h1>Thanks for listening!</h1></div>
             <div class="col-7"></div>

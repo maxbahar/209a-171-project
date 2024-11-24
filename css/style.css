@@ -1,9 +1,4 @@
 /* - - - - - - GLOBAL STYLES - - - - - - */
-.section{
-    text-align:center;
-    font-family: "Roboto", sans-serif;
-    background: #FAF9F6;;
-}
 .fp-watermark {
     display: none !important;
 }
@@ -17,18 +12,34 @@
     border-color: transparent transparent transparent black;
 }
 
-.section-img-bg{
-    background-size: cover;
-    font-family: 'Oswald', sans-serif;
-}
-
+/* - - - - - - CONTAINERS & CARDS - - - - - - */
 
 .visContainer {
     height: 75vh; /* So that SVG height can be set dynamically */
 }
 
-/* - - - - - - TITLE SPECIFIC - - - - - - */
+.content-card{
+    background: white;
+    margin:5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    margin-top: 2.5vh;
+    padding: 1vh;
+}
 
+.select-dropdown{
+    font-size: large;
+    width: 10vw;
+    text-align: center ;
+}
+
+.viz-title {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse
+}
+
+/* - - - - - - TITLE SPECIFIC - - - - - - */
 
 #title1-bg {
     background-image: url("/images/vote-t1.jpg");
@@ -50,9 +61,12 @@
 #section-1{
     background: #e4f2f5;
 }
-/* - - - - - - SECTION SPECIFIC - - - - - - */
 
-.blue-red-gradient {
+/* - - - - - - SECTION SPECIFIC - - - - - - */
+.section{
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    background: #FAF9F6;;
 }
 
 .wood-grain{
@@ -62,49 +76,9 @@
     background-image: url("/images/wood-grain-blur.png");
 }
 
-/* - - - - - - MAP SPECIFIC - - - - - - */
-
-.tooltipVisContainer {
-    width: 500px;
-    height: 500px;
-}
-
-#mapTooltip {
-    border: thin solid lightgray; 
-    border-radius: 5px; 
-    background: rgba(255, 255, 255, 0.75); 
-    padding: 20px;
-    opacity: 1;
-}
-
-#demographic-slide {
-    margin-left: 10vh;
-    margin-right: 10vh;
-    color: indianred;
-}
-
-
-/* - - - - - - BAR PLOT SPECIFIC - - - - - - */
-
-.chosen-feature {
-    font-style: italic;
-    text-decoration: underline dashed;
-    text-underline-offset: 0.3rem;
-}
-
-.barPlotContainer {
-    width: 30vw;
-    height: 50vh;
-}
-
-#barPlot1 > svg > g > rect {
-    fill: crimson;
-}
-#barPlot2 > svg > g > rect {
-    fill: steelblue;
-}
-#barPlot3 > svg > g > rect {
-    fill: orange;
+.section-img-bg{
+    background-size: cover;
+    font-family: 'Oswald', sans-serif;
 }
 
 /* - - - - - - SENTIMENT CHART SPECIFIC - - - - - - */
