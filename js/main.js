@@ -32,10 +32,17 @@ let promises = [
     d3.json('data/tracts_pred.geojson'), 
     d3.json('data/counties_pred.geojson'), 
     d3.csv('data/shap.json'),
+    d3.json('data/counties.geojson'),
 ];
 Promise.all(promises)
-    .then(data => createVis(data))
-    .catch(err => console.log(err));  
+    .then(data => {
+        createVis(data);
+
+        // Initialize the diverging bar plot
+        const countiesData = data[data.length - 1];
+        renderDivergingBarPlot(countiesData);
+    })
+    .catch(err => console.log(err));
 
 function createVis(data) {
 
@@ -118,7 +125,7 @@ function createVis(data) {
         });
     }
 
-    // sentimentVis = new SentimentChart("sentimentParent", sentimentData);
+    sentimentVis = new SentimentChart("by-network", sentimentData);
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
