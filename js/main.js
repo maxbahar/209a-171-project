@@ -84,16 +84,16 @@ function createVis(data) {
     guessTurnout = new Slider("slider");
 
     // Density plot
-    // kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
+    kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
     
     // Feature importance plot
-    // ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot");
+    ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot");
 
     // Map of model results
-    // modelMap = new MapVis("modelMapElement", geoData, 
-    //                         ["2020_turnout_pct_pred", "2020_turnout_pct","2020_absent_pct_pred", "2020_absent_pct"], 
-    //                         [d3.interpolatePurples, d3.interpolatePurples, d3.interpolateOranges, d3.interpolateOranges], 
-    //                         "geoLevel2", "demographicVar2","modelMapTooltip");
+    modelMap = new MapVis("modelMapElement", geoData, 
+                            ["2020_turnout_pct_pred", "2020_turnout_pct","2020_absent_pct_pred", "2020_absent_pct"], 
+                            [d3.interpolatePurples, d3.interpolatePurples, d3.interpolateOranges, d3.interpolateOranges], 
+                            "geoLevel2", "demographicVar2","modelMapTooltip");
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 

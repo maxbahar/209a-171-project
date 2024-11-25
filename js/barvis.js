@@ -75,8 +75,6 @@ class BarVis {
             vis.displayData = Array.from({length: numBins}, (_, i) => [ `$${(incomeMin + (i + 1) * binSize) / 1000},000`, 0 ]);
             // vis.displayData = Array.from({length: numBins}, (_, i) => [ [incomeMin + i * binSize, incomeMin + (i + 1) * binSize], 0 ]);
 
-            console.log(vis.displayData);
-
             bgArray.forEach(d => {
                 let binIndex = Math.floor((d[0] - incomeMin) / binSize);
                 vis.displayData[binIndex][1] += d[1];
