@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Voter Turnout in MA</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.css"
-          integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>    <!-- Include Bootstrap -->
+        integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Include Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Include custom styling -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.css"
-          integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>    <!-- Include Bootstrap -->
+        integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> <!-- Include Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Include custom styling -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/ballot-style.css">
@@ -25,264 +26,269 @@
     <link rel="stylesheet" href="css/kde.css">
     <link rel="stylesheet" href="css/bars.css">
     <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/divbar.css">
     <!-- Other styling dependencies -->
-    <link href="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.css" rel="stylesheet" />
 </head>
+
 <body>
 
-<div id="fullpage">
-    <!---------------------------- Prelude ---------------------------->
-    <div class="section section-img-bg" id="title1-bg">
-        <div class="row g-0">
-            <div class="col-1"></div>
-            <div class="col-4">
-                <h1>Voter Turnout in Massachusetts</h1>
-                <br/>
-                <h2>An Analysis of the 2020 Presidential Election</h2>
-                <br/>
-                <h3 id="title-sub">(Please fill out the following ballot)</h3>
+    <div id="fullpage">
+        <!---------------------------- Prelude ---------------------------->
+        <div class="section section-img-bg" id="title1-bg">
+            <div class="row g-0">
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <h1>Voter Turnout in Massachusetts</h1>
+                    <br />
+                    <h2>An Analysis of the 2020 Presidential Election</h2>
+                    <br />
+                    <h3 id="title-sub">(Please fill out the following ballot)</h3>
+                </div>
+                <div class="col-7"></div>
             </div>
-            <div class="col-7"></div>
         </div>
-    </div>
-    <!---------------------------- Page 0 / Title ---------------------------->
-    <div class="section ballot-container" id="section-0">
-        <div class="ballot-border-container">
-            <div class="ballot-border">
-                <div class="ballot-box">
-                    <div class="ballot-heading">
-                        <div>
-                            <div id="project-title">CS 1710 - Final Project 2024</div>
-                            <div id="project-subtitle"></div>
+        <!---------------------------- Page 0 / Title ---------------------------->
+        <div class="section ballot-container" id="section-0">
+            <div class="ballot-border-container">
+                <div class="ballot-border">
+                    <div class="ballot-box">
+                        <div class="ballot-heading">
+                            <div>
+                                <div id="project-title">CS 1710 - Final Project 2024</div>
+                                <div id="project-subtitle"></div>
+                            </div>
+                        </div>
+                        <div class="ballot-body">
+                            <div class="row g-0">
+                                <!-- left column -->
+                                <div class="col-4 left-ballot-col">
+                                    <div class="row g-0">
+                                        <div class="col-md-8 ballot-category-text-title">
+                                            TEAM MEMBERS
+                                        </div>
+                                        <div class="col-md-4 ballot-category-text-subtitle">
+                                            Vote for ONE
+                                        </div>
+                                    </div>
+                                    <div class="row ballot-vote-row ">
+                                        <div class="col-10">
+                                            <div class="row vote-title-text">
+                                                Max Bahar
+                                            </div>
+                                            <div class="row vote-subtitle-text">
+                                                Harvard University
+                                            </div>
+                                            <div class="row  vote-sub-subtitle-text">
+                                                MS - Data Science 2026
+                                            </div>
+                                        </div>
+                                        <div class="col-2 vote-box-container">
+                                            <div class="vote-box" id="vote-max" onclick="voted('vote-max')"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row ballot-vote-row ">
+                                        <div class="col-10">
+                                            <div class="row vote-title-text">
+                                                Ted McCulloch
+                                            </div>
+                                            <div class="row vote-subtitle-text">
+                                                Harvard University
+                                            </div>
+                                            <div class="row vote-sub-subtitle-text">
+                                                MS - Data Science 2026
+                                            </div>
+                                        </div>
+                                        <div class="col-2 vote-box-container">
+                                            <div class="vote-box" id="vote-ted" onclick="voted('vote-ted')"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- middle column -->
+                                <div class="col-4 mid-ballot-col">
+                                    <div class="row g-0">
+                                        <div class="col-md-8 ballot-category-text-title">
+                                            TEAM MEMBERS
+                                        </div>
+                                        <div class="col-md-4 ballot-category-text-subtitle">
+                                            CONTINUED
+                                        </div>
+                                    </div>
+                                    <div class="row g-0">
+                                        <div class="row ballot-vote-row ">
+                                            <div class="col-10">
+                                                <div class="row vote-title-text">
+                                                    Stefan Chu
+                                                </div>
+                                                <div class="row vote-subtitle-text">
+                                                    Harvard University
+                                                </div>
+                                                <div class="row vote-sub-subtitle-text">
+                                                    MS - Data Science 202X
+                                                </div>
+                                            </div>
+                                            <div class="col-2 vote-box-container">
+                                                <div class="vote-box" id="vote-stef" onclick="voted('vote-stef')"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row ballot-vote-row ">
+                                            <div class="col-10">
+                                                <div class="row vote-title-text">
+                                                    Anitej Thamma
+                                                </div>
+                                                <div class="row vote-subtitle-text">
+                                                    Harvard University
+                                                </div>
+                                                <div class="row vote-sub-subtitle-text">
+                                                    MS - Data Science 2026
+                                                </div>
+                                            </div>
+                                            <div class="col-2 vote-box-container">
+                                                <div class="vote-box" id="vote-ani" onclick="voted('vote-ani')"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- right column -->
+                                <div class="col-4 right-ballot-col ">
+                                    <div class="row g-0">
+                                        <div class="col-md-12 ballot-category-text-title">
+                                            <u>INSTRUCTIONS</u>
+                                        </div>
+                                    </div>
+                                    <div class="right-ballot-instructions">
+                                        <ul>
+                                            <li><span class="preattentive">you will be prompted to vote</span></li>
+                                            <li><span class="preattentive">to vote fill in the <u>oval</u> next to your
+                                                    choice</span>
+                                            </li>
+                                            <li>this page is just practice</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="ballot-body">
-                        <div class="row g-0">
-                            <!-- left column -->
+                </div>
+            </div>
+        </div>
+        <!---------------------------- Page 1 / HOOK (QUESTION) ---------------------------->
+        <div class="section ballot-container" id="section-1">
+            <div class="ballot-border-container">
+                <div class="ballot-border-end">
+                    <div class="ballot-box-end">
+                        <div class="row ballot-col-container-end">
                             <div class="col-4 left-ballot-col">
-                                <div class="row g-0">
-                                    <div class="col-md-8 ballot-category-text-title">
-                                        TEAM MEMBERS
-                                    </div>
-                                    <div class="col-md-4 ballot-category-text-subtitle">
-                                        Vote for ONE
-                                    </div>
-                                </div>
-                                <div class="row ballot-vote-row ">
-                                    <div class="col-10">
-                                        <div class="row vote-title-text">
-                                            Max Bahar
-                                        </div>
-                                        <div class="row vote-subtitle-text">
-                                            Harvard University
-                                        </div>
-                                        <div class="row  vote-sub-subtitle-text">
-                                            MS - Data Science 2026
-                                        </div>
-                                    </div>
-                                    <div class="col-2 vote-box-container">
-                                        <div class="vote-box" id="vote-max" onclick="voted('vote-max')"></div>
-                                    </div>
-                                </div>
-                                <div class="row ballot-vote-row ">
-                                    <div class="col-10">
-                                        <div class="row vote-title-text">
-                                            Ted McCulloch
-                                        </div>
-                                        <div class="row vote-subtitle-text">
-                                            Harvard University
-                                        </div>
-                                        <div class="row vote-sub-subtitle-text">
-                                            MS - Data Science 2026
-                                        </div>
-                                    </div>
-                                    <div class="col-2 vote-box-container">
-                                        <div class="vote-box" id="vote-ted" onclick="voted('vote-ted')"></div>
+                                <div class="padding-from-top"></div>
+                                <div class="left-ballot-col-question">
+                                    <div><b><u>QUESTION</u></b></div>
+                                    <div>WHICH DEMOGRAPHIC CATEGORIES DO YOU THINK <span class="preattentive">CONTRIBUTE
+                                            THE MOST</span>
+                                        TOWARDS VOTER TURNOUT (POSITIVELY OR NEGATIVELY)
                                     </div>
                                 </div>
                             </div>
-                            <!-- middle column -->
                             <div class="col-4 mid-ballot-col">
+                                <div class="padding-from-top"></div>
                                 <div class="row g-0">
-                                    <div class="col-md-8 ballot-category-text-title">
-                                        TEAM MEMBERS
+                                    <div class="col-md-6 ballot-category-text-title">
+                                        CATEGORIES
                                     </div>
-                                    <div class="col-md-4 ballot-category-text-subtitle">
+                                    <div class="col-md-6 ballot-category-text-subtitle">
+                                        Select up to THREE
+                                    </div>
+                                </div>
+                                <div class="row ballot-vote-row-pg2 ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Party Affiliation
+                                        </div>
+                                        <div class="row vote-sub-subtitle-text">
+                                            Democrat, Republican, Independent, etc.
+                                        </div>
+
+                                    </div>
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box2" id="vote-party" onclick="votecat('vote-party')"></div>
+                                    </div>
+                                </div>
+                                <div class="row ballot-vote-row-pg2 ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Gender
+                                        </div>
+                                        <div class="row vote-sub-subtitle-text">
+                                            Male, Female, Unknown
+                                        </div>
+                                    </div>
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box2" id="vote-gender" onclick="votecat('vote-gender')"></div>
+                                    </div>
+                                </div>
+                                <div class="row ballot-vote-row-pg2 ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Age
+                                        </div>
+                                        <div class="row vote-sub-subtitle-text">
+                                            Younger, Older, etc.
+                                        </div>
+                                    </div>
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box2" id="vote-age" onclick="votecat('vote-age')"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 right-ballot-col">
+                                <div class="padding-from-top"></div>
+                                <div class="row g-0">
+                                    <div class="col-md-6 ballot-category-text-title">
+                                        CATEGORIES
+                                    </div>
+
+                                    <div class="col-md-6 ballot-category-text-subtitle">
                                         CONTINUED
                                     </div>
                                 </div>
-                                <div class="row g-0">
-                                    <div class="row ballot-vote-row ">
-                                        <div class="col-10">
-                                            <div class="row vote-title-text">
-                                                Stefan Chu
-                                            </div>
-                                            <div class="row vote-subtitle-text">
-                                                Harvard University
-                                            </div>
-                                            <div class="row vote-sub-subtitle-text">
-                                                MS - Data Science 202X
-                                            </div>
+                                <div class="row ballot-vote-row-pg2 ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Average Income
                                         </div>
-                                        <div class="col-2 vote-box-container">
-                                            <div class="vote-box" id="vote-stef" onclick="voted('vote-stef')"></div>
+                                        <div class="row vote-sub-subtitle-text">
+                                            High, Middle, Low
                                         </div>
                                     </div>
-                                    <div class="row ballot-vote-row ">
-                                        <div class="col-10">
-                                            <div class="row vote-title-text">
-                                                Anitej Thamma
-                                            </div>
-                                            <div class="row vote-subtitle-text">
-                                                Harvard University
-                                            </div>
-                                            <div class="row vote-sub-subtitle-text">
-                                                MS - Data Science 202X
-                                            </div>
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box2" id="vote-income" onclick="votecat('vote-income')"></div>
+                                    </div>
+                                </div>
+                                <div class="row ballot-vote-row-pg2 ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Spoken Language
                                         </div>
-                                        <div class="col-2 vote-box-container">
-                                            <div class="vote-box" id="vote-ani" onclick="voted('vote-ani')"></div>
+                                        <div class="row vote-sub-subtitle-text">
+                                            English, Spanish, Italian, etc.
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!-- right column -->
-                            <div class="col-4 right-ballot-col ">
-                                <div class="row g-0">
-                                    <div class="col-md-12 ballot-category-text-title">
-                                        <u>INSTRUCTIONS</u>
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box2" id="vote-lang" onclick="votecat('vote-lang')"></div>
                                     </div>
                                 </div>
-                                <div class="right-ballot-instructions">
-                                    <ul>
-                                        <li><span class="preattentive">you will be prompted to vote</span></li>
-                                        <li><span class="preattentive">to vote fill in the <u>oval</u> next to your choice</span>
-                                        </li>
-                                        <li>this page is just practice</li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!---------------------------- Page 1 / HOOK (QUESTION) ---------------------------->
-    <div class="section ballot-container" id="section-1">
-        <div class="ballot-border-container">
-            <div class="ballot-border-end">
-                <div class="ballot-box-end">
-                    <div class="row ballot-col-container-end">
-                        <div class="col-4 left-ballot-col">
-                            <div class="padding-from-top"></div>
-                            <div class="left-ballot-col-question">
-                                <div><b><u>QUESTION</u></b></div>
-                                <div>WHICH DEMOGRAPHIC CATEGORIES DO YOU THINK <span class="preattentive">CONTRIBUTE THE MOST</span>
-                                    TOWARDS VOTER TURNOUT (POSITIVELY OR NEGATIVELY)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4 mid-ballot-col">
-                            <div class="padding-from-top"></div>
-                            <div class="row g-0">
-                                <div class="col-md-6 ballot-category-text-title">
-                                    CATEGORIES
-                                </div>
-                                <div class="col-md-6 ballot-category-text-subtitle">
-                                    Select up to THREE
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Party Affiliation
+                                <div class="row ballot-vote-row-pg2 ">
+                                    <div class="col-10">
+                                        <div class="row vote-title-text">
+                                            Ethnicity
+                                        </div>
+                                        <div class="row vote-sub-subtitle-text">
+                                            European, African American, East/South Asian, Hispanic
+                                        </div>
                                     </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        Democrat, Republican, Independent, etc.
+                                    <div class="col-2 vote-box-container">
+                                        <div class="vote-box2" id="vote-eth" onclick="votecat('vote-eth')"></div>
                                     </div>
-
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-party" onclick="votecat('vote-party')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Gender
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        Male, Female, Unknown
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-gender" onclick="votecat('vote-gender')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Age
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        Younger, Older, etc.
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-age" onclick="votecat('vote-age')"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-4 right-ballot-col">
-                            <div class="padding-from-top"></div>
-                            <div class="row g-0">
-                                <div class="col-md-6 ballot-category-text-title">
-                                    CATEGORIES
-                                </div>
-
-                                <div class="col-md-6 ballot-category-text-subtitle">
-                                    CONTINUED
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Average Income
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        High, Middle, Low
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-income" onclick="votecat('vote-income')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Spoken Language
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        English, Spanish, Italian, etc.
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-lang" onclick="votecat('vote-lang')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Ethnicity
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        European, African American, East/South Asian, Hispanic
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-eth" onclick="votecat('vote-eth')"></div>
                                 </div>
                             </div>
                         </div>
@@ -290,359 +296,380 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!---------------------------- Page 1.5 / Selection Preview ---------------------------->
-    <div class="section" id="var-preview-section">
-        <div class="header">
-            <h1>Reviewing Your Selections</h1>
-            <p id="val-sel-count">You have made no selections, please return to previous slide to vote.</p>
-        </div>
-        <div class="card-container">
-            <div class="card" id="var-sel1">
-                <h3 id="var-sel1-title"></h3>
-                <img src="/images/250.png" alt="Card 1 Image" id="var-sel1-img">
-                <p id="var-sel1-card"></p>
+        <!---------------------------- Page 1.5 / Selection Preview ---------------------------->
+        <div class="section" id="var-preview-section">
+            <div class="header">
+                <h1>Reviewing Your Selections</h1>
+                <p id="val-sel-count">You have made no selections, please return to previous slide to vote.</p>
             </div>
-            <div class="card" id="var-sel2">
-                <h3 id="var-sel2-title"></h3>
-                <img src="/images/250.png" alt="Card 1 Image" id="var-sel2-img">
-                <p id="var-sel2-card"></p>
-            </div>
-            <div class="card" id="var-sel3">
-                <h3 id="var-sel3-title"></h3>
-                <img src="/images/250.png" alt="Card 1 Image" id="var-sel3-img">
-                <p id="var-sel3-card"></p>
-            </div>
-        </div>
-    </div>
-    <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
-    <div class="section">
-        <div class="header">
-            <h1>What Do You Think Voter Turnout is for <span class="chosen-feature"></span> ?</h1>
-            <p>How do you think the demographics of this county affects voter turnout?</p>
-        </div>
-
-        <div class="card-container">
-            <div class="bar-card" style="width:35vw; margin-bottom: 20px;" id="countyMapParent"></div>
-        </div>
-        
-        <div class="card-container" id="allBarPlotsParent">
-            <div class="bar-card" id="barPlot1">
-            </div>
-            <div class="bar-card" id="barPlot2">
-            </div>
-            <div class="bar-card" id="barPlot3">
-            </div>
-        </div>
-
-        <div id="slider"></div>
-        <div class="header">
-            <h3>Use the slider to make your guess.</h3>
-            <p>The average voter turnout in Massachusetts is <span id="stateAvg"></span></p>
-        </div>
-    </div>
-    <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
-    <div class="section custom-container">
-        <div class="row g-0">
-            <div class="col-4">
-                <div class="content-card">
-                    <h4>What do Massachusetts Demographics Look Like?</h4>
-                    <p>Voter turnout in Massachussets is not the same across the state.</p>
-                    <ul>
-                        <li></li>
-                    </ul>
+            <div class="card-container">
+                <div class="card" id="var-sel1">
+                    <h3 id="var-sel1-title"></h3>
+                    <img src="/images/250.png" alt="Card 1 Image" id="var-sel1-img">
+                    <p id="var-sel1-card"></p>
                 </div>
-
-                <div class="kde-right content-card">
-                    <h4>About</h4>
-                    <ul>
-                        <li>kernel density plots allow you to visualize the density of data observations</li>
-                        <li>each of our observations is a block group</li>
-                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
-                            belonged to the stated category
-                        </li>
-                        <li><b>y-axis</b> - voter turnout for a given block group</li>
-                    </ul>
+                <div class="card" id="var-sel2">
+                    <h3 id="var-sel2-title"></h3>
+                    <img src="/images/250.png" alt="Card 1 Image" id="var-sel2-img">
+                    <p id="var-sel2-card"></p>
                 </div>
-
+                <div class="card" id="var-sel3">
+                    <h3 id="var-sel3-title"></h3>
+                    <img src="/images/250.png" alt="Card 1 Image" id="var-sel3-img">
+                    <p id="var-sel3-card"></p>
+                </div>
             </div>
-            <div class="col-8">
-                <div class="content-card">
-                    <table class="viz-title">
-                        <h4>Voter Turnout in Massachussets</h4>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <p class="map-dropdown-label">by Geography:</p>
-                                </td>
-                                <td>
-                                    <select class="select-dropdown" id="geoLevel" onchange="mainMap.updateVis()">
-                                        <option value="county">County</option>
-                                        <option value="tract">Tract</option>
-                                        <option value="blockGroup">Block Group</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="map-dropdown-label">by Category:</p>
-                                </td>
-                                <td>
-                                    <select class="select-dropdown" id="demographicVar" onchange="mainMap.updateVis()">
-                                        <option value="vote-age">Age</option>
-                                        <option value="vote-gender">Gender</option>
-                                        <option value="vote-party">Party</option>
-                                        <option value="vote-eth">Ethnicity</option>
-                                        <option value="vote-lang">Language</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- <button type="button" class="btn btn-primary" onclick="mainMap.prevMap()">Previous</button>
-                    <button type="button" class="btn btn-primary" onclick="mainMap.nextMap()">Next</button> -->
-                    <div class="map-container">
-                        <div class="arrow-button left-arrow">
-                            <svg width="40" height="40" viewBox="0 0 48 48">
-                                <polygon points="30,10 30,38 10,24" fill="#000" onclick="mainMap.prevMap()"></polygon>
-                            </svg>
-                        </div>
-                        <div class="visContainer" id="mainMapElement"></div>
-                        <div class="arrow-button right-arrow">
-                            <svg width="40" height="40" viewBox="0 0 48 48">
-                                <polygon points="18,10 18,38 38,24" fill="#000" onclick="mainMap.nextMap()"></polygon>
-                            </svg>
-                        </div>
+        </div>
+        <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
+        <div class="section">
+            <div class="header">
+                <h1>What Do You Think Voter Turnout is for <span class="chosen-feature"></span> ?</h1>
+                <p>How do you think the demographics of this county affects voter turnout?</p>
+            </div>
+
+            <div class="card-container">
+                <div class="bar-card" style="width:35vw; margin-bottom: 20px;" id="countyMapParent"></div>
+            </div>
+
+            <div class="card-container" id="allBarPlotsParent">
+                <div class="bar-card" id="barPlot1">
+                </div>
+                <div class="bar-card" id="barPlot2">
+                </div>
+                <div class="bar-card" id="barPlot3">
+                </div>
+            </div>
+
+            <div id="slider"></div>
+            <div class="header">
+                <h3>Use the slider to make your guess.</h3>
+                <p>The average voter turnout in Massachusetts is <span id="stateAvg"></span></p>
+            </div>
+        </div>
+        <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
+        <div class="section custom-container">
+            <div class="row g-0">
+                <div class="col-4">
+                    <div class="content-card">
+                        <h4>What do Massachusetts Demographics Look Like?</h4>
+                        <p>Voter turnout in Massachussets is not the same across the state.</p>
+                        <ul>
+                            <li></li>
+                        </ul>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-        
-    <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
-    <div class="section custom-container" id="kde-container">
-        <div class="kde-tooltip"></div>
-        <div class="row g-0">
-            <div class="col-8 kde-left">
-                <div class="content-card">
-                    <table class="viz-title" id="kde-title">
-                        <tbody>
-                        <tr>
-                            <td>
-                                <h4>Kernel Density Estimate by Category:&nbsp;</h4>
-                            </td>
-                            <td><select class="select-dropdown" id="kde-select" onchange="onKdeSelChange()">
-                                <option value="gender">Gender</option>
-                                <option value="party">Party</option>
-                                <option value="ethnicity">Ethnicity</option>
-                                <option value="age">Age</option>
-                                <option value="language">Language</option>
-                            </select></td>
-                        </tr>
-                        </tbody>
-                    </table>
 
-                    <div id="kde-plot-parent"></div>
+                    <div class="kde-right content-card">
+                        <h4>About</h4>
+                        <ul>
+                            <li>kernel density plots allow you to visualize the density of data observations</li>
+                            <li>each of our observations is a block group</li>
+                            <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
+                                belonged to the stated category
+                            </li>
+                            <li><b>y-axis</b> - voter turnout for a given block group</li>
+                        </ul>
+                    </div>
+
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="kde-right kde-right-top content-card">
-                    <h4>Legend</h4>
-                    <div class="kde-right-top-table">
-                        <table>
+                <div class="col-8">
+                    <div class="content-card">
+                        <table class="viz-title">
+                            <h4>Voter Turnout in Massachussets</h4>
                             <tbody>
-                            <tr>
-                                <th>
-                                    <div id="k-t-r0-color"></div>
-                                </th>
-                                <td id="k-t-r0-label"></td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div id="k-t-r1-color"></div>
-                                </th>
-                                <td id="k-t-r1-label"></td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div id="k-t-r2-color"></div>
-                                </th>
-                                <td id="k-t-r2-label"></td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <div id="k-t-r3-color"></div>
-                                </th>
-                                <td id="k-t-r3-label"></td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td></td>
-                            </tr>
+                                <tr>
+                                    <td>
+                                        <p class="map-dropdown-label">by Geography:</p>
+                                    </td>
+                                    <td>
+                                        <select class="select-dropdown" id="geoLevel" onchange="mainMap.updateVis()">
+                                            <option value="county">County</option>
+                                            <option value="tract">Tract</option>
+                                            <option value="blockGroup">Block Group</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p class="map-dropdown-label">by Category:</p>
+                                    </td>
+                                    <td>
+                                        <select class="select-dropdown" id="demographicVar"
+                                            onchange="mainMap.updateVis()">
+                                            <option value="vote-age">Age</option>
+                                            <option value="vote-gender">Gender</option>
+                                            <option value="vote-party">Party</option>
+                                            <option value="vote-eth">Ethnicity</option>
+                                            <option value="vote-lang">Language</option>
+                                        </select>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
+                        <!-- <button type="button" class="btn btn-primary" onclick="mainMap.prevMap()">Previous</button>
+                    <button type="button" class="btn btn-primary" onclick="mainMap.nextMap()">Next</button> -->
+                        <div class="map-container">
+                            <div class="arrow-button left-arrow">
+                                <svg width="40" height="40" viewBox="0 0 48 48">
+                                    <polygon points="30,10 30,38 10,24" fill="#000" onclick="mainMap.prevMap()">
+                                    </polygon>
+                                </svg>
+                            </div>
+                            <div class="visContainer" id="mainMapElement"></div>
+                            <div class="arrow-button right-arrow">
+                                <svg width="40" height="40" viewBox="0 0 48 48">
+                                    <polygon points="18,10 18,38 38,24" fill="#000" onclick="mainMap.nextMap()">
+                                    </polygon>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
-
-                </div>
-                <div class="kde-right content-card">
-                    <h4>About</h4>
-                    <ul>
-                        <li>kernel density plots allow you to visualize the density of data observations</li>
-                        <li>each of our observations is a block group</li>
-                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
-                            belonged to the stated category
-                        </li>
-                        <li><b>y-axis</b> - voter turnout for a given block group</li>
-                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-    <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
-    <div class="section">
-        <div class="header">
-            <h1>Rising Insight (Diverging Bar Plot)</h1>
-        </div>
-        <div class="visContainer" id="sentimentParent"></div>
-    </div>
-    <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
-    <div class="section">
-        <div class="header">
-            <h1>Model Feature Importance</h1>
-            <p>Our results suggest that some demographic features are more important in predicting voter turnout.<p>
-        </div>
-        <div class="visContainer" id="importance-beeswarm-plot"></div>
-    </div>
-    <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
-    <div class="section custom-container"><h1>Predicted Voter Turnout</h1>
-        <div class="row g-0">
-            <div class="col-8">
-                <div class="map-card">
-                    <h3>Our model predictions vs. real values</h3>
-                    <button type="button" class="btn btn-primary" onclick="modelMap.prevMap()">Previous</button>
-                    <select name="geoLevel-option2" id="geoLevel2" onchange="modelMap.updateVis()">
-                        <option value="county">County</option>
-                        <option value="tract">Tract</option>
-                        <option value="blockGroup">Block Group</option>
-                    </select>
-                    <select name="demographicVar-option2" id="demographicVar2" onchange="modelMap.updateVis()">
-                        <option value="vote-age">Age</option>
-                        <option value="vote-gender">Gender</option>
-                        <option value="vote-party">Party</option>
-                        <option value="vote-eth">Ethnicity</option>
-                        <option value="vote-lang">Language</option>
-                    </select>
-                    <button type="button" class="btn btn-primary" onclick="modelMap.nextMap()">Next</button>
-                    <div class="visContainer" id="modelMapElement"></div>
+
+        <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
+        <div class="section custom-container" id="kde-container">
+            <div class="kde-tooltip"></div>
+            <div class="row g-0">
+                <div class="col-8 kde-left">
+                    <div class="content-card">
+                        <table class="viz-title" id="kde-title">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <h4>Kernel Density Estimate by Category:&nbsp;</h4>
+                                    </td>
+                                    <td><select class="select-dropdown" id="kde-select" onchange="onKdeSelChange()">
+                                            <option value="gender">Gender</option>
+                                            <option value="party">Party</option>
+                                            <option value="ethnicity">Ethnicity</option>
+                                            <option value="age">Age</option>
+                                            <option value="language">Language</option>
+                                        </select></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div id="kde-plot-parent"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="kde-right kde-right-top content-card">
+                        <h4>Legend</h4>
+                        <div class="kde-right-top-table">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <div id="k-t-r0-color"></div>
+                                        </th>
+                                        <td id="k-t-r0-label"></td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <div id="k-t-r1-color"></div>
+                                        </th>
+                                        <td id="k-t-r1-label"></td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <div id="k-t-r2-color"></div>
+                                        </th>
+                                        <td id="k-t-r2-label"></td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <div id="k-t-r3-color"></div>
+                                        </th>
+                                        <td id="k-t-r3-label"></td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="kde-right content-card">
+                        <h4>About</h4>
+                        <ul>
+                            <li>kernel density plots allow you to visualize the density of data observations</li>
+                            <li>each of our observations is a block group</li>
+                            <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
+                                belonged to the stated category
+                            </li>
+                            <li><b>y-axis</b> - voter turnout for a given block group</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="map-card">
-                    <h3>How did you do?</h3>
-                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span id="user-guess"></span>.</p>
-                    <p>Our model predicted that the county had a voter turnout of <span id="model-guess"></span>.</p>
-                    <p>In reality, the county had a voter turnout of <span id="actual-value"></span>.</p>
+        </div>
+        <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
+        <div class="section">
+            <div class="header">
+                <h1>Demographics in Regions with Differing Party Affiliation</h1>
+                <p>What are the distribution of votes? Let's explore!</p>
+            </div>
+            <div id="diverging-bar-plot-container">
+                <div id="party-selection"></div>
+                <svg id="diverging-bar-plot"></svg>
+                <div id="legend"></div>
+            </div>
+        </div>
+        <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
+        <div class="section">
+            <div class="header">
+                <h1>Model Feature Importance</h1>
+                <p>Our results suggest that some demographic features are more important in predicting voter turnout.
+                <p>
+            </div>
+            <div class="visContainer" id="importance-beeswarm-plot"></div>
+        </div>
+        <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
+        <div class="section custom-container">
+            <h1>Predicted Voter Turnout</h1>
+            <div class="row g-0">
+                <div class="col-8">
+                    <div class="map-card">
+                        <h3>Our model predictions vs. real values</h3>
+                        <button type="button" class="btn btn-primary" onclick="modelMap.prevMap()">Previous</button>
+                        <select name="geoLevel-option2" id="geoLevel2" onchange="modelMap.updateVis()">
+                            <option value="county">County</option>
+                            <option value="tract">Tract</option>
+                            <option value="blockGroup">Block Group</option>
+                        </select>
+                        <select name="demographicVar-option2" id="demographicVar2" onchange="modelMap.updateVis()">
+                            <option value="vote-age">Age</option>
+                            <option value="vote-gender">Gender</option>
+                            <option value="vote-party">Party</option>
+                            <option value="vote-eth">Ethnicity</option>
+                            <option value="vote-lang">Language</option>
+                        </select>
+                        <button type="button" class="btn btn-primary" onclick="modelMap.nextMap()">Next</button>
+                        <div class="visContainer" id="modelMapElement"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="map-card">
+                        <h3>How did you do?</h3>
+                        <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span
+                                id="user-guess"></span>.</p>
+                        <p>Our model predicted that the county had a voter turnout of <span id="model-guess"></span>.
+                        </p>
+                        <p>In reality, the county had a voter turnout of <span id="actual-value"></span>.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!---------------------------- RECOMMENDATIONS / CONCLUSION ---------------------------->
-    <div class="section rec-bg" id="bg-rec-tran">
-        <h1>If voting is not equitable,</h1>
-    </div>
-    <div class="section rec-bg" id="bg-rec-tran2">
-        <h1>what can be done?</h1>
-    </div>
-    <div class="section section-img-bg" id="rec1-bg">
-        <div class="img-text-container">
-            <h1><u>Making Voting More Accessible</u></h1>
-            <ul>
-                <li><b>Voter Registration Reform</b> - Universal automatic registration, same day registration, and
-                    online registration
-                </li>
-                <li><b>Expanding Voting Access</b> - Increasing access to mail-in/absentee ballots and extended
-                    voting/early voting hours
-                </li>
-                <li><b>Reducing Polling Place Closures</b> - Minority-heavy areas are particularly susceptible to having
-                    polling places closed or moved, making voting more difficult
-                </li>
-            </ul>
+        <!---------------------------- RECOMMENDATIONS / CONCLUSION ---------------------------->
+        <div class="section rec-bg" id="bg-rec-tran">
+            <h1>If voting is not equitable,</h1>
+        </div>
+        <div class="section rec-bg" id="bg-rec-tran2">
+            <h1>what can be done?</h1>
+        </div>
+        <div class="section section-img-bg" id="rec1-bg">
+            <div class="img-text-container">
+                <h1><u>Making Voting More Accessible</u></h1>
+                <ul>
+                    <li><b>Voter Registration Reform</b> - Universal automatic registration, same day registration, and
+                        online registration
+                    </li>
+                    <li><b>Expanding Voting Access</b> - Increasing access to mail-in/absentee ballots and extended
+                        voting/early voting hours
+                    </li>
+                    <li><b>Reducing Polling Place Closures</b> - Minority-heavy areas are particularly susceptible to
+                        having
+                        polling places closed or moved, making voting more difficult
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section section-img-bg" id="rec2-bg">
+            <div class="img-text-container-dark">
+                <h1><u>Addressing Corruption</u></h1>
+                <ul>
+                    <li><b>Campaign Finance Reform</b> - Ensuring that elections are not disproportionately influenced
+                        by
+                        wealthier individuals or corporations
+                    </li>
+                    <li><b>End Gerrymandering</b> - Independent, non-partisan commissions can ensure fairer, more
+                        representative district boundaries
+                    </li>
+                    <li><b>Limit Purging of Voter Rolls</b> - Many states engage in "voter roll purging," which can
+                        incorrectly remove eligible voters from the rolls
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section section-img-bg" id="rec3-bg">
+            <div class="img-text-container">
+                <h1><u>Education and Outreach</u></h1>
+                <ul>
+                    <li><b>Civic Education Programs</b> - Increasing the focus on civic education in schools and
+                        communities
+                        can improve voter literacy and confidence
+                    </li>
+                    <li><b>Community-Based Voter Outreach</b> - Engaging in targeted outreach to underrepresented groups
+                        through grassroots organizations can help improve voter turnout in marginalized communities.
+                        This
+                        can include providing information in different languages, assisting people with understanding
+                        their
+                        voting rights, and offering transportation to polling stations.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="section section-img-bg" id="rec4-bg">
+            <div class="row g-0">
+                <div class="col-1"></div>
+                <div class="col-4">
+                    <h1>Thanks for listening!</h1>
+                </div>
+                <div class="col-7"></div>
+            </div>
         </div>
     </div>
-    <div class="section section-img-bg" id="rec2-bg">
-        <div class="img-text-container-dark">
-            <h1><u>Addressing Corruption</u></h1>
-            <ul>
-                <li><b>Campaign Finance Reform</b> - Ensuring that elections are not disproportionately influenced by
-                    wealthier individuals or corporations
-                </li>
-                <li><b>End Gerrymandering</b> - Independent, non-partisan commissions can ensure fairer, more
-                    representative district boundaries
-                </li>
-                <li><b>Limit Purging of Voter Rolls</b> - Many states engage in "voter roll purging," which can
-                    incorrectly remove eligible voters from the rolls
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="section section-img-bg" id="rec3-bg">
-        <div class="img-text-container">
-            <h1><u>Education and Outreach</u></h1>
-            <ul>
-                <li><b>Civic Education Programs</b> - Increasing the focus on civic education in schools and communities
-                    can improve voter literacy and confidence
-                </li>
-                <li><b>Community-Based Voter Outreach</b> - Engaging in targeted outreach to underrepresented groups
-                    through grassroots organizations can help improve voter turnout in marginalized communities. This
-                    can include providing information in different languages, assisting people with understanding their
-                    voting rights, and offering transportation to polling stations.
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="section section-img-bg" id="rec4-bg">
-        <div class="row g-0">
-            <div class="col-1"></div>
-            <div class="col-4"><h1>Thanks for listening!</h1></div>
-            <div class="col-7"></div>
-        </div>
-    </div>
-</div>
 
 
-<!-- Load JS libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"
+    <!-- Load JS libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"
         integrity="sha512-LGiXf+jHGTHcIybSsOWO3I/in+OObCkcEsWIZ7IyhzfD6RzD5qDUw2CK+JveuI7zTSEcDG//bIOvOpAJW2BWsg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<!-- Include custom libraries -->
-<script src="js/selectedVariablePreview.js"></script>
-<script src="js/interactionHelper.js"></script>
-<script src="js/tooltipvis.js"></script>
-<script src="js/barvis.js"></script>
-<script src="js/beeswarm.js"></script>
-<script src="js/countyvis.js"></script>
-<script src="js/mapvis.js"></script>
-<script src="js/kdeplot.js"></script>
-<script src="js/sentimentvis.js"></script>
-<script src="js/main.js"></script>
-<script src="js/guess.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Include custom libraries -->
+    <script src="js/selectedVariablePreview.js"></script>
+    <script src="js/interactionHelper.js"></script>
+    <script src="js/tooltipvis.js"></script>
+    <script src="js/barvis.js"></script>
+    <script src="js/beeswarm.js"></script>
+    <script src="js/countyvis.js"></script>
+    <script src="js/mapvis.js"></script>
+    <script src="js/kdeplot.js"></script>
+    <script src="js/sentimentvis.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/guess.js"></script>
+    <!-- JS for the diverging bar plot -->
+    <script src="js/divbarplot.js"></script>
 
 </body>
+
 </html>
