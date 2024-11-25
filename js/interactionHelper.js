@@ -54,12 +54,13 @@ function votecat(categoryID) {
         }
         
         // Reset title
-        // parentDiv.querySelector("h3").innerText = "Nothing Selected";
+        document.getElementById(`barTitle${votecatIdx}`).innerText = titleMap["none"];
 
     } else if (Object.keys(selectedFeatureCategories).length <= 2) {
 
         // document.getElementById(`barPlot${votecatIdx}`).classList.add("barPlotContainer");
         selectedFeatureCategories[categoryID] = new BarVis(`barPlot${votecatIdx}`, geoData, categoryID);
+        document.getElementById(`barTitle${votecatIdx}`).innerText = titleMap[categoryID];
         votecatIdx++;
     }
     document.querySelectorAll('.vote-box2').forEach(function (div) {
@@ -96,9 +97,9 @@ function votecat(categoryID) {
         document.getElementById("val-sel-count").innerText = "You have made no selections, please return to previous slide to vote.";
     }
 
-    selPrevCard1.wrangleData()
-    selPrevCard2.wrangleData()
-    selPrevCard3.wrangleData()
+    selPrevCard1.wrangleData();
+    selPrevCard2.wrangleData();
+    selPrevCard3.wrangleData();
     
 }
 

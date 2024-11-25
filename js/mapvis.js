@@ -19,6 +19,7 @@ class MapVis {
 
         let vis = this;
 
+
         // Define width, height, and margins
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
@@ -133,7 +134,7 @@ class MapVis {
         vis.legendAxisGroup.transition()
                         .duration(800)
                         .call(vis.legendAxis);
-        vis.legendLabel.text(vis.mainVar);
+        vis.legendLabel.text(variableMap[vis.mainVar]);
 
         //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
         // This could be very inefficient since it's just redrawing all the features on change.
@@ -157,7 +158,7 @@ class MapVis {
                                 .attr('class', 'geoFeature')
                                 .attr("d", vis.path)
                                 .attr("fill", "#ccc")
-                                .attr("stroke", "#333")
+                                .attr("stroke", "#949494")
                                 .attr("stroke-width", 0.1);
 
         // Change the feature colors
@@ -192,7 +193,7 @@ class MapVis {
                     .style("top", event.pageY + "px")
                     .html(`
                         <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
-                        <div style="font-size: 14pt"><span style="font-weight:600">${vis.mainVar}: </span>${d.properties[vis.mainVar].toLocaleString()}</div>
+                        <div style="font-size: 14pt"><b>${vis.mainVar}: </b>${d.properties[vis.mainVar].toLocaleString()}</div>
                         <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
                         `); 
 

@@ -9,6 +9,23 @@ let userGuess = 0.5;
 let maps = {};
 let mainMap;
 
+let variableMap = {
+    "total_reg": "Total Registered Voters", 
+    "age_18_19" : "Age 18-19", "age_20_24" : "Age 20-24", "age_25_29" : "Age 25-29", "age_30_34" : "Age 30-34",
+    "age_35_44" : "Age 35-44", "age_45_54" : "Age 45-54", "age_55_64" : "Age 55-64", "age_65_74" : "Age 65-74", 
+    "age_75_84" : "Age 75-84", "age_85over" : "Age 85+",
+    "gender_m" : "Male", "gender_f" : "Female", "gender_unknown" : "Unknown", 
+    "party_npp" : "Nonpartisan", "party_dem" : "Democrat", "party_rep" : "Republican", "party_lib" : "Libertarian", 
+    "party_grn" : "Green", "party_con" : "Conservative", "party_ain" : "American Independent", "party_scl" : "Socialist", "party_oth" : "Unknown", 
+    "eth1_eur" : "European", "eth1_hisp" : "Hispanic",
+    "eth1_aa" : "African American", "eth1_esa" : "East/South Asian", "eth1_oth" : "Other", "eth1_unk" : "Unknown",
+    "lang_english" : "English", "lang_spanish" : "Spanish", "lang_portuguese" : "Portuguese", "lang_chinese" : "Chinese", "lang_italian" : "Italian",
+    "lang_vietnamese" : "Vietnamese", "lang_other" : "Other", "lang_unknown" : "Unknown", "mean_hh_income" : "Mean Household Income",
+    "ALAND20" : "Land Area", "2020_turnout_pct" : "Voter Turnout Percentage", "2020_absent_pct" : "Voter Absence Percentage", "2020_reg" : "Voters Registered",
+    "2020_turnout" : "Voter Turnout", "2020_turnout_pct_pred" : "Predicted Voter Turnout Percentage", "2020_absent" : "Voter Absence",
+    "2020_absent_pct_pred" : "Predicted Voter Absence Percentage", "2020_turnout_pred" : "Predicted Voter Turnout", "2020_absent_pred" : "Predicted Voter Absence"
+}
+
 // Read in data from multiple files via promises
 let promises = [
     d3.json('data/block_groups_pred.geojson'), 
@@ -49,8 +66,8 @@ function createVis(data) {
 
     // Map of demographic variables
     mainMap = new MapVis("mainMapElement", geoData, 
-                            ["2020_absent_pct", "total_reg", "mean_hh_income"], 
-                            [d3.interpolatePurples,d3.interpolateReds, d3.interpolateBlues],
+                            ["2020_turnout_pct", "2020_absent_pct", "total_reg", "mean_hh_income"], 
+                            [d3.interpolatePurples, d3.interpolateOranges, d3.interpolateReds, d3.interpolateBlues],
                             "geoLevel", "demographicVar","mainMapTooltip");
 
     // Initialize user guess
@@ -67,16 +84,16 @@ function createVis(data) {
     guessTurnout = new Slider("slider");
 
     // Density plot
-    kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
+    // kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
     
     // Feature importance plot
-    ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot")
+    // ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot");
 
     // Map of model results
-    modelMap = new MapVis("modelMapElement", geoData, 
-                            ["2020_absent_pct_pred", "2020_absent_pct"], 
-                            [d3.interpolatePurples, d3.interpolatePurples], 
-                            "geoLevel2", "demographicVar2","modelMapTooltip");
+    // modelMap = new MapVis("modelMapElement", geoData, 
+    //                         ["2020_turnout_pct_pred", "2020_turnout_pct","2020_absent_pct_pred", "2020_absent_pct"], 
+    //                         [d3.interpolatePurples, d3.interpolatePurples, d3.interpolateOranges, d3.interpolateOranges], 
+    //                         "geoLevel2", "demographicVar2","modelMapTooltip");
 
     //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 

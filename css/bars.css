@@ -17,9 +17,14 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s;
-    width: 20vw;
-    height: 30vh;
+    /* width: 25vw; */
+    /* height: 35vh; */
     border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.bar-card > h3 {
+    margin-top: 10px;
+    margin-bottom: 0px;
 }
 
 .bar-card-parent {
@@ -30,9 +35,15 @@
     transform: translateY(-5px);
 }
 
-.barPlotContainer {
+/* .barPlotContainer {
     width: 30vw;
     height: 50vh;
+} */
+
+#countyMapParent {
+    width: 25vw; 
+    height: 27vh;
+    margin-bottom: 20px;
 }
 
 /* - - - - - - Chosen feature - - - - - - */

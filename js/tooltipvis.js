@@ -14,7 +14,7 @@ class TooltipVis {
 
         let vis = this;
         
-        vis.margin = {top: 20, right: 20, bottom: 100, left: 50};
+        vis.margin = {top: 20, right: 20, bottom: 70, left: 50};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -79,7 +79,7 @@ class TooltipVis {
         }
 
         // Get data for relevant variables
-        vis.displayData = vis.variables.map((d) => [d,vis.featureData.properties[d]]);
+        vis.displayData = vis.variables.map((d) => [variableMap[d],vis.featureData.properties[d]]);
 
         console.log(vis.displayData);
 

@@ -14,7 +14,7 @@ class BarVis {
 
         let vis = this;
         
-        vis.margin = {top: 20, right: 20, bottom: 100, left: 50};
+        vis.margin = {top: 20, right: 20, bottom: 70, left: 50};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -72,7 +72,8 @@ class BarVis {
             let incomeMin = Math.floor(d3.min(bgArray.map(d => d[0])) / binSize) * binSize;
             let incomeMax = Math.ceil(d3.max(bgArray.map(d => d[0])) / binSize) * binSize;
             let numBins = Math.ceil((incomeMax - incomeMin) / binSize);
-            vis.displayData = Array.from({length: numBins}, (_, i) => [ [incomeMin + i * binSize, incomeMin + (i + 1) * binSize], 0 ]);
+            vis.displayData = Array.from({length: numBins}, (_, i) => [ `$${(incomeMin + (i + 1) * binSize) / 1000},000`, 0 ]);
+            // vis.displayData = Array.from({length: numBins}, (_, i) => [ [incomeMin + i * binSize, incomeMin + (i + 1) * binSize], 0 ]);
 
             console.log(vis.displayData);
 
@@ -102,7 +103,7 @@ class BarVis {
             }
 
             // Get data for relevant variables
-            vis.displayData = vis.variables.map((d) => [d,chosenFeature.properties[d]]);
+            vis.displayData = vis.variables.map((d) => [variableMap[d],chosenFeature.properties[d]]);
 
         }
 

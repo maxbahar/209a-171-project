@@ -8,11 +8,15 @@ class Beeswarm {
         let vis = this;
 
         // margin conventions
-        let size = document.getElementById(vis.parentContainer).getBoundingClientRect();
 
-        vis.margin = {top: 50, right: 50, bottom: 50, left: 50};
+        // vis.margin = {top: 50, right: 50, bottom: 50, left: 50};
         vis.width = 800;
         vis.height = 3000;
+        
+        vis.margin = {top: 20, right: 100, bottom: 20, left: 20};
+        // vis.width = document.getElementById(vis.parentContainer).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        // vis.height = document.getElementById(vis.parentContainer).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
+
 
         vis.svg = d3.select("#" + vis.parentContainer)
             .append('svg')

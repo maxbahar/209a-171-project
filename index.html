@@ -319,20 +319,29 @@
     <div class="section">
         <div class="header">
             <h1>What Do You Think Voter Turnout is for <span class="chosen-feature"></span> ?</h1>
-            <p>How do you think the demographics of this county affects voter turnout?</p>
+            <!-- <p>How do you think the demographics of this county affects voter turnout?</p> -->
         </div>
 
         <div class="card-container">
-            <div class="bar-card" style="width:35vw; margin-bottom: 20px;" id="countyMapParent"></div>
+            <div class="bar-card" id="countyMapParent"></div>
         </div>
         
         <div class="card-container" id="allBarPlotsParent">
-            <div class="bar-card" id="barPlot1">
-            </div>
-            <div class="bar-card" id="barPlot2">
-            </div>
-            <div class="bar-card" id="barPlot3">
-            </div>
+            <div class="bar-card">
+                <h3 id="barTitle1">Nothing Selected</h3>
+                <div style="width: 25vw; height: 25vh;" id="barPlot1">
+                </div>
+            </div> 
+            <div class="bar-card">
+                <h3 id="barTitle2">Nothing Selected</h3>
+                <div style="width: 25vw; height: 25vh;" id="barPlot2">
+                </div>
+            </div> 
+            <div class="bar-card">
+                <h3 id="barTitle3">Nothing Selected</h3>
+                <div style="width: 25vw; height: 25vh;" id="barPlot3">
+                </div>
+            </div> 
         </div>
 
         <div id="slider"></div>
@@ -346,30 +355,25 @@
         <div class="row g-0">
             <div class="col-4">
                 <div class="content-card">
-                    <h4>What do Massachusetts Demographics Look Like?</h4>
-                    <p>Voter turnout in Massachussets is not the same across the state.</p>
+                    <h4>Voter Turnout and Demographics</h4>
+                    <p>Unsurprisingly, voter turnout and demographics vary across the state of Massachusetts.</p>
+                    <p>The map to the right shows voter turnout, the number of registered voters, and mean household income across the state.</p>
+                    <p><b>Click on an area</b> to view the distribution of voter age, gender, party affiliation, ethnicity, or language.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Areas with Low Voter Turnout</h4>
+                    <p>Focusing on areas and demographic characteristics associated with low voter turnout may help government officials focus their efforts.</p>
+                    <p>These characteristics are associated with lower voter turnout:</p>
                     <ul>
-                        <li></li>
+                        <li>Lower mean household income.</li>
+                        <li>Higher percentage of people that identify as hispanic.</li>
                     </ul>
                 </div>
-
-                <div class="kde-right content-card">
-                    <h4>About</h4>
-                    <ul>
-                        <li>kernel density plots allow you to visualize the density of data observations</li>
-                        <li>each of our observations is a block group</li>
-                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
-                            belonged to the stated category
-                        </li>
-                        <li><b>y-axis</b> - voter turnout for a given block group</li>
-                    </ul>
-                </div>
-
             </div>
             <div class="col-8">
                 <div class="content-card">
+                    <h4>Voter Turnout in Massachussets</h4>
                     <table class="viz-title">
-                        <h4>Voter Turnout in Massachussets</h4>
                         <tbody>
                             <tr>
                                 <td>
@@ -519,42 +523,85 @@
     </div>
     <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
     <div class="section">
-        <div class="header">
-            <h1>Model Feature Importance</h1>
-            <p>Our results suggest that some demographic features are more important in predicting voter turnout.<p>
+        <!-- <div class="header"> -->
+        <div class="col-4">
+
         </div>
-        <div class="visContainer" id="importance-beeswarm-plot"></div>
+        <div class="col-8">
+            <div class="content-card">
+                <h4>Model Prediction Results</h4>
+                <div class="map-container">
+                    <!-- PROTOTYPE -->
+                    <div class="visContainer" id="importance-beeswarm-plot" style="flex: 1; height: 3050px"></div>
+                </div>
+            </div>
+        </div>
+            <!-- <h1>Model Feature Importance</h1>
+            <p>Our results suggest that some demographic features are more important in predicting voter turnout.<p> -->
+        <!-- <div class="visContainer" id="importance-beeswarm-plot"></div> -->
     </div>
     <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
-    <div class="section custom-container"><h1>Predicted Voter Turnout</h1>
+    <div class="section custom-container">
         <div class="row g-0">
             <div class="col-8">
-                <div class="map-card">
-                    <h3>Our model predictions vs. real values</h3>
-                    <button type="button" class="btn btn-primary" onclick="modelMap.prevMap()">Previous</button>
-                    <select name="geoLevel-option2" id="geoLevel2" onchange="modelMap.updateVis()">
-                        <option value="county">County</option>
-                        <option value="tract">Tract</option>
-                        <option value="blockGroup">Block Group</option>
-                    </select>
-                    <select name="demographicVar-option2" id="demographicVar2" onchange="modelMap.updateVis()">
-                        <option value="vote-age">Age</option>
-                        <option value="vote-gender">Gender</option>
-                        <option value="vote-party">Party</option>
-                        <option value="vote-eth">Ethnicity</option>
-                        <option value="vote-lang">Language</option>
-                    </select>
-                    <button type="button" class="btn btn-primary" onclick="modelMap.nextMap()">Next</button>
-                    <div class="visContainer" id="modelMapElement"></div>
+                <div class="content-card">
+                    <h4>Model Prediction Results</h4>
+                    <table class="viz-title">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p class="map-dropdown-label">by Geography:</p>
+                                </td>
+                                <td>
+                                    <select class="select-dropdown" id="geoLevel2" onchange="modelMap.updateVis()">
+                                        <option value="county">County</option>
+                                        <option value="tract">Tract</option>
+                                        <option value="blockGroup">Block Group</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p class="map-dropdown-label">by Category:</p>
+                                </td>
+                                <td>
+                                    <select class="select-dropdown" id="demographicVar2" onchange="modelMap.updateVis()">
+                                        <option value="vote-age">Age</option>
+                                        <option value="vote-gender">Gender</option>
+                                        <option value="vote-party">Party</option>
+                                        <option value="vote-eth">Ethnicity</option>
+                                        <option value="vote-lang">Language</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="map-container">
+                        <div class="arrow-button left-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="30,10 30,38 10,24" fill="#000" onclick="modelMap.prevMap()"></polygon>
+                            </svg>
+                        </div>
+                        <div class="visContainer" id="modelMapElement"></div>
+                        <div class="arrow-button right-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="18,10 18,38 38,24" fill="#000" onclick="modelMap.nextMap()"></polygon>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-4">
-                <div class="map-card">
+                <div class="content-card">
                     <h3>How did you do?</h3>
                     <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span id="user-guess"></span>.</p>
                     <p>Our model predicted that the county had a voter turnout of <span id="model-guess"></span>.</p>
                     <p>In reality, the county had a voter turnout of <span id="actual-value"></span>.</p>
                 </div>
+                <!-- <div class="content-card">
+                    <h3>Additional Information</h3>
+                    <p>Our model had a R2 score of ...</p>
+                </div> -->
             </div>
         </div>
     </div>
