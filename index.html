@@ -318,7 +318,7 @@
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
     <div class="section">
         <div class="header">
-            <h1>What Do You Think Voter Turnout is for <span class="chosen-feature"></span> ?</h1>
+            <h3>What Do You Think Voter Turnout in the 2020 Presidential Election is for <span class="chosen-feature"></span> ?</h3>
             <!-- <p>How do you think the demographics of this county affects voter turnout?</p> -->
         </div>
 
@@ -347,7 +347,7 @@
         <div id="slider"></div>
         <div class="header">
             <h3>Use the slider to make your guess.</h3>
-            <p>The average voter turnout in Massachusetts is <span id="stateAvg"></span></p>
+            <p>The average 2020 presidential voter turnout in Massachusetts is <span id="stateAvg"></span></p>
         </div>
     </div>
     <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
@@ -503,42 +503,73 @@
                 <div class="kde-right content-card">
                     <h4>About</h4>
                     <ul>
-                        <li>kernel density plots allow you to visualize the density of data observations</li>
-                        <li>each of our observations is a block group</li>
-                        <li><b>x-axis</b> - of the registered, voting population (of a block group), this proportion
+                        <li>Kernel density plots allow you to visualize the density of data observations</li>
+                        <li>Each of our observations is a block group</li>
+                        <li><b>X-axis</b> - of the registered, voting population (of a block group), this proportion
                             belonged to the stated category
                         </li>
-                        <li><b>y-axis</b> - voter turnout for a given block group</li>
+                        <li><b>Y-axis</b> - voter turnout for a given block group</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
-    <div class="section">
-        <div class="header">
-            <h1>Rising Insight (Diverging Bar Plot)</h1>
-        </div>
-        <div class="visContainer" id="sentimentParent"></div>
-    </div>
-    <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
-    <div class="section">
-        <!-- <div class="header"> -->
-        <div class="col-4">
-
-        </div>
-        <div class="col-8">
-            <div class="content-card">
-                <h4>Model Prediction Results</h4>
-                <div class="map-container">
-                    <!-- PROTOTYPE -->
-                    <div class="visContainer" id="importance-beeswarm-plot" style="flex: 1; height: 3050px"></div>
+    <div class="section custom-container">
+        <div class="row g-0">
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>Voter Turnout by County by Party</h4>
+                    <div class="visContainer" id="diverging-bar-plot-container" style="overflow-y: scroll; overflow-x:hidden;">
+                        <div id="party-selection"></div>
+                        <svg id="diverging-bar-plot"></svg>
+                        <div id="legend"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="content-card">
+                    <h4>How Does Voter Turnout Vary Across Counties?</h4>
+                    <p>We find that Hampden county has the lowest voter turnout, with <b>10% lower</b> voter turnout compared to other counties.</p>
+                    <p>On the other hand, Barnstable and Hampshire county are tied for the highest voter turnout, with <b>4% higher</b> voter turnout compared to other counties.</p>
+                </div>
+                <div class="content-card">
+                    <h4>About</h4>
+                    <ul>
+                        <li>The diverging bar plot shows how counties' voter turnout compare with one another.</li>
+                    </ul>
                 </div>
             </div>
         </div>
-            <!-- <h1>Model Feature Importance</h1>
-            <p>Our results suggest that some demographic features are more important in predicting voter turnout.<p> -->
-        <!-- <div class="visContainer" id="importance-beeswarm-plot"></div> -->
+    </div>
+    <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
+    <div class="section custom-container">
+        <!-- <div class="header"> -->
+        <div class="row g-0">
+            <div class="col-4">
+                <div class="content-card">
+                    <h4>How Important Are Specific Demographic Features?</h4>
+                    <p>Our model shows that some demographic features are more important than others in predicting voter turnout.</p>
+                    <p>Specifically, we find age brackets of <b>65-74, 25-29, and 30-34</b> are the most impactful to our model's predicitons.</p>
+                </div>
+                <div class="content-card">
+                    <h4>About</h4>
+                    <ul>
+                        <li>The plot to the right shows the SHAP values for each demographic feature.</li>
+                        <li>SHAP values measure how impactful a feature is to the model's predictions.</li>
+                        <li>Features at the top are the most impactful, those at the bottom are least impactful.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>Model Feature Importance</h4>
+                    <div class="map-container">
+                        <div class="visContainer" id="importance-beeswarm-plot" style="overflow-y: scroll; overflow-x:hidden;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
     <div class="section custom-container">
@@ -597,6 +628,11 @@
                     <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span id="user-guess"></span>.</p>
                     <p>Our model predicted that the county had a voter turnout of <span id="model-guess"></span>.</p>
                     <p>In reality, the county had a voter turnout of <span id="actual-value"></span>.</p>
+                </div>
+                <div class="content-card">
+                    <h3>Implications of Model Results</h3>
+                    <p>The model performs pretty well in predicting voter turnout using voter demographic information, suggesting that the information needed to perform similar analyses is readily available.</p>
+                    <p>Our results are at the Census block group level and predict aggregate voting behavior. Using more detailed information (with ethical considerations) may allow for more granular predictions at the individual voter level.</p>
                 </div>
                 <!-- <div class="content-card">
                     <h3>Additional Information</h3>
@@ -687,6 +723,7 @@
 <script src="js/countyvis.js"></script>
 <script src="js/mapvis.js"></script>
 <script src="js/kdeplot.js"></script>
+<script src="js/divbarplot.js"></script>
 <script src="js/sentimentvis.js"></script>
 <script src="js/main.js"></script>
 <script src="js/guess.js"></script>
