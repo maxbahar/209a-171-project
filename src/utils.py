@@ -1,3 +1,4 @@
+import zipfile
 import pandas as pd
 import geopandas as gpd
 import numpy as np
@@ -27,15 +28,18 @@ languages = ["lang_english", "lang_spanish",
 income = ["commercialdata_estimatedhhincomeamount_avg"]
 predictors = [*registered, *age, *gender, *party, *ethnicity1, *languages, "mean_hh_income"]
 
-def process_data(csv_filepath="../data/MA_l2_2022stats_2020block/MA_l2_2022stats_2020block.csv",
-                 bg_filepath="../data/ma_pl2020_bg/ma_pl2020_bg.shp",
-                 t_filepath="../data/ma_pl2020_t/ma_pl2020_t.shp",
-                 c_filepath="../data/ma_pl2020_cnty/ma_pl2020_cnty.shp"):
+def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
+                 bg_zipfile="../data/ma_pl2020_bg.zip",
+                 t_zipfile="../data/ma_pl2020_t.zip",
+                 c_zipfile="../data/ma_pl2020_cnty.zip"):
     
-    voter_blocks_all = pd.read_csv(csv_filepath, low_memory=False).set_index("geoid20")
-    block_groups_shp = gpd.read_file(bg_filepath)
-    tracts_shp = gpd.read_file(t_filepath)
-    counties_shp = gpd.read_file(c_filepath)
+    with zipfile.ZipFile(csv_zipfile) as z:
+        with z.open("MA_l2_2022stats_2020block.csv") as f:
+            voter_blocks_all = pd.read_csv(f, low_memory=False).set_index("geoid20")
+    
+    block_groups_shp = gpd.read_file(f"zip://{bg_zipfile}!ma_pl2020_bg.shp")
+    tracts_shp = gpd.read_file(f"zip://{t_zipfile}!ma_pl2020_t.shp")
+    counties_shp = gpd.read_file(f"zip://{c_zipfile}!ma_pl2020_cnty.shp")
 
     # Rename columns for easier intepretation
     col_labels = {k:v for k, v in zip(init_gender, gender)}

@@ -1,8 +1,5 @@
 .DS_Store
 **/.DS_Store
-/data
-/data/MA_l2_2022stats_2020block/
-/data/ma_pl2020_b/
 /src/TedSandbox.ipynb
 .local
 .idea/
