@@ -34,8 +34,10 @@ class MapVis {
 
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
-                        .attr('class', "tooltip")
-                        .attr('id', 'mapTooltip');
+            .attr('class', "tooltip")
+            .attr('id', 'mapTooltip');
+
+
         // Prevent tooltip from hiding when hovered
         vis.tooltip.on("mouseover", () => {
             vis.tooltipKeep = true; // Keep the tooltip visible
@@ -252,7 +254,13 @@ class MapVis {
                             <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
                             `); 
 
-            vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
+            if(vis.tooltipID === "modelMapTooltip"){
+                vis.tooltipVis = new TooltipLocalImportance(vis.tooltipID, d);
+            }
+            else{
+                vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
+            }
+
             vis.tooltipShowing = true;
             vis.tooltipHandler.raise();
     
