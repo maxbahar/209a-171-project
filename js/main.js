@@ -34,7 +34,7 @@ let promises = [
     d3.json('data/block_groups_pred.geojson'), 
     d3.json('data/tracts_pred.geojson'), 
     d3.json('data/counties_pred.geojson'), 
-    d3.csv('data/shap.json'),
+    d3.json('data/shap.json'),
 ];
 Promise.all(promises)
     .then(data => createVis(data))
@@ -92,7 +92,7 @@ function createVis(data) {
     kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
     
     // Feature importance plot
-    // ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot");
+    ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot", shapData);
 
     // Map of model results
     modelMap = new MapVis("modelMapElement", geoData, 
