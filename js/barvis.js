@@ -73,10 +73,14 @@ class BarVis {
             let incomeMax = Math.ceil(d3.max(bgArray.map(d => d[0])) / binSize) * binSize;
             let numBins = Math.ceil((incomeMax - incomeMin) / binSize);
             vis.displayData = Array.from({length: numBins}, (_, i) => [ `$${(incomeMin + (i + 1) * binSize) / 1000},000`, 0 ]);
-            // vis.displayData = Array.from({length: numBins}, (_, i) => [ [incomeMin + i * binSize, incomeMin + (i + 1) * binSize], 0 ]);
 
             bgArray.forEach(d => {
-                let binIndex = Math.floor((d[0] - incomeMin) / binSize);
+                let binIndex
+                if (d[0] === incomeMax) {
+                    binIndex = numBins - 1;
+                } else {
+                    binIndex = Math.floor((d[0] - incomeMin) / binSize);
+                }
                 vis.displayData[binIndex][1] += d[1];
             });
 
@@ -112,7 +116,6 @@ class BarVis {
 
     updateVis() {
         let vis = this;
-
 
         // Update domains
         vis.x.domain(vis.displayData.map(d => d[0]));
