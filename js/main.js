@@ -11,6 +11,8 @@ let mainMap;
 
 // Initialize formatting functions
 const pctFormat = value => value.toLocaleString(undefined, {style: 'percent', minimumFractionDigits:2});
+const intFormat = value => value.toLocaleString(undefined, { maximumFractionDigits: 0 });
+const dollarFormat = value => `$ ${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
 let variableMap = {
     "total_reg": "Total Registered Voters", 
@@ -49,18 +51,10 @@ function createVis(data) {
         "county": data[2]
     }
     shapData = data[3];
-
+    
     // Choose a feature for users to guess
     let chosenFeatureIdx = Math.floor(Math.random() * geoData["county"].features.length);
-    chosenFeature = geoData["county"].features[chosenFeatureIdx];
-    
-    // Update text in the page to match chosen feature    
-    let chosenFeatureSpans = document.getElementsByClassName("chosen-feature");
-    for (let i = 0; i < chosenFeatureSpans.length; i++) {
-        chosenFeatureSpans[i].innerText = chosenFeature.properties["BASENAME"] + " County";
-    }
-    document.getElementById("model-guess").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct_pred"]);
-    document.getElementById("actual-value").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct"]);
+    updateCounty(geoData["county"].features[chosenFeatureIdx]);
 
     ////////// VISUALIZATIONS //////////
 
@@ -102,6 +96,20 @@ function createVis(data) {
                             // [d3.interpolatePurples, d3.interpolatePurples, d3.interpolateOranges, d3.interpolateOranges], 
                             "geoLevel2", "demographicVar2","modelMapTooltip");
 
+}
+
+function updateCounty(countyInput) {
+    
+    // Update the chosen feature
+    chosenFeature = countyInput
+    
+    // Update text in the page to match chosen feature    
+    let chosenFeatureSpans = document.getElementsByClassName("chosen-feature");
+    for (let i = 0; i < chosenFeatureSpans.length; i++) {
+        chosenFeatureSpans[i].innerText = chosenFeature.properties["BASENAME"] + " County";
+    }
+    document.getElementById("model-guess").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct_pred"]);
+    document.getElementById("actual-value").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct"]);
 }
 
 // Slide navigation

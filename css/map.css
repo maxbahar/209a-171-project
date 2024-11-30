@@ -25,6 +25,11 @@
     height: 200px;
 }
 
+#countyTooltip {
+    padding: 10px;
+    font-size: larger;
+}
+
 .map-dropdown-label {
     margin: 0 15px 0 0;
     text-align: right;
@@ -36,8 +41,8 @@
     background: rgba(255, 255, 255, 0.95); 
     padding: 20px;
     opacity: 1;
+    font-family: 'Oswald', sans-serif;
 }
-
 
 .map-container{
     display: flex;

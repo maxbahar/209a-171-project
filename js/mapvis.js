@@ -117,8 +117,13 @@ class MapVis {
         // Get demographic variable
         vis.demoVar = document.getElementById(vis.demoID).value;
 
-        // Get the main variable values
-        vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
+        if (vis.tooltipID === "modelMapTooltip") {
+            vis.mainVarArray = [];
+            vis.cycleVars.forEach(variable => vis.mainVarArray = vis.mainVarArray.concat(vis.geoData[vis.geoLevel].features.map(d => d.properties[variable])));
+        } else {
+            // Get the main variable values
+            vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
+        }
 
         // Define breakpoints for the scale
         const minValue = d3.min(vis.mainVarArray);
@@ -246,17 +251,40 @@ class MapVis {
             }
 
             vis.tooltip.style("left",`${left}px`)
-                        .style("top",`${top}px`)
-                        .html(`
-                            <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
-                            <div style="font-size: 14pt"><b>${variableMap[vis.mainVar]}: </b>${pctFormat(d.properties[vis.mainVar])}</div>
-                            <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
-                            `); 
+                        .style("top",`${top}px`);
+                        
 
             if(vis.tooltipID === "modelMapTooltip"){
+                vis.tooltip.html(`
+                    <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
+                    <div style="font-size: 14pt"><b>${variableMap[vis.cycleVars[0]]}: </b>${pctFormat(d.properties[vis.cycleVars[0]])}</div>
+                    <div style="font-size: 14pt"><b>Actual ${variableMap[vis.cycleVars[1]]}: </b>${pctFormat(d.properties[vis.cycleVars[1]])}</div>
+                    <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
+                    `); 
                 vis.tooltipVis = new TooltipLocalImportance(vis.tooltipID, d);
             }
             else{
+
+                let mainVarValue;
+
+                switch (vis.mainVar) {
+                    case "2020_turnout_pct":
+                        mainVarValue = pctFormat(d.properties[vis.mainVar])
+                        break;
+                    case "total_reg":
+                        mainVarValue = intFormat(d.properties[vis.mainVar])
+                        break;
+                    case "mean_hh_income":
+                        mainVarValue = dollarFormat(d.properties[vis.mainVar])
+                        break;
+                }
+                ;
+
+                vis.tooltip.html(`
+                    <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
+                    <div style="font-size: 14pt"><b>${variableMap[vis.mainVar]}: </b>${mainVarValue}</div>
+                    <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
+                    `); 
                 vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
             }
 

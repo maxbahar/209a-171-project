@@ -14,7 +14,7 @@ class CountyVis {
         let vis = this;
 
         // Define width, height, and margins
-        vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
+        vis.margin = {top: 10, right: 10, bottom: 10, left: 10};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -24,6 +24,15 @@ class CountyVis {
                     .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+
+        // Initialize tooltip
+        vis.tooltip = d3.select("body").append('div')
+                        .attr('class', "tooltip mapTooltip")
+                        .attr("id","countyTooltip");
+
+        vis.instruction = vis.svg.append("text").attr("y", vis.height / 4 * 3);
+        vis.instruction.append("tspan").attr("x", vis.width/20).text("Click on a county");
+        vis.instruction.append("tspan").attr("x", vis.width/20).attr("dy", "1.5em").text("to predict its voter turnout");
 
         vis.wrangleData();
 
@@ -64,9 +73,46 @@ class CountyVis {
                                         return "white";
                                     }
                                 })
-                                .attr("stroke", "#333")
+                                .attr("stroke", "#8F99A8")
                                 .attr("stroke-width", 0.5);
 
+        vis.geoFeatures.on("mouseover", function(event, d) {
+            d3.select(this)
+                .attr("stroke", "#D33D17")
+                .attr("stroke-width", 5).raise();
+
+            vis.tooltip.style("display", "grid")
+                        .style("left", `${event.pageX + 20}px`)
+                        .style("top", `${event.pageY}px`)
+                        .html(`
+                            <p style="margin: 0px">${d.properties["BASENAME"]} County</p>
+                            `);
+        
+        }).on('mouseout', function(event, d) {
+            d3.select(this)
+                .attr("stroke", "#8F99A8")
+                .attr("stroke-width", 0.5);
+            vis.tooltip.style("display", "none");
+        }).on("mousemove", function(event, d) {
+            vis.tooltip.style("display", "grid")
+                        .style("left", `${event.pageX + 20}px`)
+                        .style("top", `${event.pageY}px`);
+        }).on("click", function(event, d) {
+            updateCounty(d);
+            vis.updateColor();
+        });
+
+    }
+
+    updateColor() {
+        let vis = this;
+        vis.geoFeatures.attr("fill", function(d) {
+            if (d.properties["GEOID20"] == chosenFeature.properties["GEOID20"]) {
+                return "#D33D17";
+            } else {
+                return "white";
+            }
+        })
     }
 
 }
