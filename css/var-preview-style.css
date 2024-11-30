@@ -1,8 +1,7 @@
 #var-preview-section{
-    background-image: linear-gradient(180deg, #e4f2f5, #FAF9F6);
+    background:#e4f2f5;
     font-family: 'Oswald', sans-serif;
 }
-
 
 /* Title and subtitle styling */
 .header {

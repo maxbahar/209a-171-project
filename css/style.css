@@ -112,3 +112,9 @@
     left: 0;
     top: 0;
 }
+
+.blue-white-grad{
+    background-image: linear-gradient(180deg, #e4f2f5, #FAF9F6);
+
+}
+

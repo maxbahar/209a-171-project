@@ -5,11 +5,14 @@
 }
 
 #bg-rec-tran{
-    background-image: linear-gradient(180deg, #FAF9F6, #2F343C);
+    background-image: linear-gradient(180deg, #FAF9F6, #e4f2f5);
+    color: #D33D17;
+
 }
 
 #bg-rec-tran2{
-    background-image: linear-gradient(180deg, #2F343C,#ececeb);
+    background: #e4f2f5;
+    color: #D33D17;
 }
 
 .rec-bg h1 {
@@ -35,7 +38,7 @@
 
 .img-text-container {
     padding: 10px;
-    background: rgba(255, 255, 255, .8);
+    background: rgba(255, 255, 255, .95);
     text-align: left;
     margin-left: 25vh;
     margin-right: 25vh;
