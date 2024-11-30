@@ -129,13 +129,13 @@ def generate_predictions(data_dict, random_state=None):
     t_data = data_dict["tract"]
     c_data = data_dict["county"]
 
-    X = bg_data[predictors]
-    y = bg_data["2020_turnout_pct"]
+    X = bg_data[predictors].copy()
+    y = bg_data["2020_turnout_pct"].copy()
 
     bg_predictions = bg_data[["2020_turnout_pct","2020_absent_pct","2020_registered","2020_turnout"]].copy()
 
     kf = KFold(n_splits=10,shuffle=True,random_state=random_state)
-    X.loc[:,["total_reg","mean_hh_income"]] = StandardScaler().fit_transform(X=X[["total_reg","mean_hh_income"]])
+    X[["total_reg","mean_hh_income"]] = StandardScaler().fit_transform(X=X[["total_reg","mean_hh_income"]])
 
     linreg = LinearRegression()
 
@@ -174,11 +174,11 @@ def generate_predictions(data_dict, random_state=None):
 if __name__ == "__main__":
 
     data_dict = process_data()
-    data_dict["block_group"].to_file("../data/block_groups.geojson")
-    data_dict["tract"].to_file("../data/tracts.geojson")
-    data_dict["county"].to_file("../data/counties.geojson")
+    # data_dict["block_group"].to_file("../data/block_groups.geojson")
+    # data_dict["tract"].to_file("../data/tracts.geojson")
+    # data_dict["county"].to_file("../data/counties.geojson")
 
     pred_dict = generate_predictions(data_dict, random_state=209)
-    pred_dict["block_group"].to_file("../data/block_groups_pred.geojson")
-    pred_dict["tract"].to_file("../data/tracts_pred.geojson")
-    pred_dict["county"].to_file("../data/counties_pred.geojson")
+    # pred_dict["block_group"].to_file("../data/block_groups_pred.geojson")
+    # pred_dict["tract"].to_file("../data/tracts_pred.geojson")
+    # pred_dict["county"].to_file("../data/counties_pred.geojson")
