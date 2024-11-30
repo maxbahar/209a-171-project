@@ -101,7 +101,7 @@ function createVis(data) {
 function updateCounty(countyInput) {
     
     // Update the chosen feature
-    chosenFeature = countyInput
+    chosenFeature = countyInput;
     
     // Update text in the page to match chosen feature    
     let chosenFeatureSpans = document.getElementsByClassName("chosen-feature");
@@ -110,6 +110,11 @@ function updateCounty(countyInput) {
     }
     document.getElementById("model-guess").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct_pred"]);
     document.getElementById("actual-value").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct"]);
+
+    for (const cat in selectedFeatureCategories) {
+        selectedFeatureCategories[cat].wrangleData();
+    }
+
 }
 
 // Slide navigation

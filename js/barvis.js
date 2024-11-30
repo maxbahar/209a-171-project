@@ -121,17 +121,26 @@ class BarVis {
         // Draw bars
         vis.bars = vis.svg.selectAll(`.${vis.category}-bar`)
                         .data(vis.displayData, (d) => d[0]);
-        vis.bars.enter().append("rect")
-                .attr("class",`${vis.category}-bar`)
-                // .merge(vis.bars)
-                .attr("x",d => vis.x(d[0]))
+
+        vis.bars.exit().remove();
+
+        vis.barsEnter = vis.bars.enter().append("rect")
+                                .attr("class",`${vis.category}-bar`)
+                                .attr("x",d => vis.x(d[0]))
+                                .attr("y",d => vis.y(d[1]))
+                                .attr("height",d => vis.height - vis.y(d[1]))
+                                .attr("width", vis.x.bandwidth());
+
+        vis.bars = vis.barsEnter.merge(vis.bars);
+
+        vis.bars.transition().duration(800).attr("x",d => vis.x(d[0]))
                 .attr("y",d => vis.y(d[1]))
                 .attr("height",d => vis.height - vis.y(d[1]))
                 .attr("width", vis.x.bandwidth());
 
         // Update axis
-        vis.xAxisGroup.call(vis.xAxis).selectAll("text").attr("transform","rotate(-45)").style("text-anchor","end");
-        vis.yAxisGroup.call(vis.yAxis);
+        vis.xAxisGroup.transition().duration(800).call(vis.xAxis).selectAll("text").attr("transform","rotate(-45)").style("text-anchor","end");
+        vis.yAxisGroup.transition().duration(800).call(vis.yAxis);
 
     }
 }
