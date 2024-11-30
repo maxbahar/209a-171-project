@@ -34,8 +34,7 @@ class MapVis {
 
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
-            .attr('class', "tooltip")
-            .attr('id', 'mapTooltip');
+            .attr('class', "tooltip mapTooltip");
 
 
         // Prevent tooltip from hiding when hovered
