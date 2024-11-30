@@ -15,18 +15,20 @@ class Slider {
         // Define slider functionality
         noUiSlider.create(vis.slider, {
             start: userGuess,
-            connect: true,
             behaviour: "tap-drag",
             step: 0.0025,
-            margin: 1,
             range: {
                 'min': 0,
                 'max': 1
             },
+            format: {
+                to: (value) => value.toFixed(4), // Keep precision to 4 decimal places
+                from: (value) => parseFloat(value)
+            },
             // Use pctFormat for tooltips
             tooltips: {
                 to: (value) => pctFormat(value), // Format slider tooltip as percentage
-                from: (formattedValue) => parseFloat(formattedValue) // Parse tooltip back to number
+                from: (formattedValue) => parseFloat(formattedValue)
             }
         });
 
@@ -35,7 +37,10 @@ class Slider {
 
         // Update user's guess when slider is changed
         slider.noUiSlider.on('slide', function (values) {
-            userGuess = values[0];
+            console.log(values);
+            userGuess = +values[0];
+            console.log(userGuess);
+            console.log(pctFormat(userGuess));
             document.getElementById("user-guess").innerText = pctFormat(userGuess);
             vis.tooltip.classList.remove("slider-not-interacted");
         });

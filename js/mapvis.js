@@ -231,29 +231,10 @@ class MapVis {
             
         // Show tooltip on click
         vis.geoFeatures.on("click", function(event, d){
+            console.log("NEW CLICK");
 
             vis.tooltip.style("display","grid");
-
-            // Tooltip dimensions
-            let tooltipWidth = vis.tooltip.node().offsetWidth;
-            let tooltipHeight = vis.tooltip.node().offsetHeight;
-
-            // Default tooltip position (bottom-right of cursor)
-            let left = event.pageX + 20;
-            let top = event.pageY;
-
-            // Adjust position if the tooltip goes off the screen
-            if (left + tooltipWidth > window.innerWidth) {
-                left = event.pageX - tooltipWidth - 20; // Position to the left of the cursor
-            }
-            if (top + tooltipHeight > window.innerHeight) {
-                top = event.pageY - tooltipHeight - 20; // Position above the cursor
-            }
-
-            vis.tooltip.style("left",`${left}px`)
-                        .style("top",`${top}px`);
                         
-
             if(vis.tooltipID === "modelMapTooltip"){
                 vis.tooltip.html(`
                     <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
@@ -287,6 +268,25 @@ class MapVis {
                     `); 
                 vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
             }
+
+            // Tooltip dimensions
+            let tooltipWidth = vis.tooltip.node().offsetWidth;
+            let tooltipHeight = vis.tooltip.node().offsetHeight;
+
+            // Default tooltip position (bottom-right of cursor)
+            let left = event.pageX + 20;
+            let top = event.pageY;
+            
+            // Adjust position if the tooltip goes off the screen
+            if (left + tooltipWidth > window.innerWidth) {
+                left = event.pageX - tooltipWidth - 20; // Position to the left of the cursor
+            }
+            if (top + tooltipHeight > window.innerHeight) {
+                top = event.pageY - tooltipHeight - 20; // Position above the cursor
+            }
+            
+            vis.tooltip.style("left",`${left}px`)
+                        .style("top",`${top}px`);
 
             vis.tooltipShowing = true;
             vis.tooltipHandler.raise();
