@@ -59,7 +59,7 @@ class CountyVis {
                                 .attr("d", vis.path)
                                 .attr("fill", function(d) {
                                     if (d.properties["GEOID20"] == chosenFeature.properties["GEOID20"]) {
-                                        return "purple";
+                                        return "#CD4246";
                                     } else {
                                         return "white";
                                     }

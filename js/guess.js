@@ -17,19 +17,27 @@ class Slider {
             start: userGuess,
             connect: true,
             behaviour: "tap-drag",
-            step: 0.01,
+            step: 0.0025,
             margin: 1,
             range: {
                 'min': 0,
                 'max': 1
             },
-            tooltips: {to: (v) => v}
+            // Use pctFormat for tooltips
+            tooltips: {
+                to: (value) => pctFormat(value), // Format slider tooltip as percentage
+                from: (formattedValue) => parseFloat(formattedValue) // Parse tooltip back to number
+            }
         });
+
+        vis.tooltip = vis.slider.querySelector('.noUi-tooltip');
+        vis.tooltip.classList.add("slider-not-interacted");
 
         // Update user's guess when slider is changed
         slider.noUiSlider.on('slide', function (values) {
             userGuess = values[0];
-            document.getElementById("user-guess").innerText = userGuess.toLocaleString();
+            document.getElementById("user-guess").innerText = pctFormat(userGuess);
+            vis.tooltip.classList.remove("slider-not-interacted");
         });
     }
 }

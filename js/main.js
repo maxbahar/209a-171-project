@@ -9,6 +9,9 @@ let userGuess = 0.5;
 let maps = {};
 let mainMap;
 
+// Initialize formatting functions
+const pctFormat = value => value.toLocaleString(undefined, {style: 'percent', minimumFractionDigits:2});
+
 let variableMap = {
     "total_reg": "Total Registered Voters", 
     "age_18_19" : "Age 18-19", "age_20_24" : "Age 20-24", "age_25_29" : "Age 25-29", "age_30_34" : "Age 30-34",
@@ -66,8 +69,10 @@ function createVis(data) {
 
     // Map of demographic variables
     mainMap = new MapVis("mainMapElement", geoData, 
-                            ["2020_turnout_pct", "2020_absent_pct", "total_reg", "mean_hh_income"], 
-                            [d3.interpolatePurples, d3.interpolateOranges, d3.interpolateReds, d3.interpolateBlues],
+                            ["2020_turnout_pct", "total_reg", "mean_hh_income"], 
+                            [["#FFE39F", "#6B9FA1", "#1F4B99"],["#B1ECB5", "#6AAE6A", "#1D7324"],["#E1BAE1", "#9D6D9C", "#5C255C"]],
+                            // [["#F6F7F9","#5642A6"], ["#F6F7F9","#77450D"], ["#F6F7F9","#165A36"], ["#F6F7F9","#184A90"]],
+                            // [d3.interpolatePurples, d3.interpolateOranges, d3.interpolateReds, d3.interpolateBlues],
                             "geoLevel", "demographicVar","mainMapTooltip");
 
     // Initialize user guess
@@ -77,8 +82,8 @@ function createVis(data) {
         stateReg += d.properties["2020_registered"];
     });
     userGuess = stateVotes / stateReg;
-    document.getElementById("stateAvg").innerText = userGuess.toLocaleString();
-    document.getElementById("user-guess").innerText = userGuess.toLocaleString();
+    document.getElementById("stateAvg").innerText = pctFormat(userGuess);
+    document.getElementById("user-guess").innerText = pctFormat(userGuess);
 
     // Slider below map
     guessTurnout = new Slider("slider");
@@ -87,40 +92,13 @@ function createVis(data) {
     kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
     
     // Feature importance plot
-    ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot");
+    // ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot");
 
     // Map of model results
     modelMap = new MapVis("modelMapElement", geoData, 
                             ["2020_turnout_pct_pred", "2020_turnout_pct","2020_absent_pct_pred", "2020_absent_pct"], 
                             [d3.interpolatePurples, d3.interpolatePurples, d3.interpolateOranges, d3.interpolateOranges], 
                             "geoLevel2", "demographicVar2","modelMapTooltip");
-
-    //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
-
-    // Dummy data for rendering purposes
-    const sentimentData = Array.from({ length: 3000 }, (_, i) => ({
-        date: new Date(
-            2023,
-            Math.floor(Math.random() * 12),
-            Math.ceil(Math.random() * 28)
-        ),
-        network: `Demographic Group ${Math.ceil(Math.random() * 5)}`,
-        score: Math.random(),
-        party: Math.random() > 0.5 ? "Democrat" : "Republican",
-    }));
-
-    for (let i = 0; i < 1500; i++) {
-        sentimentData.push({
-            date: new Date(2023, Math.floor(Math.random() * 12), Math.ceil(Math.random() * 28)),
-            network: "Demographic Group 1",
-            score: Math.random(),
-            party: Math.random() > 0.5 ? "Democrat" : "Republican",
-        });
-    }
-
-    // sentimentVis = new SentimentChart("sentimentParent", sentimentData);
-
-    //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
 
 }
 

@@ -9,6 +9,29 @@
     align-items: center;    /* Centers vertically (if applicable) */
 }
 
+.noUi-base {
+    border: 1px solid #8F99A8; /* Add borders to the track */
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+
+.noUi-touch-area {
+    border: 1px solid #8F99A8; 
+    border-radius: 5px; /* Optional: Rounded corners */
+}
+
+.noUi-handle:before {
+    background: #8F99A8 !important; 
+}
+
+.noUi-handle:after {
+    background: #8F99A8 !important; 
+}
+
+.slider-not-interacted {
+    color: #CD4246 !important;
+    font-size: large;
+}
+
 /* - - - - - - Cards and containers - - - - - - */
 
 .bar-card {
@@ -35,11 +58,6 @@
     transform: translateY(-5px);
 }
 
-/* .barPlotContainer {
-    width: 30vw;
-    height: 50vh;
-} */
-
 #countyMapParent {
     width: 25vw; 
     height: 27vh;
@@ -49,19 +67,21 @@
 /* - - - - - - Chosen feature - - - - - - */
 
 .chosen-feature {
-    font-style: italic;
-    text-decoration: underline dashed;
+    /* font-style: italic; */
+    color: #CD4246;
+    /* text-decoration: underline dashed;
     text-underline-offset: 0.3rem;
+    text-decoration-color: #CD4246; */
 }
 
 /* - - - - - - Barplots - - - - - - */
 
 #barPlot1 > svg > g > rect {
-    fill: crimson;
+    fill: #8ABBFF;
 }
 #barPlot2 > svg > g > rect {
-    fill: steelblue;
+    fill: #72CA9B;
 }
 #barPlot3 > svg > g > rect {
-    fill: orange;
+    fill: #FBB360;
 }

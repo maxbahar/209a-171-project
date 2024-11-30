@@ -1,11 +1,11 @@
 class MapVis {
 
-    constructor(parentElement, geoData, cycleVars, colorScales, geoLevelID, demoID, tooltipID) {
+    constructor(parentElement, geoData, cycleVars, colorRanges, geoLevelID, demoID, tooltipID) {
         
         this.parentElement = parentElement;
         this.geoData = geoData;
         this.cycleVars = cycleVars;
-        this.colorScales = colorScales;
+        this.colorRanges = colorRanges;
         this.mainVar = cycleVars[0];
         this.geoLevelID = geoLevelID;
         this.demoID = demoID;
@@ -109,12 +109,31 @@ class MapVis {
         // Get demographic variable
         vis.demoVar = document.getElementById(vis.demoID).value;
 
-        // Get the color scale
-        vis.colorScale = d3.scaleSequential(vis.colorScales[vis.varIndex]);
+        // // Get the color scale
+        // vis.colorScale = d3.scaleSequential(vis.colorScales[vis.varIndex]);
 
-        // Update the color scale
+        // // Update the color scale
+        // vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
+        // vis.colorScale.domain([d3.min(vis.mainVarArray),d3.max(vis.mainVarArray)]);
+
+
+
+        // Get the main variable values
         vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
-        vis.colorScale.domain([d3.min(vis.mainVarArray),d3.max(vis.mainVarArray)]);
+
+        // Define breakpoints for the scale
+        const minValue = d3.min(vis.mainVarArray);
+        const maxValue = d3.max(vis.mainVarArray);
+        const breakpoints = [minValue, (minValue + maxValue) / 2, maxValue]; // Adjust as needed
+
+        // Create a linear scale with discrete breakpoints
+        vis.colorScale = d3.scaleLinear()
+            .domain(breakpoints) // Use the defined breakpoints
+            .range(vis.colorRanges[vis.varIndex]);  // Map the breakpoints to colors
+
+
+
+
 
         // Define gradient and update legend
         vis.svg.selectAll("defs").remove();
@@ -158,8 +177,8 @@ class MapVis {
                                 .attr('class', 'geoFeature')
                                 .attr("d", vis.path)
                                 .attr("fill", "#ccc")
-                                .attr("stroke", "#949494")
-                                .attr("stroke-width", 0.1);
+                                .attr("stroke", "#8F99A8")
+                                .attr("stroke-width", 0.5);
 
         // Change the feature colors
         vis.geoFeatures = vis.svg.selectAll('.geoFeature')
@@ -174,15 +193,17 @@ class MapVis {
         vis.geoFeatures.on("mouseover", function(event, d){
 
             d3.select(this)
-                .attr('fill', 'white')
-                .attr("stroke-width", 0.5);
+                // .attr('fill', 'white')
+                .attr("stroke", "#CD4246")
+                .attr("stroke-width", 5).raise();
 
         // Un-highlight on mouseout
         }).on('mouseout', function(event, d){
 
             d3.select(this)
                 .attr("fill", d => vis.colorScale(d.properties[vis.mainVar]))
-                .attr("stroke-width", 0.1);
+                .attr("stroke", "#8F99A8")
+                .attr("stroke-width", 0.5);
         })
             
         // Show tooltip on click
