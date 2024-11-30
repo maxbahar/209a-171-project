@@ -5,7 +5,7 @@
 
 .emphasize {
     font-weight: bold;
-    color: #CD4246;
+    color: #D33D17;
 }
 
 /* Change the color of the horizontal arrows */
@@ -60,7 +60,7 @@
 }
 #title1-bg h1{
     font-size: 10vh;
-    color: #CD4246;
+    color: #D33D17;
 }
 #title2-bg {
     background-image: url("/images/vote-t2.jpg");

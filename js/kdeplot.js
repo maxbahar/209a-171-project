@@ -34,10 +34,10 @@ class KdePlot {
         vis.traceOptions = {
             "gender": [{xKey: 'x_male', color: "#4C90F0", label: 'Male'}, {
                 xKey: 'x_female',
-                color: "#E76A6E",
+                color: "#D33D17",
                 label: "Female"
             }],
-            "party": [{xKey: 'x_party_rep', color: "#E76A6E", label: 'Republican'}, {
+            "party": [{xKey: 'x_party_rep', color: "#D33D17", label: 'Republican'}, {
                 xKey: 'x_party_dem',
                 color: "#2D72D2",
                 label: "Democrat"
@@ -62,7 +62,7 @@ class KdePlot {
             }],
             "language": [{xKey: 'x_lang_eng', color: "#3FA6DA", label: "English"}, {
                 xKey: 'x_lang_chin',
-                color: "#E76A6E",
+                color: "#D33D17",
                 label: "Chinese and Vietnamese"
             }, {xKey: 'x_lang_ital', color: "#62D96B", label: "Italian"}, {
                 xKey: 'x_lang_span',

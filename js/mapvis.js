@@ -36,6 +36,12 @@ class MapVis {
         vis.tooltip = d3.select("body").append('div')
                         .attr('class', "tooltip")
                         .attr('id', 'mapTooltip');
+        // Prevent tooltip from hiding when hovered
+        vis.tooltip.on("mouseover", () => {
+            vis.tooltipKeep = true; // Keep the tooltip visible
+        }).on("mouseout", () => {
+            vis.tooltipKeep = false; // Allow hiding when leaving the tooltip
+        });
         vis.tooltipShowing = false;
         vis.tooltipHandler = vis.svg.append("rect")
                                         .attr("opacity", 0)
@@ -51,14 +57,15 @@ class MapVis {
                                                 vis.tooltipHandler.lower();
                                             }
                                         }).on("mouseout", function(event) {  // Temporary to prevent lingering tooltip across pages
-                                            if (vis.tooltipShowing) {
-                                                vis.tooltipShowing = false;
-                                                vis.tooltip.style("opacity", 1)
-                                                .style("display","none")
-                                                .style("left", 0)
-                                                .style("top", 0);
-                                                vis.tooltipHandler.lower();
-                                            }
+                                            setTimeout(() => {
+                                                if (!vis.tooltipKeep) {
+                                                    vis.tooltip.style("opacity", 1)
+                                                    .style("display","none")
+                                                    .style("left", 0)
+                                                    .style("top", 0);
+                                                    vis.tooltipHandler.lower();
+                                                }
+                                            }, 100);
                                         });
 
         // Initialize variable cycling
@@ -109,15 +116,6 @@ class MapVis {
         // Get demographic variable
         vis.demoVar = document.getElementById(vis.demoID).value;
 
-        // // Get the color scale
-        // vis.colorScale = d3.scaleSequential(vis.colorScales[vis.varIndex]);
-
-        // // Update the color scale
-        // vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
-        // vis.colorScale.domain([d3.min(vis.mainVarArray),d3.max(vis.mainVarArray)]);
-
-
-
         // Get the main variable values
         vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
 
@@ -130,10 +128,6 @@ class MapVis {
         vis.colorScale = d3.scaleLinear()
             .domain(breakpoints) // Use the defined breakpoints
             .range(vis.colorRanges[vis.varIndex]);  // Map the breakpoints to colors
-
-
-
-
 
         // Define gradient and update legend
         vis.svg.selectAll("defs").remove();
@@ -153,7 +147,34 @@ class MapVis {
         vis.legendAxisGroup.transition()
                         .duration(800)
                         .call(vis.legendAxis);
-        vis.legendLabel.text(variableMap[vis.mainVar]);
+        
+        let mainVarLabel = variableMap[vis.mainVar]
+        if (mainVarLabel.includes("Predicted")) {
+            const [before, predicted, after] = mainVarLabel.split(/(Predicted)/);
+        
+            vis.legendLabel.html('') // Clear existing label
+                .append("tspan")
+                .text(before)
+                .attr("fill", "black") // Default color
+                .attr("font-weight", "normal");
+        
+            vis.legendLabel.append("tspan")
+                .text(predicted)
+                .attr("fill", "#D33D17") // Red for "Predicted"
+                .attr("font-weight", "bold");
+        
+            vis.legendLabel.append("tspan")
+                .text(after)
+                .attr("fill", "black") // Default color
+                .attr("font-weight", "normal");
+        } else {
+            vis.legendLabel.html('') // Clear existing label
+                .append("tspan")
+                .text(mainVarLabel)
+                .attr("fill", "black")
+                .attr("font-weight", "normal");
+        }
+
 
         //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
         // This could be very inefficient since it's just redrawing all the features on change.
@@ -168,33 +189,29 @@ class MapVis {
         vis.path = d3.geoPath()
                     .projection(vis.projection);
 
-        vis.svg.selectAll(".geoFeature").remove();
-
         // Draw the geographic features
         vis.geoFeatures = vis.svg.selectAll(".geoFeature")
-                                .data(vis.geoData[vis.geoLevel].features)
-                                .enter().append("path")
-                                .attr('class', 'geoFeature')
-                                .attr("d", vis.path)
-                                .attr("fill", "#ccc")
-                                .attr("stroke", "#8F99A8")
-                                .attr("stroke-width", 0.5);
+                                .data(vis.geoData[vis.geoLevel].features, d => d.properties["GEOID20"]);
 
-        // Change the feature colors
-        vis.geoFeatures = vis.svg.selectAll('.geoFeature')
-                                    .data(vis.geoData[vis.geoLevel].features)
-                                    .enter().append("path")
-                                    .merge(vis.geoFeatures)
-                                    .attr("fill", d => vis.colorScale(d.properties[vis.mainVar]));
+        vis.geoFeatures.exit().remove();
 
-        //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
+        vis.geoFeaturesEnter = vis.geoFeatures.enter().append("path")
+                                                .attr('class', 'geoFeature')
+                                                .attr("d", vis.path)
+                                                .attr("fill", "#ccc")
+                                                .attr("stroke", "#8F99A8")
+                                                .attr("stroke-width", 0.5);
+
+        vis.geoFeatures = vis.geoFeaturesEnter.merge(vis.geoFeatures);
+        vis.geoFeatures.transition().duration(800)
+                        .attr("fill", d => vis.colorScale(d.properties[vis.mainVar]));
 
         // Highlight on mouseover
         vis.geoFeatures.on("mouseover", function(event, d){
 
             d3.select(this)
                 // .attr('fill', 'white')
-                .attr("stroke", "#CD4246")
+                .attr("stroke", "#D33D17")
                 .attr("stroke-width", 5).raise();
 
         // Un-highlight on mouseout
@@ -209,14 +226,31 @@ class MapVis {
         // Show tooltip on click
         vis.geoFeatures.on("click", function(event, d){
 
-            vis.tooltip.style("display","grid")
-                    .style("left", event.pageX + 20 + "px")
-                    .style("top", event.pageY + "px")
-                    .html(`
-                        <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
-                        <div style="font-size: 14pt"><b>${vis.mainVar}: </b>${d.properties[vis.mainVar].toLocaleString()}</div>
-                        <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
-                        `); 
+            vis.tooltip.style("display","grid");
+
+            // Tooltip dimensions
+            let tooltipWidth = vis.tooltip.node().offsetWidth;
+            let tooltipHeight = vis.tooltip.node().offsetHeight;
+
+            // Default tooltip position (bottom-right of cursor)
+            let left = event.pageX + 20;
+            let top = event.pageY;
+
+            // Adjust position if the tooltip goes off the screen
+            if (left + tooltipWidth > window.innerWidth) {
+                left = event.pageX - tooltipWidth - 20; // Position to the left of the cursor
+            }
+            if (top + tooltipHeight > window.innerHeight) {
+                top = event.pageY - tooltipHeight - 20; // Position above the cursor
+            }
+
+            vis.tooltip.style("left",`${left}px`)
+                        .style("top",`${top}px`)
+                        .html(`
+                            <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
+                            <div style="font-size: 14pt"><b>${variableMap[vis.mainVar]}: </b>${pctFormat(d.properties[vis.mainVar])}</div>
+                            <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
+                            `); 
 
             vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
             vis.tooltipShowing = true;

@@ -2,7 +2,7 @@
 
 #slider {
     width: 50vw;
-    margin: 5vh auto 1vh auto;
+    margin: 6vh auto 1vh auto;
     /* Flexbox properties for centering */
     display: flex;
     justify-content: center; /* Centers horizontally */
@@ -28,8 +28,9 @@
 }
 
 .slider-not-interacted {
-    color: #CD4246 !important;
-    font-size: large;
+    color: #D33D17 !important;
+    font-size: larger;
+    font-weight: bold;
 }
 
 /* - - - - - - Cards and containers - - - - - - */
@@ -68,10 +69,11 @@
 
 .chosen-feature {
     /* font-style: italic; */
-    color: #CD4246;
+    color: #D33D17;
+    font-weight: bold;
     /* text-decoration: underline dashed;
     text-underline-offset: 0.3rem;
-    text-decoration-color: #CD4246; */
+    text-decoration-color: #D33D17; */
 }
 
 /* - - - - - - Barplots - - - - - - */

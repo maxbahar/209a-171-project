@@ -22,7 +22,7 @@
 #mapTooltip {
     border: thin solid lightgray; 
     border-radius: 5px; 
-    background: rgba(255, 255, 255, 0.9); 
+    background: rgba(255, 255, 255, 0.95); 
     padding: 20px;
     opacity: 1;
 }
@@ -50,6 +50,10 @@
     margin-left: 10px; /* Adjust spacing */
 }
 
-.arrow-button:hover {
+.arrow-button > svg > polygon{
+    transition: transform 0.3s;
+}
 
+.arrow-button> svg > polygon:hover {
+    transform: translateY(-5px);
 }

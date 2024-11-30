@@ -57,7 +57,7 @@ class TooltipVis {
     wrangleData() {
         let vis = this;
 
-        console.log(vis.category);
+        // console.log(vis.category);
 
         // Define the category
         switch(vis.category) {
@@ -81,7 +81,7 @@ class TooltipVis {
         // Get data for relevant variables
         vis.displayData = vis.variables.map((d) => [variableMap[d],vis.featureData.properties[d]]);
 
-        console.log(vis.displayData);
+        // console.log(vis.displayData);
 
         vis.updateVis();
     }
@@ -103,7 +103,8 @@ class TooltipVis {
                 .attr("x",d => vis.x(d[0]))
                 .attr("y",d => vis.y(d[1]))
                 .attr("height",d => vis.height - vis.y(d[1]))
-                .attr("width", vis.x.bandwidth());
+                .attr("width", vis.x.bandwidth())
+                .attr("fill", "#8F99A8");
 
         // Update axis
         vis.xAxisGroup.call(vis.xAxis).selectAll("text").attr("transform","rotate(-45)").style("text-anchor","end");

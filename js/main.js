@@ -59,8 +59,8 @@ function createVis(data) {
     for (let i = 0; i < chosenFeatureSpans.length; i++) {
         chosenFeatureSpans[i].innerText = chosenFeature.properties["BASENAME"] + " County";
     }
-    document.getElementById("model-guess").innerText = chosenFeature.properties["2020_turnout_pct_pred"].toLocaleString();
-    document.getElementById("actual-value").innerText = chosenFeature.properties["2020_turnout_pct"].toLocaleString();
+    document.getElementById("model-guess").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct_pred"]);
+    document.getElementById("actual-value").innerText = pctFormat(chosenFeature.properties["2020_turnout_pct"]);
 
     ////////// VISUALIZATIONS //////////
 
@@ -96,8 +96,10 @@ function createVis(data) {
 
     // Map of model results
     modelMap = new MapVis("modelMapElement", geoData, 
-                            ["2020_turnout_pct_pred", "2020_turnout_pct","2020_absent_pct_pred", "2020_absent_pct"], 
-                            [d3.interpolatePurples, d3.interpolatePurples, d3.interpolateOranges, d3.interpolateOranges], 
+                            ["2020_turnout_pct_pred", "2020_turnout_pct"], 
+                            // ["2020_turnout_pct_pred", "2020_turnout_pct","2020_absent_pct_pred", "2020_absent_pct"], 
+                            [["#FFE39F", "#6B9FA1", "#1F4B99"],["#FFE39F", "#6B9FA1", "#1F4B99"]],
+                            // [d3.interpolatePurples, d3.interpolatePurples, d3.interpolateOranges, d3.interpolateOranges], 
                             "geoLevel2", "demographicVar2","modelMapTooltip");
 
 }
