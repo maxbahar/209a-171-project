@@ -95,24 +95,6 @@
     font-family: 'Oswald', sans-serif;
 }
 
-
-#temp_pue_wrapper {
-    position: relative;
-    height: 0;
-    width: 100%;
-    padding: 0;
-    /* padding-bottom will be overwritten by JavaScript later */
-    padding-bottom: 100%;
-
-}
-#temp_pue_wrapper > svg {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-}
-
 .blue-white-grad{
     background-image: linear-gradient(180deg, #e4f2f5, #FAF9F6);
 

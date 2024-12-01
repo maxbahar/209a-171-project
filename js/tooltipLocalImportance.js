@@ -9,85 +9,76 @@ class TooltipLocalImportance{
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 20, bottom: 70, left: 50};
-        vis.width = 500
-        vis.height = 30
+        vis.margin = {top: 20, right: 50, bottom: 25, left: 120};
+        vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
+        vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
-        console.log(document.getElementById(vis.parentElement).getBoundingClientRect().width)
-        vis.tmp_wrapper = d3.select("#" + vis.parentElement)
-            .attr(
-                "style",
-                "padding-bottom: " + Math.ceil(vis.height / vis.width) + "%"
-            )
-            .append("svg")
-            .attr("viewBox", "0 0 " + vis.width + " " + vis.height);
+        // Initialize SVG drawing area
+        vis.svg = d3.select("#" + vis.parentElement).append("svg")
+            .attr("width", vis.width + vis.margin.left + vis.margin.right)
+            .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
-        vis.gradient = vis.tmp_wrapper.append("defs")
-            .append("linearGradient")
-            .attr("id", "gradient")
-            .attr("x1", "0%")
-            .attr("y1", "0%")
-            .attr("x2", "100%")
-            .attr("y2", "0%")
-            .attr("spreadMethod", "pad");
-
-        vis.gradient.append("stop")
-            .attr("offset", "0%")
-            .attr("stop-color", "red")
-            .attr("stop-opacity", 1);
-
-        vis.gradient.append("stop")
-            .attr("offset", "50%")
-            .attr("stop-color", "red")
-            .attr("stop-opacity", 1);
-
-        vis.gradient.append("stop")
-            .attr("offset", "50%")
-            .attr("stop-color", "blue")
-            .attr("stop-opacity", 1);
-
-        vis.gradient.append("stop")
-            .attr("offset", "100%")
-            .attr("stop-color", "blue")
-            .attr("stop-opacity", 1);
-
-        vis.tmp_wrapper.append('rect')
-            .attr("width", "480")
-            .attr("height", "100%")
-            .attr("x", "29px")
-            .attr("y", "0px")
-            .attr("fill", "url(#gradient)")
-            .attr("class","foo");
-
-        //vis.tmp_wrapper.append("svg:path")  // Fixed.
-        //    .attr("d", d3.symbol(d3.symbolTriangle).size(400))
-        //    .style("fill", "#FFFFFF")
-        //    .attr ("transform", "translate(37,15) rotate (90)");
-
-        //vis.tmp_wrapper.append("svg:path")  // Fixed.
-        //    .attr("d", d3.symbol(d3.symbolTriangle).size(400))
-        //    .style("fill", "#FFFFFF")
-        //    .attr ("transform", "translate(465,15) rotate (-90)");
-
-
-        //vis.wrangleData();
-
+        vis.wrangleData();
     }
 
     wrangleData() {
         let vis = this;
 
-        //The data for our line
-        vis.lineData = [
-            { "x": -5,   "y": 0},
-            { "x": 20,  "y": 0},
-            { "x": -5,  "y": 15},
-            { "x": 20,  "y": 30},
-            { "x": -5,  "y": 30},
-            { "x": -30, "y": 15},
-            { "x": -5, "y": 0}
+        vis.variables = ["total_reg_shap", "age_18_19_shap", "age_20_24_shap", "age_25_29_shap", "age_30_34_shap",
+            "age_35_44_shap", "age_45_54_shap", "age_55_64_shap", "age_65_74_shap", "age_75_84_shap",
+            "age_85over_shap", "gender_m_shap", "gender_f_shap", "gender_unknown_shap", "party_npp_shap",
+            "party_dem_shap", "party_rep_shap", "party_lib_shap", "party_grn_shap", "party_con_shap",
+            "party_ain_shap", "party_scl_shap", "party_oth_shap", "eth1_eur_shap", "eth1_hisp_shap",
+            "eth1_aa_shap", "eth1_esa_shap", "eth1_oth_shap", "eth1_unk_shap", "lang_english_shap",
+            "lang_spanish_shap", "lang_portuguese_shap", "lang_chinese_shap", "lang_italian_shap",
+            "lang_vietnamese_shap", "lang_other_shap", "lang_unknown_shap", "mean_hh_income_shap"]
 
-        ];
+        const base_value_shap = vis.data.properties["base_value_shap"]
+        const predicted_turnout = vis.data.properties["2020_turnout_pct_pred"]
+
+        // Get data for relevant variables
+        vis.displayData = vis.variables.map((d) => [variableMap[d],vis.data.properties[d]]);
+
+        vis.displayData.sort(function(a, b) {
+            return Math.abs(b[1]) - Math.abs(a[1]); // Sort in descending order
+        });
+
+        // Calculate cumulative values
+        vis.displayData.forEach((d, i) => {
+            if (i > 0) {
+                d.start = vis.displayData[i - 1].end;
+                d.end = d.start - d[1];
+            } else {
+                d.start = predicted_turnout;
+                d.end = predicted_turnout - d[1];
+            }
+        });
+
+        // Create scales
+        vis.x = d3.scaleLinear()
+            .domain([d3.min(vis.displayData, d => d.start)-0.01, d3.max(vis.displayData, d => d.end)+0.01])
+            .range([0, vis.width]);
+
+        vis.y = d3.scaleBand()
+            .domain(vis.displayData.map(d => d[0]))
+            .range([0, vis.height])
+            .padding(0.1);
+
+        vis.xAxis = d3.axisBottom()
+            .scale(vis.x);
+
+        vis.yAxis = d3.axisLeft()
+            .scale(vis.y);
+
+        // Initialize axis
+        vis.xAxisGroup = vis.svg.append("g")
+            .attr("class","x-axis")
+            .attr("transform", `translate(0, ${vis.height})`);;
+
+        vis.yAxisGroup = vis.svg.append("g")
+            .attr("class","y-axis");
 
         vis.updateVis();
     }
@@ -95,21 +86,34 @@ class TooltipLocalImportance{
     updateVis() {
         let vis = this;
 
-        //accessor function
-        vis.lineFunction = d3.line()
-            .x(function(d) { return d.x; })
-            .y(function(d) { return d.y; })
-            .curve(d3.curveLinear);
+        // Create bars
+        vis.svg.selectAll("rect")
+            .data(vis.displayData)
+            .enter()
+            .append("rect")
+            .attr("x", d => vis.x(Math.min(d.start, d.end)))
+            .attr("y", d => vis.y(d[0]))
+            .attr("width", d => Math.abs(vis.x(d.end) - vis.x(d.start)))
+            .attr("height", vis.y.bandwidth())
+            .attr("fill", d => d[1] > 0 ? "red" : "blue");
 
-        //The line SVG Path we draw
-        vis.lineGraph = vis.tmp_wrapper.append("path")
-            .attr("d", vis.lineFunction(vis.lineData))
-            .style("fill", "blue")
-            .attr ("transform", "translate(485)");
+        vis.svg.selectAll("text")
+            .data(vis.displayData)
+            .enter()
+            .append("text")
+            .attr("x", d => vis.x(Math.max(d.start, d.end)) + 5)
+            .attr("y", d => vis.y(d[0]) + 11)
+            .text(d => {
+                if(d[1]>0){
+                    return `+${(d[1]*100).toFixed(2)}%`
+                }
+                else{
+                    return `${(d[1]*100).toFixed(2)}%`
+                }
+            })
 
-        vis.lineGraph1 = vis.tmp_wrapper.append("path")
-            .attr("d", vis.lineFunction(vis.lineData))
-            .style("fill", "red")
-            .attr ("transform", "translate(15,30) rotate(180)");
+        // Update axis
+        vis.xAxisGroup.call(vis.xAxis).selectAll("text").attr("transform","rotate(-45)").style("text-anchor","end");
+        vis.yAxisGroup.call(vis.yAxis);
     }
 }
