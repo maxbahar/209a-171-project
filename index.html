@@ -516,16 +516,6 @@
     <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
     <div class="section custom-container">
         <div class="row g-0">
-            <div class="col-8">
-                <div class="content-card">
-                    <h4>Voter Turnout by County by Party</h4>
-                    <div class="visContainer" id="diverging-bar-plot-container" style="overflow-y: scroll; overflow-x:hidden;">
-                        <div id="party-selection"></div>
-                        <svg id="diverging-bar-plot"></svg>
-                        <div id="legend"></div>
-                    </div>
-                </div>
-            </div>
             <div class="col-4">
                 <div class="content-card">
                     <h4>How Does Voter Turnout Vary Across Counties?</h4>
@@ -539,9 +529,27 @@
                     </ul>
                 </div>
             </div>
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>Voter Turnout by County by Party</h4>
+                    <div class="visContainer" id="diverging-bar-plot-container" style="overflow-y: scroll; overflow-x:hidden;">
+                        <div id="party-selection"></div>
+                        <svg id="diverging-bar-plot"></svg>
+                        <div id="legend"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!---------------------------- Page 7 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
+    <!---------------------------- Page 7 / MODEL EXPLANATION ---------------------------->
+    <div class="section custom-container">
+        <div class="row g-0">
+            <div class="col-6">
+                <!-- ADD INFO ABOUT THE MODEL HERE -->
+            </div>
+        </div>
+    </div>
+    <!---------------------------- Page 8 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
     <div class="section custom-container">
         <!-- <div class="header"> -->
         <div class="row g-0">
@@ -563,12 +571,12 @@
             <div class="col-8">
                 <div class="content-card">
                     <h4>Model Feature Importance</h4>
-                    <div class="visContainer" id="importance-beeswarm-plot" style="overflow-y: scroll; overflow-x:hidden;"></div>
+                    <div class="visContainer" id="importance-beeswarm-plot"></div>
                 </div>
             </div>
         </div>
     </div>
-    <!---------------------------- Page 8 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
+    <!---------------------------- Page 9 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
     <div class="section custom-container">
         <div class="row g-0">
             <div class="col-8">
@@ -622,9 +630,9 @@
             <div class="col-4">
                 <div class="content-card">
                     <h3>How did you do?</h3>
-                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span id="user-guess"></span>.</p>
-                    <p>Our model predicted that the county had a voter turnout of <span id="model-guess"></span>.</p>
-                    <p>In reality, the county had a voter turnout of <span id="actual-value"></span>.</p>
+                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span class="pct-turnout" id="user-guess"></span>.</p>
+                    <p>Our model predicted that the county had a voter turnout of <span class="pct-turnout" id="model-guess"></span>.</p>
+                    <p>In reality, the county had a voter turnout of <span class="pct-turnout" id="actual-value"></span>.</p>
                 </div>
                 <div class="content-card">
                     <h3>Implications of Model Results</h3>

@@ -97,7 +97,7 @@ function createVis(data) {
     kdePlot = new KdePlot("kde-plot-parent", geoData["blockGroup"]);
     
     // Feature importance plot
-    //ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot", shapData);
+    ImportanceBeeswarmPlot = new Beeswarm("importance-beeswarm-plot", shapData);
 
     // Map of model results
     modelMap = new MapVis("modelMapElement", geoData, 

@@ -87,3 +87,10 @@
 #barPlot3 > svg > g > rect {
     fill: #FBB360;
 }
+
+/* - - - - - - Text - - - - - - */
+
+.pct-turnout {
+    font-weight: bold;
+    /* text-decoration: underline; */
+}
