@@ -2,6 +2,7 @@ import zipfile
 import pandas as pd
 import geopandas as gpd
 import numpy as np
+import shap
 
 from sklearn.model_selection import KFold
 from sklearn.preprocessing import StandardScaler
@@ -133,6 +134,7 @@ def generate_predictions(data_dict, random_state=None):
     y = bg_data["2020_turnout_pct"]
 
     bg_predictions = bg_data[["2020_turnout_pct","2020_absent_pct","2020_registered","2020_turnout"]].copy()
+    bg_shap = bg_data[predictors]
 
     kf = KFold(n_splits=10,shuffle=True,random_state=random_state)
     X.loc[:,["total_reg","mean_hh_income"]] = StandardScaler().fit_transform(X=X[["total_reg","mean_hh_income"]])
@@ -144,12 +146,27 @@ def generate_predictions(data_dict, random_state=None):
         val = X.index[val_idx]
         linreg.fit(X.loc[train], y.loc[train])
         bg_predictions.loc[val,"2020_turnout_pct_pred"] = linreg.predict(X.loc[val])
-
+    
+    # Create SHAP explainer
+    explainer = shap.LinearExplainer(linreg, X)
+    shap_values = explainer.shap_values(X)
+    for i in range(len(bg_shap)):
+        bg_shap.iloc[i] = shap_values[i]
+       
+    print("SHAP base value: " + str(explainer.expected_value))
+    print()
+    
     # Calculate other columns
     bg_predictions["2020_absent"] = bg_predictions["2020_registered"] - bg_predictions["2020_turnout"]
     bg_predictions["2020_absent_pct_pred"] = 1 - bg_predictions["2020_turnout_pct_pred"]
     bg_predictions["2020_turnout_pred"] = (bg_predictions["2020_registered"] * bg_predictions["2020_turnout_pct_pred"]).round(decimals=0).astype(int)
     bg_predictions["2020_absent_pred"] = bg_predictions["2020_registered"] - bg_predictions["2020_turnout_pred"] 
+    
+    print(linreg.predict([X.iloc[0]]))
+    print("SHAP Turnout Pred: " + str(sum(bg_shap.iloc[0]) + explainer.expected_value))
+    print("2020 Turnout Pct Pred: " + str(bg_predictions["2020_turnout_pct_pred"].iloc[0]))
+    print("Block Groups:" + str(len(bg_shap)))
+    print()
 
     # Aggregate to Tract
     t_predictions = bg_predictions.copy()
@@ -157,6 +174,15 @@ def generate_predictions(data_dict, random_state=None):
     t_predictions = t_predictions.groupby("tract_id")[["2020_registered", "2020_turnout", "2020_absent", "2020_turnout_pred", "2020_absent_pred"]].sum()
     t_predictions["2020_turnout_pct_pred"] = t_predictions["2020_turnout_pred"] / t_predictions["2020_registered"]
     t_predictions["2020_absent_pct_pred"] = 1 - t_predictions["2020_turnout_pct_pred"]
+    
+    t_shap = bg_shap.copy()
+    t_shap["tract_id"] = t_shap.index.str[:11]
+    t_shap = t_shap.groupby("tract_id")[predictors].mean()
+    
+    print("SHAP Turnout Pred: " + str(sum(t_shap.iloc[0]) + explainer.expected_value))
+    print("2020 Turnout Pct Pred: " + str(t_predictions["2020_turnout_pct_pred"].iloc[0]))
+    print("Tracts:" + str(len(t_shap)))
+    print()
 
     # Aggregate to County
     c_predictions = bg_predictions.copy()
@@ -164,6 +190,15 @@ def generate_predictions(data_dict, random_state=None):
     c_predictions = c_predictions.groupby("county_id")[["2020_registered", "2020_turnout", "2020_absent", "2020_turnout_pred", "2020_absent_pred"]].sum()
     c_predictions["2020_turnout_pct_pred"] = c_predictions["2020_turnout_pred"] / c_predictions["2020_registered"]
     c_predictions["2020_absent_pct_pred"] = 1 - c_predictions["2020_turnout_pct_pred"]
+    
+    c_shap = bg_shap.copy()
+    c_shap["county_id"] = c_shap.index.str[:5]
+    c_shap = c_shap.groupby("county_id")[predictors].mean()
+    
+    print("SHAP Turnout Pred: " + str(sum(c_shap.iloc[0])+ explainer.expected_value))
+    print("2020 Turnout Pct Pred: " + str(c_predictions["2020_turnout_pct_pred"].iloc[0]))
+    print("Counties:" + str(len(c_shap)))
+    print()
 
     bg_joined = bg_data.merge(bg_predictions.drop(columns=["2020_registered","2020_turnout","2020_turnout_pct","2020_absent_pct"]), left_on="GEOID20", right_on="GEOID20")
     t_joined = t_data.merge(t_predictions.drop(columns=["2020_registered","2020_turnout"]), left_index=True, right_on="tract_id").reset_index().rename({"tract_id":"GEOID20"}, axis=1).set_index("GEOID20")
