@@ -136,22 +136,29 @@ def generate_predictions(data_dict, random_state=None):
     bg_predictions = bg_data[["2020_turnout_pct","2020_absent_pct","2020_registered","2020_turnout"]].copy()
     bg_shap = bg_data[predictors]
 
-    kf = KFold(n_splits=10,shuffle=True,random_state=random_state)
+    #kf = KFold(n_splits=10,shuffle=True,random_state=random_state)
     X.loc[:,["total_reg","mean_hh_income"]] = StandardScaler().fit_transform(X=X[["total_reg","mean_hh_income"]])
 
     linreg = LinearRegression()
-
+    
+    '''
     for train_idx, val_idx in kf.split(X, y):
         train = X.index[train_idx]
         val = X.index[val_idx]
         linreg.fit(X.loc[train], y.loc[train])
         bg_predictions.loc[val,"2020_turnout_pct_pred"] = linreg.predict(X.loc[val])
-    
+        # Create SHAP explainer
+        explainer = shap.LinearExplainer(linreg, X.loc[train])
+        shap_values = explainer.shap_values(X.loc[val])
+        bg_shap.loc[val, predictors] = shap_values
+    '''
+    linreg.fit(X, y)
+    bg_predictions.loc[X.index, "2020_turnout_pct_pred"] = linreg.predict(X)
     # Create SHAP explainer
     explainer = shap.LinearExplainer(linreg, X)
     shap_values = explainer.shap_values(X)
-    for i in range(len(bg_shap)):
-        bg_shap.iloc[i] = shap_values[i]
+    bg_shap.loc[X.index, predictors] = shap_values
+    
        
     print("SHAP base value: " + str(explainer.expected_value))
     print()
@@ -159,10 +166,9 @@ def generate_predictions(data_dict, random_state=None):
     # Calculate other columns
     bg_predictions["2020_absent"] = bg_predictions["2020_registered"] - bg_predictions["2020_turnout"]
     bg_predictions["2020_absent_pct_pred"] = 1 - bg_predictions["2020_turnout_pct_pred"]
-    bg_predictions["2020_turnout_pred"] = (bg_predictions["2020_registered"] * bg_predictions["2020_turnout_pct_pred"]).round(decimals=0).astype(int)
+    bg_predictions["2020_turnout_pred"] = (bg_predictions["2020_registered"] * bg_predictions["2020_turnout_pct_pred"]) #.round(decimals=0).astype(int)
     bg_predictions["2020_absent_pred"] = bg_predictions["2020_registered"] - bg_predictions["2020_turnout_pred"] 
     
-    print(linreg.predict([X.iloc[0]]))
     print("SHAP Turnout Pred: " + str(sum(bg_shap.iloc[0]) + explainer.expected_value))
     print("2020 Turnout Pct Pred: " + str(bg_predictions["2020_turnout_pct_pred"].iloc[0]))
     print("Block Groups:" + str(len(bg_shap)))
@@ -176,8 +182,14 @@ def generate_predictions(data_dict, random_state=None):
     t_predictions["2020_absent_pct_pred"] = 1 - t_predictions["2020_turnout_pct_pred"]
     
     t_shap = bg_shap.copy()
-    t_shap["tract_id"] = t_shap.index.str[:11]
-    t_shap = t_shap.groupby("tract_id")[predictors].mean()
+    for i in t_shap.index:
+        t_shap.loc[i,predictors] *= bg_predictions.loc[i,"2020_registered"]
+    
+    t_shap["tract_id"] = bg_shap.index.str[:11]
+    t_shap = t_shap.groupby("tract_id")[predictors].sum()
+    
+    for i in t_shap.index:
+        t_shap.loc[i,predictors] /= t_predictions.loc[i,"2020_registered"]
     
     print("SHAP Turnout Pred: " + str(sum(t_shap.iloc[0]) + explainer.expected_value))
     print("2020 Turnout Pct Pred: " + str(t_predictions["2020_turnout_pct_pred"].iloc[0]))
@@ -192,18 +204,36 @@ def generate_predictions(data_dict, random_state=None):
     c_predictions["2020_absent_pct_pred"] = 1 - c_predictions["2020_turnout_pct_pred"]
     
     c_shap = bg_shap.copy()
-    c_shap["county_id"] = c_shap.index.str[:5]
-    c_shap = c_shap.groupby("county_id")[predictors].mean()
+    for i in c_shap.index:
+        c_shap.loc[i,predictors] *= bg_predictions.loc[i,"2020_registered"]
+        
+    c_shap["county_id"] = bg_shap.index.str[:5]
+    c_shap = c_shap.groupby("county_id")[predictors].sum()
     
-    print("SHAP Turnout Pred: " + str(sum(c_shap.iloc[0])+ explainer.expected_value))
+    for i in c_shap.index:
+        c_shap.loc[i,predictors] /= c_predictions.loc[i,"2020_registered"]
+    
+    print("SHAP Turnout Pred: " + str(sum(c_shap.iloc[0]) + explainer.expected_value))
     print("2020 Turnout Pct Pred: " + str(c_predictions["2020_turnout_pct_pred"].iloc[0]))
     print("Counties:" + str(len(c_shap)))
     print()
+    
+    bg_shap = bg_shap.add_suffix("_shap")
+    t_shap = t_shap.add_suffix("_shap")
+    c_shap = c_shap.add_suffix("_shap")
+    
+    bg_shap["base_value_shap"] = explainer.expected_value
+    t_shap["base_value_shap"] = explainer.expected_value
+    c_shap["base_value_shap"] = explainer.expected_value
 
     bg_joined = bg_data.merge(bg_predictions.drop(columns=["2020_registered","2020_turnout","2020_turnout_pct","2020_absent_pct"]), left_on="GEOID20", right_on="GEOID20")
     t_joined = t_data.merge(t_predictions.drop(columns=["2020_registered","2020_turnout"]), left_index=True, right_on="tract_id").reset_index().rename({"tract_id":"GEOID20"}, axis=1).set_index("GEOID20")
     c_joined = c_data.merge(c_predictions.drop(columns=["2020_registered","2020_turnout"]), left_index=True, right_on="county_id").reset_index().rename({"county_id":"GEOID20"}, axis=1).set_index("GEOID20")
-
+    
+    bg_joined = bg_joined.merge(bg_shap, left_on="GEOID20", right_on="GEOID20")
+    t_joined = t_joined.merge(t_shap, left_index=True, right_on="tract_id").reset_index().rename({"tract_id":"GEOID20"}, axis=1).set_index("GEOID20")
+    c_joined = c_joined.merge(c_shap, left_index=True, right_on="county_id").reset_index().rename({"county_id":"GEOID20"}, axis=1).set_index("GEOID20")
+    
     return {"block_group":bg_joined, "tract":t_joined, "county":c_joined}
 
 if __name__ == "__main__":
