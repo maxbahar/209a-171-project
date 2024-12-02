@@ -41,6 +41,10 @@
     margin-left: 5px;
 }
 
+.explanation {
+    height: 50vh;
+}
+
 .select-dropdown{
     font-size: large;
     width: 10vw;
