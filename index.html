@@ -316,32 +316,33 @@
         </div>
     </div>
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
-    <div class="section blue-white-grad" >
+    <div class="section blue-white-grad">
         <div class="header">
-            <h3>What Do You Think Voter Turnout in the 2020 Presidential Election is for <span class="chosen-feature"></span> ?</h3>
+            <h3>What Do You Think Voter Turnout in the 2020 Presidential Election is for <span
+                    class="chosen-feature"></span> ?</h3>
             <p>The average 2020 presidential voter turnout in Massachusetts is <span id="stateAvg"></span></p>
         </div>
 
         <div class="card-container">
             <div class="bar-card" id="countyMapParent"></div>
         </div>
-        
+
         <div class="card-container" id="allBarPlotsParent">
             <div class="bar-card">
                 <h3 id="barTitle1">Nothing Selected</h3>
                 <div style="width: 25vw; height: 25vh;" id="barPlot1">
                 </div>
-            </div> 
+            </div>
             <div class="bar-card">
                 <h3 id="barTitle2">Nothing Selected</h3>
                 <div style="width: 25vw; height: 25vh;" id="barPlot2">
                 </div>
-            </div> 
+            </div>
             <div class="bar-card">
                 <h3 id="barTitle3">Nothing Selected</h3>
                 <div style="width: 25vw; height: 25vh;" id="barPlot3">
                 </div>
-            </div> 
+            </div>
         </div>
 
         <div id="slider"></div>
@@ -356,12 +357,15 @@
                 <div class="content-card">
                     <h4>Voter Turnout and Demographics</h4>
                     <p>Unsurprisingly, voter turnout and demographics vary across the state of Massachusetts.</p>
-                    <p>The map to the right shows voter turnout, the number of registered voters, and mean household income across the state.</p>
-                    <p><span class="emphasize">Click on an area</span> to view the distribution of voter age, gender, party affiliation, ethnicity, or language.</p>
+                    <p>The map to the right shows voter turnout, the number of registered voters, and mean household
+                        income across the state.</p>
+                    <p><span class="emphasize">Click on an area</span> to view the distribution of voter age, gender,
+                        party affiliation, ethnicity, or language.</p>
                 </div>
                 <div class="content-card">
                     <h4>Areas with Low Voter Turnout</h4>
-                    <p>Focusing on areas and demographic characteristics associated with low voter turnout may help government officials focus their efforts.</p>
+                    <p>Focusing on areas and demographic characteristics associated with low voter turnout may help
+                        government officials focus their efforts.</p>
                     <p>These characteristics are associated with lower voter turnout:</p>
                     <ul>
                         <li>Lower mean household income.</li>
@@ -374,32 +378,32 @@
                     <h4>Voter Turnout in Massachussets</h4>
                     <table class="viz-title">
                         <tbody>
-                            <tr>
-                                <td>
-                                    <p class="map-dropdown-label">by Geography:</p>
-                                </td>
-                                <td>
-                                    <select class="select-dropdown" id="geoLevel" onchange="mainMap.updateVis()">
-                                        <option value="county">County</option>
-                                        <option value="tract">Tract</option>
-                                        <option value="blockGroup">Block Group</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="map-dropdown-label">by Category:</p>
-                                </td>
-                                <td>
-                                    <select class="select-dropdown" id="demographicVar" onchange="mainMap.updateVis()">
-                                        <option value="vote-age">Age</option>
-                                        <option value="vote-gender">Gender</option>
-                                        <option value="vote-party">Party</option>
-                                        <option value="vote-eth">Ethnicity</option>
-                                        <option value="vote-lang">Language</option>
-                                    </select>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Geography:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="geoLevel" onchange="mainMap.updateVis()">
+                                    <option value="county">County</option>
+                                    <option value="tract">Tract</option>
+                                    <option value="blockGroup">Block Group</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Category:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="demographicVar" onchange="mainMap.updateVis()">
+                                    <option value="vote-age">Age</option>
+                                    <option value="vote-gender">Gender</option>
+                                    <option value="vote-party">Party</option>
+                                    <option value="vote-eth">Ethnicity</option>
+                                    <option value="vote-lang">Language</option>
+                                </select>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <!-- <button type="button" class="btn btn-primary" onclick="mainMap.prevMap()">Previous</button>
@@ -421,7 +425,7 @@
             </div>
         </div>
     </div>
-        
+
     <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
     <div class="section custom-container" id="kde-container">
         <div class="kde-tooltip"></div>
@@ -494,6 +498,16 @@
                                 <th></th>
                                 <td></td>
                             </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r4-color"></div>
+                                </th>
+                                <td id="k-t-r4-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -519,24 +533,33 @@
             <div class="col-4">
                 <div class="content-card">
                     <h4>How Does Voter Turnout Vary Across Counties?</h4>
-                    <p>We find that Hampden county has the lowest voter turnout, with <b>10% lower</b> voter turnout compared to other counties.</p>
-                    <p>On the other hand, Barnstable and Hampshire county are tied for the highest voter turnout, with <b>4% higher</b> voter turnout compared to other counties.</p>
+                    <p>We find that Hampden county has the lowest voter turnout, with <b>10% lower</b> voter turnout
+                        compared to other counties.</p>
+                    <p>On the other hand, Barnstable and Hampshire county are tied for the highest voter turnout, with
+                        <b>4% higher</b> voter turnout compared to other counties.</p>
                 </div>
                 <div class="content-card">
                     <h4>About</h4>
                     <ul>
-                        <li>The diverging bar plot visualizes how voter turnout in Massachusetts counties deviates from the average voter turnout (81% in this case).</li>
-                        <li>The dropdown menus above the plot allow users to select two political parties for comparison, dynamically updating the
-                        chart to reflect the selected parties' dominance in each county.</li>
-                        <li>The bars are shaded based on the dominant party for each county, with each party assigned a unique color for easy
-                        differentiation.</li>
+                        <li>The diverging bar plot visualizes how voter turnout in Massachusetts counties deviates from
+                            the average voter turnout (81% in this case).
+                        </li>
+                        <li>The dropdown menus above the plot allow users to select two political parties for
+                            comparison, dynamically updating the
+                            chart to reflect the selected parties' dominance in each county.
+                        </li>
+                        <li>The bars are shaded based on the dominant party for each county, with each party assigned a
+                            unique color for easy
+                            differentiation.
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="col-8">
                 <div class="content-card">
                     <h4>Voter Turnout by County by Party</h4>
-                    <div class="visContainer" id="diverging-bar-plot-container" style="overflow-y: scroll; overflow-x:hidden;">
+                    <div class="visContainer" id="diverging-bar-plot-container"
+                         style="overflow-y: scroll; overflow-x:hidden;">
                         <div id="party-selection"></div>
                         <svg id="diverging-bar-plot"></svg>
                         <div id="legend"></div>
@@ -555,18 +578,22 @@
                 <div class="content-card explanation">
                     <h4>Random Forest Model</h4>
                     <img src="/images/tree.png">
-                    <p>A <b>Decision Tree</b> predicts outcomes by splitting data into branches based on yes/no questions. While useful, single trees can overfit and perform poorly on unseen data.</p>
-                    <p>Our team uses a <b>Random Forest</b>, which improves accuracy by combining decisions from multiple trees, capturing complex patterns and reducing overfitting.</p>
+                    <p>A <b>Decision Tree</b> predicts outcomes by splitting data into branches based on yes/no
+                        questions. While useful, single trees can overfit and perform poorly on unseen data.</p>
+                    <p>Our team uses a <b>Random Forest</b>, which improves accuracy by combining decisions from
+                        multiple trees, capturing complex patterns and reducing overfitting.</p>
                 </div>
             </div>
             <div class="col-4">
                 <div class="content-card explanation">
                     <h4>Key Inputs</h4>
                     <img src="/images/input.png">
-                    <p>We identified the <b>most important predictors</b> using techniques that measure feature importance. These include:</p>
+                    <p>We identified the <b>most important predictors</b> using techniques that measure feature
+                        importance. These include:</p>
                     <ul>
                         <li>Proportion of voters aged 20-24, 25-29, 30-34, and 45-55.</li>
-                        <li>Proportion of voters with European, African American, Hispanic, and "Other" ethnicities.</li>
+                        <li>Proportion of voters with European, African American, Hispanic, and "Other" ethnicities.
+                        </li>
                         <li>Proportion of female voters.</li>
                         <li>Mean household income.</li>
                         <li>Total number of registered voters.</li>
@@ -577,14 +604,16 @@
                 <div class="content-card explanation">
                     <h4>Predictive Output</h4>
                     <img src="/images/output.png">
-                    <p>Our Random Forest model predicts voter turnout in the 2020 presidential election for each Census Block Group in Massachusetts, based on demographic data.</p>
+                    <p>Our Random Forest model predicts voter turnout in the 2020 presidential election for each Census
+                        Block Group in Massachusetts, based on demographic data.</p>
                     <p>Key findings include:</p>
                     <ul>
                         <li>Higher turnout is linked to higher income and more registered Democrats.</li>
-                        <li>Lower turnout is linked to higher proportions of Hispanic voters and non-English speakers.</li>
+                        <li>Lower turnout is linked to higher proportions of Hispanic voters and non-English speakers.
+                        </li>
                     </ul>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -595,8 +624,10 @@
             <div class="col-4">
                 <div class="content-card">
                     <h4>How Important Are Specific Demographic Features?</h4>
-                    <p>Our model shows that some demographic features are more important than others in predicting voter turnout.</p>
-                    <p>Specifically, we find age brackets of <b>65-74, 25-29, and 30-34</b> are the most impactful to our model's predicitons.</p>
+                    <p>Our model shows that some demographic features are more important than others in predicting voter
+                        turnout.</p>
+                    <p>Specifically, we find age brackets of <b>65-74, 25-29, and 30-34</b> are the most impactful to
+                        our model's predicitons.</p>
                 </div>
                 <div class="content-card">
                     <h4>About</h4>
@@ -623,32 +654,32 @@
                     <h4>Model Prediction Results</h4>
                     <table class="viz-title">
                         <tbody>
-                            <tr>
-                                <td>
-                                    <p class="map-dropdown-label">by Geography:</p>
-                                </td>
-                                <td>
-                                    <select class="select-dropdown" id="geoLevel2" onchange="modelMap.updateVis()">
-                                        <option value="county">County</option>
-                                        <option value="tract">Tract</option>
-                                        <option value="blockGroup">Block Group</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p class="map-dropdown-label">by Category:</p>
-                                </td>
-                                <td>
-                                    <select class="select-dropdown" id="demographicVar2" onchange="modelMap.updateVis()">
-                                        <option value="vote-age">Age</option>
-                                        <option value="vote-gender">Gender</option>
-                                        <option value="vote-party">Party</option>
-                                        <option value="vote-eth">Ethnicity</option>
-                                        <option value="vote-lang">Language</option>
-                                    </select>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Geography:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="geoLevel2" onchange="modelMap.updateVis()">
+                                    <option value="county">County</option>
+                                    <option value="tract">Tract</option>
+                                    <option value="blockGroup">Block Group</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Category:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="demographicVar2" onchange="modelMap.updateVis()">
+                                    <option value="vote-age">Age</option>
+                                    <option value="vote-gender">Gender</option>
+                                    <option value="vote-party">Party</option>
+                                    <option value="vote-eth">Ethnicity</option>
+                                    <option value="vote-lang">Language</option>
+                                </select>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <div class="map-container">
@@ -669,14 +700,20 @@
             <div class="col-4">
                 <div class="content-card">
                     <h3>How did you do?</h3>
-                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span class="pct-turnout" id="user-guess"></span>.</p>
-                    <p>Our model predicted that the county had a voter turnout of <span class="pct-turnout" id="model-guess"></span>.</p>
-                    <p>In reality, the county had a voter turnout of <span class="pct-turnout" id="actual-value"></span>.</p>
+                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span
+                            class="pct-turnout" id="user-guess"></span>.</p>
+                    <p>Our model predicted that the county had a voter turnout of <span class="pct-turnout"
+                                                                                        id="model-guess"></span>.</p>
+                    <p>In reality, the county had a voter turnout of <span class="pct-turnout" id="actual-value"></span>.
+                    </p>
                 </div>
                 <div class="content-card">
                     <h3>Implications of Model Results</h3>
-                    <p>The model performs pretty well in predicting voter turnout using voter demographic information, suggesting that the information needed to perform similar analyses is readily available.</p>
-                    <p>Our results are at the Census block group level and predict aggregate voting behavior. Using more detailed information (with ethical considerations) may allow for more granular predictions at the individual voter level.</p>
+                    <p>The model performs pretty well in predicting voter turnout using voter demographic information,
+                        suggesting that the information needed to perform similar analyses is readily available.</p>
+                    <p>Our results are at the Census block group level and predict aggregate voting behavior. Using more
+                        detailed information (with ethical considerations) may allow for more granular predictions at
+                        the individual voter level.</p>
                 </div>
                 <!-- <div class="content-card">
                     <h3>Additional Information</h3>
@@ -746,29 +783,29 @@
                 <h1><u>Thanks for listening!</u></h1>
                 <table>
                     <tbody>
-                        <tr>
-                            <td>
-                                <h2>Max Bahar</h2>
-                                <h3>Harvard University</h3>
-                                <h3 style="color: #b5b3b3;"> MS Data Science 2026</h3>
-                            </td>
-                            <td><h2>Stefan Chu</h2>
-                                <h3>Harvard University</h3>
-                                <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
-                            </td>
-                        </tr>
-                        <tr style="height: 5vh"></tr>
-                        <tr>
-                            <td>
-                                <h2>Ted McCulloch</h2>
-                                <h3>Harvard University</h3>
-                                <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
-                            </td>
-                            <td><h2>Anitej Thamma</h2>
-                                <h3>Harvard University</h3>
-                                <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <h2>Max Bahar</h2>
+                            <h3>Harvard University</h3>
+                            <h3 style="color: #b5b3b3;"> MS Data Science 2026</h3>
+                        </td>
+                        <td><h2>Stefan Chu</h2>
+                            <h3>Harvard University</h3>
+                            <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
+                        </td>
+                    </tr>
+                    <tr style="height: 5vh"></tr>
+                    <tr>
+                        <td>
+                            <h2>Ted McCulloch</h2>
+                            <h3>Harvard University</h3>
+                            <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
+                        </td>
+                        <td><h2>Anitej Thamma</h2>
+                            <h3>Harvard University</h3>
+                            <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

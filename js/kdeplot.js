@@ -68,7 +68,12 @@ class KdePlot {
                 xKey: 'x_lang_span',
                 color: "#F0B726",
                 label: "Spanish and Portuguese"
-            }],
+            },
+                {
+                    xKey: 'x_lang_unknown',
+                    color: "#9D3F9D",
+                    label: "Unknown"
+                }],
 
         }
 
@@ -77,7 +82,7 @@ class KdePlot {
             "party": {xDomain: [-.05, .75], yDomain: [0.4, 1]},
             "ethnicity": {xDomain: [-.1, .95], yDomain: [0.5, 1]},
             "age": {xDomain: [0, .6], yDomain: [0.4, 1]},
-            "language": {xDomain: [-0.05, .65], yDomain: [0.5, 1]},
+            "language": {xDomain: [-0.05, .75], yDomain: [0.5, 1]},
         }
         vis.activeTraces = vis.traceOptions[defaultTag]
         vis.xDomain = vis.traceConfigs[defaultTag].xDomain;
@@ -158,37 +163,28 @@ class KdePlot {
         // build data for plots
 
         let nData = []
-        let denom_gender;
-        let denom_party;
-        let denom_eth;
-        let denom_age;
-        let denom_lang;
-        vis.data.features.forEach(function (feature) {
-            denom_gender = feature.properties.gender_f + feature.properties.gender_m + feature.properties.gender_unknown;
-            denom_party = feature.properties.party_ain + feature.properties.party_con + feature.properties.party_dem + feature.properties.party_grn + feature.properties.party_lib + feature.properties.party_npp + feature.properties.party_oth + feature.properties.party_rep + feature.properties.party_scl;
-            denom_eth = feature.properties.eth1_aa + feature.properties.eth1_esa + feature.properties.eth1_eur + feature.properties.eth1_hisp + feature.properties.eth1_oth + feature.properties.eth1_unk
-            denom_age = feature.properties.age_18_19 + feature.properties.age_20_24 + feature.properties.age_25_29 + feature.properties.age_30_34 + feature.properties.age_35_44 + feature.properties.age_45_54 + feature.properties.age_55_64 + feature.properties.age_65_74 + feature.properties.age_75_84 + feature.properties.age_85over
-            denom_lang = feature.properties.lang_chinese + feature.properties.lang_english + feature.properties.lang_italian + feature.properties.lang_other + feature.properties.lang_portuguese + feature.properties.lang_spanish + feature.properties.lang_unknown + feature.properties.lang_vietnamese
 
+        vis.data.features.forEach(function (feature) {
             nData.push({
-                x_female: feature.properties.gender_f / denom_gender,
-                x_male: feature.properties.gender_m / denom_gender,
-                x_party_np: feature.properties.party_npp / denom_party,
-                x_party_dem: feature.properties.party_dem / denom_party,
-                x_party_rep: feature.properties.party_rep / denom_party,
-                x_eth_aa: feature.properties.eth1_aa / denom_eth,
-                x_eth_esa: feature.properties.eth1_esa / denom_eth,
-                x_eth_eur: feature.properties.eth1_eur / denom_eth,
-                x_eth_hisp: feature.properties.eth1_hisp / denom_eth,
-                x_eth_oth: feature.properties.eth1_oth / denom_eth,
-                x_age_young1: (feature.properties.age_18_19 + feature.properties.age_20_24) / denom_age,
-                x_age_young2: (feature.properties.age_25_29 + feature.properties.age_30_34) / denom_age,
-                x_age_mid: (+feature.properties.age_35_44 + feature.properties.age_45_54 + feature.properties.age_55_64) / denom_age,
-                x_age_old: (feature.properties.age_65_74 + feature.properties.age_75_84 + feature.properties.age_85over) / denom_age,
-                x_lang_chin: (feature.properties.lang_chinese + feature.properties.lang_vietnamese) / denom_lang,
-                x_lang_eng: feature.properties.lang_english / denom_lang,
-                x_lang_ital: feature.properties.lang_italian / denom_lang,
-                x_lang_span: (feature.properties.lang_portuguese + feature.properties.lang_spanish) / denom_lang,
+                x_female: feature.properties.gender_f,
+                x_male: feature.properties.gender_m,
+                x_party_np: feature.properties.party_npp,
+                x_party_dem: feature.properties.party_dem,
+                x_party_rep: feature.properties.party_rep,
+                x_eth_aa: feature.properties.eth1_aa,
+                x_eth_esa: feature.properties.eth1_esa,
+                x_eth_eur: feature.properties.eth1_eur,
+                x_eth_hisp: feature.properties.eth1_hisp,
+                x_eth_oth: feature.properties.eth1_oth,
+                x_age_young1: (feature.properties.age_18_19 + feature.properties.age_20_24),
+                x_age_young2: (feature.properties.age_25_29 + feature.properties.age_30_34),
+                x_age_mid: (+feature.properties.age_35_44 + feature.properties.age_45_54 + feature.properties.age_55_64),
+                x_age_old: (feature.properties.age_65_74 + feature.properties.age_75_84 + feature.properties.age_85over),
+                x_lang_chin: (feature.properties.lang_chinese + feature.properties.lang_vietnamese),
+                x_lang_eng: feature.properties.lang_english,
+                x_lang_ital: feature.properties.lang_italian,
+                x_lang_span: (feature.properties.lang_portuguese + feature.properties.lang_spanish),
+                x_lang_unknown: (feature.properties.lang_unknown),
                 y: feature.properties["2020_turnout_pct"]
 
             });
@@ -238,7 +234,7 @@ class KdePlot {
             .call(d3.axisLeft(vis.yScale));
 
         // update legend
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 5; i++) {
             document.getElementById("k-t-r" + i + "-color").style.background = "white"
             document.getElementById("k-t-r" + i + "-label").innerText = ""
         }
