@@ -1,124 +1,118 @@
-/* Ballot Containers */
-/* top level for top of ballot */
-.ballot-container {
+
+
+
+
+.ballot-font-large{
+    font-size: 2.1rem;
+}
+.ballot-font-med{
+    font-size: 1.8rem;
+    color: gray;
+}
+.ballot-font-small{
+    font-size: 1.6rem;
+    color: #b5b3b3;
+}
+
+
+
+.height-fit{
+    height:25%;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+}
+
+.limit-height {
+    height: 1px;
+}
+
+#ballot-top-header{
+    background: #f0f6f7;
+    border: 1px solid #acccd4;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vh;
+}
+
+.black-border-right-thin{
+    border-right: 1px solid black;
+}
+.black-border-bottom-thin{
+    border-bottom: 1px solid black;
+}
+
+.gray-border-bottom-thin{
+    border-bottom: 1px solid gray;
+}
+
+
+.black-border-left{
+    border-left: 3px solid black;
+}
+
+
+
+/* - - - - - - - - - - -*/
+#ballot-top{
+    overflow: hidden;
+    background-image: linear-gradient(180deg,#acccd4,#e4f2f5);
     width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     font-family: 'Oswald', sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
 
 }
-
-/* small border around ballot and background*/
-/* .ballot-container > .ballot-border-container */
-.ballot-border-container {
-    border-left: 3px solid rgba(166, 166, 166, .7);
-    border-right: 1px solid rgba(166, 166, 166, .7);
+#ballot-top td {
+    width: 33%;
+    padding-left: 10px;
 }
 
-/* big blocky borders of ballot */
-/* .ballot-border-container > .ballot-border  */
-.ballot-border {
-    height: 100vh;
+#ballot-bottom td {
+    width: 33%;
+    padding-left: 10px;
+}
+
+#ballot-top-page{
+    height: 90vh;
     width: 83vw;
     background: #fff;
-    /**
-        border-left: 3vh dashed #000;
-        border-right: 3vh dashed #000;
-        border-top: 6vh dashed #000;
-    */
-    border-left: .5vh solid #000;
-    border-right: .5vh solid #000;
-    border-top: .5vh solid #000;
-    box-sizing: border-box;
+    text-align: start;
+    padding-top: 1.8vw;
+    padding-left: 1.8vw;
+    padding-right: 1.8vw;
 }
-
-/* wrapper around ballot contents (including heading) */
-/* .ballot-border > .ballot-box */
-.ballot-box {
-    padding-left: 3vh;
-    padding-right: 3vh;
-    padding-top: 2.5vh;
-    height: 99vh;
-
-}
-
-/* large color heading at top of ballot*/
-/* .ballot-box > .ballot-heading */
-.ballot-heading {
+#ballot-bottom{
     background: #e4f2f5;
-    height: 35vh;
-    width: 100%;
+    width: 100vw;
+    height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    border: 1px solid #acccd4
-}
-
-/* .ballot-heading > #project-title  */
-#project-title {
-    font-size: 7vh;
-    padding-bottom: 2.5vh;
-}
-
-/* .ballot-heading > #project-subtitle */
-#project-subtitle {
-    font-size: 3vh;
-}
-
-/* .box that wraps the contents below ballot heading */
-/* .ballot-box > .ballot-body */
-.ballot-body {
-    height: 61vh; /*56.5vh*/
-    text-align: left;
-}
-
-/* left column */
-/* .ballot-body > .left-ballot-col  */
-.left-ballot-col {
-    border-right: .25vh solid #000;
-    font-size: 1.4rem;
-}
-
-/* middle column */
-/* .ballot-body >  .mid-ballot-col */
-.mid-ballot-col {
-    border-left: .125vh solid #000;
-    border-right: .125vh solid #000;
-}
-
-/* right column */
-/* .ballot-body > .right-ballot-col */
-.right-ballot-col {
-    border-left: .25vh solid #000;
-}
-
-.right-ballot-instructions li{
-    padding-top: 3vh;
+    font-family: 'Oswald', sans-serif;
     font-size: 2rem;
+}
+#ballot-bottom-page{
+    height: 95vh;
+    width: 83vw;
+    background: #fff;
+    text-align: start;
+    padding-bottom: 1.8vw;
+    padding-left: 1.8vw;
+    padding-right: 1.8vw;
 }
 
 .preattentive {
     color:#D33D17;
 }
 
-/* container for content in left and middle rows*/
-.ballot-vote-row {
-    border-top: 1px solid black;
-    padding-top: 3vh;
-    text-align: left;
-    padding-left: 3vh;
-    padding-bottom: 3vh;
-    height: 28vh
-}
-
-.vote-box-container {
-    display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-}
 
 .vote-box {
     border: 3px solid black;
@@ -135,86 +129,6 @@
     cursor: pointer;
 }
 
-
-/* title and subtitle for left and middle columns */
-.ballot-category-text-title {
-    font-size: 2rem;
-}
-
-.ballot-category-text-subtitle {
-    color: gray;
-    text-align: right;
-    align-items: center;
-    padding-top: .5rem;
-}
-
-/* left and middle column name text */
-.vote-title-text {
-    font-size: 35px
-}
-
-.vote-subtitle-text {
-    font-size: 25px;
-    color: gray;
-}
-
-.vote-sub-subtitle-text {
-    font-size: 22.5px;
-    color: #b5b3b3;
-}
-
-/* page 2 ballot ending stuff */
-.ballot-border-end {
-    width: 83vw;
-    height: 100vh;
-    background: #fff;
-    /*
-     border-left: 3vh dashed #000;
-    border-right: 3vh dashed #000;
-    border-bottom: 3vh dashed #000;
-    */
-    border-left: .5vh solid #000;
-    border-right: .5vh solid #000;
-    border-bottom: .5vh solid #000;
-    box-sizing: border-box;
-}
-
-.ballot-box-end {
-    padding-left: 3vh;
-    padding-right: 3vh;
-}
-
-.ballot-col-container-end {
-    height: 99.5vh;
-    text-align: left
-}
-
-/* page 2 selection content*/
-.interactive-warning {
-    text-align: center;
-    font-size: xxx-large;
-    margin: 3vh;
-    padding: 3vh;
-    border: 3px solid orange;
-    border-radius: 15px;
-}
-
-.left-ballot-col-question {
-    text-align: left;
-    font-size: 3rem;
-}
-.padding-from-top{
-    padding-top: 2vh;
-}
-
-.ballot-vote-row-pg2 {
-    border-top: 1px solid black;
-    padding-top: 3vh;
-    text-align: left;
-    padding-left: 3vh;
-    padding-bottom: 3vh;
-    height: 20vh;
-}
 
 .vote-box2 {
     border: 3px solid black;

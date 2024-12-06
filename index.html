@@ -46,249 +46,205 @@
         </div>
     </div>
     <!---------------------------- Page 0 / Title ---------------------------->
-    <div class="section ballot-container" id="section-0">
-        <div class="ballot-border-container">
-            <div class="ballot-border">
-                <div class="ballot-box">
-                    <div class="ballot-heading">
-                        <div>
-                            <div id="project-title">CS 1710 - Final Project 2024</div>
-                            <div id="project-subtitle"></div>
+    <div class="section" id="ballot-top">
+        <div id="ballot-top-page">
+            <table class="fill">
+                <tbody>
+                <tr class="limit-height">
+                    <td colspan="3">
+                        <div id="ballot-top-header">
+                            CS 1710 - Official Ballot 2024
                         </div>
-                    </div>
-                    <div class="ballot-body">
-                        <div class="row g-0">
-                            <!-- left column -->
-                            <div class="col-4 left-ballot-col">
-                                <div class="row g-0">
-                                    <div class="col-md-8 ballot-category-text-title">
-                                        TEAM MEMBERS
-                                    </div>
-                                    <div class="col-md-4 ballot-category-text-subtitle">
-                                        Vote for ONE
-                                    </div>
-                                </div>
-                                <div class="row ballot-vote-row ">
-                                    <div class="col-10">
-                                        <div class="row vote-title-text">
-                                            Max Bahar
-                                        </div>
-                                        <div class="row vote-subtitle-text">
-                                            Harvard University
-                                        </div>
-                                        <div class="row  vote-sub-subtitle-text">
-                                            MS - Data Science 2026
-                                        </div>
-                                    </div>
-                                    <div class="col-2 vote-box-container">
-                                        <div class="vote-box" id="vote-max" onclick="voted('vote-max')"></div>
-                                    </div>
-                                </div>
-                                <div class="row ballot-vote-row ">
-                                    <div class="col-10">
-                                        <div class="row vote-title-text">
-                                            Ted McCulloch
-                                        </div>
-                                        <div class="row vote-subtitle-text">
-                                            Harvard University
-                                        </div>
-                                        <div class="row vote-sub-subtitle-text">
-                                            MS - Data Science 2026
-                                        </div>
-                                    </div>
-                                    <div class="col-2 vote-box-container">
-                                        <div class="vote-box" id="vote-ted" onclick="voted('vote-ted')"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- middle column -->
-                            <div class="col-4 mid-ballot-col">
-                                <div class="row g-0">
-                                    <div class="col-md-8 ballot-category-text-title">
-                                        TEAM MEMBERS
-                                    </div>
-                                    <div class="col-md-4 ballot-category-text-subtitle">
-                                        CONTINUED
-                                    </div>
-                                </div>
-                                <div class="row g-0">
-                                    <div class="row ballot-vote-row ">
-                                        <div class="col-10">
-                                            <div class="row vote-title-text">
-                                                Stefan Chu
-                                            </div>
-                                            <div class="row vote-subtitle-text">
-                                                Harvard University
-                                            </div>
-                                            <div class="row vote-sub-subtitle-text">
-                                                MS - Data Science 202X
-                                            </div>
-                                        </div>
-                                        <div class="col-2 vote-box-container">
-                                            <div class="vote-box" id="vote-stef" onclick="voted('vote-stef')"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row ballot-vote-row ">
-                                        <div class="col-10">
-                                            <div class="row vote-title-text">
-                                                Anitej Thamma
-                                            </div>
-                                            <div class="row vote-subtitle-text">
-                                                Harvard University
-                                            </div>
-                                            <div class="row vote-sub-subtitle-text">
-                                                MS - Data Science 202X
-                                            </div>
-                                        </div>
-                                        <div class="col-2 vote-box-container">
-                                            <div class="vote-box" id="vote-ani" onclick="voted('vote-ani')"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- right column -->
-                            <div class="col-4 right-ballot-col ">
-                                <div class="row g-0">
-                                    <div class="col-md-12 ballot-category-text-title">
-                                        <u>INSTRUCTIONS</u>
-                                    </div>
-                                </div>
-                                <div class="right-ballot-instructions">
-                                    <ul>
-                                        <li><span class="preattentive">you will be prompted to vote</span></li>
-                                        <li><span class="preattentive">to vote fill in the <u>oval</u> next to your choice</span>
-                                        </li>
-                                        <li>this page is just practice</li>
-                                    </ul>
-                                </div>
-
+                    </td>
+                </tr>
+                <tr class="limit-height">
+                    <td class="limit-height black-border-bottom-thin">INSTRUCTIONS</td>
+                    <td class="black-border-left black-border-bottom-thin black-border-right-thin">TEAM MEMBERS</td>
+                    <td class="black-border-bottom-thin" style="color: gray; font-size: 1.6rem;">Vote for ONE</td>
+                </tr>
+                <tr>
+                    <td>
+                        <ul>
+                            <li><span class="preattentive">to vote fill in the <u>oval</u> next to your choice</span>
+                            </li>
+                            <li><span>This page is just practice.</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td class="black-border-left black-border-right-thin gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Max Bahar</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-max" onclick="voted('vote-max')"></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                    <td class="gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Ted McCulloch</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-ted" onclick="voted('vote-ted')"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="gray-border-bottom-thin"></td>
+                    <td class="black-border-left black-border-right-thin gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Stefan Chu</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-stef" onclick="voted('vote-stef')"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                    <td class="gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Anitej Thamma</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-ani" onclick="voted('vote-ani')"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <!---------------------------- Page 1 / HOOK (QUESTION) ---------------------------->
-    <div class="section ballot-container" id="section-1">
-        <div class="ballot-border-container">
-            <div class="ballot-border-end">
-                <div class="ballot-box-end">
-                    <div class="row ballot-col-container-end">
-                        <div class="col-4 left-ballot-col">
-                            <div class="padding-from-top"></div>
-                            <div class="left-ballot-col-question">
-                                <div><b><u>QUESTION</u></b></div>
-                                <div>WHICH DEMOGRAPHIC CATEGORIES DO YOU THINK <span class="preattentive">CONTRIBUTE THE MOST</span>
-                                    TOWARDS VOTER TURNOUT (POSITIVELY OR NEGATIVELY)
-                                </div>
+    <div class="section" id="ballot-bottom">
+        <div id="ballot-bottom-page">
+            <table class="fill">
+                <tbody>
+                <tr class="limit-height">
+                    <td class="black-border-bottom-thin">QUESTION</td>
+                    <td class="limit-height black-border-left black-border-bottom-thin black-border-right-thin">
+                        CATEGORIES
+                    </td>
+                    <td style="color: gray; font-size: 1.6rem;" class="black-border-bottom-thin">Select up to THREE</td>
+                </tr>
+                <tr>
+                    <td rowspan="3" style="font-size: 2.6rem">
+                        WHICH DEMOGRAPHIC CATEGORIES DO YOU THINK <span class="preattentive">CONTRIBUTE THE MOST</span>
+                        TOWARDS VOTER TURNOUT (POSITIVELY OR NEGATIVELY)?
+                    </td>
+                    <td class="black-border-left gray-border-bottom-thin black-border-right-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Party Affiliation</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">Democrat, Republican, etc.</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-party" onclick="votecat('vote-party')"></div>
                             </div>
                         </div>
-                        <div class="col-4 mid-ballot-col">
-                            <div class="padding-from-top"></div>
-                            <div class="row g-0">
-                                <div class="col-md-6 ballot-category-text-title">
-                                    CATEGORIES
-                                </div>
-                                <div class="col-md-6 ballot-category-text-subtitle">
-                                    Select up to THREE
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Party Affiliation
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        Democrat, Republican, Independent, etc.
-                                    </div>
-
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-party" onclick="votecat('vote-party')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Gender
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        Male, Female, Unknown
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-gender" onclick="votecat('vote-gender')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Age
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        Younger, Older, etc.
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-age" onclick="votecat('vote-age')"></div>
-                                </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                    <td class="gray-border-bottom-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Average Income</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">High, Middle, Low</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-income" onclick="votecat('vote-income')"></div>
                             </div>
                         </div>
-                        <div class="col-4 right-ballot-col">
-                            <div class="padding-from-top"></div>
-                            <div class="row g-0">
-                                <div class="col-md-6 ballot-category-text-title">
-                                    CATEGORIES
-                                </div>
-
-                                <div class="col-md-6 ballot-category-text-subtitle">
-                                    CONTINUED
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Average Income
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        High, Middle, Low
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-income" onclick="votecat('vote-income')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Spoken Language
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        English, Spanish, Italian, etc.
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-lang" onclick="votecat('vote-lang')"></div>
-                                </div>
-                            </div>
-                            <div class="row ballot-vote-row-pg2 ">
-                                <div class="col-10">
-                                    <div class="row vote-title-text">
-                                        Ethnicity
-                                    </div>
-                                    <div class="row vote-sub-subtitle-text">
-                                        European, African American, East/South Asian, Hispanic
-                                    </div>
-                                </div>
-                                <div class="col-2 vote-box-container">
-                                    <div class="vote-box2" id="vote-eth" onclick="votecat('vote-eth')"></div>
-                                </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black-border-left gray-border-bottom-thin black-border-right-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Gender</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">Male, Female, Unknown</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-gender" onclick="votecat('vote-gender')"></div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                    <td class="gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Spoken Language</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">English, Spanish, Italian, etc.</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-lang" onclick="votecat('vote-lang')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black-border-left black-border-right-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Age</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">Younger, Older, etc.</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-age" onclick="votecat('vote-age')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Ethnicity</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">European, African American, East/South Asian, Hispanic</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-eth" onclick="votecat('vote-eth')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     <!---------------------------- Page 1.5 / Selection Preview ---------------------------->
