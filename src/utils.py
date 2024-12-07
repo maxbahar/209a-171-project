@@ -4,13 +4,14 @@ import geopandas as gpd
 import numpy as np
 import shap
 
-from sklearn.model_selection import KFold
+from sklearn.model_selection import KFold, RandomizedSearchCV
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
 
 # Group demographic columns together
 registered = ["total_reg"]
-age = ["age_18_19", "age_20_24", "age_25_29","age_30_34","age_35_44", "age_45_54", "age_55_64", "age_65_74","age_75_84", "age_85over"]
+age = ["age_18_19", "age_20_24", "age_25_29", "age_30_34", "age_35_44", "age_45_54", "age_55_64", "age_65_74","age_75_84", "age_85over"]
 init_gender = [ "voters_gender_m", "voters_gender_f", "voters_gender_unknown"] 
 gender = [ "gender_m", "gender_f", "gender_unknown"] 
 party = ["party_npp", "party_dem", "party_rep","party_lib", "party_grn", "party_con", "party_ain", "party_scl","party_oth"]
@@ -28,6 +29,10 @@ languages = ["lang_english", "lang_spanish",
                 "lang_unknown"]
 income = ["commercialdata_estimatedhhincomeamount_avg"]
 predictors = [*registered, *age, *gender, *party, *ethnicity1, *languages, "mean_hh_income"]
+predictors_subset = ["mean_hh_income", "total_reg", 
+                     "lang_unknown", "gender_f", "party_dem", 
+                     "eth1_hisp", "eth1_eur", "eth1_aa", "eth1_oth",
+                     "age_20_24", "age_25_29", "age_30_34", "age_45_54",]
 
 def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
                  bg_zipfile="../data/ma_pl2020_bg.zip",
@@ -130,34 +135,44 @@ def generate_predictions(data_dict, random_state=None):
     t_data = data_dict["tract"]
     c_data = data_dict["county"]
 
-    X = bg_data[predictors]
+    X = bg_data[predictors_subset]
     y = bg_data["2020_turnout_pct"]
 
     bg_predictions = bg_data[["2020_turnout_pct","2020_absent_pct","2020_registered","2020_turnout"]].copy()
-    bg_shap = bg_data[predictors]
+    bg_shap = bg_data[predictors_subset].copy()
 
     #kf = KFold(n_splits=10,shuffle=True,random_state=random_state)
-    X.loc[:,["total_reg","mean_hh_income"]] = StandardScaler().fit_transform(X=X[["total_reg","mean_hh_income"]])
+    # X.loc[:,["total_reg","mean_hh_income"]] = StandardScaler().fit_transform(X=X[["total_reg","mean_hh_income"]])
 
-    linreg = LinearRegression()
-    
-    '''
-    for train_idx, val_idx in kf.split(X, y):
-        train = X.index[train_idx]
-        val = X.index[val_idx]
-        linreg.fit(X.loc[train], y.loc[train])
-        bg_predictions.loc[val,"2020_turnout_pct_pred"] = linreg.predict(X.loc[val])
-        # Create SHAP explainer
-        explainer = shap.LinearExplainer(linreg, X.loc[train])
-        shap_values = explainer.shap_values(X.loc[val])
-        bg_shap.loc[val, predictors] = shap_values
-    '''
-    linreg.fit(X, y)
-    bg_predictions.loc[X.index, "2020_turnout_pct_pred"] = linreg.predict(X)
+    param_grid = {
+        "n_estimators" : [50, 100, 200],
+        "max_depth" : [10, 20, None],
+        "min_samples_split" : [2, 10],
+        "min_samples_leaf" : [1, 5],
+        "max_features" : ["sqrt","log2"]
+    }
+
+    random_search = RandomizedSearchCV(RandomForestRegressor(
+        random_state=0, 
+        warm_start=False), # Set this to false for deterministic behavior
+            param_grid, 
+            cv=10, 
+            scoring="neg_mean_squared_error",
+            random_state=0,
+            n_iter=5 # 5 iterations for now
+        )
+
+    random_search.fit(X, y)
+
+    rf_cv = RandomForestRegressor(**random_search.best_params_, random_state=0)
+    rf_cv.fit(X, y)
+    bg_predictions.loc[X.index, "2020_turnout_pct_pred"] = rf_cv.predict(X)
+
     # Create SHAP explainer
-    explainer = shap.LinearExplainer(linreg, X)
+    # explainer = shap.LinearExplainer(linreg, X)
+    explainer = shap.TreeExplainer(rf_cv)
     shap_values = explainer.shap_values(X)
-    bg_shap.loc[X.index, predictors] = shap_values
+    bg_shap.loc[X.index, predictors_subset] = shap_values
     
        
     print("SHAP base value: " + str(explainer.expected_value))
@@ -183,13 +198,13 @@ def generate_predictions(data_dict, random_state=None):
     
     t_shap = bg_shap.copy()
     for i in t_shap.index:
-        t_shap.loc[i,predictors] *= bg_predictions.loc[i,"2020_registered"]
+        t_shap.loc[i,predictors_subset] *= bg_predictions.loc[i,"2020_registered"]
     
     t_shap["tract_id"] = bg_shap.index.str[:11]
-    t_shap = t_shap.groupby("tract_id")[predictors].sum()
+    t_shap = t_shap.groupby("tract_id")[predictors_subset].sum()
     
     for i in t_shap.index:
-        t_shap.loc[i,predictors] /= t_predictions.loc[i,"2020_registered"]
+        t_shap.loc[i,predictors_subset] /= t_predictions.loc[i,"2020_registered"]
     
     print("SHAP Turnout Pred: " + str(sum(t_shap.iloc[0]) + explainer.expected_value))
     print("2020 Turnout Pct Pred: " + str(t_predictions["2020_turnout_pct_pred"].iloc[0]))
@@ -205,13 +220,13 @@ def generate_predictions(data_dict, random_state=None):
     
     c_shap = bg_shap.copy()
     for i in c_shap.index:
-        c_shap.loc[i,predictors] *= bg_predictions.loc[i,"2020_registered"]
+        c_shap.loc[i,predictors_subset] *= bg_predictions.loc[i,"2020_registered"]
         
     c_shap["county_id"] = bg_shap.index.str[:5]
-    c_shap = c_shap.groupby("county_id")[predictors].sum()
+    c_shap = c_shap.groupby("county_id")[predictors_subset].sum()
     
     for i in c_shap.index:
-        c_shap.loc[i,predictors] /= c_predictions.loc[i,"2020_registered"]
+        c_shap.loc[i,predictors_subset] /= c_predictions.loc[i,"2020_registered"]
     
     print("SHAP Turnout Pred: " + str(sum(c_shap.iloc[0]) + explainer.expected_value))
     print("2020 Turnout Pct Pred: " + str(c_predictions["2020_turnout_pct_pred"].iloc[0]))
@@ -222,9 +237,10 @@ def generate_predictions(data_dict, random_state=None):
     t_shap = t_shap.add_suffix("_shap")
     c_shap = c_shap.add_suffix("_shap")
     
-    bg_shap["base_value_shap"] = explainer.expected_value
-    t_shap["base_value_shap"] = explainer.expected_value
-    c_shap["base_value_shap"] = explainer.expected_value
+    shap_exp_val = explainer.expected_value if np.isscalar(explainer.expected_value) else explainer.expected_value[0]
+    bg_shap["base_value_shap"] = shap_exp_val
+    t_shap["base_value_shap"] = shap_exp_val
+    c_shap["base_value_shap"] = shap_exp_val
 
     bg_joined = bg_data.merge(bg_predictions.drop(columns=["2020_registered","2020_turnout","2020_turnout_pct","2020_absent_pct"]), left_on="GEOID20", right_on="GEOID20")
     t_joined = t_data.merge(t_predictions.drop(columns=["2020_registered","2020_turnout"]), left_index=True, right_on="tract_id").reset_index().rename({"tract_id":"GEOID20"}, axis=1).set_index("GEOID20")

@@ -76,9 +76,7 @@ function createVis(data) {
     mainMap = new MapVis("mainMapElement", geoData, 
                             ["2020_turnout_pct", "total_reg", "mean_hh_income"], 
                             [["#FFE39F", "#6B9FA1", "#1F4B99"],["#B1ECB5", "#6AAE6A", "#1D7324"],["#E1BAE1", "#9D6D9C", "#5C255C"]],
-                            // [["#F6F7F9","#5642A6"], ["#F6F7F9","#77450D"], ["#F6F7F9","#165A36"], ["#F6F7F9","#184A90"]],
-                            // [d3.interpolatePurples, d3.interpolateOranges, d3.interpolateReds, d3.interpolateBlues],
-                            "geoLevel", "demographicVar","mainMapTooltip");
+                            "geoLevel", "demographicVar", "mainMapTooltip");
 
     // Initialize user guess
     let stateVotes = 0, stateReg = 0;

@@ -26,11 +26,11 @@ class MapVis {
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
         // Initialize SVG drawing area
-        vis.svg = d3.select("#" + vis.parentElement).append("svg")
-                    .attr("width", vis.width + vis.margin.left + vis.margin.right)
-                    .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
-                    .append("g")
-                    .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
+        vis.initSvg = d3.select("#" + vis.parentElement).append("svg")
+                        .attr("width", vis.width + vis.margin.left + vis.margin.right)
+                        .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+        vis.svg = vis.initSvg.append("g")
+                        .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
@@ -79,9 +79,24 @@ class MapVis {
         vis.legendAxis = d3.axisBottom()
                             .scale(vis.legendScale);
         // Append legend
-        vis.legend = vis.svg.append("g")
+        vis.legend = vis.initSvg.append("g")
                             .attr('class', 'legend')
                             .attr('transform', `translate(${vis.width / 6}, ${vis.height * 3/4})`);
+        const paddingX = vis.legendWidth/5;
+        const paddingY = vis.legendHeight*2;
+        const rectWidth = vis.legendWidth + paddingX;
+        const rectHeight = vis.legendHeight + paddingY;
+        // Append legend background
+        vis.legend.append("rect")
+                    .attr("class", "legend-background")
+                    .attr("x", - paddingX / 2) // Adjust to provide padding around the text
+                    .attr("y", - paddingY / 1.75) // Position above the text
+                    .attr("width", rectWidth) // Slightly larger than the legend
+                    .attr("height", rectHeight) // Larger to fit text and gradient
+                    .attr("fill", "white") // Background color
+                    .attr("stroke", "#ccc") // Optional border for the background
+                    .attr("stroke-width", 0.5);
+
         vis.legendAxisGroup = vis.legend.append("g")
                                 .attr("transform", `translate(0, ${vis.legendHeight/2 + 10})`)
                                 .attr("class","legend-axis");
@@ -97,6 +112,44 @@ class MapVis {
                                         .attr("text-anchor","middle")
                                         .attr("x",vis.legendWidth/2)
                                         .attr("y",-10);
+
+        vis.transformScale = 1;
+
+        // Set up zoom behavior
+        const zoom = d3.zoom()
+        .scaleExtent([1, 20]) // Minimum and maximum zoom levels
+        .translateExtent([[0, 0], [vis.width + vis.margin.left + vis.margin.right, 
+                                   vis.height + vis.margin.top + vis.margin.bottom]]) // Set panning limits
+        .filter((event) => event.type !== "wheel")
+        .on("zoom", (event) => {
+            vis.svg.attr("transform", event.transform);
+            vis.transformScale = event.transform.k;
+            vis.svg.selectAll(".geoFeature").attr("stroke-width", 0.5 / vis.transformScale);
+        });
+        // .on("end", (event) => {
+        //     // Update stroke width when mouse is released
+        //     vis.transformScale = event.transform.k;
+        //     vis.svg.selectAll(".geoFeature").attr("stroke-width", 0.5 / vis.transformScale);
+        // });
+
+        vis.initSvg = d3.select("#" + vis.parentElement).select("svg");
+        vis.initSvg.call(zoom);
+
+        // Zoom button functionality
+        const zoomLevel = d3.zoomIdentity;
+        vis.initSvg.call(zoom.transform, zoomLevel); // Reset zoom
+
+        d3.select(`#${vis.parentElement}-zoom-in`).on("click", () => {
+            vis.initSvg.transition().call(zoom.scaleBy, 3); // Zoom in by 20%
+        });
+
+        d3.select(`#${vis.parentElement}-zoom-out`).on("click", () => {
+            vis.initSvg.transition().call(zoom.scaleBy, 1/3); // Zoom out by 20%
+        });
+
+        d3.select(`#${vis.parentElement}-reset`).on("click", () => {
+            vis.initSvg.transition().call(zoom.transform, zoomLevel); // Reset zoom
+        });
 
         vis.wrangleData();
 
@@ -206,7 +259,7 @@ class MapVis {
                                                 .attr("d", vis.path)
                                                 .attr("fill", "#ccc")
                                                 .attr("stroke", "#8F99A8")
-                                                .attr("stroke-width", 0.5);
+                                                .attr("stroke-width", 0.5 / vis.transformScale);
 
         vis.geoFeatures = vis.geoFeaturesEnter.merge(vis.geoFeatures);
         vis.geoFeatures.transition().duration(800)
@@ -218,7 +271,7 @@ class MapVis {
             d3.select(this)
                 // .attr('fill', 'white')
                 .attr("stroke", "#D33D17")
-                .attr("stroke-width", 5).raise();
+                .style("stroke-width", 5 / vis.transformScale).raise();
 
         // Un-highlight on mouseout
         }).on('mouseout', function(event, d){
@@ -226,7 +279,8 @@ class MapVis {
             d3.select(this)
                 .attr("fill", d => vis.colorScale(d.properties[vis.mainVar]))
                 .attr("stroke", "#8F99A8")
-                .attr("stroke-width", 0.5);
+                .style("stroke-width", null);
+                // .style("stroke-width", 0.5 / vis.transformScale);
         })
             
         // Show tooltip on click
