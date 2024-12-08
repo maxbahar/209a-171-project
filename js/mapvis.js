@@ -82,20 +82,20 @@ class MapVis {
         vis.legend = vis.initSvg.append("g")
                             .attr('class', 'legend')
                             .attr('transform', `translate(${vis.width / 6}, ${vis.height * 3/4})`);
-        const paddingX = vis.legendWidth/5;
-        const paddingY = vis.legendHeight*2;
+        const paddingX = vis.legendWidth/8;
+        const paddingY = vis.legendHeight;
         const rectWidth = vis.legendWidth + paddingX;
         const rectHeight = vis.legendHeight + paddingY;
         // Append legend background
         vis.legend.append("rect")
                     .attr("class", "legend-background")
                     .attr("x", - paddingX / 2) // Adjust to provide padding around the text
-                    .attr("y", - paddingY / 1.75) // Position above the text
+                    .attr("y", - paddingY / 1.5) // Position above the text
                     .attr("width", rectWidth) // Slightly larger than the legend
                     .attr("height", rectHeight) // Larger to fit text and gradient
                     .attr("fill", "white") // Background color
-                    .attr("stroke", "#ccc") // Optional border for the background
-                    .attr("stroke-width", 0.5);
+                    .attr("rx",5)
+                    .attr("opacity", 0.9);
 
         vis.legendAxisGroup = vis.legend.append("g")
                                 .attr("transform", `translate(0, ${vis.legendHeight/2 + 10})`)
@@ -113,9 +113,82 @@ class MapVis {
                                         .attr("x",vis.legendWidth/2)
                                         .attr("y",-10);
 
-        vis.transformScale = 1;
+        
+        const iconSize = rectHeight / 4
+        const offsetY = iconSize / 4
+
+        vis.legend.append("rect")
+                    .attr("class", "legend-background")
+                    .attr("x", - 1.6 * (rectWidth / 5)) // Adjust to provide padding around the text
+                    .attr("y", - paddingY / 1.5) // Position above the text
+                    .attr("width", iconSize * 3.5)
+                    .attr("height", rectHeight)
+                    .attr("fill", "white") // Background color
+                    .attr("rx",5)
+                    .attr("opacity", 0.9);
+        // Append zoom-in button
+        vis.legend.append("image")
+            .attr("href", "../images/zoom-in.png")
+            .attr("id", `${vis.parentElement}-zoom-in`)
+            .attr("class", "zoom-in")
+            .attr("font-size", "1.5em")
+            .attr("x", -rectWidth / 5) // Position to the left of the legend
+            .attr("y", -(rectHeight * (1/4)) + offsetY)
+            .attr("height", iconSize)
+            .attr("width", iconSize)
+            .attr("alignment-baseline","middle")
+            .attr("cursor", "pointer");
+        // Append zoom-out button
+        vis.legend.append("image")
+            .attr("href", "../images/zoom-out.png")
+            .attr("id", `${vis.parentElement}-zoom-out`)
+            .attr("class", "zoom-out")
+            .attr("font-size", "1.5em")
+            .attr("x", -rectWidth / 5) // Position to the left of the legend
+            .attr("y", offsetY)
+            .attr("height", iconSize)
+            .attr("width", iconSize)
+            .attr("alignment-baseline","middle")
+            .attr("cursor", "pointer");
+        // Append reset button
+        vis.legend.append("image")
+            .attr("href", "../images/reset.png")
+            .attr("id", `${vis.parentElement}-reset`)
+            .attr("class", "zoom-out")
+            .attr("font-size", "1.5em")
+            .attr("x", -rectWidth / 5) // Position to the left of the legend
+            .attr("y", (rectHeight * (1/4)) + offsetY)
+            .attr("height", iconSize)
+            .attr("width", iconSize)
+            .attr("alignment-baseline","middle")
+            .attr("cursor", "pointer");
+
+        // Append button labels
+        vis.legend.append("text")
+                    .text("Zoom In")
+                    .attr("font-size","1em")
+                    .attr("x", - rectWidth / 5) // Position to the left of the legend
+                    .attr("y", - (rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
+                    .attr("alignment-baseline","middle")
+                    .attr("text-anchor","end");
+        vis.legend.append("text")
+                    .text("Zoom Out")
+                    .attr("font-size","1em")
+                    .attr("x", - rectWidth / 5) // Position to the left of the legend
+                    .attr("y", (iconSize / 1.75) + offsetY)
+                    .attr("alignment-baseline","middle")
+                    .attr("text-anchor","end");
+        vis.legend.append("text")
+                    .text("Reset")
+                    .attr("font-size","1em")
+                    .attr("x", - rectWidth / 5) // Position to the left of the legend
+                    .attr("y", (rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
+                    .attr("alignment-baseline","middle")
+                    .attr("text-anchor","end");
+
 
         // Set up zoom behavior
+        vis.transformScale = 1;
         const zoom = d3.zoom()
         .scaleExtent([1, 20]) // Minimum and maximum zoom levels
         .translateExtent([[0, 0], [vis.width + vis.margin.left + vis.margin.right, 
@@ -126,11 +199,6 @@ class MapVis {
             vis.transformScale = event.transform.k;
             vis.svg.selectAll(".geoFeature").attr("stroke-width", 0.5 / vis.transformScale);
         });
-        // .on("end", (event) => {
-        //     // Update stroke width when mouse is released
-        //     vis.transformScale = event.transform.k;
-        //     vis.svg.selectAll(".geoFeature").attr("stroke-width", 0.5 / vis.transformScale);
-        // });
 
         vis.initSvg = d3.select("#" + vis.parentElement).select("svg");
         vis.initSvg.call(zoom);
@@ -285,7 +353,6 @@ class MapVis {
             
         // Show tooltip on click
         vis.geoFeatures.on("click", function(event, d){
-            console.log("NEW CLICK");
 
             vis.tooltip.style("display","grid");
                         
