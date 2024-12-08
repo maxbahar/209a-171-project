@@ -274,6 +274,16 @@ class MapVis {
                         .attr("stop-color", d => d.color);
         vis.legendScale.domain([d3.min(vis.mainVarArray),d3.max(vis.mainVarArray)]);
         vis.legendAxis.tickValues([d3.min(vis.mainVarArray),d3.max(vis.mainVarArray)]);
+        vis.legendAxis.tickFormat(d => {
+            switch (vis.mainVar) {
+                case "total_reg":
+                    return intFormat(d);
+                case "mean_hh_income":
+                    return dollarFormat(d);
+                default:
+                    return pctFormat(d);
+            }
+        });
         vis.legendAxisGroup.transition()
                         .duration(800)
                         .call(vis.legendAxis);
@@ -383,11 +393,23 @@ class MapVis {
                         mainVarValue = dollarFormat(d.properties[vis.mainVar])
                         break;
                 }
-                ;
+                
+                let title = "";
+                switch (vis.geoLevel) {
+                    case "county":
+                        title = `${d.properties["BASENAME"]} County`
+                        break;
+                    case "tract":
+                        title = `Tract ${d.properties["GEOID20"]}`
+                        break;
+                    case "blockGroup":
+                        title = `Block Group ${d.properties["GEOID20"]}`
+                        break;
+                }
 
                 vis.tooltip.html(`
-                    <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
-                    <div style="font-size: 14pt"><b>${variableMap[vis.mainVar]}: </b>${mainVarValue}</div>
+                    <h4>${title}</h4>
+                    <div style="font-size: 14pt"><b style="color:black">${variableMap[vis.mainVar]}: </b>${mainVarValue}</div>
                     <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
                     `); 
                 vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
