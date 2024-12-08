@@ -74,15 +74,15 @@ class MapVis {
 
         // Define legend scale and axis
         vis.legendWidth = vis.width / 3;
-        vis.legendHeight = vis.height / 15;
+        vis.legendHeight = vis.height / 10;
         vis.legendScale = d3.scaleLinear().range([0, vis.legendWidth]);
         vis.legendAxis = d3.axisBottom()
                             .scale(vis.legendScale);
         // Append legend
         vis.legend = vis.initSvg.append("g")
                             .attr('class', 'legend')
-                            .attr('transform', `translate(${vis.width / 6}, ${vis.height * 3/4})`);
-        const paddingX = vis.legendWidth/8;
+                            .attr('transform', `translate(${vis.width / 4}, ${vis.height * 7/8})`);
+        const paddingX = vis.legendWidth/5;
         const paddingY = vis.legendHeight;
         const rectWidth = vis.legendWidth + paddingX;
         const rectHeight = vis.legendHeight + paddingY;
@@ -114,77 +114,80 @@ class MapVis {
                                         .attr("y",-10);
 
         
-        const iconSize = rectHeight / 4
-        const offsetY = iconSize / 4
-
-        vis.legend.append("rect")
-                    .attr("class", "legend-background")
-                    .attr("x", - 1.6 * (rectWidth / 5)) // Adjust to provide padding around the text
-                    .attr("y", - paddingY / 1.5) // Position above the text
-                    .attr("width", iconSize * 3.5)
-                    .attr("height", rectHeight)
-                    .attr("fill", "white") // Background color
-                    .attr("rx",5)
-                    .attr("opacity", 0.9);
+        const iconPadding = 10;
+        const iconSize = rectHeight / 4 - iconPadding;
+        const offsetY = iconSize / 2;
         // Append zoom-in button
         vis.legend.append("image")
-            .attr("href", "../images/zoom-in.png")
-            .attr("id", `${vis.parentElement}-zoom-in`)
-            .attr("class", "zoom-in")
-            .attr("font-size", "1.5em")
-            .attr("x", -rectWidth / 5) // Position to the left of the legend
-            .attr("y", -(rectHeight * (1/4)) + offsetY)
-            .attr("height", iconSize)
-            .attr("width", iconSize)
-            .attr("alignment-baseline","middle")
-            .attr("cursor", "pointer");
+                    .attr("href", "../images/zoom-in.png")
+                    .attr("id", `${vis.parentElement}-zoom-in`)
+                    .attr("class", "zoom-button")
+                    .attr("font-size", "1.5em")
+                    .attr("x", - (rectWidth / 5) - iconPadding/2) // Position to the left of the legend
+                    .attr("y", -(rectHeight * (1/4)) + offsetY)
+                    .attr("height", iconSize)
+                    .attr("width", iconSize)
+                    .attr("alignment-baseline","middle")
+                    .attr("cursor", "pointer");
         // Append zoom-out button
         vis.legend.append("image")
-            .attr("href", "../images/zoom-out.png")
-            .attr("id", `${vis.parentElement}-zoom-out`)
-            .attr("class", "zoom-out")
-            .attr("font-size", "1.5em")
-            .attr("x", -rectWidth / 5) // Position to the left of the legend
-            .attr("y", offsetY)
-            .attr("height", iconSize)
-            .attr("width", iconSize)
-            .attr("alignment-baseline","middle")
-            .attr("cursor", "pointer");
+                    .attr("href", "../images/zoom-out.png")
+                    .attr("id", `${vis.parentElement}-zoom-out`)
+                    .attr("class", "zoom-button")
+                    .attr("font-size", "1.5em")
+                    .attr("x", - (rectWidth / 5) - iconPadding/2) // Position to the left of the legend
+                    .attr("y", offsetY)
+                    .attr("height", iconSize)
+                    .attr("width", iconSize)
+                    .attr("alignment-baseline","middle")
+                    .attr("cursor", "pointer");
         // Append reset button
         vis.legend.append("image")
-            .attr("href", "../images/reset.png")
-            .attr("id", `${vis.parentElement}-reset`)
-            .attr("class", "zoom-out")
-            .attr("font-size", "1.5em")
-            .attr("x", -rectWidth / 5) // Position to the left of the legend
-            .attr("y", (rectHeight * (1/4)) + offsetY)
-            .attr("height", iconSize)
-            .attr("width", iconSize)
-            .attr("alignment-baseline","middle")
-            .attr("cursor", "pointer");
+                    .attr("href", "../images/reset.png")
+                    .attr("id", `${vis.parentElement}-reset`)
+                    .attr("class", "zoom-button")
+                    .attr("font-size", "1.5em")
+                    .attr("x", - (rectWidth / 5) - iconPadding/2) // Position to the left of the legend
+                    .attr("y", (rectHeight * (1/4)) + offsetY)
+                    .attr("height", iconSize)
+                    .attr("width", iconSize)
+                    .attr("alignment-baseline","middle")
+                    .attr("cursor", "pointer");
 
         // Append button labels
-        vis.legend.append("text")
+        const zoomInText = vis.legend.append("text")
                     .text("Zoom In")
                     .attr("font-size","1em")
-                    .attr("x", - rectWidth / 5) // Position to the left of the legend
+                    .attr("x", - (rectWidth / 5) - iconPadding) // Position to the left of the legend
                     .attr("y", - (rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
                     .attr("alignment-baseline","middle")
                     .attr("text-anchor","end");
-        vis.legend.append("text")
+        const zoomOutText = vis.legend.append("text")
                     .text("Zoom Out")
                     .attr("font-size","1em")
-                    .attr("x", - rectWidth / 5) // Position to the left of the legend
+                    .attr("x", - (rectWidth / 5) - iconPadding) // Position to the left of the legend
                     .attr("y", (iconSize / 1.75) + offsetY)
                     .attr("alignment-baseline","middle")
                     .attr("text-anchor","end");
-        vis.legend.append("text")
+        const resetText = vis.legend.append("text")
                     .text("Reset")
                     .attr("font-size","1em")
-                    .attr("x", - rectWidth / 5) // Position to the left of the legend
+                    .attr("x", - (rectWidth / 5) - iconPadding) // Position to the left of the legend
                     .attr("y", (rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
                     .attr("alignment-baseline","middle")
                     .attr("text-anchor","end");
+        const widthArray = Array.from([zoomInText, zoomOutText, resetText]).map(d => d.node().getBBox().width);
+        const maxTextWidth = d3.max(widthArray);
+        vis.legend.append("rect")
+                    .attr("class", "legend-background")
+                    .attr("x", - iconSize*5 - maxTextWidth) // Adjust to provide padding around the text
+                    .attr("y", - paddingY / 1.5) // Position above the text
+                    .attr("width", iconSize * 3 + maxTextWidth)
+                    .attr("height", rectHeight)
+                    .attr("fill", "white") // Background color
+                    .attr("rx",5)
+                    .attr("opacity", 0.9)
+                    .lower();
 
 
         // Set up zoom behavior

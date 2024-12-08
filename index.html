@@ -309,7 +309,7 @@
     <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
     <div class="section custom-container">
         <div class="row g-0">
-            <div class="col-4">
+            <div class="col content-container">
                 <div class="content-card">
                     <h4>Voter Turnout and Demographics</h4>
                     <p>Unsurprisingly, voter turnout and demographics vary across the state of Massachusetts.</p>
@@ -387,7 +387,7 @@
     <div class="section custom-container" id="kde-container">
         <div class="kde-tooltip"></div>
         <div class="row g-0">
-            <div class="col-8 kde-left">
+            <div class="col-8">
                 <div class="content-card">
                     <table class="viz-title" id="kde-title">
                         <tbody>
@@ -409,7 +409,7 @@
                     <div id="kde-plot-parent"></div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col content-container">
                 <div class="kde-right kde-right-top content-card">
                     <h4>Legend</h4>
                     <div class="kde-right-top-table">
@@ -470,7 +470,7 @@
                     </div>
 
                 </div>
-                <div class="kde-right content-card">
+                <div class="content-card">
                     <h4>About</h4>
                     <ul>
                         <li>Kernel density plots allow you to visualize the density of data observations</li>
@@ -487,7 +487,7 @@
     <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
     <div class="section custom-container">
         <div class="row g-0">
-            <div class="col-4">
+            <div class="col content-container">
                 <div class="content-card">
                     <h4>How Does Voter Turnout Vary Across Counties?</h4>
                     <p>We find that Hampden county has the lowest voter turnout, with <b>10% lower</b> voter turnout
@@ -499,15 +499,11 @@
                     <h4>About</h4>
                     <ul>
                         <li>The diverging bar plot visualizes how voter turnout in Massachusetts counties deviates from
-                            the average voter turnout (81% in this case).
+                            the average 81% voter turnout.
                         </li>
-                        <li>The dropdown menus above the plot allow users to select two political parties for
-                            comparison, dynamically updating the
-                            chart to reflect the selected parties' dominance in each county.
+                        <li><b>Use the dropdowns</b> to see the proportion of each party's voters in each county.
                         </li>
-                        <li>The bars are shaded based on the dominant party for each county, with each party assigned a
-                            unique color for easy
-                            differentiation.
+                        <li>The bars are shaded based on the dominant party for each county.
                         </li>
                     </ul>
                 </div>
@@ -531,8 +527,8 @@
         <div class="header">
             <h3>How Do We Uncover the Demographic Drivers of Voter Turnout?</h3>
         </div>
-        <div class="row g-0">
-            <div class="col-4">
+        <div class="row g-0 justify-content-center align-items-center">
+            <div class="col content-container">
                 <div class="content-card explanation">
                     <h4>Random Forest Model</h4>
                     <img src="/images/tree.png">
@@ -542,7 +538,7 @@
                         multiple trees, capturing complex patterns and reducing overfitting.</p>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col content-container">
                 <div class="content-card explanation">
                     <h4>Key Inputs</h4>
                     <img src="/images/input.png">
@@ -558,11 +554,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col content-container">
                 <div class="content-card explanation">
                     <h4>Predictive Output</h4>
                     <img src="/images/output.png">
-                    <p>Our Random Forest model predicts voter turnout in the 2020 presidential election for each Census
+                    <p>Our Random Forest model <b>predicts voter turnout</b> in the 2020 presidential election for each Census
                         Block Group in Massachusetts, based on demographic data.</p>
                     <p>Key findings include:</p>
                     <ul>
@@ -579,7 +575,7 @@
     <div class="section custom-container">
         <!-- <div class="header"> -->
         <div class="row g-0">
-            <div class="col-4">
+            <div class="col content-container">
                 <div class="content-card">
                     <h4>How Important Are Specific Demographic Features?</h4>
                     <p>Our model shows that some demographic features are more important than others in predicting voter
@@ -658,7 +654,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col content-container">
                 <div class="content-card">
                     <h3>How did you do?</h3>
                     <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span
