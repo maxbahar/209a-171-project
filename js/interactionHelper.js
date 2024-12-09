@@ -9,15 +9,6 @@ let titleMap = {
     "vote-lang":"Language Spoken",
     "vote-eth":"Ethnicity",
 }
-let textMap = {
-    "none": "",
-    "vote-party":"Our model includes 10 party categories",
-    "vote-gender":"Our model includes: male, female, and unknown",
-    "vote-age":"Our model includes 10 age groups",
-    "vote-income":"Our model considers mean incomes",
-    "vote-lang":"Our model includes 8 language categories",
-    "vote-eth":"Our model considers 6 ethnicity categories",
-}
 
 /**
  * handle the vote cast for group member

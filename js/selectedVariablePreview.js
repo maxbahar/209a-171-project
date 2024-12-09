@@ -27,12 +27,12 @@ class SelVarPrev{
         }
         vis.textMap = {
             "none": "",
-            "vote-party":"Our model includes 10 party categories",
-            "vote-gender":"Our model includes: male, female, and unknown",
-            "vote-age":"Our model includes 10 age groups",
-            "vote-income":"Our model considers mean incomes",
-            "vote-lang":"Our model includes 8 language categories",
-            "vote-eth":"Our model considers 6 ethnicity categories",
+            "vote-party":"The data includes 10 party categories",
+            "vote-gender":"The data includes male, female, and unknown",
+            "vote-age":"The data includes 10 age groups",
+            "vote-income":"The data includes mean household income",
+            "vote-lang":"The data includes 8 language categories",
+            "vote-eth":"The data includes 6 ethnicity categories",
         }
         vis.imageMap = {
             "none": "/images/250.png",

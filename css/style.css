@@ -12,6 +12,18 @@ b {
     color: #D33D17;
 }
 
+p, li {
+    font-family: "Roboto", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto {
+    font-family: "Roboto", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
 /* Change the color of the horizontal arrows */
 .fp-controlArrow.fp-prev {
     border-color: transparent black transparent transparent;

@@ -39,7 +39,9 @@ class BarVis {
                         .scale(vis.x);
 
         vis.yAxis = d3.axisLeft()
-                        .scale(vis.y);
+                        .scale(vis.y)
+                        .ticks(4)
+                        .tickFormat(d3.format(".0%"));
 
         // Initialize axis
         vis.xAxisGroup = vis.svg.append("g")
@@ -73,6 +75,7 @@ class BarVis {
             let incomeMax = Math.ceil(d3.max(bgArray.map(d => d[0])) / binSize) * binSize;
             let numBins = Math.ceil((incomeMax - incomeMin) / binSize);
             vis.displayData = Array.from({length: numBins}, (_, i) => [ `$${(incomeMin + (i + 1) * binSize) / 1000},000`, 0 ]);
+            let totalCount = d3.sum(bgArray, d => d[1]);
 
             bgArray.forEach(d => {
                 let binIndex
@@ -82,6 +85,10 @@ class BarVis {
                     binIndex = Math.floor((d[0] - incomeMin) / binSize);
                 }
                 vis.displayData[binIndex][1] += d[1];
+            });
+
+            vis.displayData.forEach(bin => {
+                bin[1] /= totalCount;  // Convert to proportion
             });
 
         } else {

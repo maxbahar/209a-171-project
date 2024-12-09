@@ -81,7 +81,6 @@
 }
 
 #ballot-top-page{
-    height: 90vh;
     width: 83vw;
     background: #fff;
     text-align: start;
@@ -139,4 +138,9 @@
 .vote-box2:hover {
     background: black;
     cursor: pointer;
+}
+
+.left-section {
+    padding-top: 15px;
+    padding-right: 10px;
 }
