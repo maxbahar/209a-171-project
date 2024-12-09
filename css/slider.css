@@ -41,14 +41,16 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s;
-    /* width: 25vw; */
-    /* height: 35vh; */
     border: 1px solid rgba(0, 0, 0, .125);
 }
 
 .bar-card > h3 {
     margin-top: 10px;
     margin-bottom: 0px;
+    font-size: 1.6em;
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    font-style: normal;
 }
 
 .bar-card-parent {
@@ -68,12 +70,8 @@
 /* - - - - - - Chosen feature - - - - - - */
 
 .chosen-feature {
-    /* font-style: italic; */
     color: #D33D17;
     font-weight: bold;
-    /* text-decoration: underline dashed;
-    text-underline-offset: 0.3rem;
-    text-decoration-color: #D33D17; */
 }
 
 /* - - - - - - Barplots - - - - - - */
@@ -92,5 +90,5 @@
 
 .pct-turnout {
     font-weight: bold;
-    /* text-decoration: underline; */
+    color: #D33D17;
 }

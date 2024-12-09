@@ -1,17 +1,14 @@
-
-
-
-
 .ballot-font-large{
-    font-size: 2.1rem;
+    font-size: 2rem;
+    font-weight: bold;
 }
 .ballot-font-med{
     font-size: 1.8rem;
-    color: gray;
+    color: #5F6B7C;
 }
 .ballot-font-small{
     font-size: 1.6rem;
-    color: #b5b3b3;
+    color: #ABB3BF;
 }
 
 
@@ -81,6 +78,7 @@
 }
 
 #ballot-top-page{
+    height: 95vh;
     width: 83vw;
     background: #fff;
     text-align: start;
@@ -141,6 +139,8 @@
 }
 
 .left-section {
-    padding-top: 15px;
+    vertical-align: top;
+    font-size: 2rem;
+    padding-top: 3vh;
     padding-right: 10px;
 }

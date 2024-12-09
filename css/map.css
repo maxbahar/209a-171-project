@@ -15,6 +15,13 @@
     display: flex;
 }
 
+.tooltipText {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+}
+
 #mainMapTooltip {
     width: 300px;
     height: 300px;

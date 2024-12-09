@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Voter Turnout in MA</title>
 
-    <!-- Include Roboto font -->
+    <!-- Include font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.css"
           integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
@@ -36,18 +36,30 @@
 <body>
 
 <div id="fullpage">
-    <!---------------------------- Prelude ---------------------------->
+    <!---------------------------- Prelude Part 1 ---------------------------->
     <div class="section section-img-bg" id="title1-bg">
         <div class="row g-0">
             <div class="col-1"></div>
-            <div class="col-4">
-                <h1>Voter Turnout in Massachusetts</h1>
+            <div class="col-5 main-title">
+                <h1 style="text-shadow: 0 4px 8px rgba(100, 100, 100, 0.3)">Voter Turnout in Massachusetts</h1>
                 <br/>
-                <h2>How Do Demographics Predict Voter Turnout in the 2020 Presidential Election?</h2>
-                <br/>
-                <h3 id="title-sub">(Please fill out the following ballot)</h3>
+                <h2 class="lato">How Do Demographics Affect Voter Turnout in the 2020 Presidential Election?</h2>
             </div>
-            <div class="col-7"></div>
+            <div class="col-6"></div>
+        </div>
+    </div>
+    <!---------------------------- Prelude Part 2 ---------------------------->
+    <div class="section section-img-bg" id="title2-bg">
+        <div class="img-text-container">
+            <h1>Understanding Voter Turnout</h1>
+            <ul>
+                <li><b>Why Voter Turnout Matters</b> - Voter turnout reflects public engagement in democracy. High turnout ensures broader representation. Low turnout highlights barriers to participation.
+                </li>
+                <li><b>Demographics and Turnout</b> - Research shows that turnout varies by demographics like age, income, and ethnicity. Identifying these patterns helps address gaps in representation.
+                </li>
+                <li><b>About This Site</b> - You can explore voter turnout in Massachusetts for the 2020 election. You can make guesses, compare them to our model, and uncover key demographic insights.
+                </li>
+            </ul>
         </div>
     </div>
     <!---------------------------- Page 0 / Title ---------------------------->
@@ -65,12 +77,12 @@
                 <tr class="limit-height">
                     <td class="limit-height black-border-bottom-thin">INSTRUCTIONS</td>
                     <td class="black-border-left black-border-bottom-thin black-border-right-thin">TEAM MEMBERS</td>
-                    <td class="black-border-bottom-thin" style="color: gray; font-size: 1.6rem;">Vote for ONE</td>
+                    <td class="black-border-bottom-thin" style="color: gray; font-size: 1.6rem;">VOTE FOR ONE</td>
                 </tr>
-                <tr>
-                    <td class="left-section">
+                <tr class="lato">
+                    <td class="left-section" rowspan="2">
                         <ul>
-                            <li><span class="preattentive">To vote, fill in the <u>oval</u> next to your choice.</span>
+                            <li>To vote, <b>fill in the oval</b> next to your choice.
                             </li>
                             <li><span>This page is just practice.</span>
                             </li>
@@ -109,8 +121,7 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="gray-border-bottom-thin"></td>
+                <tr class="lato">
                     <td class="black-border-left black-border-right-thin gray-border-bottom-thin">
                         <div class="row">
                             <div class="col-11 ballot-font-large">Stefan Chu</div>
@@ -158,12 +169,15 @@
                     <td class="limit-height black-border-left black-border-bottom-thin black-border-right-thin">
                         CATEGORIES
                     </td>
-                    <td style="color: gray; font-size: 1.6rem;" class="black-border-bottom-thin">Select up to THREE</td>
+                    <td style="color: gray; font-size: 1.6rem;" class="black-border-bottom-thin">SELECT UP TO THREE</td>
                 </tr>
-                <tr>
-                    <td rowspan="3" style="font-size: 2.5rem" class="left-section">
+                <tr class="lato">
+                    <!-- <td rowspan="3" style="font-size: 2.5rem" class="left-section">
                         WHICH <u>DEMOGRAPHIC CATEGORIES</u> DO YOU THINK <span class="preattentive">CONTRIBUTE THE MOST</span>
                         TOWARDS <u>VOTER TURNOUT</u> (POSITIVELY OR NEGATIVELY)?
+                    </td> -->
+                    <td rowspan="3" class="left-section" style="font-size: 2.3rem;">
+                        Which <b>demographic categories</b> do you think have the greatest impact on <b>voter turnout</b>, positively or negatively?
                     </td>
                     <td class="black-border-left gray-border-bottom-thin black-border-right-thin height-fit">
                         <div class="row">
@@ -192,7 +206,7 @@
                         <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
                     </td>
                 </tr>
-                <tr>
+                <tr class="lato">
                     <td class="black-border-left gray-border-bottom-thin black-border-right-thin height-fit">
                         <div class="row">
                             <div class="col-11 ballot-font-large">Gender</div>
@@ -220,7 +234,7 @@
                         <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
                     </td>
                 </tr>
-                <tr>
+                <tr class="lato">
                     <td class="black-border-left black-border-right-thin height-fit">
                         <div class="row">
                             <div class="col-11 ballot-font-large">Age</div>
@@ -279,8 +293,7 @@
     <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
     <div class="section blue-white-grad">
         <div class="header">
-            <h3>What Do You Think Voter Turnout in the 2020 Presidential Election is for <span
-                    class="chosen-feature"></span> ?</h3>
+            <h3>What do you think the voter turnout was in <span class="chosen-feature"></span> for the 2020 Presidential Election?</h3>
             <p>The average 2020 presidential voter turnout in Massachusetts is <span id="stateAvg"></span></p>
         </div>
 
@@ -527,10 +540,10 @@
         </div>
     </div>
     <!---------------------------- Page 7 / MODEL EXPLANATION ---------------------------->
-    <!-- ADD COLOR -->
     <div class="section custom-container">
         <div class="header">
             <h3>How Do We Uncover the Demographic Drivers of Voter Turnout?</h3>
+            <p>Leveraging data and models to understand voter behavior in Massachusetts.</p>
         </div>
         <div class="row g-0 justify-content-center align-items-center">
             <div class="col content-container">
@@ -563,16 +576,14 @@
                 <div class="content-card explanation">
                     <h4>Predictive Output</h4>
                     <img src="/images/output.png">
-                    <p>Our Random Forest model <b>predicts voter turnout</b> in the 2020 presidential election for each Census
-                        Block Group in Massachusetts, based on demographic data.</p>
-                    <p>Key findings include:</p>
+                    <p>The Random Forest model <b>predicts voter turnout</b> in the 2020 presidential election for each Census
+                        Block Group in Massachusetts, based on demographic data. Key findings include:</p>
                     <ul>
                         <li>Higher turnout is linked to higher income and more registered Democrats.</li>
                         <li>Lower turnout is linked to higher proportions of Hispanic voters and non-English speakers.
                         </li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>
@@ -641,9 +652,6 @@
                         </tr>
                         </tbody>
                     </table>
-                    <!-- <button id="modelMapElement-zoom-in">Zoom In</button>
-                    <button id="modelMapElement-zoom-out">Zoom Out</button>
-                    <button id="modelMapElement-reset">Reset</button> -->
                     <div class="map-container">
                         <div class="arrow-button left-arrow">
                             <svg width="40" height="40" viewBox="0 0 48 48">
@@ -677,10 +685,6 @@
                         detailed information (with ethical considerations) may allow for more granular predictions at
                         the individual voter level.</p>
                 </div>
-                <!-- <div class="content-card">
-                    <h3>Additional Information</h3>
-                    <p>Our model had a R2 score of ...</p>
-                </div> -->
             </div>
         </div>
     </div>
@@ -693,7 +697,7 @@
     </div>
     <div class="section section-img-bg" id="rec1-bg">
         <div class="img-text-container">
-            <h1><u>Making Voting More Accessible</u></h1>
+            <h1>Making Voting More Accessible</h1>
             <ul>
                 <li><b>Voter Registration Reform</b> - Universal automatic registration, same day registration, and
                     online registration
@@ -709,7 +713,7 @@
     </div>
     <div class="section section-img-bg" id="rec2-bg">
         <div class="img-text-container-dark">
-            <h1><u>Addressing Corruption</u></h1>
+            <h1>Addressing Corruption</h1>
             <ul>
                 <li><b>Campaign Finance Reform</b> - Ensuring that elections are not disproportionately influenced by
                     wealthier individuals or corporations
@@ -725,7 +729,7 @@
     </div>
     <div class="section section-img-bg" id="rec3-bg">
         <div class="img-text-container">
-            <h1><u>Education and Outreach</u></h1>
+            <h1>Education and Outreach</h1>
             <ul>
                 <li><b>Civic Education Programs</b> - Increasing the focus on civic education in schools and communities
                     can improve voter literacy and confidence
@@ -742,30 +746,30 @@
         <div class="row g-0">
             <div class="col-1"></div>
             <div class="col-4">
-                <h1><u>Thanks for listening!</u></h1>
+                <h1>Thanks for listening!</h1>
                 <table>
-                    <tbody>
+                    <tbody class="lato">
                     <tr>
                         <td>
-                            <h2>Max Bahar</h2>
-                            <h3>Harvard University</h3>
-                            <h3 style="color: #b5b3b3;"> MS Data Science 2026</h3>
+                            <h2 class="ballot-font-large">Max Bahar</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small"> MS Data Science 2026</h3>
                         </td>
-                        <td><h2>Stefan Chu</h2>
-                            <h3>Harvard University</h3>
-                            <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
+                        <td><h2 class="ballot-font-large">Stefan Chu</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small">MS Data Science 2026</h3>
                         </td>
                     </tr>
                     <tr style="height: 5vh"></tr>
                     <tr>
                         <td>
-                            <h2>Ted McCulloch</h2>
-                            <h3>Harvard University</h3>
-                            <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
+                            <h2 class="ballot-font-large">Ted McCulloch</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small">MS Data Science 2026</h3>
                         </td>
-                        <td><h2>Anitej Thamma</h2>
-                            <h3>Harvard University</h3>
-                            <h3 style="color: #b5b3b3;">MS Data Science 2026</h3>
+                        <td><h2 class="ballot-font-large">Anitej Thamma</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small">MS Data Science 2026</h3>
                         </td>
                     </tr>
                     </tbody>

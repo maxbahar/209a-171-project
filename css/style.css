@@ -13,13 +13,19 @@ b {
 }
 
 p, li {
-    font-family: "Roboto", serif;
+    font-family: "Lato", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
 
-.roboto {
-    font-family: "Roboto", serif;
+g > text {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.lato {
+    font-family: "Lato", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -46,10 +52,9 @@ p, li {
 
 .content-card{
     background: white;
-    margin:5px;
+    margin: 10px 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    margin-top: 2.5vh;
     padding: 15px;
 }
 .content-card ul {
@@ -67,7 +72,7 @@ p, li {
     height: auto;
     border-radius: 8px;
     margin-bottom: 15px;
-    padding:25px
+    padding:15px
 }
 .content-card h4 {
     margin-bottom: 10px;
@@ -92,6 +97,10 @@ p, li {
 
 /* - - - - - - TITLE SPECIFIC - - - - - - */
 
+.main-title {
+    text-align: left;
+}
+
 #title1-bg {
     background-image: url("/images/vote-t1.jpg");
 }
@@ -100,10 +109,12 @@ p, li {
     color: #D33D17;
 }
 #title2-bg {
-    background-image: url("/images/vote-t2.jpg");
+    /* background-image: url("/images/vote-t1.jpg"); */
+    background-color: #acccd4;
+    
 }
 #title-sub{
-    color: #666666;
+    color: #5F6B7C;
 }
 
 #section-0{
@@ -118,13 +129,6 @@ p, li {
     text-align: center;
     font-family: "Oswald", sans-serif;
     background: #FAF9F6;;
-}
-
-.wood-grain{
-    background-image: url("/images/wood-grain.jpg");
-}
-.wood-grain-blur{
-    background-image: url("/images/wood-grain-blur.png");
 }
 
 .section-img-bg{

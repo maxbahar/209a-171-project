@@ -37,8 +37,6 @@
     width: 20vw;
     max-width: 45vh;
     margin-bottom: 10px;
-
-
 }
 
 /* Hover effect on cards */
@@ -51,6 +49,9 @@
     margin: 0 0 10px;
     font-size: 1.6em;
     color: #333;
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    font-style: normal;
 }
 
 /* Card image styling */
@@ -65,5 +66,5 @@
 /* Card description styling */
 .card p {
     font-size: 1.4em;
-    color: #666;
+    color: #ABB3BF
 }

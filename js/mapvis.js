@@ -368,12 +368,24 @@ class MapVis {
         vis.geoFeatures.on("click", function(event, d){
 
             vis.tooltip.style("display","grid");
+            let title = "";
+            switch (vis.geoLevel) {
+                case "county":
+                    title = `${d.properties["BASENAME"]} County`
+                    break;
+                case "tract":
+                    title = `Tract ${d.properties["GEOID20"]}`
+                    break;
+                case "blockGroup":
+                    title = `Block Group ${d.properties["GEOID20"]}`
+                    break;
+            }
                         
             if(vis.tooltipID === "modelMapTooltip"){
                 vis.tooltip.html(`
-                    <h4>${d.properties["BASENAME"]} ${vis.geoLevel}</h4>
-                    <div style="font-size: 14pt"><b>${variableMap[vis.cycleVars[0]]}: </b>${pctFormat(d.properties[vis.cycleVars[0]])}</div>
-                    <div style="font-size: 14pt"><b>Actual ${variableMap[vis.cycleVars[1]]}: </b>${pctFormat(d.properties[vis.cycleVars[1]])}</div>
+                    <h4>${title}</h4>
+                    <div class="tooltipText"><b>Predicted</b> <b style="color:black">${variableMap[vis.cycleVars[1]]}: </b>${pctFormat(d.properties[vis.cycleVars[0]])}</div>
+                    <div class="tooltipText"><b>Actual</b> <b style="color:black">${variableMap[vis.cycleVars[1]]}: </b>${pctFormat(d.properties[vis.cycleVars[1]])}</div>
                     <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
                     `); 
                 vis.tooltipVis = new TooltipLocalImportance(vis.tooltipID, d);
@@ -393,23 +405,10 @@ class MapVis {
                         mainVarValue = dollarFormat(d.properties[vis.mainVar])
                         break;
                 }
-                
-                let title = "";
-                switch (vis.geoLevel) {
-                    case "county":
-                        title = `${d.properties["BASENAME"]} County`
-                        break;
-                    case "tract":
-                        title = `Tract ${d.properties["GEOID20"]}`
-                        break;
-                    case "blockGroup":
-                        title = `Block Group ${d.properties["GEOID20"]}`
-                        break;
-                }
 
                 vis.tooltip.html(`
                     <h4>${title}</h4>
-                    <div style="font-size: 14pt"><b style="color:black">${variableMap[vis.mainVar]}: </b>${mainVarValue}</div>
+                    <div class="tooltipText"><b style="color:black">${variableMap[vis.mainVar]}: </b>${mainVarValue}</div>
                     <div class="tooltipVisContainer" id="${vis.tooltipID}"></div>
                     `); 
                 vis.tooltipVis = new TooltipVis(vis.tooltipID, d, vis.demoVar);
