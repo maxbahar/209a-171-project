@@ -1,35 +1,47 @@
-import zipfile
-import pandas as pd
+# Dependencies
 import geopandas as gpd
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+import seaborn as sns
 import shap
-
+import zipfile
+from matplotlib.lines import Line2D
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.inspection import permutation_importance
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import KFold, RandomizedSearchCV
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import RandomForestRegressor
 
 # Group demographic columns together
-registered = ["total_reg"]
-age = ["age_18_19", "age_20_24", "age_25_29", "age_30_34", "age_35_44", "age_45_54", "age_55_64", "age_65_74","age_75_84", "age_85over"]
-init_gender = [ "voters_gender_m", "voters_gender_f", "voters_gender_unknown"] 
-gender = [ "gender_m", "gender_f", "gender_unknown"] 
-party = ["party_npp", "party_dem", "party_rep","party_lib", "party_grn", "party_con", "party_ain", "party_scl","party_oth"]
-ethnicity1 = ["eth1_eur", "eth1_hisp", "eth1_aa",
-                "eth1_esa", "eth1_oth", "eth1_unk"]
-init_languages = ["languages_description_english", "languages_description_spanish",
-                "languages_description_portuguese",
-                "languages_description_chinese", "languages_description_italian",
-                "languages_description_vietnamese", "languages_description_other",
-                "languages_description_unknown"]
-languages = ["lang_english", "lang_spanish",
-                "lang_portuguese",
-                "lang_chinese", "lang_italian",
-                "lang_vietnamese", "lang_other",
-                "lang_unknown"]
-income = ["commercialdata_estimatedhhincomeamount_avg"]
-predictors = [*registered, *age, *gender, *party, *ethnicity1, *languages, "mean_hh_income"]
-predictors_subset = ["mean_hh_income", "total_reg", 
+
+PREDICTORS_DICT = dict(
+    registered = ["total_reg"],
+    age = ["age_18_19", "age_20_24", "age_25_29", "age_30_34", "age_35_44", "age_45_54", "age_55_64", "age_65_74","age_75_84", "age_85over"],
+    gender = [ "gender_m", "gender_f", "gender_unknown"],
+    party = ["party_npp", "party_dem", "party_rep","party_lib", "party_grn", "party_con", "party_ain", "party_scl","party_oth"],
+    ethnicity = ["eth1_eur", "eth1_hisp", "eth1_aa",
+                    "eth1_esa", "eth1_oth", "eth1_unk"],
+    languages = ["lang_english", "lang_spanish",
+                    "lang_portuguese",
+                    "lang_chinese", "lang_italian",
+                    "lang_vietnamese", "lang_other",
+                    "lang_unknown"],
+    income= ["mean_hh_income"]
+)
+
+PREDICTORS_INIT_DICT = dict(
+    init_gender = [ "voters_gender_m", "voters_gender_f", "voters_gender_unknown"],
+    init_languages = ["languages_description_english", "languages_description_spanish",
+                    "languages_description_portuguese",
+                    "languages_description_chinese", "languages_description_italian",
+                    "languages_description_vietnamese", "languages_description_other",
+                    "languages_description_unknown"],
+   init_income = ["commercialdata_estimatedhhincomeamount_avg"]
+)
+
+PREDICTORS = [item for sublist in PREDICTORS_DICT.values() for item in sublist]
+SUBSET_PREDICTORS = ["mean_hh_income", "total_reg", 
                      "lang_unknown", "gender_f", "party_dem", 
                      "eth1_hisp", "eth1_eur", "eth1_aa", "eth1_oth",
                      "age_20_24", "age_25_29", "age_30_34", "age_45_54",]
@@ -48,8 +60,8 @@ def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
     counties_shp = gpd.read_file(f"zip://{c_zipfile}!ma_pl2020_cnty.shp")
 
     # Rename columns for easier intepretation
-    col_labels = {k:v for k, v in zip(init_gender, gender)}
-    col_labels.update({k:v for k,v in zip(init_languages, languages)})
+    col_labels = {k:v for k, v in zip(PREDICTORS_INIT_DICT["init_gender"], PREDICTORS_DICT["gender"])}
+    col_labels.update({k:v for k,v in zip(PREDICTORS_INIT_DICT["init_languages"], PREDICTORS_DICT["languages"])})
     voter_blocks_all = voter_blocks_all.rename(col_labels, axis=1)
 
     # Drop "NO BLOCK ASSIGNMENT" entries
@@ -67,7 +79,10 @@ def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
     )
 
     # Define aggregation method for columns
-    agg_funcs = {col: "sum" for col in [*registered, *age, *gender, *party, *ethnicity1, *languages, "g20201103_voted_all", "g20201103_reg_all"]}
+    sum_cols = [*PREDICTORS_DICT["registered"], *PREDICTORS_DICT["age"], *PREDICTORS_DICT["gender"], 
+                 *PREDICTORS_DICT["party"], *PREDICTORS_DICT["ethnicity"], *PREDICTORS_DICT["languages"], 
+                 "g20201103_voted_all", "g20201103_reg_all"]
+    agg_funcs = {col: "sum" for col in sum_cols}
     agg_funcs.update({"commercialdata_estimatedhhincomeamount_avg": wm_blocks})
 
     # Define block group ID
@@ -91,7 +106,7 @@ def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
     )
 
     # Define aggregation method for columns
-    agg_funcs = {col: "sum" for col in [*registered, *age, *gender, *party, *ethnicity1, *languages, "g20201103_voted_all", "g20201103_reg_all"]}
+    agg_funcs = {col: "sum" for col in sum_cols}
     agg_funcs.update({"mean_hh_income": wm_bg})
 
     # Define tract and county IDs
@@ -103,7 +118,7 @@ def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
     counties = block_groups.groupby("county_id").agg(agg_funcs)
 
     # Take proportions
-    for cat in [*age, *gender, *party, *ethnicity1, *languages]:
+    for cat in [*PREDICTORS_DICT["age"], *PREDICTORS_DICT["gender"], *PREDICTORS_DICT["party"], *PREDICTORS_DICT["ethnicity"], *PREDICTORS_DICT["languages"]]:
         block_groups[cat] = block_groups[cat] / block_groups["total_reg"]
         tracts[cat] = tracts[cat] / tracts["total_reg"]
         counties[cat] = counties[cat] / counties["total_reg"]
@@ -114,7 +129,7 @@ def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
     c_gdf = counties_shp.merge(counties, left_on="GEOID20", right_on="county_id").set_index("GEOID20")
     
     # Keep only relevant columns
-    keep_cols = predictors + ["g20201103_voted_all","g20201103_reg_all","BASENAME", "ALAND20", "geometry"]
+    keep_cols = PREDICTORS + ["g20201103_voted_all","g20201103_reg_all","BASENAME", "ALAND20", "geometry"]
     bg_gdf = bg_gdf[keep_cols]
     t_gdf = t_gdf[keep_cols]
     c_gdf = c_gdf[keep_cols]
@@ -135,11 +150,11 @@ def generate_predictions(data_dict, random_state=None):
     t_data = data_dict["tract"]
     c_data = data_dict["county"]
 
-    X = bg_data[predictors_subset]
+    X = bg_data[SUBSET_PREDICTORS]
     y = bg_data["2020_turnout_pct"]
 
     bg_predictions = bg_data[["2020_turnout_pct","2020_absent_pct","2020_registered","2020_turnout"]].copy()
-    bg_shap = bg_data[predictors_subset].copy()
+    bg_shap = bg_data[SUBSET_PREDICTORS].copy()
 
     #kf = KFold(n_splits=10,shuffle=True,random_state=random_state)
     # X.loc[:,["total_reg","mean_hh_income"]] = StandardScaler().fit_transform(X=X[["total_reg","mean_hh_income"]])
@@ -172,7 +187,7 @@ def generate_predictions(data_dict, random_state=None):
     # explainer = shap.LinearExplainer(linreg, X)
     explainer = shap.TreeExplainer(rf_cv)
     shap_values = explainer.shap_values(X)
-    bg_shap.loc[X.index, predictors_subset] = shap_values
+    bg_shap.loc[X.index, SUBSET_PREDICTORS] = shap_values
     
        
     print("SHAP base value: " + str(explainer.expected_value))
@@ -198,13 +213,13 @@ def generate_predictions(data_dict, random_state=None):
     
     t_shap = bg_shap.copy()
     for i in t_shap.index:
-        t_shap.loc[i,predictors_subset] *= bg_predictions.loc[i,"2020_registered"]
+        t_shap.loc[i,SUBSET_PREDICTORS] *= bg_predictions.loc[i,"2020_registered"]
     
     t_shap["tract_id"] = bg_shap.index.str[:11]
-    t_shap = t_shap.groupby("tract_id")[predictors_subset].sum()
+    t_shap = t_shap.groupby("tract_id")[SUBSET_PREDICTORS].sum()
     
     for i in t_shap.index:
-        t_shap.loc[i,predictors_subset] /= t_predictions.loc[i,"2020_registered"]
+        t_shap.loc[i,SUBSET_PREDICTORS] /= t_predictions.loc[i,"2020_registered"]
     
     print("SHAP Turnout Pred: " + str(sum(t_shap.iloc[0]) + explainer.expected_value))
     print("2020 Turnout Pct Pred: " + str(t_predictions["2020_turnout_pct_pred"].iloc[0]))
@@ -220,13 +235,13 @@ def generate_predictions(data_dict, random_state=None):
     
     c_shap = bg_shap.copy()
     for i in c_shap.index:
-        c_shap.loc[i,predictors_subset] *= bg_predictions.loc[i,"2020_registered"]
+        c_shap.loc[i,SUBSET_PREDICTORS] *= bg_predictions.loc[i,"2020_registered"]
         
     c_shap["county_id"] = bg_shap.index.str[:5]
-    c_shap = c_shap.groupby("county_id")[predictors_subset].sum()
+    c_shap = c_shap.groupby("county_id")[SUBSET_PREDICTORS].sum()
     
     for i in c_shap.index:
-        c_shap.loc[i,predictors_subset] /= c_predictions.loc[i,"2020_registered"]
+        c_shap.loc[i,SUBSET_PREDICTORS] /= c_predictions.loc[i,"2020_registered"]
     
     print("SHAP Turnout Pred: " + str(sum(c_shap.iloc[0]) + explainer.expected_value))
     print("2020 Turnout Pct Pred: " + str(c_predictions["2020_turnout_pct_pred"].iloc[0]))
@@ -252,14 +267,156 @@ def generate_predictions(data_dict, random_state=None):
     
     return {"block_group":bg_joined, "tract":t_joined, "county":c_joined}
 
+def gather_plot_importance(model, title):
+    # gather pred/coeff results
+    importance = []
+    preds = model.feature_names_in_
+    if hasattr(model, "coef_"):
+        importance = model.coef_
+    else: 
+        importance = model.feature_importances_
+    importance_df = pd.DataFrame({'Predictor': preds, 'Importance':importance})
+
+    # Visualize feature importance
+    # Sort by 'Importance' to improve visualization
+    importance_df = importance_df.sort_values('Importance', ascending=True).reset_index(drop=True)
+
+    # Plot
+    plt.figure(figsize=(10, 8))
+    colors = importance_df['Importance'].apply(lambda x: 'green' if x > 0 else 'red')
+    plt.barh(importance_df['Predictor'], importance_df['Importance'], color=colors)
+
+    # Add titles and labels
+    plt.xlabel('Importance')
+    plt.ylabel('Predictor')
+    plt.title('Feature Importance Plot of '+ title)
+
+    # Display plot
+    plt.grid(alpha=0.3)
+    plt.show()
+    return importance_df
+
+def gather_perm_importance(model, X_train, y_train, title, n_repeats=5):
+
+    results = permutation_importance(model, X_train, y_train, n_repeats=n_repeats)
+
+    if hasattr(model, "coef_"):
+        importance = model.coef_
+    else: 
+        importance = model.feature_importances_
+    perm_imp = pd.DataFrame({
+        'Predictor': X_train.columns,
+        'Permutation Importance Mean': results.importances_mean,
+        'Permutation Importance Std': results.importances_std, 
+        'Importance': importance
+    }).sort_values('Permutation Importance Mean', ascending=False)
+
+    perm_imp = perm_imp[perm_imp['Permutation Importance Mean'] > 0]
+
+    F = list(perm_imp['Predictor'])
+    I = list(perm_imp['Permutation Importance Mean'])
+    E = list(perm_imp['Permutation Importance Std'])
+    B = list(perm_imp['Importance'])
+    F.reverse()
+    I.reverse()
+    E.reverse()
+    B.reverse()
+    colors = ['red' if b < 0 else 'green' for b in B]
+
+    # Plot top 10 features with error bars
+    plt.figure(figsize=(10, 8))
+
+    plt.barh(range(len(perm_imp)), I, xerr=E, capsize=5, color=colors)
+    plt.yticks(range(len(perm_imp)), F)
+    plt.title('Permutation Importance of Features for ' + title)
+    plt.xlabel('Importance')
+    plt.tight_layout()
+    plt.grid(alpha=0.3)
+    plt.show()
+
+    return perm_imp
+
+def plot_dist(data, title, column, xlabel, ylabel, annotation_format, annotation_height):
+    # Create figure and axis
+    fig, ax = plt.subplots(figsize=(8,6))
+
+    # KDE plot
+    sns.kdeplot(data, x=column, linewidth=3, alpha=0.75, ax=ax)
+
+    # Calculate statistics
+    median = data[column].median()
+    p5 = np.percentile(data[column], 5)
+    p95 = np.percentile(data[column], 95)
+
+    # Add vertical lines for statistics
+    plt.axvline(x=median, linestyle="--", color="r", linewidth=2, label="Median")
+    plt.axvline(x=p5, linestyle=":", color="k", linewidth=2, label="5th percentile")
+    plt.axvline(x=p95, linestyle=":", color="k", linewidth=2, label="95th percentile")
+
+    # Annotate statistics on the plot
+    y_min, y_max = ax.get_ylim()
+    plt.text(median, annotation_height[1] * y_max, annotation_format.format(median), color="r", bbox={"edgecolor":"r", "facecolor":"white", "alpha":0.9}, ha="center")
+    plt.text(p5, annotation_height[0] * y_max, annotation_format.format(p5), color="k", bbox={"edgecolor":"k", "facecolor":"white", "alpha":0.9}, ha="center")
+    plt.text(p95, annotation_height[2] * y_max, annotation_format.format(p95), color="k", bbox={"edgecolor":"k", "facecolor":"white", "alpha":0.9}, ha="center")
+
+    # Customize axes
+    print()
+    plt.xticks(ax.get_xticks(), [annotation_format.format(x) for x in ax.get_xticks()])
+    plt.xlim(data[column].min(), data[column].max())
+    
+    # Add the custom legend to the plot
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+    plt.legend()
+    plt.grid(alpha=0.3)
+
+    plt.show()
+
+# Creates a scatterplot of two continuous variables
+def plot_scatter(data, title, x_column, y_column, xlabel, ylabel, label_format):
+    fig,ax = plt.subplots(figsize = (8,6))
+
+    # Plot the data
+    sns.scatterplot(data, x=x_column, y=y_column, alpha=0.3)
+
+    # Add the custom legend to the plot
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.xticks(ticks=ax.get_xticks(), labels=[label_format.format(x) for x in ax.get_xticks()])
+    plt.xlim(0, max(ax.get_xticks()))
+    plt.grid(alpha=0.3)
+    plt.title(title)
+    plt.show()
+
+# Plots voter distribution by category via kernel density
+def plot_KDE(data, title, vars, labels, colors, xlabel):
+    fig,ax = plt.subplots(figsize = (8,6))
+    legend_elements =[]
+    for i in range(len(vars)):
+        sns.kdeplot(data, x=vars[i], y='2020_turnout_pct', ax=ax,
+                    color=colors[i],
+                        alpha=0.3,
+                        label=labels[i]
+                    )
+        legend_elements.append(Line2D([0], [0], color=colors[i], lw=4, label=labels[i]))
+
+    # Add the custom legend to the plot
+    plt.legend(handles=legend_elements)
+    plt.title(title)
+    plt.xlabel(f'Proportion of {xlabel} Relative to Total Registered Voting Population')
+    plt.ylabel('Voter Turnout')
+    plt.grid(alpha=0.3)
+    plt.show()
+    
 if __name__ == "__main__":
 
     data_dict = process_data()
-    data_dict["block_group"].to_file("../data/block_groups.geojson")
-    data_dict["tract"].to_file("../data/tracts.geojson")
-    data_dict["county"].to_file("../data/counties.geojson")
+    # data_dict["block_group"].to_file("../data/block_groups.geojson")
+    # data_dict["tract"].to_file("../data/tracts.geojson")
+    # data_dict["county"].to_file("../data/counties.geojson")
 
-    pred_dict = generate_predictions(data_dict, random_state=209)
-    pred_dict["block_group"].to_file("../data/block_groups_pred.geojson")
-    pred_dict["tract"].to_file("../data/tracts_pred.geojson")
-    pred_dict["county"].to_file("../data/counties_pred.geojson")
+    # pred_dict = generate_predictions(data_dict, random_state=209)
+    # pred_dict["block_group"].to_file("../data/block_groups_pred.geojson")
+    # pred_dict["tract"].to_file("../data/tracts_pred.geojson")
+    # pred_dict["county"].to_file("../data/counties_pred.geojson")
