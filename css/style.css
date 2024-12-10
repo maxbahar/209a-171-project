@@ -12,6 +12,14 @@ b {
     color: #D33D17;
 }
 
+body {
+    color: #404854;
+}
+
+h1, h2, h3, h4 {
+    color: #111418;
+}
+
 p, li {
     font-family: "Lato", sans-serif;
     font-weight: 400;
@@ -58,11 +66,11 @@ g > text {
     padding: 15px;
 }
 .content-card ul {
-    font-size: large;
+    font-size: 1.1rem;
     text-align: left;
 }
-.content-card p {
-    font-size: large;
+.content-card > p {
+    font-size: 1.1rem;
     text-align: left;
     margin-left: 5px;
     margin-bottom: 5px;

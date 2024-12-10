@@ -3,7 +3,7 @@ class KdePlot {
     constructor(parentElement, data) {
         this.parentElement = parentElement;
         this.data = data;
-        this.margin = {top: 40, right: 40, bottom: 40, left: 40};
+        this.margin = {top: 20, right: 20, bottom: 20, left: 20};
         this.selectedCategory = "gender"
         this.initVis();
         window.addEventListener('resize', () => this.resize());

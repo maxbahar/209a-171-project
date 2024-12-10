@@ -172,10 +172,6 @@
                     <td style="color: gray; font-size: 1.6rem;" class="black-border-bottom-thin">SELECT UP TO THREE</td>
                 </tr>
                 <tr class="lato">
-                    <!-- <td rowspan="3" style="font-size: 2.5rem" class="left-section">
-                        WHICH <u>DEMOGRAPHIC CATEGORIES</u> DO YOU THINK <span class="preattentive">CONTRIBUTE THE MOST</span>
-                        TOWARDS <u>VOTER TURNOUT</u> (POSITIVELY OR NEGATIVELY)?
-                    </td> -->
                     <td rowspan="3" class="left-section" style="font-size: 2.3rem;">
                         Which <b>demographic categories</b> do you think have the greatest impact on <b>voter turnout</b>, positively or negatively?
                     </td>
@@ -407,11 +403,13 @@
         <div class="row g-0">
             <div class="col-8">
                 <div class="content-card">
+                    <h4>Voter Turnout Kernel Density Estimate</h4>
                     <table class="viz-title" id="kde-title">
                         <tbody>
                         <tr>
                             <td>
-                                <h4>Kernel Density Estimate by Category:&nbsp;</h4>
+                                <p class="map-dropdown-label">by Category:</p>
+                                <!-- <h4>Kernel Density Estimate by Category:&nbsp;</h4> -->
                             </td>
                             <td><select class="select-dropdown" id="kde-select" onchange="onKdeSelChange()">
                                 <option value="gender">Gender</option>
@@ -430,7 +428,7 @@
             <div class="col content-container">
                 <div class="kde-right kde-right-top content-card">
                     <h4>Legend</h4>
-                    <div class="kde-right-top-table">
+                    <div class="kde-right-top-table lato">
                         <table>
                             <tbody>
                             <tr>
@@ -492,11 +490,10 @@
                     <h4>About</h4>
                     <ul>
                         <li>Kernel density plots allow you to visualize the density of data observations</li>
-                        <li>Each of our observations is a block group</li>
                         <li><b>X-axis</b> - of the registered, voting population (of a block group), this proportion
-                            belonged to the stated category
+                            belonged to the category
                         </li>
-                        <li><b>Y-axis</b> - voter turnout for a given block group</li>
+                        <li><b>Y-axis</b> - voter turnout for a block group</li>
                         <li><b>Example Interpretation</b> - The density of <u>females</u> is to the right of <u>males</u> as there tend to be more women registered to vote than men.
                         </li>
                         <li><i><span style="border-bottom: 2px dashed black;">Dashed lines</span> are to aid with plot readability</i></li>
@@ -564,7 +561,7 @@
                 <div class="content-card explanation">
                     <h4>Key Inputs</h4>
                     <img src="/images/input.png">
-                    <p>We identified the <b>most important predictors</b> using techniques that measure feature
+                    <p>We identified the <b>most important predictors</b> by measuring feature
                         importance. These include:</p>
                     <ul>
                         <li>Proportion of voters aged 20-24, 25-29, 30-34, and 45-55.</li>
