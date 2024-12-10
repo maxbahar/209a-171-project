@@ -45,8 +45,9 @@
 #rec4-bg h1 {
     color: #D33D17;
 }
-#rec4-bg h3{
-    color:gray
+#rec4-bg .ballot-font-small {
+    font-size: 1.3rem;
+    color: #8F99A8;
 }
 
 .img-text-container {
@@ -69,7 +70,9 @@
     margin: 5vh 25vh;
     color: white;
 }
-
+.img-text-container-dark > h1{
+    color: white;
+}
 
 .img-text-container h1 {
     text-align: center;

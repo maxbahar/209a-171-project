@@ -41,7 +41,7 @@
         <div class="row g-0">
             <div class="col-1"></div>
             <div class="col-5 main-title">
-                <h1 style="text-shadow: 0 4px 8px rgba(100, 100, 100, 0.3)">Voter Turnout in Massachusetts</h1>
+                <h1>Voter Turnout in Massachusetts</h1>
                 <br/>
                 <h2 class="lato">How Do Demographics Affect Voter Turnout in the 2020 Presidential Election?</h2>
             </div>
@@ -487,8 +487,16 @@
 
                 </div>
                 <div class="content-card">
-                    <h4>About</h4>
-                    <ul>
+                    <h4>Turnout Trends Across Demographics</h4>
+                    <p>Kernel density plots allow you to visualize the density of data observations</p>
+                    <p><b>X-axis</b> - of the registered, voting population (of a block group), this proportion
+                        belonged to the category
+                    </p>
+                    <p><b>Y-axis</b> - voter turnout for a block group</p>
+                    <p><b>Example Interpretation</b> - The density of <u>females</u> is to the right of <u>males</u> as there tend to be more women registered to vote than men.
+                    </p>
+                    <p><i><span style="border-bottom: 2px dashed black;">Dashed lines</span> are to aid with plot readability</i></p>
+                    <!-- <ul>
                         <li>Kernel density plots allow you to visualize the density of data observations</li>
                         <li><b>X-axis</b> - of the registered, voting population (of a block group), this proportion
                             belonged to the category
@@ -497,8 +505,7 @@
                         <li><b>Example Interpretation</b> - The density of <u>females</u> is to the right of <u>males</u> as there tend to be more women registered to vote than men.
                         </li>
                         <li><i><span style="border-bottom: 2px dashed black;">Dashed lines</span> are to aid with plot readability</i></li>
-
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
         </div>
@@ -508,15 +515,22 @@
         <div class="row g-0">
             <div class="col content-container">
                 <div class="content-card">
-                    <h4>How Does Voter Turnout Vary Across Counties?</h4>
+                    <h4>Voter Turnout Across Counties</h4>
                     <p>We find that Hampden county has the lowest voter turnout, with <b>10% lower</b> voter turnout
                         compared to other counties.</p>
                     <p>On the other hand, Barnstable and Hampshire county are tied for the highest voter turnout, with
                         <b>4% higher</b> voter turnout compared to other counties.</p>
                 </div>
                 <div class="content-card">
-                    <h4>About</h4>
-                    <ul>
+                    <h4>Party Affiliation in Massachusetts</h4>
+                    <p>The diverging bar plot visualizes how voter turnout in Massachusetts counties deviates from
+                        the average 81% voter turnout.
+                    </p>
+                    <p><b>Use the dropdowns</b> to see the proportion of each party's voters in each county.
+                    </p>
+                    <p>The bars are shaded based on the dominant party for each county.
+                    </p>
+                    <!-- <ul>
                         <li>The diverging bar plot visualizes how voter turnout in Massachusetts counties deviates from
                             the average 81% voter turnout.
                         </li>
@@ -524,7 +538,7 @@
                         </li>
                         <li>The bars are shaded based on the dominant party for each county.
                         </li>
-                    </ul>
+                    </ul> -->
                 </div>
             </div>
             <div class="col-8">
@@ -593,20 +607,25 @@
         <!-- <div class="header"> -->
         <div class="row g-0">
             <div class="col content-container">
-                <div class="content-card">
-                    <h4>How Important Are Specific Demographic Features?</h4>
-                    <p>Our model shows that some demographic features are more important than others in predicting voter
-                        turnout.</p>
-                    <p>Specifically, we find age brackets of <b>65-74, 25-29, and 30-34</b> are the most impactful to
-                        our model's predicitons.</p>
-                </div>
-                <div class="content-card">
-                    <h4>About</h4>
+                <!-- <div class="content-card">
+                    <h4>Understanding Feature Impact on Voter Turnout</h4>
                     <ul>
                         <li>The plot to the right shows the SHAP values for each demographic feature.</li>
                         <li>SHAP values measure how impactful a feature is to the model's predictions.</li>
                         <li>Features at the top are the most impactful, those at the bottom are least impactful.</li>
                     </ul>
+                </div> -->
+                <div class="content-card">
+                    <h4>Understanding Feature Impact on Voter Turnout</h4>
+                    <p>The plot to the right shows the <b>SHAP values</b> for each demographic feature.</p>
+                    <p>SHAP values measures the impact of a feature on the model's predictions.</p>
+                    <p>Features at the top are the most impactful, those at the bottom are least impactful.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Key Demographics Driving Turnout Predictions</h4>
+                    <p>Our model shows that some demographic features are more important than others in predicting voter
+                        turnout.</p>
+                    <p>Specifically, we find <b>FILL THIS IN</b> are the most impactful to our model's predicitons.</p>
                 </div>
             </div>
             <div class="col-8">
@@ -670,21 +689,16 @@
             </div>
             <div class="col content-container">
                 <div class="content-card">
-                    <h3>How did you do?</h3>
-                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span
-                            class="pct-turnout" id="user-guess"></span>.</p>
-                    <p>Our model predicted that the county had a voter turnout of <span class="pct-turnout"
-                                                                                        id="model-guess"></span>.</p>
-                    <p>In reality, the county had a voter turnout of <span class="pct-turnout" id="actual-value"></span>.
-                    </p>
+                    <h4>Comparing Predictions and Reality</h4>
+                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span class="pct-turnout" id="user-guess"></span>.</p>
+                    <p>Our model predicted that the county had a voter turnout of <span class="pct-turnout" id="model-guess"></span>.</p>
+                    <p>In reality, the county had a voter turnout of <span class="pct-turnout" id="actual-value"></span>.</p>
                 </div>
                 <div class="content-card">
-                    <h3>Implications of Model Results</h3>
-                    <p>The model performs pretty well in predicting voter turnout using voter demographic information,
-                        suggesting that the information needed to perform similar analyses is readily available.</p>
-                    <p>Our results are at the Census block group level and predict aggregate voting behavior. Using more
-                        detailed information (with ethical considerations) may allow for more granular predictions at
-                        the individual voter level.</p>
+                    <h4>Insights from Model Results</h4>
+                    <p><b>Click on any area</b> to see how each demographic feature affected the turnout prediction for that area.</p>
+                    <p>Predictions closely align with actual turnout, validating the use of demographic data for understanding voter engagement.</p>
+                    <p>Lower turnout is linked to higher proportions of FILL THIS IN, highlighting areas for targeted outreach.</p>
                 </div>
             </div>
         </div>

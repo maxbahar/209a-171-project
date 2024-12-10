@@ -149,3 +149,10 @@ g > text {
 
 }
 
+#diverging-bar-plot, #importance-beeswarm-plot {
+    height: 85vh;
+}
+
+#rec4-bg h1 {
+    text-shadow: 0 4px 8px rgba(100, 100, 100, 0.3);
+}
