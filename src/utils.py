@@ -185,7 +185,7 @@ def generate_predictions(data_dict, random_state=None):
 
     # Create SHAP explainer
     # explainer = shap.LinearExplainer(linreg, X)
-    explainer = shap.TreeExplainer(rf_cv)
+    explainer = shap.TreeExplainer(rf_cv, X)
     shap_values = explainer.shap_values(X)
     bg_shap.loc[X.index, SUBSET_PREDICTORS] = shap_values
     
@@ -407,6 +407,14 @@ def plot_KDE(data, title, vars, labels, colors, xlabel):
     plt.xlabel(f'Proportion of {xlabel} Relative to Total Registered Voting Population')
     plt.ylabel('Voter Turnout')
     plt.grid(alpha=0.3)
+    plt.show()
+
+def plot_corr_matrix(data, title, vars):
+    fig,ax = plt.subplots(figsize = (10,10))
+    corr = data[vars].corr()
+    mask = np.triu(np.ones_like(corr, dtype=bool))
+    sns.heatmap(corr, mask=mask, cmap="RdBu")
+    plt.title(title)
     plt.show()
     
 if __name__ == "__main__":
