@@ -296,9 +296,9 @@ def gather_plot_importance(model, title):
     plt.show()
     return importance_df
 
-def gather_perm_importance(model, X_train, y_train, title, n_repeats=5):
+def gather_perm_importance(model, X_train, y_train, title, n_repeats=5, random_state=None):
 
-    results = permutation_importance(model, X_train, y_train, n_repeats=n_repeats)
+    results = permutation_importance(model, X_train, y_train, n_repeats=n_repeats, random_state=random_state)
 
     if hasattr(model, "coef_"):
         importance = model.coef_
