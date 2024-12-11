@@ -49,10 +49,10 @@ class MapVis {
         // Global mousemove listener
         const svgElement = document.querySelector(`#${vis.parentElement}`);
         const sectionElement = svgElement.closest(".section");
+        const cardElement = svgElement.closest(".content-card");
         sectionElement.addEventListener("mousemove", function(event) {
             const [mouseX, mouseY] = d3.pointer(event);
 
-            const cardElement = svgElement.closest(".content-card");
             const boundingBox = cardElement.getBoundingClientRect();
 
             // Check if the cursor is within the SVG's bounding box

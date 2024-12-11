@@ -530,26 +530,16 @@
                     </p>
                     <p>The bars are shaded dynamically, with lighter or darker hues indicating the proportion of the dominant party in each
                         county.</p>
-                    <!-- <ul>
-                        <li>The diverging bar plot visualizes how voter turnout in Massachusetts counties deviates from
-                            the average 81% voter turnout.
-                        </li>
-                        <li><b>Use the dropdowns</b> to see the proportion of each party's voters in each county.
-                        </li>
-                        <li>The bars are shaded based on the dominant party for each county.
-                        </li>
-                    </ul> -->
                 </div>
             </div>
             <div class="col-8">
                 <div class="content-card">
                     <h4>Voter Turnout by County by Party</h4>
-                    <div class="visContainer" id="diverging-bar-plot-container"
-                         style="overflow-y: scroll; overflow-x:hidden;">
-                        <div id="party-selection"></div>
-                        <svg id="diverging-bar-plot"></svg>
-                        <div id="legend"></div>
-                    </div>
+                    <div id="party-selection"></div>
+                        <div class="visContainer" id="diverging-bar-plot-container">
+                            <svg id="diverging-bar-plot"></svg>
+                        </div>
+                    <div id="legend"></div>
                 </div>
             </div>
         </div>
@@ -607,39 +597,22 @@
         <!-- <div class="header"> -->
         <div class="row g-0">
             <div class="col content-container">
-                <!-- <div class="content-card">
-                    <h4>Understanding Feature Impact on Voter Turnout</h4>
-                    <ul>
-                        <li>The plot to the right shows the SHAP values for each demographic feature.</li>
-                        <li>SHAP values measure how impactful a feature is to the model's predictions.</li>
-                        <li>Features at the top are the most impactful, those at the bottom are least impactful.</li>
-                    </ul>
-                </div> -->
                 <div class="content-card">
-                    <h4>Understanding Feature Impact on Voter Turnout</h4>
-                    <p>The plot to the right shows the <b>SHAP values</b> for each demographic feature.</p>
-                    <p>SHAP values measure the impact each feature has on the model's predictions.</p>
-                    <p>Features at the top influence the model outcome the most, so they can be interpreted as more
-                        important relative to the features at the bottom.</p>
+                    <h4>Impact on Voter Turnout</h4>
+                    <p>The plot to the right shows <b>SHAP values</b>, measuring the impact each feature has on the model's predictions.</p>
+                    <p>Features at the top are most influential, while those at the bottom are less impactful.</p>
                 </div>
                 <div class="content-card">
-                    <h4>Key Demographics Driving Turnout Predictions</h4>
-                    <p>We find that <b>mean household income, unknown language, and hispanic ethnicity</b> are on
-                        average, the most impactful to the model's predictions.</p>
-                    <p>SHAP is great for showing global feature importance. To interpret the plot, features with a high
-                        proportion of registered voters in that category are more red, while features with a low
-                        proportion are more blue.</p>
-                    <p>For example, we can interpret that block groups with high mean household income tend to increase
-                        the model's voter turnout prediction by a small amount, and those with a low mean household
-                        income tend to decrease the prediction by a large amount.</p>
-                    <p>We also see that block groups with a high proportion of registered voters who speak an unknown
-                        language and those with a high proportion of hispanic voters tend to decrease the model's
-                        prediction of voter turnout by a large amount.</p>
+                    <h4>Key Demographics Driving Turnout</h4>
+                    <p><b>Mean household income</b>, <b>unknown language</b>, and <b>Hispanic ethnicity</b> are the most impactful features on average.</p> 
+                    <p>High variable values are shown in red, while low values are shown in blue.</p>
+                    <p>For example, high household income slightly increases turnout predictions, while low income decreases them significantly.</p> 
+                    <p>Similarly, block groups with high proportions of voters in the unknown language category (that are likely non-English speakers) or Hispanic ethnicity tend to lower turnout predictions.</p>
                 </div>
             </div>
             <div class="col-8">
                 <div class="content-card">
-                    <h4>Model Feature Importance</h4>
+                    <h4>SHAP Model Feature Importance</h4>
                     <div class="visContainer" id="importance-beeswarm-plot"></div>
                 </div>
             </div>
@@ -706,10 +679,10 @@
                 <div class="content-card">
                     <h4>Insights from Model Results</h4>
                     <p><b>Click on any area</b> to see how each demographic feature affected the turnout prediction for that area.</p>
-                    <p>Predictions closely align with actual turnout, validating the use of demographic data for understanding voter engagement.</p>
-                    <p>Each tooltip shows how much each feature influences the model's local prediction for that area.</p>
+                    <p>The tooltip shows how much each feature influences the model's local prediction for that area.</p>
                     <p>The prediction always starts at a base SHAP prediction of <b>78.74%</b>. Then each feature is shown
                         positively influencing the voter turnout prediction in red or negatively in blue.</p>
+                    <p>Predictions closely align with actual turnout, validating the use of demographic data for understanding voter engagement.</p>
                 </div>
             </div>
         </div>
