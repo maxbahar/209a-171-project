@@ -109,6 +109,10 @@ g > text {
     text-align: left;
 }
 
+.main-title > h1 {
+    text-shadow: 0 4px 8px rgba(100, 100, 100, 0.3);
+}
+
 #title1-bg {
     background-image: url("/images/vote-t1.jpg");
 }

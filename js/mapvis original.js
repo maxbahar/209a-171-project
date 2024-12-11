@@ -36,45 +36,13 @@ class MapVis {
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip mapTooltip");
 
-        // Track whether the tooltip should stay visible
-        vis.tooltipKeep = false;
 
-        // Add mouseover and mouseout handlers to the tooltip
+        // Prevent tooltip from hiding when hovered
         vis.tooltip.on("mouseover", () => {
             vis.tooltipKeep = true; // Keep the tooltip visible
         }).on("mouseout", () => {
             vis.tooltipKeep = false; // Allow hiding when leaving the tooltip
         });
-
-        // Global mousemove listener
-        d3.select("body").on(`mousemove.${vis.parentElement}`, function(event) {
-            const [mouseX, mouseY] = d3.pointer(event);
-
-            const svgElement = document.querySelector(`#${vis.parentElement}`);
-            const cardElement = svgElement.closest(".content-card");
-            const boundingBox = cardElement.getBoundingClientRect();
-
-            console.log(cardElement);
-
-            // Check if the cursor is within the SVG's bounding box
-            const isWithinBounds = (
-                mouseX >= boundingBox.left &&
-                mouseX <= boundingBox.right &&
-                mouseY >= boundingBox.top &&
-                mouseY <= boundingBox.bottom
-            );
-
-            // Hide the tooltip if the cursor is not over the SVG or tooltip
-            if (!isWithinBounds) {
-                vis.tooltip.style("opacity", 1)
-                    .style("display", "none")
-                    .style("left", 0)
-                    .style("top", 0);
-                vis.tooltipShowing = false;
-                vis.tooltipHandler.lower();
-            }
-        });
-
         vis.tooltipShowing = false;
         vis.tooltipHandler = vis.svg.append("rect")
                                         .attr("opacity", 0)
@@ -89,18 +57,17 @@ class MapVis {
                                                 .style("top", 0);
                                                 vis.tooltipHandler.lower();
                                             }
+                                        }).on("mouseout", function(event) {  // Temporary to prevent lingering tooltip across pages
+                                            setTimeout(() => {
+                                                if (!vis.tooltipKeep) {
+                                                    vis.tooltip.style("opacity", 1)
+                                                    .style("display","none")
+                                                    .style("left", 0)
+                                                    .style("top", 0);
+                                                    vis.tooltipHandler.lower();
+                                                }
+                                            }, 100);
                                         });
-                                        // .on("mouseout", function(event) {  // Temporary to prevent lingering tooltip across pages
-                                        //     setTimeout(() => {
-                                        //         if (!vis.tooltipKeep) {
-                                        //             vis.tooltip.style("opacity", 1)
-                                        //             .style("display","none")
-                                        //             .style("left", 0)
-                                        //             .style("top", 0);
-                                        //             vis.tooltipHandler.lower();
-                                        //         }
-                                        //     }, 100);
-                                        // });
 
         // Initialize variable cycling
         vis.varIndex = 0;
@@ -461,12 +428,6 @@ class MapVis {
             }
             if (top + tooltipHeight > window.innerHeight) {
                 top = event.pageY - tooltipHeight - 20; // Position above the cursor
-            }
-            if (top < 0) {
-                top = 10; // Minimum top margin
-            }
-            if (left < 0) {
-                left = 10; // Minimum left margin
             }
             
             vis.tooltip.style("left",`${left}px`)
