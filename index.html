@@ -618,14 +618,23 @@
                 <div class="content-card">
                     <h4>Understanding Feature Impact on Voter Turnout</h4>
                     <p>The plot to the right shows the <b>SHAP values</b> for each demographic feature.</p>
-                    <p>SHAP values measures the impact of a feature on the model's predictions.</p>
-                    <p>Features at the top are the most impactful, those at the bottom are least impactful.</p>
+                    <p>SHAP values measure the impact each feature has on the model's predictions.</p>
+                    <p>Features at the top influence the model outcome the most, so they can be interpreted as more
+                        important relative to the features at the bottom.</p>
                 </div>
                 <div class="content-card">
                     <h4>Key Demographics Driving Turnout Predictions</h4>
-                    <p>Our model shows that some demographic features are more important than others in predicting voter
-                        turnout.</p>
-                    <p>Specifically, we find <b>FILL THIS IN</b> are the most impactful to our model's predicitons.</p>
+                    <p>We find that <b>mean household income, unknown language, and hispanic ethnicity</b> are on
+                        average, the most impactful to the model's predictions.</p>
+                    <p>SHAP is great for showing global feature importance. To interpret the plot, features with a high
+                        proportion of registered voters in that category are more red, while features with a low
+                        proportion are more blue.</p>
+                    <p>For example, we can interpret that block groups with high mean household income tend to increase
+                        the model's voter turnout prediction by a small amount, and those with a low mean household
+                        income tend to decrease the prediction by a large amount.</p>
+                    <p>We also see that block groups with a high proportion of registered voters who speak an unknown
+                        language and those with a high proportion of hispanic voters tend to decrease the model's
+                        prediction of voter turnout by a large amount.</p>
                 </div>
             </div>
             <div class="col-8">
@@ -698,7 +707,9 @@
                     <h4>Insights from Model Results</h4>
                     <p><b>Click on any area</b> to see how each demographic feature affected the turnout prediction for that area.</p>
                     <p>Predictions closely align with actual turnout, validating the use of demographic data for understanding voter engagement.</p>
-                    <p>Lower turnout is linked to higher proportions of FILL THIS IN, highlighting areas for targeted outreach.</p>
+                    <p>Each tooltip shows how much each feature influences the model's local prediction for that area.</p>
+                    <p>The prediction always starts at a base SHAP prediction of <b>78.74%</b>. Then each feature is shown
+                        positively influencing the voter turnout prediction in red or negatively in blue.</p>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ class Beeswarm {
         let vis = this;
 
         // Define width, height, and margins
-        vis.margin = {top: 20, right: 100, bottom: 20, left: 20};
+        vis.margin = {top: 10, right: 100, bottom: 10, left: 50};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -54,17 +54,17 @@ class Beeswarm {
         })
 
         //limit to top 8 features to fit within content card
-        vis.sortedKeys = vis.sortedKeys.slice(vis.sortedKeys.length-8, vis.sortedKeys.length);
+        //vis.sortedKeys = vis.sortedKeys.slice(vis.sortedKeys.length-8, vis.sortedKeys.length);
 
         vis.xScale = d3
             .scaleLinear()
-            .domain([vis.min-0.05, vis.max+0.05])
+            .domain([vis.min-0.01, vis.max+0.01])
             .range([150, vis.width]);
 
         vis.yScale = d3
             .scaleBand()
             .domain(vis.sortedKeys)
-            .range([vis.height, 80])
+            .range([vis.height-20, 20])
 
         vis.xAxis = d3.axisBottom(vis.xScale);
 
@@ -92,22 +92,22 @@ class Beeswarm {
                         let prevX = vis.xScale(vis.data[key][j][0]);
                         if (Math.abs(x - prevX) < 1) {
                             if (vis.offset_flag){
-                                yOffset -= 0.1; // Shift up
+                                yOffset -= 0.05; // Shift up
                             }
                             else{
-                                yOffset += 0.1; // Shift down
+                                yOffset += 0.05; // Shift down
                             }
                         }
-                        if(yOffset <=-30 || yOffset >=30){
+                        if(yOffset <=-15 || yOffset >=15){
                             j = i;
                         }
                     }
                     vis.offset_flag = !vis.offset_flag
-                    if (yOffset < -30){
-                        yOffset = -30; // Max up shift
+                    if (yOffset < -15){
+                        yOffset = -15; // Max up shift
                     }
-                    if (yOffset > 30){
-                        yOffset = 30; // Max down shift
+                    if (yOffset > 15){
+                        yOffset = 15; // Max down shift
                     }
                     return y + yOffset;
                 }))
@@ -119,7 +119,7 @@ class Beeswarm {
                 .attr("x", 130)
                 .attr("y", vis.yScale(key))
                 .attr("text-anchor", "end")
-                .text(variableMap[key]);
+                .text(variableMap[key+"_shap"]);
         });
 
 

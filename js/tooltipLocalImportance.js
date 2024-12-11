@@ -9,7 +9,7 @@ class TooltipLocalImportance{
     initVis() {
         let vis = this;
 
-        vis.margin = {top: 20, right: 50, bottom: 25, left: 120};
+        vis.margin = {top: 20, right: 50, bottom: 30, left: 120};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
         vis.height = document.getElementById(vis.parentElement).getBoundingClientRect().height - vis.margin.top - vis.margin.bottom;
 
@@ -26,16 +26,14 @@ class TooltipLocalImportance{
     wrangleData() {
         let vis = this;
 
-        vis.variables = ["total_reg_shap", "age_18_19_shap", "age_20_24_shap", "age_25_29_shap", "age_30_34_shap",
-            "age_35_44_shap", "age_45_54_shap", "age_55_64_shap", "age_65_74_shap", "age_75_84_shap",
-            "age_85over_shap", "gender_m_shap", "gender_f_shap", "gender_unknown_shap", "party_npp_shap",
-            "party_dem_shap", "party_rep_shap", "party_lib_shap", "party_grn_shap", "party_con_shap",
-            "party_ain_shap", "party_scl_shap", "party_oth_shap", "eth1_eur_shap", "eth1_hisp_shap",
-            "eth1_aa_shap", "eth1_esa_shap", "eth1_oth_shap", "eth1_unk_shap", "lang_english_shap",
-            "lang_spanish_shap", "lang_portuguese_shap", "lang_chinese_shap", "lang_italian_shap",
-            "lang_vietnamese_shap", "lang_other_shap", "lang_unknown_shap", "mean_hh_income_shap"]
+        vis.variables = ["mean_hh_income_shap", "total_reg_shap",
+            "lang_unknown_shap", "gender_f_shap", "party_dem_shap",
+            "eth1_hisp_shap", "eth1_eur_shap", "eth1_aa_shap", "eth1_oth_shap",
+            "age_20_24_shap", "age_25_29_shap", "age_30_34_shap", "age_45_54_shap",]
 
         const base_value_shap = vis.data.properties["base_value_shap"]
+        console.log("base shap value: " + base_value_shap);
+
         const predicted_turnout = vis.data.properties["2020_turnout_pct_pred"]
 
         // Get data for relevant variables
@@ -58,7 +56,7 @@ class TooltipLocalImportance{
 
         // Create scales
         vis.x = d3.scaleLinear()
-            .domain([d3.min(vis.displayData, d => d.start)-0.01, d3.max(vis.displayData, d => d.end)+0.01])
+            .domain([d3.min(vis.displayData, d => d.end) -0.01, d3.max(vis.displayData, d => d.start) + 0.01])
             .range([0, vis.width]);
 
         vis.y = d3.scaleBand()
@@ -102,7 +100,7 @@ class TooltipLocalImportance{
             .enter()
             .append("text")
             .attr("x", d => vis.x(Math.max(d.start, d.end)) + 5)
-            .attr("y", d => vis.y(d[0]) + 11)
+            .attr("y", d => vis.y(d[0]) + 16)
             .text(d => {
                 if(d[1]>0){
                     return `+${(d[1]*100).toFixed(2)}%`
