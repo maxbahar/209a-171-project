@@ -47,14 +47,13 @@ class MapVis {
         });
 
         // Global mousemove listener
-        d3.select("body").on(`mousemove.${vis.parentElement}`, function(event) {
+        const svgElement = document.querySelector(`#${vis.parentElement}`);
+        const sectionElement = svgElement.closest(".section");
+        sectionElement.addEventListener("mousemove", function(event) {
             const [mouseX, mouseY] = d3.pointer(event);
 
-            const svgElement = document.querySelector(`#${vis.parentElement}`);
             const cardElement = svgElement.closest(".content-card");
             const boundingBox = cardElement.getBoundingClientRect();
-
-            console.log(cardElement);
 
             // Check if the cursor is within the SVG's bounding box
             const isWithinBounds = (
@@ -74,6 +73,15 @@ class MapVis {
                 vis.tooltipHandler.lower();
             }
         });
+        sectionElement.addEventListener("wheel", function(event) {
+            console.log("Scroll");
+            vis.tooltip.style("opacity", 1)
+                    .style("display", "none")
+                    .style("left", 0)
+                    .style("top", 0);
+                vis.tooltipShowing = false;
+                vis.tooltipHandler.lower();
+        });
 
         vis.tooltipShowing = false;
         vis.tooltipHandler = vis.svg.append("rect")
@@ -90,17 +98,6 @@ class MapVis {
                                                 vis.tooltipHandler.lower();
                                             }
                                         });
-                                        // .on("mouseout", function(event) {  // Temporary to prevent lingering tooltip across pages
-                                        //     setTimeout(() => {
-                                        //         if (!vis.tooltipKeep) {
-                                        //             vis.tooltip.style("opacity", 1)
-                                        //             .style("display","none")
-                                        //             .style("left", 0)
-                                        //             .style("top", 0);
-                                        //             vis.tooltipHandler.lower();
-                                        //         }
-                                        //     }, 100);
-                                        // });
 
         // Initialize variable cycling
         vis.varIndex = 0;
