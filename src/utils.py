@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import shap
+import json
 import zipfile
 from matplotlib.lines import Line2D
 from sklearn.ensemble import RandomForestRegressor
@@ -145,6 +146,19 @@ def process_data(csv_zipfile="../data/MA_l2_2022stats_2020block.zip",
 
     return data_dict
 
+def shap_global_csv(shap_values, X):
+    shap_df = pd.DataFrame(shap_values.values, columns=X.columns)
+    shap_df.reindex(shap_df.abs().mean().sort_values().index, axis=1)
+    
+    data_df = pd.DataFrame(shap_values.data, columns=X.columns)
+    
+    dict = {}
+    for key in shap_df.keys():
+        dict[key] = [[shap_df[key].to_list()[i], data_df[key].to_list()[i]] for i in range(0, len(shap_df[key].to_list()))]
+        
+    with open("../data/shap.json", "w") as outfile:
+        json.dump(dict, outfile)
+
 def generate_predictions(data_dict, random_state=None):
     bg_data = data_dict["block_group"]
     t_data = data_dict["tract"]
@@ -189,6 +203,8 @@ def generate_predictions(data_dict, random_state=None):
     shap_values = explainer.shap_values(X)
     bg_shap.loc[X.index, SUBSET_PREDICTORS] = shap_values
     
+    shap_values = explainer(X)
+    shap_global_csv(shap_values, X)
        
     print("SHAP base value: " + str(explainer.expected_value))
     print()
@@ -424,7 +440,7 @@ if __name__ == "__main__":
     # data_dict["tract"].to_file("../data/tracts.geojson")
     # data_dict["county"].to_file("../data/counties.geojson")
 
-    # pred_dict = generate_predictions(data_dict, random_state=209)
+    #pred_dict = generate_predictions(data_dict, random_state=209)
     # pred_dict["block_group"].to_file("../data/block_groups_pred.geojson")
     # pred_dict["tract"].to_file("../data/tracts_pred.geojson")
     # pred_dict["county"].to_file("../data/counties_pred.geojson")
