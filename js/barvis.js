@@ -61,7 +61,7 @@ class BarVis {
 
 
         // Define the category
-
+        // If income, calculate histogram
         if (vis.category == "vote-income") {
             vis.variables = ["mean_hh_income"];
 
@@ -91,8 +91,8 @@ class BarVis {
                 bin[1] /= totalCount;  // Convert to proportion
             });
 
+        // If other variable, use proportions
         } else {
-
             switch(vis.category) {
                 case "vote-party":
                     vis.variables = ['party_npp', 'party_dem', 'party_rep','party_lib', 'party_grn', 'party_con', 'party_ain', 'party_scl','party_oth']
@@ -115,8 +115,6 @@ class BarVis {
             vis.displayData = vis.variables.map((d) => [variableMap[d],chosenFeature.properties[d]]);
 
         }
-
-        // console.log(vis.displayData);
 
         vis.updateVis();
     }

@@ -8,7 +8,6 @@ class Slider {
 
     initVis() {
         let vis = this;
-        console.log(userGuess);
         // Get slider location
         vis.slider = document.getElementById(vis.sliderId);
 
@@ -37,10 +36,7 @@ class Slider {
 
         // Update user's guess when slider is changed
         slider.noUiSlider.on('slide', function (values) {
-            console.log(values);
             userGuess = +values[0];
-            console.log(userGuess);
-            console.log(pctFormat(userGuess));
             document.getElementById("user-guess").innerText = pctFormat(userGuess);
             vis.tooltip.classList.remove("slider-not-interacted");
         });

@@ -47,4 +47,4 @@ The raw data files utilized for this project are:
 
 This is an illustration of the model's workflow:
 
-![Model flowchart](./images/model-flowchart.png)
+![Model flowchart](./img/model-flowchart.png)

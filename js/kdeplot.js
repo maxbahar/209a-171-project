@@ -133,12 +133,6 @@ class KdePlot {
         vis.svg.on('mousemove', function (event) {
             let mousePosition = d3.pointer(event);
 
-
-            // tooltip.style('visibility', 'visible')
-            //     .style('top', (mousePosition[1] + 200) + 'px')
-            //     .style('left', (mousePosition[0]) + 'px')
-            //     .text('x: ' + vis.xScale.invert(mousePosition[0]));
-
             horizontalLine
                 .attr('x1', 0)
                 .attr('y1', mousePosition[1])
@@ -290,9 +284,6 @@ class KdePlot {
         // reset x and y domains
         vis.xScale.domain(vis.traceConfigs[vis.selectedCategory].xDomain);
         vis.yScale.domain(vis.traceConfigs[vis.selectedCategory].yDomain);
-
-        // TODO Experimental
-
 
         vis.updateVis()
 

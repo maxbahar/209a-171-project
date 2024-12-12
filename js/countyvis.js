@@ -76,6 +76,7 @@ class CountyVis {
                                 .attr("stroke", "#8F99A8")
                                 .attr("stroke-width", 0.5);
 
+        // Highlight hovered county and show county name
         vis.geoFeatures.on("mouseover", function(event, d) {
             d3.select(this)
                 .attr("stroke", "#D33D17")
@@ -93,10 +94,14 @@ class CountyVis {
                 .attr("stroke", "#8F99A8")
                 .attr("stroke-width", 0.5);
             vis.tooltip.style("display", "none");
+
+        // Have the tooltip follow the cursor
         }).on("mousemove", function(event, d) {
             vis.tooltip.style("display", "grid")
                         .style("left", `${event.pageX + 20}px`)
                         .style("top", `${event.pageY}px`);
+
+        // Update county on click
         }).on("click", function(event, d) {
             updateCounty(d);
             vis.updateColor();
@@ -104,6 +109,7 @@ class CountyVis {
 
     }
 
+    // Update the color on click
     updateColor() {
         let vis = this;
         vis.geoFeatures.attr("fill", function(d) {

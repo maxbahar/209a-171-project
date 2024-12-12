@@ -2,6 +2,7 @@
 d3.json("data/counties.geojson").then(function (data) {
     const overallMeanTurnout = d3.mean(data.features, d => d.properties["2020_turnout_pct"]);
 
+    // Format data
     const formattedData = data.features.map(d => ({
         county: d.properties.BASENAME,
         turnout_diff: d.properties["2020_turnout_pct"] - overallMeanTurnout,
@@ -19,6 +20,7 @@ d3.json("data/counties.geojson").then(function (data) {
         }
     }));
 
+    // Define long party names
     const partyFullNames = {
         dem: "Democrat",
         rep: "Republican",
@@ -31,8 +33,10 @@ d3.json("data/counties.geojson").then(function (data) {
         oth: "Other"
     };
 
+    // Choose default values
     let selectedParties = ["dem", "rep"];
 
+    // Initialize tooltip
     const tooltip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("position", "absolute")
@@ -43,26 +47,10 @@ d3.json("data/counties.geojson").then(function (data) {
         .style("pointer-events", "none")
         .style("opacity", 0);
 
+    // Create SVG
     const margin = { top: 50, right: 30, bottom: 40, left: 100 };
-    console.log(document.getElementById("diverging-bar-plot-container").getBoundingClientRect().height);
     const width = document.getElementById("diverging-bar-plot-container").getBoundingClientRect().width - margin.left - margin.right;
     const height = document.getElementById("diverging-bar-plot-container").getBoundingClientRect().height - margin.top - margin.bottom;
-
-    // const width = 800 - margin.left - margin.right;
-    // const height = 600 - margin.top - margin.bottom;
-
-    // const targetWidth = Math.min(window.innerWidth * 0.8, 800);
-    // const targetHeight = Math.min(window.innerHeight * 0.8, 600);
-
-    // container.style.width = `${targetWidth}px`;
-    // container.style.height = `${targetHeight}px`;
-
-    // const margin = { top: 20, right: 30, bottom: 40, left: 100 };
-    // const width = targetWidth - margin.left - margin.right;
-    // const height = targetHeight - margin.top - margin.bottom;
-
-    // console.log(container.getBoundingClientRect().width)
-    // console.log(container.getBoundingClientRect().height)
 
     const svg = d3.select("#diverging-bar-plot")
         .attr("width", width + margin.left + margin.right)
@@ -70,6 +58,7 @@ d3.json("data/counties.geojson").then(function (data) {
         .append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
+    // Define scales
     const x = d3.scaleLinear()
         .domain([
             d3.min(formattedData, d => d.turnout_diff) - 0.01,
@@ -81,18 +70,6 @@ d3.json("data/counties.geojson").then(function (data) {
         .domain(formattedData.map(d => d.county))
         .range([0, height])
         .padding(0.2);
-
-    // const colorScales = {
-    //     dem: d3.interpolateBlues,
-    //     rep: d3.interpolateReds,
-    //     npp: d3.interpolateGreys,
-    //     lib: d3.interpolatePurples,
-    //     grn: d3.interpolateGreens,
-    //     con: d3.interpolateOranges,
-    //     ain: d3.interpolatePink,
-    //     scl: d3.interpolateYlGnBu,
-    //     oth: d3.interpolateYlOrRd
-    // };
 
     const colorScales = {
         dem: d3.scaleLinear().domain([0, 1]).range(["#d6e9f9", "#0056b3"]), // Light blue to dark blue
@@ -106,6 +83,7 @@ d3.json("data/counties.geojson").then(function (data) {
         oth: d3.scaleLinear().domain([0, 1]).range(["#f9f0d6", "#b38c00"])  // Light yellow to dark yellow
     };
 
+    // Add party dropdown options
     const parties = Object.keys(formattedData[0].votes);
     d3.select("#party-selection").html(`
         <label for="party1" style="margin-left: 20px" class="map-dropdown-label">Party 1:</label>
@@ -128,6 +106,7 @@ d3.json("data/counties.geojson").then(function (data) {
         updateChart();
     });
 
+    // Update chart on dropdown change
     function updateChart() {
         formattedData.forEach(d => {
             const totalVotes = Object.values(d.votes).reduce((a, b) => a + b, 0);
@@ -137,6 +116,7 @@ d3.json("data/counties.geojson").then(function (data) {
 
         svg.selectAll("*").remove();
 
+        // Update the bars
         svg.selectAll(".bar")
             .data(formattedData)
             .enter()
@@ -187,7 +167,7 @@ d3.json("data/counties.geojson").then(function (data) {
             .style("font-weight", "bold")
             .text(`Mean Turnout: ${(overallMeanTurnout * 100).toFixed(2)}%`);
 
-        //Update legend
+        // Update legend
         d3.select("#legend").html(`
         <div style="display: flex; gap: 10px; align-items: center;">
             <div style="display: flex; align-items: center;">

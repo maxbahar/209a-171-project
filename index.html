@@ -271,17 +271,17 @@
         <div class="card-container">
             <div class="card" id="var-sel1">
                 <h3 id="var-sel1-title"></h3>
-                <img src="/images/250.png" alt="Card 1 Image" id="var-sel1-img">
+                <img src="/img/250.png" alt="Card 1 Image" id="var-sel1-img">
                 <p id="var-sel1-card"></p>
             </div>
             <div class="card" id="var-sel2">
                 <h3 id="var-sel2-title"></h3>
-                <img src="/images/250.png" alt="Card 1 Image" id="var-sel2-img">
+                <img src="/img/250.png" alt="Card 1 Image" id="var-sel2-img">
                 <p id="var-sel2-card"></p>
             </div>
             <div class="card" id="var-sel3">
                 <h3 id="var-sel3-title"></h3>
-                <img src="/images/250.png" alt="Card 1 Image" id="var-sel3-img">
+                <img src="/img/250.png" alt="Card 1 Image" id="var-sel3-img">
                 <p id="var-sel3-card"></p>
             </div>
         </div>
@@ -376,9 +376,6 @@
                         </tr>
                         </tbody>
                     </table>
-                    <!-- <button id="mainMapElement-zoom-in">Zoom In</button>
-                    <button id="mainMapElement-zoom-out">Zoom Out</button>
-                    <button id="mainMapElement-reset">Reset</button> -->
                     <div class="map-container">
                         <div class="arrow-button left-arrow">
                             <svg width="40" height="40" viewBox="0 0 48 48">
@@ -409,7 +406,6 @@
                         <tr>
                             <td>
                                 <p class="map-dropdown-label">by Category:</p>
-                                <!-- <h4>Kernel Density Estimate by Category:&nbsp;</h4> -->
                             </td>
                             <td><select class="select-dropdown" id="kde-select" onchange="onKdeSelChange()">
                                 <option value="gender">Gender</option>
@@ -496,16 +492,6 @@
                     <p><b>Example Interpretation</b> - The density of <u>females</u> is to the right of <u>males</u> as there tend to be more women registered to vote than men.
                     </p>
                     <p><i><span style="border-bottom: 2px dashed black;">Dashed lines</span> are to aid with plot readability</i></p>
-                    <!-- <ul>
-                        <li>Kernel density plots allow you to visualize the density of data observations</li>
-                        <li><b>X-axis</b> - of the registered, voting population (of a block group), this proportion
-                            belonged to the category
-                        </li>
-                        <li><b>Y-axis</b> - voter turnout for a block group</li>
-                        <li><b>Example Interpretation</b> - The density of <u>females</u> is to the right of <u>males</u> as there tend to be more women registered to vote than men.
-                        </li>
-                        <li><i><span style="border-bottom: 2px dashed black;">Dashed lines</span> are to aid with plot readability</i></li>
-                    </ul> -->
                 </div>
             </div>
         </div>
@@ -554,7 +540,7 @@
             <div class="col content-container">
                 <div class="content-card explanation">
                     <h4>Random Forest Model</h4>
-                    <img src="/images/tree.png">
+                    <img src="/img/tree.png">
                     <p>A <b>Decision Tree</b> predicts outcomes by splitting data into branches based on yes/no
                         questions. While useful, single trees can overfit and perform poorly on unseen data.</p>
                     <p>Our team uses a <b>Random Forest</b>, which improves accuracy by combining decisions from
@@ -564,7 +550,7 @@
             <div class="col content-container">
                 <div class="content-card explanation">
                     <h4>Key Inputs</h4>
-                    <img src="/images/input.png">
+                    <img src="/img/input.png">
                     <p>We identified the <b>most important predictors</b> by measuring feature
                         importance. These include:</p>
                     <ul>
@@ -580,7 +566,7 @@
             <div class="col content-container">
                 <div class="content-card explanation">
                     <h4>Predictive Output</h4>
-                    <img src="/images/output.png">
+                    <img src="/img/output.png">
                     <p>The Random Forest model <b>predicts voter turnout</b> in the 2020 presidential election for each Census
                         Block Group in Massachusetts, based on demographic data. Key findings include:</p>
                     <ul>
@@ -800,7 +786,6 @@
 <script src="js/mapvis.js"></script>
 <script src="js/kdeplot.js"></script>
 <script src="js/divbarplot.js"></script>
-<script src="js/sentimentvis.js"></script>
 <script src="js/main.js"></script>
 <script src="js/guess.js"></script>
 

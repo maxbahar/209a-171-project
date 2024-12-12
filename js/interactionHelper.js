@@ -1,3 +1,5 @@
+
+// Define index for voter demographic category
 let votecatIdx = 1;
 
 let titleMap = {
@@ -35,7 +37,6 @@ function votecat(categoryID) {
 
         // Remove barplot
         votecatIdx--;
-        // document.getElementById(`barPlot${votecatIdx}`).classList.remove("barPlotContainer");
         let parentDiv = document.getElementById(`barPlot${votecatIdx}`)
         let svgElement = parentDiv.querySelector("svg");
 
@@ -49,7 +50,6 @@ function votecat(categoryID) {
 
     } else if (Object.keys(selectedFeatureCategories).length <= 2) {
 
-        // document.getElementById(`barPlot${votecatIdx}`).classList.add("barPlotContainer");
         selectedFeatureCategories[categoryID] = new BarVis(`barPlot${votecatIdx}`, geoData, categoryID);
         document.getElementById(`barTitle${votecatIdx}`).innerText = titleMap[categoryID];
         votecatIdx++;
@@ -74,9 +74,6 @@ function votecat(categoryID) {
             nStr += categoryID + ', '
         })
     }
-
-
-    // document.getElementById("user-cat-sel-info").innerText = nStr;
 
     if(Object.keys(selectedFeatureCategories).length > 1){
         document.getElementById("val-sel-count").innerText = "You have selected "+Object.keys(selectedFeatureCategories).length+" categories";

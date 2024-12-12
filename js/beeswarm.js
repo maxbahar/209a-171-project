@@ -54,7 +54,6 @@ class Beeswarm {
         })
 
         //limit to top 8 features to fit within content card
-        //vis.sortedKeys = vis.sortedKeys.slice(vis.sortedKeys.length-8, vis.sortedKeys.length);
 
         vis.xScale = d3
             .scaleLinear()

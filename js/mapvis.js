@@ -19,7 +19,6 @@ class MapVis {
 
         let vis = this;
 
-
         // Define width, height, and margins
         vis.margin = {top: 20, right: 20, bottom: 20, left: 20};
         vis.width = document.getElementById(vis.parentElement).getBoundingClientRect().width - vis.margin.left - vis.margin.right;
@@ -32,12 +31,35 @@ class MapVis {
         vis.svg = vis.initSvg.append("g")
                         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
 
+        // Initialize variable cycling
+        vis.varIndex = 0;
+
+        // Initialize legend handling
+        vis.handleLegend();
+
+        // Initialize tooltip showing/hiding
+        vis.handleTooltip();
+        
+        // Initialize zoom handling
+        vis.handleZoom();
+
+        // Update visualizations
+        vis.updateVis();
+
+    }
+
+    // Tooltip handling
+    handleTooltip() {
+
+        let vis = this;
+
         // Initialize tooltip
         vis.tooltip = d3.select("body").append('div')
             .attr('class', "tooltip mapTooltip");
 
-        // Track whether the tooltip should stay visible
+        // Track whether the tooltip should stay visible or is visible
         vis.tooltipKeep = false;
+        vis.tooltipShowing = false;
 
         // Add mouseover and mouseout handlers to the tooltip
         vis.tooltip.on("mouseover", () => {
@@ -65,107 +87,59 @@ class MapVis {
 
             // Hide the tooltip if the cursor is not over the SVG or tooltip
             if (!isWithinBounds) {
-                vis.tooltip.style("opacity", 1)
-                    .style("display", "none")
-                    .style("left", 0)
-                    .style("top", 0);
-                vis.tooltipShowing = false;
-                vis.tooltipHandler.lower();
+                vis.hideTooltip();
             }
         });
+
+        // Hide on scroll to next/previous page
         sectionElement.addEventListener("wheel", function(event) {
-            console.log("Scroll");
-            vis.tooltip.style("opacity", 1)
+            vis.hideTooltip();
+        });
+
+        // Hide when clicking a non-feature
+        sectionElement.addEventListener("click", function(event){
+            let isFeatureClick = event.target.classList.contains('geoFeature')
+            if (vis.tooltipShowing && !isFeatureClick) {
+                vis.hideTooltip();
+            }
+        });
+    }
+
+    // Hides the tooltip if called
+    hideTooltip() {
+        let vis = this;
+        vis.tooltip.style("opacity", 1)
                     .style("display", "none")
                     .style("left", 0)
                     .style("top", 0);
-                vis.tooltipShowing = false;
-                vis.tooltipHandler.lower();
-        });
-
         vis.tooltipShowing = false;
-        vis.tooltipHandler = vis.svg.append("rect")
-                                        .attr("opacity", 0)
-                                        .attr("width", vis.width)
-                                        .attr("height", vis.height)
-                                        .on("click", function(event) {
-                                            if (vis.tooltipShowing) {
-                                                vis.tooltipShowing = false;
-                                                vis.tooltip.style("opacity", 1)
-                                                .style("display","none")
-                                                .style("left", 0)
-                                                .style("top", 0);
-                                                vis.tooltipHandler.lower();
-                                            }
-                                        });
+    }
 
-        // Initialize variable cycling
-        vis.varIndex = 0;
+    handleZoom() {
+        let vis = this;
 
-        // Define legend scale and axis
-        vis.legendWidth = vis.width / 3;
-        vis.legendHeight = vis.height / 10;
-        vis.legendScale = d3.scaleLinear().range([0, vis.legendWidth]);
-        vis.legendAxis = d3.axisBottom()
-                            .scale(vis.legendScale);
-        // Append legend
-        vis.legend = vis.initSvg.append("g")
-                            .attr('class', 'legend')
-                            .attr('transform', `translate(${vis.width / 4}, ${vis.height * 7/8})`);
-        const paddingX = vis.legendWidth/5;
-        const paddingY = vis.legendHeight;
-        const rectWidth = vis.legendWidth + paddingX;
-        const rectHeight = vis.legendHeight + paddingY;
-        // Append legend background
-        vis.legend.append("rect")
-                    .attr("class", "legend-background")
-                    .attr("x", - paddingX / 2) // Adjust to provide padding around the text
-                    .attr("y", - paddingY / 1.5) // Position above the text
-                    .attr("width", rectWidth) // Slightly larger than the legend
-                    .attr("height", rectHeight) // Larger to fit text and gradient
-                    .attr("fill", "white") // Background color
-                    .attr("rx",5)
-                    .attr("opacity", 0.9);
-
-        vis.legendAxisGroup = vis.legend.append("g")
-                                .attr("transform", `translate(0, ${vis.legendHeight/2 + 10})`)
-                                .attr("class","legend-axis");
-        // Append the rectangle gradient
-        vis.legend.append("rect")
-                    .attr("width", vis.legendWidth)
-                    .attr("height", vis.legendHeight/2)
-                    .style("fill", `url(#legend-gradient-${vis.parentElement})`)
-                    .attr("stroke", "#333")
-                    .attr("stroke-width", 0.1);
-        vis.legendLabel = vis.legend.append("text")
-                                        .attr("class","map-label")
-                                        .attr("text-anchor","middle")
-                                        .attr("x",vis.legendWidth/2)
-                                        .attr("y",-10);
-
-        
         const iconPadding = 10;
-        const iconSize = rectHeight / 4 - iconPadding;
+        const iconSize = vis.rectHeight / 4 - iconPadding;
         const offsetY = iconSize / 2;
         // Append zoom-in button
         vis.legend.append("image")
-                    .attr("href", "../images/zoom-in.png")
+                    .attr("href", "../img/zoom-in.png")
                     .attr("id", `${vis.parentElement}-zoom-in`)
                     .attr("class", "zoom-button")
                     .attr("font-size", "1.5em")
-                    .attr("x", - (rectWidth / 5) - iconPadding/2) // Position to the left of the legend
-                    .attr("y", -(rectHeight * (1/4)) + offsetY)
+                    .attr("x", - (vis.rectWidth / 5) - iconPadding/2) // Position to the left of the legend
+                    .attr("y", -(vis.rectHeight * (1/4)) + offsetY)
                     .attr("height", iconSize)
                     .attr("width", iconSize)
                     .attr("alignment-baseline","middle")
                     .attr("cursor", "pointer");
         // Append zoom-out button
         vis.legend.append("image")
-                    .attr("href", "../images/zoom-out.png")
+                    .attr("href", "../img/zoom-out.png")
                     .attr("id", `${vis.parentElement}-zoom-out`)
                     .attr("class", "zoom-button")
                     .attr("font-size", "1.5em")
-                    .attr("x", - (rectWidth / 5) - iconPadding/2) // Position to the left of the legend
+                    .attr("x", - (vis.rectWidth / 5) - iconPadding/2) // Position to the left of the legend
                     .attr("y", offsetY)
                     .attr("height", iconSize)
                     .attr("width", iconSize)
@@ -173,12 +147,12 @@ class MapVis {
                     .attr("cursor", "pointer");
         // Append reset button
         vis.legend.append("image")
-                    .attr("href", "../images/reset.png")
+                    .attr("href", "../img/reset.png")
                     .attr("id", `${vis.parentElement}-reset`)
                     .attr("class", "zoom-button")
                     .attr("font-size", "1.5em")
-                    .attr("x", - (rectWidth / 5) - iconPadding/2) // Position to the left of the legend
-                    .attr("y", (rectHeight * (1/4)) + offsetY)
+                    .attr("x", - (vis.rectWidth / 5) - iconPadding/2) // Position to the left of the legend
+                    .attr("y", (vis.rectHeight * (1/4)) + offsetY)
                     .attr("height", iconSize)
                     .attr("width", iconSize)
                     .attr("alignment-baseline","middle")
@@ -188,22 +162,22 @@ class MapVis {
         const zoomInText = vis.legend.append("text")
                     .text("Zoom In")
                     .attr("font-size","1em")
-                    .attr("x", - (rectWidth / 5) - iconPadding) // Position to the left of the legend
-                    .attr("y", - (rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
+                    .attr("x", - (vis.rectWidth / 5) - iconPadding) // Position to the left of the legend
+                    .attr("y", - (vis.rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
                     .attr("alignment-baseline","middle")
                     .attr("text-anchor","end");
         const zoomOutText = vis.legend.append("text")
                     .text("Zoom Out")
                     .attr("font-size","1em")
-                    .attr("x", - (rectWidth / 5) - iconPadding) // Position to the left of the legend
+                    .attr("x", - (vis.rectWidth / 5) - iconPadding) // Position to the left of the legend
                     .attr("y", (iconSize / 1.75) + offsetY)
                     .attr("alignment-baseline","middle")
                     .attr("text-anchor","end");
         const resetText = vis.legend.append("text")
                     .text("Reset")
                     .attr("font-size","1em")
-                    .attr("x", - (rectWidth / 5) - iconPadding) // Position to the left of the legend
-                    .attr("y", (rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
+                    .attr("x", - (vis.rectWidth / 5) - iconPadding) // Position to the left of the legend
+                    .attr("y", (vis.rectHeight * (1/4)) + (iconSize / 1.75) + offsetY)
                     .attr("alignment-baseline","middle")
                     .attr("text-anchor","end");
         const widthArray = Array.from([zoomInText, zoomOutText, resetText]).map(d => d.node().getBBox().width);
@@ -211,9 +185,9 @@ class MapVis {
         vis.legend.append("rect")
                     .attr("class", "legend-background")
                     .attr("x", - iconSize*5 - maxTextWidth) // Adjust to provide padding around the text
-                    .attr("y", - paddingY / 1.5) // Position above the text
+                    .attr("y", - vis.paddingY / 1.5) // Position above the text
                     .attr("width", iconSize * 3 + maxTextWidth)
-                    .attr("height", rectHeight)
+                    .attr("height", vis.rectHeight)
                     .attr("fill", "white") // Background color
                     .attr("rx",5)
                     .attr("opacity", 0.9)
@@ -251,15 +225,54 @@ class MapVis {
         d3.select(`#${vis.parentElement}-reset`).on("click", () => {
             vis.initSvg.transition().call(zoom.transform, zoomLevel); // Reset zoom
         });
-
-        vis.wrangleData();
-
     }
 
-    wrangleData() {
-        // No data wrangling is needed at the moment
+    handleLegend() {
         let vis = this;
-        vis.updateVis();
+
+        // Define legend scale and axis
+        vis.legendWidth = vis.width / 3;
+        vis.legendHeight = vis.height / 10;
+        vis.legendScale = d3.scaleLinear().range([0, vis.legendWidth]);
+        vis.legendAxis = d3.axisBottom()
+                            .scale(vis.legendScale);
+        
+        // Define shared spacing variables
+        vis.paddingX = vis.legendWidth/5;
+        vis.paddingY = vis.legendHeight;
+        vis.rectWidth = vis.legendWidth + vis.paddingX;
+        vis.rectHeight = vis.legendHeight + vis.paddingY;
+        
+        // Append legend
+        vis.legend = vis.initSvg.append("g")
+                            .attr('class', 'legend')
+                            .attr('transform', `translate(${vis.width / 4}, ${vis.height * 7/8})`);
+        // Append legend background
+        vis.legend.append("rect")
+                    .attr("class", "legend-background")
+                    .attr("x", - vis.paddingX / 2) // Adjust to provide padding around the text
+                    .attr("y", - vis.paddingY / 1.5) // Position above the text
+                    .attr("width", vis.rectWidth) // Slightly larger than the legend
+                    .attr("height", vis.rectHeight) // Larger to fit text and gradient
+                    .attr("fill", "white") // Background color
+                    .attr("rx",5)
+                    .attr("opacity", 0.9);
+
+        vis.legendAxisGroup = vis.legend.append("g")
+                                .attr("transform", `translate(0, ${vis.legendHeight/2 + 10})`)
+                                .attr("class","legend-axis");
+        // Append the rectangle gradient
+        vis.legend.append("rect")
+                    .attr("width", vis.legendWidth)
+                    .attr("height", vis.legendHeight/2)
+                    .style("fill", `url(#legend-gradient-${vis.parentElement})`)
+                    .attr("stroke", "#333")
+                    .attr("stroke-width", 0.1);
+        vis.legendLabel = vis.legend.append("text")
+                                        .attr("class","map-label")
+                                        .attr("text-anchor","middle")
+                                        .attr("x",vis.legendWidth/2)
+                                        .attr("y",-10);
     }
 
     updateVis() {
@@ -345,12 +358,6 @@ class MapVis {
                 .attr("font-weight", "normal");
         }
 
-
-        //////////////////////////////////////////////// PROTOTYPE //////////////////////////////////////////////////
-        // This could be very inefficient since it's just redrawing all the features on change.
-        // Maybe only do this if the geoLevel changes?
-        // I think changing only the colors/variable is enough if demoVar is changed.
-
         // Project the GeoJSON
         vis.projection = d3.geoMercator()
                           .fitSize([vis.width, vis.height], vis.geoData[vis.geoLevel]);
@@ -380,7 +387,6 @@ class MapVis {
         vis.geoFeatures.on("mouseover", function(event, d){
 
             d3.select(this)
-                // .attr('fill', 'white')
                 .attr("stroke", "#D33D17")
                 .style("stroke-width", 5 / vis.transformScale).raise();
 
@@ -391,11 +397,11 @@ class MapVis {
                 .attr("fill", d => vis.colorScale(d.properties[vis.mainVar]))
                 .attr("stroke", "#8F99A8")
                 .style("stroke-width", null);
-                // .style("stroke-width", 0.5 / vis.transformScale);
         })
             
         // Show tooltip on click
         vis.geoFeatures.on("click", function(event, d){
+            vis.tooltipShowing = true;
 
             vis.tooltip.style("display","grid");
             let title = "";
@@ -465,12 +471,9 @@ class MapVis {
             if (left < 0) {
                 left = 10; // Minimum left margin
             }
-            
             vis.tooltip.style("left",`${left}px`)
                         .style("top",`${top}px`);
 
-            vis.tooltipShowing = true;
-            vis.tooltipHandler.raise();
     
         });
 

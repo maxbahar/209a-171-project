@@ -57,8 +57,6 @@ class TooltipVis {
     wrangleData() {
         let vis = this;
 
-        // console.log(vis.category);
-
         // Define the category
         switch(vis.category) {
             case "vote-party":
@@ -80,8 +78,6 @@ class TooltipVis {
 
         // Get data for relevant variables
         vis.displayData = vis.variables.map((d) => [variableMap[d],vis.featureData.properties[d]]);
-
-        // console.log(vis.displayData);
 
         vis.updateVis();
     }

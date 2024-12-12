@@ -32,7 +32,6 @@ class TooltipLocalImportance{
             "age_20_24_shap", "age_25_29_shap", "age_30_34_shap", "age_45_54_shap",]
 
         const base_value_shap = vis.data.properties["base_value_shap"]
-        console.log("base shap value: " + base_value_shap);
 
         const predicted_turnout = vis.data.properties["2020_turnout_pct_pred"]
 

@@ -50,8 +50,7 @@ let promises = [
     d3.json('data/shap.json'),
 ];
 Promise.all(promises)
-    .then(data => createVis(data))
-    .catch(err => console.log(err));  
+    .then(data => createVis(data));  
 
 function createVis(data) {
 
@@ -66,8 +65,6 @@ function createVis(data) {
     // Choose a feature for users to guess
     let chosenFeatureIdx = Math.floor(Math.random() * geoData["county"].features.length);
     updateCounty(geoData["county"].features[chosenFeatureIdx]);
-
-    ////////// VISUALIZATIONS //////////
 
     // County map
     countyMap = new CountyVis("countyMapParent",geoData["county"]);

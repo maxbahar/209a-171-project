@@ -3,11 +3,6 @@ class SelVarPrev{
         this.parentElementID = parentElementID;
         this.arrayIndex = arrayIndex;
         this.initVis()
-
-
-
-
-
     }
 
     initVis(){
@@ -35,13 +30,13 @@ class SelVarPrev{
             "vote-eth":"The data includes 6 ethnicity categories",
         }
         vis.imageMap = {
-            "none": "/images/250.png",
-            "vote-party":"/images/align.png",
-            "vote-gender":"/images/gender.png",
-            "vote-age":"/images/cake.png",
-            "vote-income":"/images/money.png",
-            "vote-lang":"/images/lang.png",
-            "vote-eth":"/images/globe.png",
+            "none": "/img/250.png",
+            "vote-party":"/img/align.png",
+            "vote-gender":"/img/gender.png",
+            "vote-age":"/img/cake.png",
+            "vote-income":"/img/money.png",
+            "vote-lang":"/img/lang.png",
+            "vote-eth":"/img/globe.png",
         }
         vis.wrangleData()
     }
