@@ -114,14 +114,13 @@ g > text {
 }
 
 #title1-bg {
-    background-image: url("/img/vote-t1.jpg");
+    background-image: url("../img/vote-t1.jpg");
 }
 #title1-bg h1{
     font-size: 10vh;
     color: #D33D17;
 }
 #title2-bg {
-    /* background-image: url("/img/vote-t1.jpg"); */
     background-color: #acccd4;
     
 }
