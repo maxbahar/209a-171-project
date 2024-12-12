@@ -1,0 +1,162 @@
+/* - - - - - - GLOBAL STYLES - - - - - - */
+.fp-watermark {
+    display: none !important;
+}
+
+.emphasize {
+    font-weight: bold;
+    color: #D33D17;
+}
+
+b { 
+    color: #D33D17;
+}
+
+body {
+    color: #404854;
+}
+
+h1, h2, h3, h4 {
+    color: #111418;
+}
+
+p, li {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+g > text {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.lato {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Change the color of the horizontal arrows */
+.fp-controlArrow.fp-prev {
+    border-color: transparent black transparent transparent;
+}
+
+.fp-controlArrow.fp-next {
+    border-color: transparent transparent transparent black;
+}
+
+/* - - - - - - CONTAINERS & CARDS - - - - - - */
+
+.visContainer {
+    height: 75vh; /* So that SVG height can be set dynamically */
+}
+
+.content-container {
+    width: 27.5vw; 
+    flex: 0 0 auto;
+}
+
+.content-card{
+    background: white;
+    margin: 10px 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+}
+.content-card ul {
+    font-size: 1.1rem;
+    text-align: left;
+}
+.content-card > p {
+    font-size: 1.1rem;
+    text-align: left;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+.content-card img {
+    width: 50%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding:15px
+}
+.content-card h4 {
+    margin-bottom: 10px;
+}
+
+.explanation {
+    height: 75vh;
+    margin: 0px 15px 15px 15px;
+}
+
+.select-dropdown{
+    font-size: large;
+    width: 10vw;
+    text-align: center ;
+}
+
+.viz-title {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse
+}
+
+/* - - - - - - TITLE SPECIFIC - - - - - - */
+
+.main-title {
+    text-align: left;
+}
+
+.main-title > h1 {
+    text-shadow: 0 4px 8px rgba(100, 100, 100, 0.3);
+}
+
+#title1-bg {
+    background-image: url("/img/vote-t1.jpg");
+}
+#title1-bg h1{
+    font-size: 10vh;
+    color: #D33D17;
+}
+#title2-bg {
+    /* background-image: url("/img/vote-t1.jpg"); */
+    background-color: #acccd4;
+    
+}
+#title-sub{
+    color: #5F6B7C;
+}
+
+#section-0{
+    background-image: linear-gradient(180deg,#acccd4,#e4f2f5);
+}
+#section-1{
+    background: #e4f2f5;
+}
+
+/* - - - - - - SECTION SPECIFIC - - - - - - */
+.section{
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    background: #FAF9F6;;
+}
+
+.section-img-bg{
+    background-size: cover;
+    font-family: 'Oswald', sans-serif;
+}
+
+.blue-white-grad{
+    background-image: linear-gradient(180deg, #e4f2f5, #FAF9F6);
+
+}
+
+#importance-beeswarm-plot {
+    height: 85vh;
+}
+
+#rec4-bg h1 {
+    text-shadow: 0 4px 8px rgba(100, 100, 100, 0.3);
+}

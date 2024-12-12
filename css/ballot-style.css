@@ -1,0 +1,147 @@
+.ballot-font-large{
+    font-size: 2rem;
+    font-weight: bold;
+}
+.ballot-font-med{
+    font-size: 1.8rem;
+    color: #5F6B7C;
+}
+.ballot-font-small{
+    font-size: 1.6rem;
+    color: #ABB3BF;
+}
+
+
+
+.height-fit{
+    height:25%;
+}
+
+.fill {
+    width: 100%;
+    height: 100%;
+}
+
+.limit-height {
+    height: 1px;
+    color: #111418;
+}
+
+#ballot-top-header{
+    background: #f0f6f7;
+    border: 1px solid #acccd4;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vh;
+}
+
+.black-border-right-thin{
+    border-right: 1px solid black;
+}
+.black-border-bottom-thin{
+    border-bottom: 1px solid black;
+}
+
+.gray-border-bottom-thin{
+    border-bottom: 1px solid gray;
+}
+
+
+.black-border-left{
+    border-left: 3px solid black;
+}
+
+
+
+/* - - - - - - - - - - -*/
+#ballot-top{
+    overflow: hidden;
+    background-image: linear-gradient(180deg,#acccd4,#e4f2f5);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+
+}
+#ballot-top td {
+    width: 33%;
+    padding-left: 10px;
+}
+
+#ballot-bottom td {
+    width: 33%;
+    padding-left: 10px;
+}
+
+#ballot-top-page{
+    height: 95vh;
+    width: 83vw;
+    background: #fff;
+    text-align: start;
+    padding-top: 1.8vw;
+    padding-left: 1.8vw;
+    padding-right: 1.8vw;
+}
+#ballot-bottom{
+    background: #e4f2f5;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+}
+#ballot-bottom-page{
+    height: 95vh;
+    width: 83vw;
+    background: #fff;
+    text-align: start;
+    padding-bottom: 1.8vw;
+    padding-left: 1.8vw;
+    padding-right: 1.8vw;
+}
+
+.preattentive {
+    color:#D33D17;
+}
+
+
+.vote-box {
+    border: 3px solid black;
+    border-radius: 20px;
+    height: 30px;
+    width: 50px;
+}
+.clicked-vote-box{
+    background: #545454;
+}
+
+.vote-box:hover {
+    background: black;
+    cursor: pointer;
+}
+
+
+.vote-box2 {
+    border: 3px solid black;
+    border-radius: 20px;
+    height: 30px;
+    width: 50px;
+}
+.vote-box2:hover {
+    background: black;
+    cursor: pointer;
+}
+
+.left-section {
+    vertical-align: top;
+    font-size: 2rem;
+    padding-top: 3vh;
+    padding-right: 10px;
+}

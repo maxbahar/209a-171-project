@@ -1,0 +1,69 @@
+#var-preview-section{
+    background:#e4f2f5;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Title and subtitle styling */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    color: #333;
+}
+
+.header p {
+    font-size: 1.4em;
+    color:#D33D17;
+}
+
+/* Container for the cards */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Individual card styling */
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    width: 20vw;
+    max-width: 45vh;
+    margin-bottom: 10px;
+}
+
+/* Hover effect on cards */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card title styling */
+.card h3 {
+    margin: 0 0 10px;
+    font-size: 1.6em;
+    color: #333;
+    /* font-family: "Lato", sans-serif;
+    font-weight: bold;
+    font-style: normal; */
+}
+
+/* Card image styling */
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding:25px
+}
+
+/* Card description styling */
+.card p {
+    font-size: 1.4em;
+}

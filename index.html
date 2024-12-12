@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voter Turnout in MA</title>
+
+    <!-- Include font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.css"
+          integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>    
+    <!-- Include Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Include custom styling -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.css"
+          integrity="sha512-wCVOuVtxsXqrQK7tj9j4BvyfITQmpp7UE7mVilD7aieGLYFEIAa5UKTP1RapOf6dxQ9JIKAneakcyykWG4r4Ow=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>    <!-- Include Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Other styling dependencies -->
+    <link href="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.css" rel="stylesheet"/>
+    <!-- Include custom styling -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ballot-style.css">
+    <link rel="stylesheet" href="css/var-preview-style.css">
+    <link rel="stylesheet" href="css/recommendations.css">
+    <link rel="stylesheet" href="css/kde.css">
+    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="css/map.css">
+</head>
+<body>
+
+<div id="fullpage">
+    <!---------------------------- Prelude Part 1 ---------------------------->
+    <div class="section section-img-bg" id="title1-bg">
+        <div class="row g-0">
+            <div class="col-1"></div>
+            <div class="col-5 main-title">
+                <h1>Voter Turnout in Massachusetts</h1>
+                <br/>
+                <h2 class="lato">How Did Demographics Affect Voter Turnout in the 2020 Presidential Election?</h2>
+            </div>
+            <div class="col-6"></div>
+        </div>
+    </div>
+    <!---------------------------- Prelude Part 2 ---------------------------->
+    <div class="section section-img-bg" id="title2-bg">
+        <div class="img-text-container">
+            <h1>Understanding Voter Turnout</h1>
+            <ul>
+                <li><b>Why Voter Turnout Matters</b> - Voter turnout reflects public engagement in democracy. High turnout ensures broader representation. Low turnout highlights barriers to participation.
+                </li>
+                <li><b>Demographics and Turnout</b> - Research shows that turnout varies by demographics like age, income, and ethnicity. Identifying these patterns helps address gaps in representation.
+                </li>
+                <li><b>About This Site</b> - You can explore voter turnout in Massachusetts for the 2020 election. You can make guesses, compare them to our model, and uncover key demographic insights.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!---------------------------- Page 0 / Title ---------------------------->
+    <div class="section" id="ballot-top">
+        <div id="ballot-top-page">
+            <table class="fill">
+                <tbody>
+                <tr class="limit-height">
+                    <td colspan="3">
+                        <div id="ballot-top-header">
+                            CS 1710 - Official Ballot 2024
+                        </div>
+                    </td>
+                </tr>
+                <tr class="limit-height">
+                    <td class="limit-height black-border-bottom-thin">INSTRUCTIONS</td>
+                    <td class="black-border-left black-border-bottom-thin black-border-right-thin">TEAM MEMBERS</td>
+                    <td class="black-border-bottom-thin" style="color: gray; font-size: 1.6rem;">VOTE FOR ONE</td>
+                </tr>
+                <tr class="lato">
+                    <td class="left-section" rowspan="2">
+                        <ul>
+                            <li>To vote, <b>fill in the oval</b> next to your choice.
+                            </li>
+                            <li><span>This page is just practice.</span>
+                            </li>
+                        </ul>
+                    </td>
+                    <td class="black-border-left black-border-right-thin gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Max Bahar</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-max" onclick="voted('vote-max')"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                    <td class="gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Ted McCulloch</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-ted" onclick="voted('vote-ted')"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="lato">
+                    <td class="black-border-left black-border-right-thin gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Stefan Chu</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-stef" onclick="voted('vote-stef')"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                    <td class="gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Anitej Thamma</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-med">Harvard University</div>
+                            <div class="col-3">
+                                <div class="vote-box" id="vote-ani" onclick="voted('vote-ani')"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-11 ballot-font-small">MS Data Science 2026</div>
+                            <div class="col-1"></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!---------------------------- Page 1 / HOOK (QUESTION) ---------------------------->
+    <div class="section" id="ballot-bottom">
+        <div id="ballot-bottom-page">
+            <table class="fill">
+                <tbody>
+                <tr class="limit-height">
+                    <td class="black-border-bottom-thin">QUESTION</td>
+                    <td class="limit-height black-border-left black-border-bottom-thin black-border-right-thin">
+                        CATEGORIES
+                    </td>
+                    <td style="color: gray; font-size: 1.6rem;" class="black-border-bottom-thin">SELECT UP TO THREE</td>
+                </tr>
+                <tr class="lato">
+                    <td rowspan="3" class="left-section" style="font-size: 2.3rem;">
+                        Which <b>demographic categories</b> do you think have the greatest impact on <b>voter turnout</b>, positively or negatively?
+                    </td>
+                    <td class="black-border-left gray-border-bottom-thin black-border-right-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Party Affiliation</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">Democrat, Republican, etc.</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-party" onclick="votecat('vote-party')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                    <td class="gray-border-bottom-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Average Income</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">High, Middle, Low</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-income" onclick="votecat('vote-income')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                </tr>
+                <tr class="lato">
+                    <td class="black-border-left gray-border-bottom-thin black-border-right-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Gender</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">Male, Female, Unknown</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-gender" onclick="votecat('vote-gender')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                    <td class="gray-border-bottom-thin">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Spoken Language</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">English, Spanish, Italian, etc.</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-lang" onclick="votecat('vote-lang')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                </tr>
+                <tr class="lato">
+                    <td class="black-border-left black-border-right-thin height-fit">
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Age</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">Younger, Older, etc.</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-age" onclick="votecat('vote-age')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-11 ballot-font-large">Ethnicity</div>
+                            <div class="col-1"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9 ballot-font-small">European, Hispanic, Asian, etc.</div>
+                            <div class="col-3">
+                                <div class="vote-box2" id="vote-eth" onclick="votecat('vote-eth')"></div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-6"></div><div class="col-6"></div></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!---------------------------- Page 1.5 / Selection Preview ---------------------------->
+    <div class="section" id="var-preview-section">
+        <div class="header">
+            <h1>Reviewing Your Selections</h1>
+            <p id="val-sel-count">You have made no selections, please return to previous slide to vote.</p>
+        </div>
+        <div class="card-container">
+            <div class="card" id="var-sel1">
+                <h3 id="var-sel1-title"></h3>
+                <img src="/img/250.png" alt="Card 1 Image" id="var-sel1-img">
+                <p id="var-sel1-card"></p>
+            </div>
+            <div class="card" id="var-sel2">
+                <h3 id="var-sel2-title"></h3>
+                <img src="/img/250.png" alt="Card 1 Image" id="var-sel2-img">
+                <p id="var-sel2-card"></p>
+            </div>
+            <div class="card" id="var-sel3">
+                <h3 id="var-sel3-title"></h3>
+                <img src="/img/250.png" alt="Card 1 Image" id="var-sel3-img">
+                <p id="var-sel3-card"></p>
+            </div>
+        </div>
+    </div>
+    <!---------------------------- Page 2 / HOOK (ANSWER) ---------------------------->
+    <div class="section blue-white-grad">
+        <div class="header">
+            <h3>What do you think the voter turnout was in <span class="chosen-feature"></span> for the 2020 Presidential Election?</h3>
+            <p>The average 2020 presidential voter turnout in Massachusetts is <span id="stateAvg"></span></p>
+        </div>
+
+        <div class="card-container">
+            <div class="bar-card" id="countyMapParent"></div>
+        </div>
+
+        <div class="card-container" id="allBarPlotsParent">
+            <div class="bar-card">
+                <h3 id="barTitle1">Nothing Selected</h3>
+                <div style="width: 25vw; height: 25vh;" id="barPlot1">
+                </div>
+            </div>
+            <div class="bar-card">
+                <h3 id="barTitle2">Nothing Selected</h3>
+                <div style="width: 25vw; height: 25vh;" id="barPlot2">
+                </div>
+            </div>
+            <div class="bar-card">
+                <h3 id="barTitle3">Nothing Selected</h3>
+                <div style="width: 25vw; height: 25vh;" id="barPlot3">
+                </div>
+            </div>
+        </div>
+
+        <div id="slider"></div>
+        <div class="header">
+            <p>Click and drag the slider above to make your guess.</p>
+        </div>
+    </div>
+    <!---------------------------- Page 3 / RISING INSIGHT (DEMOGRAPHICS MAPS) ---------------------------->
+    <div class="section custom-container">
+        <div class="row g-0">
+            <div class="col content-container">
+                <div class="content-card">
+                    <h4>Exploring Voter Trends</h4>
+                    <p>Voter turnout and demographics vary across Massachusetts.</p>
+                    <p>On the map to the right, you can explore key information such as voter turnout, the number of registered voters, and average household
+                        income across the state.</p>
+                    <p><span class="emphasize">Click on any area</span> to dive deeper into its demographics. You can view detailed distributions of voter age, gender,
+                        party affiliation, ethnicity, or language.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Areas with Low Voter Turnout</h4>
+                    <p>Focusing on areas and demographic characteristics associated with low voter turnout may help
+                        government officials focus their efforts.</p>
+                    <p>These characteristics are associated with lower voter turnout:</p>
+                    <ul>
+                        <li>Lower mean household income.</li>
+                        <li>Higher percentage of people that identify as hispanic.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>Map of Voter Turnout in Massachusetts</h4>
+                    <table class="viz-title">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Geography:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="geoLevel" onchange="mainMap.updateVis()">
+                                    <option value="county">County</option>
+                                    <option value="tract">Tract</option>
+                                    <option value="blockGroup">Block Group</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Category:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="demographicVar" onchange="mainMap.updateVis()">
+                                    <option value="vote-age">Age</option>
+                                    <option value="vote-gender">Gender</option>
+                                    <option value="vote-party">Party</option>
+                                    <option value="vote-eth">Ethnicity</option>
+                                    <option value="vote-lang">Language</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="map-container">
+                        <div class="arrow-button left-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="30,10 30,38 10,24" fill="#000" onclick="mainMap.prevMap()"></polygon>
+                            </svg>
+                        </div>
+                        <div class="visContainer" id="mainMapElement"></div>
+                        <div class="arrow-button right-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="18,10 18,38 38,24" fill="#000" onclick="mainMap.nextMap()"></polygon>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!---------------------------- Page 5 / RISING INSIGHT (KDE) ---------------------------->
+    <div class="section custom-container" id="kde-container">
+        <div class="kde-tooltip"></div>
+        <div class="row g-0">
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>Voter Turnout Kernel Density Estimate</h4>
+                    <table class="viz-title" id="kde-title">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Category:</p>
+                            </td>
+                            <td><select class="select-dropdown" id="kde-select" onchange="onKdeSelChange()">
+                                <option value="gender">Gender</option>
+                                <option value="party">Party</option>
+                                <option value="ethnicity">Ethnicity</option>
+                                <option value="age">Age</option>
+                                <option value="language">Language</option>
+                            </select></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div id="kde-plot-parent"></div>
+                </div>
+            </div>
+            <div class="col content-container">
+                <div class="kde-right kde-right-top content-card">
+                    <h4>Legend</h4>
+                    <div class="kde-right-top-table lato">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r0-color"></div>
+                                </th>
+                                <td id="k-t-r0-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r1-color"></div>
+                                </th>
+                                <td id="k-t-r1-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r2-color"></div>
+                                </th>
+                                <td id="k-t-r2-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r3-color"></div>
+                                </th>
+                                <td id="k-t-r3-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div id="k-t-r4-color"></div>
+                                </th>
+                                <td id="k-t-r4-label"></td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="content-card">
+                    <h4>Turnout Trends Across Demographics</h4>
+                    <p>Kernel density plots allow you to visualize the density of data observations</p>
+                    <p><b>X-axis</b> - of the registered, voting population (of a block group), this proportion
+                        belonged to the category
+                    </p>
+                    <p><b>Y-axis</b> - voter turnout for a block group</p>
+                    <p><b>Example Interpretation</b> - The density of <u>females</u> is to the right of <u>males</u> as there tend to be more women registered to vote than men.
+                    </p>
+                    <p><i><span style="border-bottom: 2px dashed black;">Dashed lines</span> are to aid with plot readability</i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------- Page 6 / RISING INSIGHT (DIVERGING BAR PLOT) ---------------------------->
+    <div class="section custom-container">
+        <div class="row g-0">
+            <div class="col content-container">
+                <div class="content-card">
+                    <h4>Voter Turnout Across Counties</h4>
+                    <p>We find that Hampden county has the lowest voter turnout, with <b>10% lower</b> voter turnout
+                        compared to other counties.</p>
+                    <p>On the other hand, Barnstable and Hampshire county are tied for the highest voter turnout, with
+                        <b>4% higher</b> voter turnout compared to other counties.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Party Affiliation in Massachusetts</h4>
+                    <p>The diverging bar plot visualizes how voter turnout in Massachusetts counties deviates from
+                        the average 81% voter turnout.
+                    </p>
+                    <p><b>Use the dropdowns</b> to see the proportion of each party's voters in each county.
+                    </p>
+                    <p>The bars are shaded dynamically, with lighter or darker hues indicating the proportion of the dominant party in each
+                        county.</p>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>Voter Turnout by County by Party</h4>
+                    <div id="party-selection"></div>
+                        <div class="visContainer" id="diverging-bar-plot-container">
+                            <svg id="diverging-bar-plot"></svg>
+                        </div>
+                    <div id="legend"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------- Page 7 / MODEL EXPLANATION ---------------------------->
+    <div class="section custom-container">
+        <div class="header">
+            <h3>How Do We Uncover the Demographic Drivers of Voter Turnout?</h3>
+            <p>Leveraging data and models to understand voter behavior in Massachusetts.</p>
+        </div>
+        <div class="row g-0 justify-content-center align-items-center">
+            <div class="col content-container">
+                <div class="content-card explanation">
+                    <h4>Random Forest Model</h4>
+                    <img src="/img/tree.png">
+                    <p>A <b>Decision Tree</b> predicts outcomes by splitting data into branches based on yes/no
+                        questions. While useful, single trees can overfit and perform poorly on unseen data.</p>
+                    <p>Our team uses a <b>Random Forest</b>, which improves accuracy by combining decisions from
+                        multiple trees, capturing complex patterns and reducing overfitting.</p>
+                </div>
+            </div>
+            <div class="col content-container">
+                <div class="content-card explanation">
+                    <h4>Key Inputs</h4>
+                    <img src="/img/input.png">
+                    <p>We identified the <b>most important predictors</b> by measuring feature
+                        importance. These include:</p>
+                    <ul>
+                        <li>Proportion of voters aged 20-24, 25-29, 30-34, and 45-55.</li>
+                        <li>Proportion of voters with European, African American, Hispanic, and "Other" ethnicities.
+                        </li>
+                        <li>Proportion of female voters.</li>
+                        <li>Mean household income.</li>
+                        <li>Total number of registered voters.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col content-container">
+                <div class="content-card explanation">
+                    <h4>Predictive Output</h4>
+                    <img src="/img/output.png">
+                    <p>The Random Forest model <b>predicts voter turnout</b> in the 2020 presidential election for each Census
+                        Block Group in Massachusetts, based on demographic data. Key findings include:</p>
+                    <ul>
+                        <li>Higher turnout is linked to higher income and more registered Democrats.</li>
+                        <li>Lower turnout is linked to higher proportions of Hispanic voters and non-English speakers.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------- Page 8 / MAIN MESSAGE (FEATURE IMPORTANCE) ---------------------------->
+    <div class="section custom-container">
+        <!-- <div class="header"> -->
+        <div class="row g-0">
+            <div class="col content-container">
+                <div class="content-card">
+                    <h4>Impact on Voter Turnout</h4>
+                    <p>The plot to the right shows <b>SHAP values</b>, measuring the impact each feature has on the model's predictions.</p>
+                    <p>Features at the top are most influential, while those at the bottom are less impactful.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Key Demographics Driving Turnout</h4>
+                    <p><b>Mean household income</b>, <b>unknown language</b>, and <b>Hispanic ethnicity</b> are the most impactful features on average.</p> 
+                    <p>High variable values are shown in red, while low values are shown in blue.</p>
+                    <p>For example, high household income slightly increases turnout predictions, while low income decreases them significantly.</p> 
+                    <p>Similarly, block groups with high proportions of voters in the unknown language category (that are likely non-English speakers) or Hispanic ethnicity tend to lower turnout predictions.</p>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>SHAP Model Feature Importance</h4>
+                    <div class="visContainer" id="importance-beeswarm-plot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------- Page 9 / MAIN MESSAGE (MODEL PREDICTION MAP) ---------------------------->
+    <div class="section custom-container">
+        <div class="row g-0">
+            <div class="col-8">
+                <div class="content-card">
+                    <h4>Model Prediction Results</h4>
+                    <table class="viz-title">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Geography:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="geoLevel2" onchange="modelMap.updateVis()">
+                                    <option value="county">County</option>
+                                    <option value="tract">Tract</option>
+                                    <option value="blockGroup">Block Group</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="map-dropdown-label">by Category:</p>
+                            </td>
+                            <td>
+                                <select class="select-dropdown" id="demographicVar2" onchange="modelMap.updateVis()">
+                                    <option value="vote-age">Age</option>
+                                    <option value="vote-gender">Gender</option>
+                                    <option value="vote-party">Party</option>
+                                    <option value="vote-eth">Ethnicity</option>
+                                    <option value="vote-lang">Language</option>
+                                </select>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="map-container">
+                        <div class="arrow-button left-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="30,10 30,38 10,24" fill="#000" onclick="modelMap.prevMap()"></polygon>
+                            </svg>
+                        </div>
+                        <div class="visContainer" id="modelMapElement"></div>
+                        <div class="arrow-button right-arrow">
+                            <svg width="40" height="40" viewBox="0 0 48 48">
+                                <polygon points="18,10 18,38 38,24" fill="#000" onclick="modelMap.nextMap()"></polygon>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col content-container">
+                <div class="content-card">
+                    <h4>Comparing Predictions and Reality</h4>
+                    <p>You predicted that <span class="chosen-feature"></span> had a voter turnout of <span class="pct-turnout" id="user-guess"></span>.</p>
+                    <p>Our model predicted that the county had a voter turnout of <span class="pct-turnout" id="model-guess"></span>.</p>
+                    <p>In reality, the county had a voter turnout of <span class="pct-turnout" id="actual-value"></span>.</p>
+                </div>
+                <div class="content-card">
+                    <h4>Insights from Model Results</h4>
+                    <p><b>Click on any area</b> to see how each demographic feature affected the turnout prediction for that area.</p>
+                    <p>The tooltip shows how much each feature influences the model's local prediction for that area.</p>
+                    <p>The prediction always starts at a base SHAP prediction of <b>78.74%</b>. Then each feature is shown
+                        positively influencing the voter turnout prediction in red or negatively in blue.</p>
+                    <p>Predictions closely align with actual turnout, validating the use of demographic data for understanding voter engagement.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------------------- RECOMMENDATIONS / CONCLUSION ---------------------------->
+    <div class="section rec-bg" id="bg-rec-tran">
+        <h1>If voting is not equitable,</h1>
+    </div>
+    <div class="section rec-bg" id="bg-rec-tran2">
+        <h1>what can be done?</h1>
+    </div>
+    <div class="section section-img-bg" id="rec1-bg">
+        <div class="img-text-container">
+            <h1>Making Voting More Accessible</h1>
+            <ul>
+                <li><b>Voter Registration Reform</b> - Universal automatic registration, same day registration, and
+                    online registration
+                </li>
+                <li><b>Expanding Voting Access</b> - Increasing access to mail-in/absentee ballots and extended
+                    voting/early voting hours
+                </li>
+                <li><b>Reducing Polling Place Closures</b> - Minority-heavy areas are particularly susceptible to having
+                    polling places closed or moved, making voting more difficult
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="section section-img-bg" id="rec2-bg">
+        <div class="img-text-container-dark">
+            <h1>Addressing Corruption</h1>
+            <ul>
+                <li><b>Campaign Finance Reform</b> - Ensuring that elections are not disproportionately influenced by
+                    wealthier individuals or corporations
+                </li>
+                <li><b>End Gerrymandering</b> - Independent, non-partisan commissions can ensure fairer, more
+                    representative district boundaries
+                </li>
+                <li><b>Limit Purging of Voter Rolls</b> - Many states engage in "voter roll purging," which can
+                    incorrectly remove eligible voters from the rolls
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="section section-img-bg" id="rec3-bg">
+        <div class="img-text-container">
+            <h1>Education and Outreach</h1>
+            <ul>
+                <li><b>Civic Education Programs</b> - Increasing the focus on civic education in schools and communities
+                    can improve voter literacy and confidence
+                </li>
+                <li><b>Community-Based Voter Outreach</b> - Engaging in targeted outreach to underrepresented groups
+                    through grassroots organizations can help improve voter turnout in marginalized communities. This
+                    can include providing information in different languages, assisting people with understanding their
+                    voting rights, and offering transportation to polling stations.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="section section-img-bg" id="rec4-bg">
+        <div class="row g-0">
+            <div class="col-1"></div>
+            <div class="col-4">
+                <h1>Thanks for listening!</h1>
+                <table>
+                    <tbody class="lato">
+                    <tr>
+                        <td>
+                            <h2 class="ballot-font-large">Max Bahar</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small"> MS Data Science 2026</h3>
+                        </td>
+                        <td><h2 class="ballot-font-large">Stefan Chu</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small">MS Data Science 2026</h3>
+                        </td>
+                    </tr>
+                    <tr style="height: 5vh"></tr>
+                    <tr>
+                        <td>
+                            <h2 class="ballot-font-large">Ted McCulloch</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small">MS Data Science 2026</h3>
+                        </td>
+                        <td><h2 class="ballot-font-large">Anitej Thamma</h2>
+                            <h3 class="ballot-font-med">Harvard University</h3>
+                            <h3 class="ballot-font-small">MS Data Science 2026</h3>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-7"></div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Load JS libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.20/fullpage.min.js"
+        integrity="sha512-LGiXf+jHGTHcIybSsOWO3I/in+OObCkcEsWIZ7IyhzfD6RzD5qDUw2CK+JveuI7zTSEcDG//bIOvOpAJW2BWsg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/nouislider@14.6.3/distribute/nouislider.min.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<!-- Include custom libraries -->
+<script src="js/selectedVariablePreview.js"></script>
+<script src="js/interactionHelper.js"></script>
+<script src="js/tooltipvis.js"></script>
+<script src="js/tooltipLocalImportance.js"></script>
+<script src="js/barvis.js"></script>
+<script src="js/beeswarm.js"></script>
+<script src="js/countyvis.js"></script>
+<script src="js/mapvis.js"></script>
+<script src="js/kdeplot.js"></script>
+<script src="js/divbarplot.js"></script>
+<script src="js/main.js"></script>
+<script src="js/guess.js"></script>
+
+</body>
+</html>

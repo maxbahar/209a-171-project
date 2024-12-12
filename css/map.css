@@ -1,0 +1,82 @@
+/* Individual card styling */
+.map-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid rgba(0, 0, 0, .125);
+    margin-right: 25px;
+}
+
+.tooltipVisContainer {
+    justify-content: center;
+    align-items: center; 
+    display: flex;
+}
+
+.tooltipText {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+#mainMapTooltip {
+    width: 300px;
+    height: 300px;
+}
+
+#modelMapTooltip {
+    width: 400px;
+    height: 400px;
+}
+
+#countyTooltip {
+    padding: 10px;
+    font-size: larger;
+}
+
+.map-dropdown-label {
+    margin: 0 15px 0 0;
+    text-align: right;
+}
+
+.mapTooltip {
+    border: thin solid lightgray; 
+    border-radius: 5px; 
+    background: rgba(255, 255, 255, 0.95); 
+    padding: 20px;
+    opacity: 1;
+    font-family: 'Oswald', sans-serif;
+}
+
+.map-container{
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: space-between; /* Space out arrows and map */
+    position: relative;
+}
+
+#mainMapElement {
+    flex: 1;
+}
+#modelMapElement {
+    flex: 1;
+}
+
+.left-arrow {
+    margin-right: 10px; /* Adjust spacing */
+}
+
+.right-arrow {
+    margin-left: 10px; /* Adjust spacing */
+}
+
+.arrow-button > svg > polygon{
+    transition: transform 0.3s;
+}
+
+.arrow-button> svg > polygon:hover {
+    transform: translateY(-5px);
+}
