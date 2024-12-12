@@ -20,19 +20,19 @@
 }
 
 #rec1-bg {
-    background-image: url("/img/vote1.jpg");
+    background-image: url("../img/vote1.jpg");
 }
 
 #rec2-bg {
-    background-image: url("/img/vote2.jpg");
+    background-image: url("../img/vote2.jpg");
 }
 
 #rec3-bg {
-    background-image: url("/img/vote3.jpg");
+    background-image: url("../img/vote3.jpg");
 }
 
 #rec4-bg {
-    background-image: url("/img/vote4.jpg");
+    background-image: url("../img/vote4.jpg");
 }
 
 #rec4-bg table {

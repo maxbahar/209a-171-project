@@ -30,13 +30,13 @@ class SelVarPrev{
             "vote-eth":"The data includes 6 ethnicity categories",
         }
         vis.imageMap = {
-            "none": "/img/250.png",
-            "vote-party":"/img/align.png",
-            "vote-gender":"/img/gender.png",
-            "vote-age":"/img/cake.png",
-            "vote-income":"/img/money.png",
-            "vote-lang":"/img/lang.png",
-            "vote-eth":"/img/globe.png",
+            "none": "img/250.png",
+            "vote-party":"img/align.png",
+            "vote-gender":"img/gender.png",
+            "vote-age":"img/cake.png",
+            "vote-income":"img/money.png",
+            "vote-lang":"img/lang.png",
+            "vote-eth":"img/globe.png",
         }
         vis.wrangleData()
     }

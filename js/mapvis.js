@@ -123,7 +123,7 @@ class MapVis {
         const offsetY = iconSize / 2;
         // Append zoom-in button
         vis.legend.append("image")
-                    .attr("href", "../img/zoom-in.png")
+                    .attr("href", "img/zoom-in.png")
                     .attr("id", `${vis.parentElement}-zoom-in`)
                     .attr("class", "zoom-button")
                     .attr("font-size", "1.5em")
@@ -135,7 +135,7 @@ class MapVis {
                     .attr("cursor", "pointer");
         // Append zoom-out button
         vis.legend.append("image")
-                    .attr("href", "../img/zoom-out.png")
+                    .attr("href", "img/zoom-out.png")
                     .attr("id", `${vis.parentElement}-zoom-out`)
                     .attr("class", "zoom-button")
                     .attr("font-size", "1.5em")
@@ -147,7 +147,7 @@ class MapVis {
                     .attr("cursor", "pointer");
         // Append reset button
         vis.legend.append("image")
-                    .attr("href", "../img/reset.png")
+                    .attr("href", "img/reset.png")
                     .attr("id", `${vis.parentElement}-reset`)
                     .attr("class", "zoom-button")
                     .attr("font-size", "1.5em")
@@ -242,7 +242,7 @@ class MapVis {
         vis.paddingY = vis.legendHeight;
         vis.rectWidth = vis.legendWidth + vis.paddingX;
         vis.rectHeight = vis.legendHeight + vis.paddingY;
-        
+
         // Append legend
         vis.legend = vis.initSvg.append("g")
                             .attr('class', 'legend')
