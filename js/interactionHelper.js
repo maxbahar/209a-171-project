@@ -51,13 +51,25 @@ function votecat(categoryID) {
     } else if (Object.keys(selectedFeatureCategories).length <= 2) {
 
         selectedFeatureCategories[categoryID] = new BarVis(`barPlot${votecatIdx}`, geoData, categoryID);
-        document.getElementById(`barTitle${votecatIdx}`).innerText = titleMap[categoryID];
         votecatIdx++;
     }
+
     document.querySelectorAll('.vote-box2').forEach(function (div) {
         div.classList.remove('clicked-vote-box');
     });
-    Object.keys(selectedFeatureCategories).forEach((categoryID) => {
+
+    Object.keys(selectedFeatureCategories).forEach((categoryID,idx) => {
+
+        const parentDiv = document.getElementById(`barPlot${idx+1}`);
+        const svgElement = parentDiv.querySelector("svg");
+        if (svgElement) {
+            parentDiv.removeChild(svgElement);
+        }
+
+        delete selectedFeatureCategories[categoryID];
+        selectedFeatureCategories[categoryID] = new BarVis(`barPlot${idx+1}`, geoData, categoryID);
+        
+        document.getElementById(`barTitle${idx+1}`).innerText = titleMap[categoryID];
         const clickedDiv = document.getElementById(categoryID);
         if (clickedDiv) {
             clickedDiv.classList.add('clicked-vote-box');
