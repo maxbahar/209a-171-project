@@ -1,7 +1,7 @@
 # Voter Turnout and Demographics in Massachusetts
 
-## Group Members
-- Anitej Thamma (CS1710 only)
+## Project Contributors
+- Anitej Thamma
 - Max Bahar 
 - Stefan Chu 
 - Ted McCulloch 
@@ -47,4 +47,4 @@ The raw data files utilized for this project are:
 
 This is an illustration of the model's workflow:
 
-![Model flowchart](.img/model-flowchart.png)
+![Model flowchart](img/model-flowchart.png)
