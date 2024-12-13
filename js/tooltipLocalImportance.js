@@ -31,8 +31,6 @@ class TooltipLocalImportance{
             "eth1_hisp_shap", "eth1_eur_shap", "eth1_aa_shap", "eth1_oth_shap",
             "age_20_24_shap", "age_25_29_shap", "age_30_34_shap", "age_45_54_shap",]
 
-        const base_value_shap = vis.data.properties["base_value_shap"]
-
         const predicted_turnout = vis.data.properties["2020_turnout_pct_pred"]
 
         // Get data for relevant variables
@@ -55,7 +53,10 @@ class TooltipLocalImportance{
 
         // Create scales
         vis.x = d3.scaleLinear()
-            .domain([d3.min(vis.displayData, d => d.end) -0.01, d3.max(vis.displayData, d => d.start) + 0.01])
+            .domain([
+                d3.min(vis.displayData, d => Math.min(d.start, d.end)) - 0.01,
+                d3.max(vis.displayData, d => Math.max(d.start, d.end)) + 0.01
+            ])
             .range([0, vis.width]);
 
         vis.y = d3.scaleBand()
