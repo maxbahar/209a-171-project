@@ -418,7 +418,7 @@ def plot_KDE(data, title, vars, labels, colors, xlabel):
         legend_elements.append(Line2D([0], [0], color=colors[i], lw=4, label=labels[i]))
 
     # Add the custom legend to the plot
-    plt.legend(handles=legend_elements)
+    plt.legend(handles=legend_elements, loc='lower right')
     plt.title(title)
     plt.xlabel(f'Proportion of {xlabel} Relative to Total Registered Voting Population')
     plt.ylabel('Voter Turnout')
