@@ -281,15 +281,13 @@ class MapVis {
         // Get geography level
         vis.geoLevel = document.getElementById(vis.geoLevelID).value;
 
-        // Get demographic variable
-        vis.demoVar = document.getElementById(vis.demoID).value;
-
         if (vis.tooltipID === "modelMapTooltip") {
             vis.mainVarArray = [];
             vis.cycleVars.forEach(variable => vis.mainVarArray = vis.mainVarArray.concat(vis.geoData[vis.geoLevel].features.map(d => d.properties[variable])));
         } else {
             // Get the main variable values
             vis.mainVarArray = vis.geoData[vis.geoLevel].features.map(d => d.properties[vis.mainVar]);
+            vis.demoVar = document.getElementById(vis.demoID).value;
         }
 
         // Define breakpoints for the scale
